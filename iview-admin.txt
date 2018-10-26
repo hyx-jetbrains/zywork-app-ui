@@ -134,3 +134,6 @@ iview-admin的相关整理
                   this.$router.push(route)
                 },
 
+6、表单验证问题
+  如果使用的是InputNumber，则trigger: 'blur'不起作用，可暂时使用trigger: 'blur, change'让用户体验稍微好点
+
