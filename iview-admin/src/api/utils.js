@@ -28,15 +28,6 @@ export const resetForm = (self, formRef) => {
 }
 
 /**
- * 清空formData数据
- * @param self
- * @param formData
- */
-export const clearForm = (self, formData) => {
-  self[formData] = {}
-}
-
-/**
  * 根据form数据对象添加数据
  * @param self this
  */
@@ -165,7 +156,7 @@ export const batchRemove = (self) => {
 export const active = (self, row) => {
   let isActive = row.isActive === 0 ? 1 : 0
   axios.request({
-    url: self.urls.editUrl,
+    url: self.urls.activeUrl,
     method: 'POST',
     data: {
       id: row.id,
@@ -203,7 +194,7 @@ export const batchActive = (self, isActive) => {
     })
     if (rowArray.length > 0) {
       axios.request({
-        url: self.urls.batchEditUrl,
+        url: self.urls.batchActiveUrl,
         method: 'POST',
         data: rowArray
       }).then(response => {
