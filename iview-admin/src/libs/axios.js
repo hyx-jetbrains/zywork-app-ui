@@ -9,8 +9,9 @@ class HttpRequest {
     const config = {
       baseURL: this.baseUrl,
       headers: {
-        //
-      }
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      withCredentials: true
     }
     return config
   }
