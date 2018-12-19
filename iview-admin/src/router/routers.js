@@ -61,10 +61,10 @@ export default [
   },
   {
     path: '/user',
-    name: 'user',
+    name: '演示页面',
     meta: {
       icon: 'ios-person',
-      title: '用户管理'
+      title: '演示页面'
     },
     component: Main,
     children: [
