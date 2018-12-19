@@ -74,31 +74,40 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, {userName, password}) {
-      userName = userName.trim()
+    handleLogin ({ commit }, self) {
       return new Promise((resolve, reject) => {
-        login({
-          userName,
-          password
-        }).then(res => {
-          const data = res.data
-          commit('setToken', data.token)
-          resolve()
+        login(self).then(res => {
+          if (res.data.code === 1001) {
+            // 认证成功
+            const data = res.data
+            commit('setToken', data.data)
+            resolve()
+            if (window.localStorage) {
+              var storage = window.localStorage
+              storage.setItem('token', data.data)
+            }
+          } else {
+            self.$Message.error(res.data.message)
+          }
         }).catch(err => {
           reject(err)
         })
       })
     },
     // 退出登录
-    handleLogOut ({ state, commit }) {
+    handleLogOut ({ state, commit }, self) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('setToken', '')
-          commit('setAccess', [])
-          resolve()
-        }).catch(err => {
-          reject(err)
-        })
+        logout(self).then(() => {
+            if (window.localStorage) {
+              var storage = window.localStorage
+              storage.removeItem('token')
+            }
+            commit('setToken', '')
+            commit('setAccess', [])
+            resolve()
+          }).catch(err => {
+            reject(err)
+          })
         // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
         // commit('setToken', '')
         // commit('setAccess', [])
@@ -106,23 +115,21 @@ export default {
       })
     },
     // 获取用户相关信息
-    getUserInfo ({ state, commit }) {
+    getUserInfo ({ state, commit }, self) {
       return new Promise((resolve, reject) => {
-        try {
-          getUserInfo(state.token).then(res => {
-            const data = res.data
-            commit('setAvator', data.avator)
-            commit('setUserName', data.name)
-            commit('setUserId', data.user_id)
-            commit('setAccess', data.access)
-            commit('setHasGetInfo', true)
+
+        getUserInfo(self).then(res => {
+          const data = res.data
+          if (data.code === 1001) {
+            commit('setAvator', 'https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png')
+            commit('setUserName', 'admin')
+            commit('setUserId', '1')
+            commit('setAccess', ['admin'])
             resolve(data)
-          }).catch(err => {
-            reject(err)
-          })
-        } catch (error) {
-          reject(error)
-        }
+          }
+        }).catch(err => {
+          reject(err)
+        })
       })
     },
     // 此方法用来获取未读消息条数，接口只返回数值，不返回消息列表

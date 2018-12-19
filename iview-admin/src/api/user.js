@@ -1,33 +1,57 @@
 import axios from '@/libs/api.request'
+import Qs from 'qs'
 
-export const login = ({ userName, password }) => {
-  const data = {
-    userName,
-    password
+/**
+ * 登入
+ */
+export const login = (self) => {
+  var token = ''
+  if (window.localStorage) {
+    token = window.localStorage.getItem('token') === null ? '' : window.localStorage.getItem('token')
   }
   return axios.request({
-    url: 'login',
-    data,
-    method: 'post'
+    url: self.urls.loginUrl,
+    method: 'POST',
+    data: Qs.stringify(self.loginForm),
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Authorization': 'Bearer ' + token
+    }
+  })
+}
+/**
+* 获取用户信息
+*/
+export const getUserInfo = (self) => {
+  var token = ''
+  if (window.localStorage) {
+    token = window.localStorage.getItem('token') === null ? '' : window.localStorage.getItem('token')
+  }
+  return axios.request({
+    url: self.urls.userUrl,
+    method: 'GET',
+    data: '',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Authorization': 'Bearer ' + token
+    }
   })
 }
 
-export const getUserInfo = (token) => {
+/**
+* 退出登入
+*/
+export const logout = (self) => {
   return axios.request({
-    url: 'get_info',
-    params: {
-      token
-    },
-    method: 'get'
+    url: self.urls.logoutUrl,
+    method: 'POST',
+    data: '',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    }
   })
 }
 
-export const logout = (token) => {
-  return axios.request({
-    url: 'logout',
-    method: 'post'
-  })
-}
 
 export const getUnreadCount = () => {
   return axios.request({

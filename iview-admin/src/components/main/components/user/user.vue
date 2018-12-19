@@ -30,12 +30,19 @@ export default {
       default: 0
     }
   },
+  data () {
+    return {
+      urls: {
+        'logoutUrl': '/auth/logout'
+      }
+    }
+  },
   methods: {
     ...mapActions([
       'handleLogOut'
     ]),
     logout () {
-      this.handleLogOut().then(() => {
+      this.handleLogOut(this).then(() => {
         this.$router.push({
           name: 'login'
         })
