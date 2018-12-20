@@ -43,7 +43,7 @@ export default {
       this.loginForm.username = username
       this.loginForm.password = password
       this.loginForm.verifyCode = verifyCode
-      this.handleLogin(this.loginForm).then(res => {
+      this.handleLogin(this).then(res => {
         this.getUserInfo().then(res => {
           this.$router.push({
             name: this.$config.homeName

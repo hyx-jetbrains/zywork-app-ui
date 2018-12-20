@@ -74,9 +74,9 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, loginForm) {
+    handleLogin ({ commit }, loginView) {
       return new Promise((resolve, reject) => {
-        login(loginForm).then(res => {
+        login(loginView).then(res => {
           if (res.data.code === 1001) {
             // 认证成功
             const data = res.data
@@ -87,7 +87,7 @@ export default {
               storage.setItem('token', data.data)
             }
           } else {
-            self.$Message.error(res.data.message)
+            loginView.$Message.error(res.data.message)
           }
         }).catch(err => {
           reject(err)

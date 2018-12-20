@@ -4,7 +4,7 @@ import Qs from 'qs'
 /**
  * 登入
  */
-export const login = (loginForm) => {
+export const login = (loginView) => {
   var token = ''
   if (window.localStorage) {
     token = window.localStorage.getItem('token') === null ? '' : window.localStorage.getItem('token')
@@ -12,7 +12,7 @@ export const login = (loginForm) => {
   return axios.request({
     url: '/auth/login',
     method: 'POST',
-    data: Qs.stringify(loginForm),
+    data: Qs.stringify(loginView.loginForm),
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       'Authorization': 'Bearer ' + token
