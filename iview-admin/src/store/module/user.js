@@ -125,6 +125,7 @@ export default {
             commit('setUserName', 'admin')
             commit('setUserId', '1')
             commit('setAccess', ['admin'])
+            commit('setHasGetInfo', true)
             resolve(data)
           }
         }).catch(err => {
