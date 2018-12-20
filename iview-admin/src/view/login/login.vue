@@ -49,11 +49,9 @@ export default {
       this.loginForm.verifyCode = verifyCode
       this.handleLogin(this).then(res => {
         this.getUserInfo(this).then(res => {
-          console.log(res);
           this.$router.push({
             name: this.$config.homeName
           })
-          console.log(res);
         })
       })
     }
