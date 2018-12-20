@@ -4,15 +4,15 @@ import Qs from 'qs'
 /**
  * 登入
  */
-export const login = (self) => {
+export const login = (loginForm) => {
   var token = ''
   if (window.localStorage) {
     token = window.localStorage.getItem('token') === null ? '' : window.localStorage.getItem('token')
   }
   return axios.request({
-    url: self.urls.loginUrl,
+    url: '/auth/login',
     method: 'POST',
-    data: Qs.stringify(self.loginForm),
+    data: Qs.stringify(loginForm),
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       'Authorization': 'Bearer ' + token
@@ -22,13 +22,13 @@ export const login = (self) => {
 /**
 * 获取用户信息
 */
-export const getUserInfo = (self) => {
+export const getUserInfo = () => {
   var token = ''
   if (window.localStorage) {
     token = window.localStorage.getItem('token') === null ? '' : window.localStorage.getItem('token')
   }
   return axios.request({
-    url: self.urls.userUrl,
+    url: '/user-userdetail/get',
     method: 'GET',
     data: '',
     headers: {
@@ -41,9 +41,9 @@ export const getUserInfo = (self) => {
 /**
 * 退出登入
 */
-export const logout = (self) => {
+export const logout = () => {
   return axios.request({
-    url: self.urls.logoutUrl,
+    url: '/user-userdetail/get',
     method: 'POST',
     data: '',
     headers: {

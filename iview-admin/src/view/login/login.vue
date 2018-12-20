@@ -27,10 +27,6 @@ export default {
   },
   data () {
     return {
-      urls: {
-        loginUrl: '/auth/login',
-        userUrl: '/user-userdetail/get'
-      },
       loginForm: {
         'username': '',
         'password': '',
@@ -47,8 +43,8 @@ export default {
       this.loginForm.username = username
       this.loginForm.password = password
       this.loginForm.verifyCode = verifyCode
-      this.handleLogin(this).then(res => {
-        this.getUserInfo(this).then(res => {
+      this.handleLogin(this.loginForm).then(res => {
+        this.getUserInfo().then(res => {
           this.$router.push({
             name: this.$config.homeName
           })

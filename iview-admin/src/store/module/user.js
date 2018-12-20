@@ -74,9 +74,9 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, self) {
+    handleLogin ({ commit }, loginForm) {
       return new Promise((resolve, reject) => {
-        login(self).then(res => {
+        login(loginForm).then(res => {
           if (res.data.code === 1001) {
             // 认证成功
             const data = res.data
@@ -95,9 +95,9 @@ export default {
       })
     },
     // 退出登录
-    handleLogOut ({ state, commit }, self) {
+    handleLogOut ({ state, commit }) {
       return new Promise((resolve, reject) => {
-        logout(self).then(() => {
+        logout().then(() => {
             if (window.localStorage) {
               var storage = window.localStorage
               storage.removeItem('token')
@@ -115,10 +115,10 @@ export default {
       })
     },
     // 获取用户相关信息
-    getUserInfo ({ state, commit }, self) {
+    getUserInfo ({ state, commit }) {
       return new Promise((resolve, reject) => {
 
-        getUserInfo(self).then(res => {
+        getUserInfo().then(res => {
           const data = res.data
           if (data.code === 1001) {
             commit('setAvator', 'https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png')

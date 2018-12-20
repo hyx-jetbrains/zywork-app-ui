@@ -32,9 +32,7 @@ export default {
   },
   data () {
     return {
-      urls: {
-        'logoutUrl': '/auth/logout'
-      }
+
     }
   },
   methods: {
@@ -42,7 +40,7 @@ export default {
       'handleLogOut'
     ]),
     logout () {
-      this.handleLogOut(this).then(() => {
+      this.handleLogOut().then(() => {
         this.$router.push({
           name: 'login'
         })
