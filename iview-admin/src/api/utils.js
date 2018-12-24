@@ -40,17 +40,16 @@ export const add = (self) => {
         method: 'POST',
         data: self.form
       }).then(response => {
-          self.loading['add'] = false
-          if (response.data.code !== 1001) {
-            self.$Message.error(response.data.message);
-            return;
-          }
-          self.$Message.success(response.data.message);
-          resetForm(self, 'addForm')
-          cancelModal(self, 'add')
-          search(self)
+        self.loading['add'] = false
+        if (response.data.code !== 1001) {
+          self.$Message.error(response.data.message);
+          return
         }
-      ).catch(error => {
+        self.$Message.success(response.data.message);
+        resetForm(self, 'addForm')
+        cancelModal(self, 'add')
+        search(self)
+      }).catch(error => {
         console.log(error)
         self.loading['add'] = false
         self.$Message.error('添加数据失败，稍候再试')
@@ -72,18 +71,17 @@ export const edit = (self) => {
         method: 'POST',
         data: self.form
       }).then(response => {
-          self.loading['add'] = false
-          if (response.data.code !== 1001) {
-            self.$Message.error(response.data.message);
-            return;
-          }
-          self.$Message.success(response.data.message);
-          resetForm(self, 'editForm')
-          cancelModal(self, 'edit')
-          search(self)
+        self.loading['edit'] = false
+        if (response.data.code !== 1001) {
+          self.$Message.error(response.data.message);
+          return
         }
-      ).catch(error => {
-        self.loading['add'] = false
+        self.$Message.success(response.data.message);
+        resetForm(self, 'editForm')
+        cancelModal(self, 'edit')
+        search(self)
+      }).catch(error => {
+        self.loading['edit'] = false
         console.log(error)
         self.$Message.error('修改数据失败，稍候再试')
       })
@@ -226,19 +224,23 @@ export const batchActive = (self, isActive) => {
  * @param self this
  */
 export const search = (self) => {
-  self.table.loading = true
   self.loading['search'] = true
+  self.table.loading = true
   axios.request({
     url: self.urls.searchUrl,
     method: 'POST',
     data: self.searchForm
   }).then(response => {
-      self.loading['search'] = false
-      self.table.loading = false
-      self.page.total = response.data.data.total
-      self.table.tableDetails = response.data.data.rows
+    self.loading['search'] = false
+    self.table.loading = false
+    if (response.data.code !== 1001) {
+      self.$Message.error(response.data.message)
+      return
     }
-  ).catch(error => {
+    self.page.total = response.data.data.total
+    self.table.tableDetails = response.data.data.rows
+  }).catch(error => {
+    console.log(error)
     self.loading['search'] = false
     self.table.loading = false
     self.$Message.error('加载数据失败，稍候再试')
