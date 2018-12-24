@@ -86,6 +86,13 @@ export default {
               var storage = window.localStorage
               storage.setItem('token', data.data)
             }
+          } else if (res.data.code === 1006) {
+            // Token 失效，需要移除token
+            if (window.localStorage) {
+              var storage = window.localStorage
+              storage.removeItem('token', data.data)
+            }
+            loginView.$Message.error(res.data.message)
           } else {
             loginView.$Message.error(res.data.message)
           }

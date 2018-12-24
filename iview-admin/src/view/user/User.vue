@@ -46,7 +46,7 @@
     </Form>
     <div slot="footer">
       <Button type="text" size="large" @click="resetFormCancelModal('addForm', 'add')">取消</Button>
-      <Button type="primary" size="large" @click="add">确定</Button>
+      <Button type="primary" size="large" @click="add" :loading="loading.add">添加</Button>
     </div>
   </Modal>
   <Modal v-model="modal.edit" title="修改" @on-visible-change="changeModalVisibleResetForm('editForm', $event)">
@@ -67,7 +67,7 @@
     </Form>
     <div slot="footer">
       <Button type="text" size="large" @click="resetFormCancelModal('editForm', 'edit')">取消</Button>
-      <Button type="primary" size="large" @click="edit">确定</Button>
+      <Button type="primary" size="large" @click="edit" :loading="loading.edit">修改</Button>
     </div>
   </Modal>
   <Modal v-model="modal.search" title="高级搜索">
@@ -92,12 +92,6 @@
       </FormItem>
       <FormItem label="用户邮箱" prop="email">
         <Input v-model="searchForm.email" />
-      </FormItem>
-      <FormItem label="登录密码" prop="password">
-        <Input v-model="searchForm.password" />
-      </FormItem>
-      <FormItem label="加密盐值" prop="salt">
-        <Input v-model="searchForm.salt" />
       </FormItem>
       <FormItem label="创建时间">
         <Row>
@@ -149,18 +143,16 @@
     <div slot="footer">
       <Button type="text" size="large" @click="resetForm('searchForm')">清空</Button>
       <Button type="text" size="large" @click="cancelModal('search')">取消</Button>
-      <Button type="primary" size="large" @click="searchOkModal('search')">确定</Button>
+      <Button type="primary" size="large" @click="searchOkModal('search')" :loading="loading.search">查询</Button>
     </div>
   </Modal>
   <Modal v-model="modal.detail" title="详情" @on-visible-change="changeModalVisibleResetForm('editForm', $event)">
     <p>用户编号: <span v-text="form.id"></span></p>
     <p>手机号: <span v-text="form.phone"></span></p>
     <p>用户邮箱: <span v-text="form.email"></span></p>
-    <p>登录密码: <span v-text="form.password"></span></p>
-    <p>加密盐值: <span v-text="form.salt"></span></p>
     <p>创建时间: <span v-text="form.createTime"></span></p>
     <p>更新时间: <span v-text="form.updateTime"></span></p>
-    <p>是否激活: <span v-text="form.isActive"></span></p>
+    <p>是否激活: <span v-text="form.isActive === 0 ? '激活' : '冻结'"></span></p>
 
   </Modal>
 </div>
@@ -178,6 +170,11 @@ export default {
         edit: false,
         search: false,
         detail: false
+      },
+      loading: {
+        add: false,
+        edit: false,
+        search: false
       },
       urls: {
         addUrl: '/user/save',
@@ -296,18 +293,6 @@ export default {
             sortable: true
           },
           {
-            title: '登录密码',
-            key: 'password',
-            width: 120,
-            sortable: true
-          },
-          {
-            title: '加密盐值',
-            key: 'salt',
-            width: 120,
-            sortable: true
-          },
-          {
             title: '创建时间',
             key: 'createTime',
             width: 120,
@@ -319,13 +304,6 @@ export default {
             width: 120,
             sortable: true
           },
-          {
-            title: '是否激活',
-            key: 'isActive',
-            width: 120,
-            sortable: true
-          },
-
           {
             title: '激活状态',
             key: 'isActive',
