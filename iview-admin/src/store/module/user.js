@@ -9,7 +9,7 @@ import {
   restoreTrash,
   getUnreadCount
 } from '@/api/user'
-import { setToken, getToken } from '@/libs/util'
+import { setToken, getToken, removeToken } from '@/libs/util'
 
 export default {
   state: {
@@ -41,6 +41,9 @@ export default {
     setToken (state, token) {
       state.token = token
       setToken(token)
+    },
+    removeToken () {
+      removeToken()
     },
     setHasGetInfo (state, status) {
       state.hasGetInfo = status
@@ -82,16 +85,10 @@ export default {
             const data = res.data
             commit('setToken', data.data)
             resolve()
-            if (window.localStorage) {
-              var storage = window.localStorage
-              storage.setItem('token', data.data)
-            }
           } else if (res.data.code === 1006) {
             // Token 失效，需要移除token
-            if (window.localStorage) {
-              var storage = window.localStorage
-              storage.removeItem('token', data.data)
-            }
+            commit('removeToken')
+            commit('setAccess', [])
             loginView.$Message.error(res.data.message)
           } else {
             loginView.$Message.error(res.data.message)
@@ -105,16 +102,12 @@ export default {
     handleLogOut ({ state, commit }) {
       return new Promise((resolve, reject) => {
         logout().then(() => {
-            if (window.localStorage) {
-              var storage = window.localStorage
-              storage.removeItem('token')
-            }
-            commit('setToken', '')
-            commit('setAccess', [])
-            resolve()
-          }).catch(err => {
-            reject(err)
-          })
+          commit('removeToken')
+          commit('setAccess', [])
+          resolve()
+        }).catch(err => {
+          reject(err)
+        })
         // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
         // commit('setToken', '')
         // commit('setAccess', [])

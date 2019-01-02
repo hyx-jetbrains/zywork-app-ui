@@ -5,15 +5,30 @@ import { forEach, hasOneOf, objEqual } from '@/libs/tools'
 const { title, cookieExpires, useI18n } = config
 
 export const TOKEN_KEY = 'token'
+export const localStorage = window.localStorage
 
 export const setToken = (token) => {
   Cookies.set(TOKEN_KEY, token, {expires: cookieExpires || 1})
+  if (localStorage) {
+    localStorage.setItem(TOKEN_KEY, token)
+  }
+}
+
+export const removeToken = () => {
+  Cookies.remove(TOKEN_KEY)
+  if (localStorage) {
+    if (localStorage.getItem(TOKEN_KEY) != null) {
+      localStorage.removeItem(TOKEN_KEY)
+    }
+  }
 }
 
 export const getToken = () => {
   const token = Cookies.get(TOKEN_KEY)
-  if (token) return token
-  else return false
+  if (token) {
+    return token
+  }
+  return false
 }
 
 export const hasChild = (item) => {
