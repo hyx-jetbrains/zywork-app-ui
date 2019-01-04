@@ -93,6 +93,11 @@
       <FormItem label="用户邮箱" prop="email">
         <Input v-model="searchForm.email" />
       </FormItem>
+      <FormItem label="是否激活" prop="isActive">
+        <Select v-model="searchForm.isActive" placeholder="请选择是否激活" clearable filterable>
+          <Option v-for="item in isActiveSelect" :value="item.value" :key="item.value">{{item.label}}</option>
+        </Select>
+      </FormItem>
       <FormItem label="创建时间">
         <Row>
           <i-col span="11">
@@ -123,22 +128,6 @@
           </i-col>
         </Row>
       </FormItem>
-      <FormItem label="是否激活">
-        <Row>
-          <i-col span="11">
-            <FormItem prop="isActiveMin">
-              <InputNumber v-model="searchForm.isActiveMin" style="width: 100%;" />
-            </FormItem>
-          </i-col>
-          <i-col span="2" style="text-align: center">-</i-col>
-          <i-col span="11">
-            <FormItem prop="isActiveMax">
-              <InputNumber v-model="searchForm.isActiveMax" style="width: 100%;" />
-            </FormItem>
-          </i-col>
-        </Row>
-      </FormItem>
-
     </Form>
     <div slot="footer">
       <Button type="text" size="large" @click="resetForm('searchForm')">清空</Button>
@@ -160,7 +149,9 @@
 
 <script>
 import * as utils from '@/api/utils'
-
+import {
+  isActiveSelect
+} from '@/api/select'
 export default {
   name: 'User',
   data() {
@@ -293,6 +284,12 @@ export default {
             sortable: true
           },
           {
+            title: "版本号",
+            key: "version",
+            width: 120,
+            sortable: true
+          },
+          {
             title: '创建时间',
             key: 'createTime',
             width: 120,
@@ -334,59 +331,93 @@ export default {
             }
           },
           {
-            title: '操作',
-            key: 'action',
-            width: 180,
-            align: 'center',
-            fixed: 'right',
+            title: "操作",
+            key: "action",
+            width: 120,
+            align: "center",
+            fixed: "right",
             render: (h, params) => {
-              return h('div', [
-                h('Button', {
-                  props: {
-                    type: 'primary',
-                    size: 'small'
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
+              return h(
+                "Dropdown",
+                {
                   on: {
-                    click: () => {
-                      this.showDetail('detail', params.row)
+                    "on-click": itemName => {
+                      this.userOpt(itemName, params.row);
                     }
                   }
-                }, '详情'),
-                h('Button', {
-                  props: {
-                    type: 'primary',
-                    size: 'small'
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
-                  on: {
-                    click: () => {
-                      this.showEdit('edit', params.row)
-                    }
-                  }
-                }, '编辑'),
-                h('Button', {
-                  props: {
-                    type: 'error',
-                    size: 'small'
-                  },
-                  on: {
-                    click: () => {
-                      this.remove(params.row)
-                    }
-                  }
-                }, '删除')
-              ]);
+                },
+                [
+                  h(
+                    "Button",
+                    {
+                      props: {
+                        type: "primary",
+                        size: "small"
+                      }
+                    },
+                    [
+                      "选择操作 ",
+                      h("Icon", {
+                        props: {
+                          type: "ios-arrow-down"
+                        }
+                      })
+                    ]
+                  ),
+                  h(
+                    "DropdownMenu",
+                    {
+                      slot: "list"
+                    },
+                    [
+                      h(
+                        "DropdownItem",
+                        {
+                          props: {
+                            name: "showEdit"
+                          }
+                        },
+                        "编辑"
+                      ),
+                      h(
+                        "DropdownItem",
+                        {
+                          props: {
+                            name: "showDetail"
+                          }
+                        },
+                        "详情"
+                      ),
+                      h(
+                        "DropdownItem",
+                        {
+                          props: {
+                            name: "remove"
+                          }
+                        },
+                        [
+                          h(
+                            "span",
+                            {
+                              style: {
+                                color: "red"
+                              }
+                            },
+                            "删除"
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              );
             }
           }
         ],
         tableDetails: [],
         selections: []
-      }
+      },
+      isActiveSelect: isActiveSelect
     }
   },
   computed: {},
@@ -432,6 +463,17 @@ export default {
         utils.batchActive(this, 1)
       } else if (itemName === 'batchRemove') {
         utils.batchRemove(this)
+      }
+    },
+    userOpt(itemName, row) {
+      if (itemName === "showEdit") {
+        utils.showModal(this, "edit");
+        this.form = JSON.parse(JSON.stringify(row));
+      } else if (itemName === "showDetail") {
+        utils.showModal(this, "detail");
+        this.form = JSON.parse(JSON.stringify(row));
+      } else if (itemName === "remove") {
+        utils.remove(this, row);
       }
     },
     add() {

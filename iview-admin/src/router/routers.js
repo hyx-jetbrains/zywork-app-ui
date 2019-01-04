@@ -76,6 +76,15 @@ export default [
           icon: 'ios-person'
         },
         component: () => import('@/view/user/User.vue')
+      },
+      {
+        path: 'sys-config-page',
+        name: '系统配置',
+        meta: {
+          title: '系统配置',
+          icon: 'ios-cog-outline'
+        },
+        component: () => import('@/view/sys-config/SysConfig.vue')
       }
     ]
   },
