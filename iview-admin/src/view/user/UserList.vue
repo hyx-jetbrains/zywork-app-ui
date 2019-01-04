@@ -123,10 +123,10 @@
           detail: false
         },
         urls: {
-          searchUrl: '/user/pager-cond',
-          allUrl: '/user/all',
-          detailUrl: '/user/one/',
-          multiUrl: '/user/multi/'
+          searchUrl: '/user/admi/pager-cond',
+          allUrl: '/user/admin/all',
+          detailUrl: '/user/admin/one/',
+          multiUrl: '/user/admin/multi/'
         },
         page: {
           total: 0

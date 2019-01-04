@@ -4,6 +4,7 @@
       <Badge :dot="!!messageUnreadCount">
         <Avatar :src="userAvator"/>
       </Badge>
+      <span class="main-user-name">{{username}}</span>
       <Icon :size="18" type="md-arrow-dropdown"></Icon>
       <DropdownMenu slot="list">
         <DropdownItem name="message">
@@ -18,6 +19,7 @@
 <script>
 import './user.less'
 import { mapActions } from 'vuex'
+import Cookie from 'js-cookie'
 export default {
   name: 'User',
   props: {
@@ -32,13 +34,16 @@ export default {
   },
   data () {
     return {
-
+      username: 'admin'
     }
   },
   methods: {
     ...mapActions([
       'handleLogOut'
     ]),
+    init() {
+      this.username = Cookie.get('user')
+    },
     logout () {
       this.handleLogOut().then(() => {
         this.$router.push({
@@ -59,6 +64,9 @@ export default {
           break
       }
     }
+  },
+  mounted() {
+    this.init()
   }
 }
 </script>

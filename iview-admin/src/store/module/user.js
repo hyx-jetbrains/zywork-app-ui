@@ -9,7 +9,7 @@ import {
   restoreTrash,
   getUnreadCount
 } from '@/api/user'
-import { setToken, getToken, removeToken } from '@/libs/util'
+import { setToken, getToken, removeToken, setUsername } from '@/libs/util'
 
 export default {
   state: {
@@ -34,6 +34,7 @@ export default {
     },
     setUserName (state, name) {
       state.userName = name
+      setUsername(name)
     },
     setAccess (state, access) {
       state.access = access
@@ -117,12 +118,16 @@ export default {
     // 获取用户相关信息
     getUserInfo ({ state, commit }) {
       return new Promise((resolve, reject) => {
-
         getUserInfo().then(res => {
           const data = res.data
           if (data.code === 1001) {
+            if (data.data.total !== 0) {
+              // 有获取到用户信息
+              commit('setUserName', data.data.rows[0].userDetailNickname)
+            } else {
+              commit('setUserName', 'admin')
+            }
             commit('setAvator', 'https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png')
-            commit('setUserName', 'admin')
             commit('setUserId', '1')
             commit('setAccess', ['admin'])
             commit('setHasGetInfo', true)

@@ -1,14 +1,12 @@
 import axios from '@/libs/api.request'
 import Qs from 'qs'
+import { getLocalStorageToken } from '@/libs/util'
 
 /**
  * 登入
  */
 export const login = (loginView) => {
-  var token = ''
-  if (window.localStorage) {
-    token = window.localStorage.getItem('token') === null ? '' : window.localStorage.getItem('token')
-  }
+  var token = getLocalStorageToken()
   return axios.request({
     url: '/auth/login',
     method: 'POST',
@@ -23,12 +21,9 @@ export const login = (loginView) => {
 * 获取用户信息
 */
 export const getUserInfo = () => {
-  var token = ''
-  if (window.localStorage) {
-    token = window.localStorage.getItem('token') === null ? '' : window.localStorage.getItem('token')
-  }
+  var token = getLocalStorageToken()
   return axios.request({
-    url: '/user-userdetail/get',
+    url: '/user-userdetail/user/get',
     method: 'GET',
     data: '',
     headers: {
@@ -42,16 +37,17 @@ export const getUserInfo = () => {
 * 退出登入
 */
 export const logout = () => {
+  var token = getLocalStorageToken()
   return axios.request({
-    url: '/user-userdetail/get',
+    url: '/auth/logout',
     method: 'POST',
     data: '',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Authorization': 'Bearer ' + token
     }
   })
 }
-
 
 export const getUnreadCount = () => {
   return axios.request({

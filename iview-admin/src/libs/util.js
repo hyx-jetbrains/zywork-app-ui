@@ -31,6 +31,18 @@ export const getToken = () => {
   return false
 }
 
+export const getLocalStorageToken = () => {
+  var token = ''
+  if (window.localStorage) {
+    token = window.localStorage.getItem(TOKEN_KEY) === null ? '' : window.localStorage.getItem(TOKEN_KEY)
+  }
+  return token
+}
+
+export const setUsername = (username) => {
+  Cookies.set('user', username)
+}
+
 export const hasChild = (item) => {
   return item.children && item.children.length !== 0
 }
