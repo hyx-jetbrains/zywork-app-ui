@@ -1,4 +1,7 @@
 import axios from '@/libs/api.request'
+import { getLocalStorageToken } from '@/libs/util'
+
+var token = getLocalStorageToken()
 
 /**
  * 根据指定的modal名打开模态框
@@ -38,7 +41,10 @@ export const add = (self) => {
       axios.request({
         url: self.urls.addUrl,
         method: 'POST',
-        data: self.form
+        data: self.form,
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
       }).then(response => {
         self.loading['add'] = false
         if (response.data.code !== 1001) {
@@ -69,7 +75,10 @@ export const edit = (self) => {
       axios.request({
         url: self.urls.editUrl,
         method: 'POST',
-        data: self.form
+        data: self.form,
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
       }).then(response => {
         self.loading['edit'] = false
         if (response.data.code !== 1001) {
@@ -101,7 +110,10 @@ export const remove = (self, row) => {
     onOk: () => {
       axios.request({
         url: self.urls.removeUrl + row.id,
-        method: 'GET'
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
       }).then(response => {
         if (response.data.code === 1001) {
           self.$Message.success(response.data.message)
@@ -137,7 +149,10 @@ export const batchRemove = (self) => {
         axios.request({
           url: self.urls.batchRemoveUrl,
           method: 'POST',
-          data: ids
+          data: ids,
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
         }).then(response => {
           if (response.data.code === 1001) {
             self.$Message.success(response.data.message)
@@ -169,6 +184,9 @@ export const active = (self, row) => {
     data: {
       id: row.id,
       isActive: isActive
+    },
+    headers: {
+      'Authorization': 'Bearer ' + token
     }
   }).then(response => {
     if (response.data.code === 1001) {
@@ -178,7 +196,6 @@ export const active = (self, row) => {
   }).catch(error => {
     console.log(error)
     self.$Message.error('激活或冻结数据失败，稍候再试')
-
   })
 }
 
@@ -204,7 +221,10 @@ export const batchActive = (self, isActive) => {
       axios.request({
         url: self.urls.batchActiveUrl,
         method: 'POST',
-        data: rowArray
+        data: rowArray,
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
       }).then(response => {
         if (response.data.code === 1001) {
           self.$Message.success(response.data.message)
@@ -229,7 +249,10 @@ export const search = (self) => {
   axios.request({
     url: self.urls.searchUrl,
     method: 'POST',
-    data: self.searchForm
+    data: self.searchForm,
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
   }).then(response => {
     self.loading['search'] = false
     self.table.loading = false
@@ -312,5 +335,17 @@ export const fitTable = (self, tableRef, tableColumns, columnKeys) => {
       })
     }
   })
+}
 
+/**
+ * 根据路由名字打开一个新的tabl
+ * @param {*} self this
+ * @param {*} path 路由路径
+ * @param {*} params 参数
+ */
+export const openTab = (self, path, params) => {
+  self.$router.push({
+    path: path,
+    query: params
+  })
 }

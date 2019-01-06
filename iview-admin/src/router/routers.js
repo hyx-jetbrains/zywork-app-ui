@@ -78,6 +78,15 @@ export default [
         component: () => import('@/view/user/User.vue')
       },
       {
+        path: 'role-page',
+        name: '角色管理',
+        meta: {
+          title: '角色管理',
+          icon: 'md-medal'
+        },
+        component: () => import('@/view/role/Role.vue')
+      },
+      {
         path: 'sys-config-page',
         name: '系统配置',
         meta: {
@@ -88,6 +97,26 @@ export default [
       }
     ]
   },
+  // {
+  //   path: '/user',
+  //   name: '单独页面',
+  //   meta: {
+  //     hideInMenu: true
+  //   },
+  //   component: Main,
+  //   children: [
+  //     {
+  //       path: 'role-permission-page',
+  //       name: '角色权限分配',
+  //       meta: {
+  //         title: '角色权限分配',
+  //         notCache: true,
+  //         icon: 'ios-build'
+  //       },
+  //       component: () => import('@/view/role-permission/RolePermission.vue')
+  //     }
+  //   ]
+  // },
   {
     path: '/401',
     name: 'error_401',

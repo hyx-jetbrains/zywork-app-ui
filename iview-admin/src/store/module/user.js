@@ -127,6 +127,7 @@ export default {
             } else {
               commit('setUserName', 'admin')
             }
+            commit('setRoleId', 1)
             commit('setAvator', 'https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png')
             commit('setUserId', '1')
             commit('setAccess', ['admin'])

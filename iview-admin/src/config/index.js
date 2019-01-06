@@ -25,6 +25,10 @@ export default {
    */
   homeName: 'home',
   /**
+   * @description 分配权限时权限树的标题
+   */
+  permissionTreeTitle: '赣州智悦科技',
+  /**
    * @description 需要加载的插件
    */
   plugin: {
