@@ -1,7 +1,4 @@
 import axios from '@/libs/api.request'
-import { getLocalStorageToken } from '@/libs/util'
-
-var token = getLocalStorageToken()
 /**
  * 获取所有模块
  */
@@ -9,10 +6,7 @@ export const getAllModule = () => {
   return axios.request({
     url: '/module/admin/all',
     method: 'GET',
-    data: '',
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
+    data: ''
   })
 }
 /**
@@ -22,10 +16,7 @@ export const getMultiPermission = (params) => {
   return axios.request({
     url: '/role-permission/admin/multi/' + params,
     method: 'GET',
-    data: '',
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
+    data: ''
   })
 }
 /**
@@ -35,10 +26,7 @@ export const getUserPermission = () => {
   return axios.request({
     url: '/module-permission/user/all',
     method: 'GET',
-    data: '',
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
+    data: ''
   })
 }
 
@@ -50,9 +38,6 @@ export const batchSavePermission = (params) => {
   return axios.request({
     url: '/role-permission/admin/batch-save',
     method: 'POST',
-    data: params,
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
+    data: params
   })
 }

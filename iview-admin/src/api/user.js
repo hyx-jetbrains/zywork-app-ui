@@ -1,19 +1,15 @@
 import axios from '@/libs/api.request'
 import Qs from 'qs'
-import { getLocalStorageToken } from '@/libs/util'
-
 /**
  * 登入
  */
 export const login = (loginView) => {
-  var token = getLocalStorageToken()
   return axios.request({
     url: '/auth/login',
     method: 'POST',
     data: Qs.stringify(loginView.loginForm),
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      'Authorization': 'Bearer ' + token
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     }
   })
 }
@@ -21,14 +17,10 @@ export const login = (loginView) => {
 * 获取用户信息
 */
 export const getUserInfo = () => {
-  var token = getLocalStorageToken()
   return axios.request({
     url: '/user-userdetail/user/get',
     method: 'GET',
-    data: '',
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
+    data: ''
   })
 }
 
@@ -36,14 +28,10 @@ export const getUserInfo = () => {
 * 退出登入
 */
 export const logout = () => {
-  var token = getLocalStorageToken()
   return axios.request({
     url: '/auth/logout',
     method: 'GET',
-    data: '',
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
+    data: ''
   })
 }
 
@@ -52,14 +40,10 @@ export const logout = () => {
  * @param {*} id 用户id
  */
 export const getUserDetail = (id) => {
-  var token = getLocalStorageToken()
   return axios.request({
     url: '/user-userdetail/admin/multi/' + id,
     method: 'GET',
-    data: '',
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
+    data: ''
   })
 }
 

@@ -1,8 +1,4 @@
 import axios from '@/libs/api.request'
-import { getLocalStorageToken } from '@/libs/util'
-
-var token = getLocalStorageToken()
-
 /**
  * 根据指定的modal名打开模态框
  * @param self this
@@ -27,7 +23,7 @@ export const cancelModal = (self, modal) => {
  * @param formRef form ref名称
  */
 export const resetForm = (self, formRef) => {
-  self.$refs[formRef].resetFields();
+  self.$refs[formRef].resetFields()
 }
 
 /**
@@ -41,17 +37,14 @@ export const add = (self) => {
       axios.request({
         url: self.urls.addUrl,
         method: 'POST',
-        data: self.form,
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
+        data: self.form
       }).then(response => {
         self.loading['add'] = false
         if (response.data.code !== 1001) {
-          self.$Message.error(response.data.message);
+          self.$Message.error(response.data.message)
           return
         }
-        self.$Message.success(response.data.message);
+        self.$Message.success(response.data.message)
         resetForm(self, 'addForm')
         cancelModal(self, 'add')
         search(self)
@@ -75,17 +68,14 @@ export const edit = (self) => {
       axios.request({
         url: self.urls.editUrl,
         method: 'POST',
-        data: self.form,
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
+        data: self.form
       }).then(response => {
         self.loading['edit'] = false
         if (response.data.code !== 1001) {
-          self.$Message.error(response.data.message);
+          self.$Message.error(response.data.message)
           return
         }
-        self.$Message.success(response.data.message);
+        self.$Message.success(response.data.message)
         resetForm(self, 'editForm')
         cancelModal(self, 'edit')
         search(self)
@@ -110,10 +100,7 @@ export const remove = (self, row) => {
     onOk: () => {
       axios.request({
         url: self.urls.removeUrl + row.id,
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
+        method: 'GET'
       }).then(response => {
         if (response.data.code === 1001) {
           self.$Message.success(response.data.message)
@@ -149,10 +136,7 @@ export const batchRemove = (self) => {
         axios.request({
           url: self.urls.batchRemoveUrl,
           method: 'POST',
-          data: ids,
-          headers: {
-            'Authorization': 'Bearer ' + token
-          }
+          data: ids
         }).then(response => {
           if (response.data.code === 1001) {
             self.$Message.success(response.data.message)
@@ -184,9 +168,6 @@ export const active = (self, row) => {
     data: {
       id: row.id,
       isActive: isActive
-    },
-    headers: {
-      'Authorization': 'Bearer ' + token
     }
   }).then(response => {
     if (response.data.code === 1001) {
@@ -221,10 +202,7 @@ export const batchActive = (self, isActive) => {
       axios.request({
         url: self.urls.batchActiveUrl,
         method: 'POST',
-        data: rowArray,
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
+        data: rowArray
       }).then(response => {
         if (response.data.code === 1001) {
           self.$Message.success(response.data.message)
@@ -249,10 +227,7 @@ export const search = (self) => {
   axios.request({
     url: self.urls.searchUrl,
     method: 'POST',
-    data: self.searchForm,
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
+    data: self.searchForm
   }).then(response => {
     self.loading['search'] = false
     self.table.loading = false
