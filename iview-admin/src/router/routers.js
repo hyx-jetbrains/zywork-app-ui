@@ -1,5 +1,4 @@
 import Main from '@/components/main'
-import parentView from '@/components/parent-view'
 
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
@@ -69,7 +68,7 @@ export default [
     component: Main,
     children: [
       {
-        path: 'user-page',
+        path: 'User',
         name: '用户列表',
         meta: {
           title: '用户列表',
@@ -78,7 +77,7 @@ export default [
         component: () => import('@/view/user/User.vue')
       },
       {
-        path: 'user-wallet-page',
+        path: 'UserWallet',
         name: '钱包管理',
         meta: {
           title: '钱包管理',
@@ -87,7 +86,7 @@ export default [
         component: () => import('@/view/user-wallet/UserWallet.vue')
       },
       {
-        path: 'user-bankcard-page',
+        path: 'UserBankcard',
         name: '银行卡管理',
         meta: {
           title: '银行卡管理',
@@ -96,7 +95,7 @@ export default [
         component: () => import('@/view/user-bankcard/UserBankcard.vue')
       },
       {
-        path: 'shipping-address-page',
+        path: 'ShippingAddress',
         name: '收货地址管理',
         meta: {
           title: '收货地址管理',
@@ -116,7 +115,7 @@ export default [
     component: Main,
     children: [
       {
-        path: 'role-page',
+        path: 'Role',
         name: '角色管理',
         meta: {
           title: '角色管理',
@@ -125,7 +124,7 @@ export default [
         component: () => import('@/view/role/Role.vue')
       },
       {
-        path: 'module-page',
+        path: 'Module',
         name: '模块管理',
         meta: {
           title: '模块管理',
@@ -134,7 +133,7 @@ export default [
         component: () => import('@/view/module/Module.vue')
       },
       {
-        path: 'permission-page',
+        path: 'Permission',
         name: '功能菜单',
         meta: {
           title: '功能菜单',
@@ -154,7 +153,7 @@ export default [
     component: Main,
     children: [
       {
-        path: 'sys-config-page',
+        path: 'SysConfig',
         name: '系统配置',
         meta: {
           title: '系统配置',
@@ -174,7 +173,7 @@ export default [
     component: Main,
     children: [
       {
-        path: 'sys-log-page',
+        path: 'SysLog',
         name: '系统日志',
         meta: {
           title: '系统日志',
@@ -194,7 +193,7 @@ export default [
     component: Main,
     children: [
       {
-        path: 'notice-page',
+        path: 'Notice',
         name: '公告管理',
         meta: {
           title: '公告管理',

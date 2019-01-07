@@ -1,16 +1,19 @@
 <template>
-  <Drawer
-    title="分配角色权限"
-    :closable="true"
-    :mask-closable="false"
-    @on-close="closeDrawer"
-    v-model="drawerFlag"
-  >
-    <Button size="small" type="primary" @click="savePermission">保存</Button>
-    <Button size="small" style="margin-left: 10px" @click="closeDrawer">关闭</Button>
-    <Divider/>
-    <Tree :data="permissionData" show-checkbox multiple scrollable ref="permissionTree"></Tree>
-  </Drawer>
+  <div>
+    <Drawer
+        title="分配角色权限"
+        :closable="true"
+        :mask-closable="false"
+        @on-close="closeDrawer"
+        v-model="drawerFlag"
+      >
+        <Button size="small" type="primary" @click="savePermission">保存</Button>
+        <Button size="small" style="margin-left: 10px" @click="closeDrawer">关闭</Button>
+        <Divider/>
+        <Tree :data="permissionData" show-checkbox multiple scrollable ref="permissionTree"></Tree>
+        <Spin size="large" fix v-if="spinShow"></Spin>
+      </Drawer>
+  </div>
 </template>
 <script>
 import {
@@ -28,6 +31,7 @@ export default {
     return {
       roleId: '',
       drawerFlag: false,
+      spinShow: true,
       allModuleList: [],
       multiPermissionList: [],
       userPermissionList: [],
@@ -48,6 +52,7 @@ export default {
      */
     initData(roleId) {
       this.drawerFlag = true
+      this.spinShow = true
       this.roleId = roleId
       // 获取所有的模块
       getAllModule()
@@ -123,6 +128,7 @@ export default {
         moduleChildren.push(tempModuleChildren)
       })
       this.permissionData[0].children = moduleChildren
+      this.spinShow = false
     },
     // 关闭权限配置
     closeDrawer() {
