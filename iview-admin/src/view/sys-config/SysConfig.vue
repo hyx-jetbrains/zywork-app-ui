@@ -54,7 +54,7 @@
     >
       <Form ref="addForm" :model="form" :label-width="100" :rules="validateRules">
         <FormItem label="配置名称" prop="name">
-          <Input v-model="form.name" placeholder="请输入配置名称"/>
+          <Input v-model="form.name" placeholder="请输入配置名称" readonly/>
         </FormItem>
         <FormItem label="配置内容(JSON)" prop="value">
           <vue-json-editor v-model="form.value" :showBtns="false"></vue-json-editor>
@@ -78,7 +78,7 @@
     >
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
         <FormItem label="配置名称" prop="name">
-          <Input v-model="form.name" placeholder="请输入配置名称"/>
+          <Input v-model="form.name" placeholder="请输入配置名称" readonly/>
         </FormItem>
         <FormItem label="配置内容(JSON)" prop="value">
           <vue-json-editor v-model="form.value" :showBtns="false"></vue-json-editor>

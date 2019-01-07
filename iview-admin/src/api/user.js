@@ -40,7 +40,7 @@ export const logout = () => {
   var token = getLocalStorageToken()
   return axios.request({
     url: '/auth/logout',
-    method: 'POST',
+    method: 'GET',
     data: '',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
