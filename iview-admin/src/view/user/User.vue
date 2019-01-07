@@ -142,7 +142,14 @@
     <p>创建时间: <span v-text="form.createTime"></span></p>
     <p>更新时间: <span v-text="form.updateTime"></span></p>
     <p>是否激活: <span v-text="form.isActive === 0 ? '激活' : '冻结'"></span></p>
-
+    <p>用户昵称: <span v-text="userDetail.userDetailNickname"></span></p>
+    <p>性别: <span v-text="userDetail.userDetailGender"></span></p>
+    <p>生日: <span v-text="userDetail.userDetailBirthday"></span></p>
+    <p>年龄: <span v-text="userDetail.userDetailAge"></span></p>
+    <p>QQ: <span v-text="userDetail.userDetailQq"></span></p>
+    <p>微信: <span v-text="userDetail.userDetailWechat"></span></p>
+    <p>支付宝: <span v-text="userDetail.userDetailAlipay"></span></p>
+    <p>分享码: <span v-text="userDetail.userDetailShareCode"></span></p>
   </Modal>
 </div>
 </template>
@@ -152,6 +159,9 @@ import * as utils from '@/api/utils'
 import {
   isActiveSelect
 } from '@/api/select'
+import {
+  getUserDetail
+} from '@/api/user'
 export default {
   name: 'User',
   data() {
@@ -191,8 +201,26 @@ export default {
         salt: null,
         createTime: null,
         updateTime: null,
-        isActive: null,
-
+        isActive: null
+      },
+      userDetail: {
+        userId: null,
+        userPhone: null,
+        userEmail: null,
+        userCreateTime: null,
+        userDetailNickname: null,
+        userDetailHeadicon: null,
+        userDetailGender: null,
+        userDetailBirthday: null,
+        userDetailAge: null,
+        userDetailQq: null,
+        userDetailQqQrcode: null,
+        userDetailWechat: null,
+        userDetailWechatQrcode: null,
+        userDetailAlipay: null,
+        userDetailAlipayQrcode: null,
+        userDetailShareCode: null,
+        userDetailVersion: null,
       },
       validateRules: {
         phone: [{
@@ -344,6 +372,9 @@ export default {
                     "on-click": itemName => {
                       this.userOpt(itemName, params.row);
                     }
+                  },
+                  props: {
+                    transfer: true
                   }
                 },
                 [
@@ -472,6 +503,16 @@ export default {
       } else if (itemName === "showDetail") {
         utils.showModal(this, "detail");
         this.form = JSON.parse(JSON.stringify(row));
+        getUserDetail(row.id).then(res => {
+          const data = res.data
+          if (data.code === 1001) {
+            if (data.data.total !== 0) {{
+              this.userDetail = data.data.rows[0]
+            }}
+          } else {
+            this.$Message.error(data.message)
+          }
+        })
       } else if (itemName === "remove") {
         utils.remove(this, row);
       }

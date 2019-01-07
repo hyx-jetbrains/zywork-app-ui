@@ -27,7 +27,6 @@ export const getUserInfo = () => {
     method: 'GET',
     data: '',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       'Authorization': 'Bearer ' + token
     }
   })
@@ -43,7 +42,22 @@ export const logout = () => {
     method: 'GET',
     data: '',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Authorization': 'Bearer ' + token
+    }
+  })
+}
+
+/**
+ * 获取用户详细信息
+ * @param {*} id 用户id
+ */
+export const getUserDetail = (id) => {
+  var token = getLocalStorageToken()
+  return axios.request({
+    url: '/user-userdetail/admin/multi/' + id,
+    method: 'GET',
+    data: '',
+    headers: {
       'Authorization': 'Bearer ' + token
     }
   })

@@ -60,7 +60,54 @@ export default [
     }
   },
   {
-    path: '/user',
+    path: '/admin',
+    name: '用户管理',
+    meta: {
+      icon: 'md-person',
+      title: '用户管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'user-page',
+        name: '用户列表',
+        meta: {
+          title: '用户列表',
+          icon: 'ios-person'
+        },
+        component: () => import('@/view/user/User.vue')
+      },
+      {
+        path: 'user-wallet-page',
+        name: '钱包管理',
+        meta: {
+          title: '钱包管理',
+          icon: 'md-cash'
+        },
+        component: () => import('@/view/user-wallet/UserWallet.vue')
+      },
+      {
+        path: 'user-bankcard-page',
+        name: '银行卡管理',
+        meta: {
+          title: '银行卡管理',
+          icon: 'ios-card'
+        },
+        component: () => import('@/view/user-bankcard/UserBankcard.vue')
+      },
+      {
+        path: 'shipping-address-page',
+        name: '收货地址管理',
+        meta: {
+          title: '收货地址管理',
+          icon: 'ios-home'
+        },
+        component: () => import('@/view/shipping-address/ShippingAddress.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
     name: '系统管理',
     meta: {
       icon: 'ios-cog',
@@ -68,15 +115,6 @@ export default [
     },
     component: Main,
     children: [
-      {
-        path: 'user-page',
-        name: '用户管理',
-        meta: {
-          title: '用户管理',
-          icon: 'ios-person'
-        },
-        component: () => import('@/view/user/User.vue')
-      },
       {
         path: 'role-page',
         name: '角色管理',
@@ -87,6 +125,35 @@ export default [
         component: () => import('@/view/role/Role.vue')
       },
       {
+        path: 'module-page',
+        name: '模块管理',
+        meta: {
+          title: '模块管理',
+          icon: 'ios-color-filter'
+        },
+        component: () => import('@/view/module/Module.vue')
+      },
+      {
+        path: 'permission-page',
+        name: '功能菜单',
+        meta: {
+          title: '功能菜单',
+          icon: 'ios-color-filter-outline'
+        },
+        component: () => import('@/view/permission/Permission.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    name: '系统配置管理',
+    meta: {
+      icon: 'md-cog',
+      title: '系统配置管理'
+    },
+    component: Main,
+    children: [
+      {
         path: 'sys-config-page',
         name: '系统配置',
         meta: {
@@ -94,6 +161,46 @@ export default [
           icon: 'ios-cog-outline'
         },
         component: () => import('@/view/sys-config/SysConfig.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    name: '系统日志管理',
+    meta: {
+      icon: 'md-paper',
+      title: '系统日志管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'sys-log-page',
+        name: '系统日志',
+        meta: {
+          title: '系统日志',
+          icon: 'ios-paper'
+        },
+        component: () => import('@/view/sys-log/SysLog.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    name: '公告管理',
+    meta: {
+      icon: 'md-notifications',
+      title: '公告管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'notice-page',
+        name: '公告管理',
+        meta: {
+          title: '公告管理',
+          icon: 'ios-notifications'
+        },
+        component: () => import('@/view/notice/Notice.vue')
       }
     ]
   },
