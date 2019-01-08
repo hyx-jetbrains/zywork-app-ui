@@ -1,7 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
 import { getLocalStorageToken } from '@/libs/util'
-var TOKEN = getLocalStorageToken()
 // import { Spin } from 'iview'
 const addErrorLog = errorInfo => {
   const { statusText, status, request: { responseURL } } = errorInfo
@@ -24,7 +23,7 @@ class HttpRequest {
       baseURL: this.baseUrl,
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer ' + TOKEN
+        'Authorization': 'Bearer ' + getLocalStorageToken()
       },
       withCredentials: true
     }
