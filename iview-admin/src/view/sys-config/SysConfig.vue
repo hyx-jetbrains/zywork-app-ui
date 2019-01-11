@@ -320,6 +320,7 @@ export default {
       },
       validateRules: {
         name: [
+          {type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
           {
             type: 'string',
             min: 1,
@@ -329,6 +330,7 @@ export default {
           }
         ],
         value: [
+          {type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
           {
             type: 'string',
             min: 1,
