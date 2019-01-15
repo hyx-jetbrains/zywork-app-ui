@@ -165,6 +165,26 @@ export default [
   },
   {
     path: '/admin',
+    name: '缓存管理',
+    meta: {
+      icon: 'md-ionitron',
+      title: '缓存管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'SysConfig',
+        name: 'Redis缓存管理',
+        meta: {
+          title: 'Redis缓存管理',
+          icon: 'ios-ionitron-outline'
+        },
+        component: () => import('@/view/redis-cache/RedisCache.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
     name: '系统日志管理',
     meta: {
       icon: 'md-paper',

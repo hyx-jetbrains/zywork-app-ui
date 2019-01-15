@@ -325,6 +325,15 @@
       <p>冻结余额:
         <span v-text="form.frozenRmbBalance"></span>
       </p>
+      <p>总积分:
+        <span v-text="form.integral"></span>
+      </p>
+      <p>可用积分:
+        <span v-text="form.usableIntegral"></span>
+      </p>
+      <p>冻结积分:
+        <span v-text="form.frozenIntegral"></span>
+      </p>
       <p>版本号:
         <span v-text="form.version"></span>
       </p>
@@ -379,6 +388,9 @@ export default {
         rmbBalance: null,
         usableRmbBalance: null,
         frozenRmbBalance: null,
+        integral: null,
+        usableIntegral: null,
+        frozenIntegral: null,
         version: null,
         createTime: null,
         updateTime: null,
@@ -499,6 +511,24 @@ export default {
                 '¥' + money
               )
             }
+          },
+          {
+            title: '总积分',
+            key: 'integral',
+            width: 120,
+            sortable: true
+          },
+          {
+            title: '可用积分',
+            key: 'usableIntegral',
+            width: 120,
+            sortable: true
+          },
+          {
+            title: '冻结积分',
+            key: 'frozenIntegral',
+            width: 120,
+            sortable: true
           },
           {
             title: '版本号',

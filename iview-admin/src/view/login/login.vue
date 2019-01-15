@@ -44,7 +44,12 @@ export default {
       this.loginForm.password = password
       this.loginForm.verifyCode = verifyCode
       this.handleLogin(this).then(res => {
+        // 登入成功获取用户信息
         this.getUserInfo().then(res => {
+          // 成功获取用户信息，清除tab菜单并进入首页
+          if (window.localStorage) {
+            window.localStorage.removeItem('tagNaveList')
+          }
           this.$router.push({
             name: this.$config.homeName
           })
