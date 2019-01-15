@@ -77,6 +77,26 @@ export default [
         component: () => import('@/view/user/User.vue')
       },
       {
+        path: 'ShippingAddress',
+        name: '收货地址管理',
+        meta: {
+          title: '收货地址管理',
+          icon: 'ios-home'
+        },
+        component: () => import('@/view/shipping-address/ShippingAddress.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    name: '用户资金管理',
+    meta: {
+      icon: 'logo-usd',
+      title: '用户资金管理'
+    },
+    component: Main,
+    children: [
+      {
         path: 'UserWallet',
         name: '钱包管理',
         meta: {
@@ -95,13 +115,13 @@ export default [
         component: () => import('@/view/user-bankcard/UserBankcard.vue')
       },
       {
-        path: 'ShippingAddress',
-        name: '收货地址管理',
+        path: 'AccountDetail',
+        name: '用户账目管理',
         meta: {
-          title: '收货地址管理',
-          icon: 'ios-home'
+          title: '用户账目管理',
+          icon: 'ios-clipboard-outline'
         },
-        component: () => import('@/view/shipping-address/ShippingAddress.vue')
+        component: () => import('@/view/account-detail/AccountDetail.vue')
       }
     ]
   },
@@ -134,9 +154,9 @@ export default [
       },
       {
         path: 'Permission',
-        name: '功能菜单',
+        name: '权限管理',
         meta: {
-          title: '功能菜单',
+          title: '权限管理',
           icon: 'ios-color-filter-outline'
         },
         component: () => import('@/view/permission/Permission.vue')
