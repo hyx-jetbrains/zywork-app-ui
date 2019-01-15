@@ -157,7 +157,7 @@ export default {
     return {
       splitDB: 0.6,
       splitInfo: 0.2,
-      searchPattern: '',
+      searchPattern: '*',
       searchCount: 1,
       redisInfo: {
         aof_rewrite_scheduled: 'N/A',
@@ -354,10 +354,8 @@ export default {
         this.searchCount = 1
       }
       var params = {
-        count: this.searchCount
-      }
-      if (this.searchPattern !== '') {
-        params.pattern = this.searchPattern
+        count: this.searchCount,
+        pattern : this.searchPattern
       }
       this.keysSpin = true
       redisCacheKeys(params)

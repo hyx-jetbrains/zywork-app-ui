@@ -173,7 +173,7 @@ export default [
     component: Main,
     children: [
       {
-        path: 'SysConfig',
+        path: 'RedisCache',
         name: 'Redis缓存管理',
         meta: {
           title: 'Redis缓存管理',
