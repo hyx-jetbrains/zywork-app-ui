@@ -15,10 +15,10 @@
                 <Row style="margin-bottom: 10px;">
                   <i-col span="24">
                     <Input v-model="searchPattern" placeholder="请输入key搜索..." class="search-input" @on-enter="searchKeys" />
-                    <InputNumber v-model="searchCount" placeholder="请输入搜索的个数" class="search-input" @on-enter="searchKeys" />
+                    <InputNumber v-model="searchCount" placeholder="请输入搜索的个数" style="width: 80px; margin-right: 5px;" @on-enter="searchKeys" />
                     <Button type="primary" icon="ios-search" @click="searchKeys" class="search-btn">搜索</Button>
                     <Tooltip content="清空缓存，谨慎操作" placement="bottom">
-                      <Button type="error" icon="md-close" @click="deleteKeys">清空</Button>
+                      <Button type="error" icon="md-close" @click="deleteKeys">清空keys</Button>
                     </Tooltip>
                   </i-col>
                 </Row>
@@ -300,7 +300,8 @@ export default {
   computed: {},
   mounted() {
     this.getRedisCacheInfo()
-    this.searchKeys()
+    this.getKeysCount()
+    // this.searchKeys()
   },
   methods: {
     // 切换数据库面板
@@ -435,7 +436,7 @@ export default {
     },
     // 清空缓存
     deleteKeys() {
-      if (this.keysCount <= 0) {
+      if (this.keysCount <= 0 || this.keysList.length <= 0) {
         this.$Message.error("未获取到缓存，不需要清空")
         return
       }

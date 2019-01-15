@@ -4,12 +4,13 @@
       <Badge :dot="!!messageUnreadCount">
         <Avatar :src="userAvator"/>
       </Badge>
-      <span class="main-user-name">{{username}}</span>
+      <span class="main-user-name">{{username === 'null' ? '' : username}}</span>
       <Icon :size="18" type="md-arrow-dropdown"></Icon>
       <DropdownMenu slot="list">
         <!-- <DropdownItem name="message">
           消息中心<Badge style="margin-left: 10px" :count="messageUnreadCount"></Badge>
         </DropdownItem> -->
+        <DropdownItem name="info">个人信息</DropdownItem>
         <DropdownItem name="logout">退出登录</DropdownItem>
       </DropdownMenu>
     </Dropdown>
@@ -34,7 +35,7 @@ export default {
   },
   data () {
     return {
-      username: 'admin'
+      username: ''
     }
   },
   methods: {
@@ -56,11 +57,18 @@ export default {
         name: 'message_page'
       })
     },
+    info () {
+      this.$router.push({
+        name: 'info'
+      })
+    },
     handleClick (name) {
       switch (name) {
         case 'logout': this.logout()
           break
         case 'message': this.message()
+          break
+        case 'info': this.info()
           break
       }
     }

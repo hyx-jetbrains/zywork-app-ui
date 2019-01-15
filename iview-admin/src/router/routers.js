@@ -165,33 +165,22 @@ export default [
   },
   {
     path: '/admin',
-    name: '缓存管理',
+    name: '系统监测',
     meta: {
-      icon: 'md-ionitron',
+      icon: 'md-eye',
       title: '缓存管理'
     },
     component: Main,
     children: [
       {
         path: 'RedisCache',
-        name: 'Redis缓存管理',
+        name: 'Redis缓存',
         meta: {
-          title: 'Redis缓存管理',
+          title: 'Redis缓存',
           icon: 'ios-ionitron-outline'
         },
         component: () => import('@/view/redis-cache/RedisCache.vue')
-      }
-    ]
-  },
-  {
-    path: '/admin',
-    name: '系统日志管理',
-    meta: {
-      icon: 'md-paper',
-      title: '系统日志管理'
-    },
-    component: Main,
-    children: [
+      }, 
       {
         path: 'SysLog',
         name: '系统日志',

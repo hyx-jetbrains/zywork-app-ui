@@ -105,6 +105,7 @@ export default {
         logout().then(() => {
           commit('removeToken')
           commit('setAccess', [])
+          commit('setUserName', '')
           resolve()
         }).catch(err => {
           reject(err)
@@ -125,7 +126,7 @@ export default {
               // 有获取到用户信息
               commit('setUserName', data.data.rows[0].userDetailNickname)
             } else {
-              commit('setUserName', 'admin')
+              commit('setUserName', '')
             }
             commit('setAvator', 'https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png')
             commit('setUserId', '1')
