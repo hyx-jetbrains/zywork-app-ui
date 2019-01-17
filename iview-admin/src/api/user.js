@@ -48,6 +48,17 @@ export const getUserDetail = (id) => {
   })
 }
 
+/**
+ * 修改用户登入密码
+ */
+export const updateLoaginPassword = (params) => {
+  return axios.request({
+    url: '/pwd/update-login',
+    method: 'POST',
+    data: Qs.stringify(params)
+  })
+}
+
 export const getUnreadCount = () => {
   return axios.request({
     url: 'message/count',

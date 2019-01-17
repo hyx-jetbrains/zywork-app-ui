@@ -68,6 +68,17 @@ export default [
     component: Main,
     children: [
       {
+        path: 'Info',
+        name: '个人信息',
+        meta: {
+          title: '个人信息',
+          icon: 'ios-contact',
+          hideInMenu: true,
+          notCache: true
+        },
+        component: () => import('@/view/info/Info.vue')
+      },
+      {
         path: 'User',
         name: '用户列表',
         meta: {

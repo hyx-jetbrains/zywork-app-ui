@@ -23,7 +23,6 @@ import {
   getUserPermission,
   batchSavePermission
 } from '@/api/role'
-import { getUserInfo } from '@/api/user'
 export default {
   name: 'RolePerminission',
   props: {},

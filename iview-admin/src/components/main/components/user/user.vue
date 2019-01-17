@@ -21,13 +21,14 @@
 import './user.less'
 import { mapActions } from 'vuex'
 import Cookie from 'js-cookie'
+import headImg from '@/assets/images/head.png'
 export default {
   name: 'User',
   props: {
-    userAvator: {
-      type: String,
-      default: ''
-    },
+    // userAvator: {
+    //   type: String,
+    //   default: ''
+    // },
     messageUnreadCount: {
       type: Number,
       default: 0
@@ -35,7 +36,8 @@ export default {
   },
   data () {
     return {
-      username: ''
+      username: '',
+      userAvator: headImg
     }
   },
   methods: {
@@ -59,7 +61,7 @@ export default {
     },
     info () {
       this.$router.push({
-        name: 'info'
+        path: '/admin/Info'
       })
     },
     handleClick (name) {
