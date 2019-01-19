@@ -102,10 +102,11 @@ export const remove = (self, row) => {
         url: self.urls.removeUrl + row.id,
         method: 'GET'
       }).then(response => {
-        if (response.data.code === 1001) {
-          self.$Message.success(response.data.message)
-          search(self)
-        }
+        if (response.data.code !== 1001) {
+          self.$Message.error(response.data.message)
+          return
+        } 
+        search(self)
       }).catch(error => {
         console.log(error)
         self.$Message.error('删除数据失败，稍候再试')
@@ -138,11 +139,13 @@ export const batchRemove = (self) => {
           method: 'POST',
           data: ids
         }).then(response => {
-          if (response.data.code === 1001) {
-            self.$Message.success(response.data.message)
-            self.table.selections = []
-            search(self)
-          }
+          if (response.data.code !== 1001) {
+            self.$Message.error(response.data.message)
+            return
+          } 
+          self.$Message.success(response.data.message)
+          self.table.selections = []
+          search(self)
         }).catch(error => {
           console.log(error)
           self.$Message.error('批量删除数据失败，稍候再试')
@@ -170,10 +173,12 @@ export const active = (self, row) => {
       isActive: isActive
     }
   }).then(response => {
-    if (response.data.code === 1001) {
-      self.$Message.success(response.data.message)
-      search(self)
-    }
+    if (response.data.code !== 1001) {
+      self.$Message.error(response.data.message)
+      return
+    } 
+    self.$Message.success(response.data.message)
+    search(self)
   }).catch(error => {
     console.log(error)
     self.$Message.error('激活或冻结数据失败，稍候再试')
@@ -204,15 +209,19 @@ export const batchActive = (self, isActive) => {
         method: 'POST',
         data: rowArray
       }).then(response => {
-        if (response.data.code === 1001) {
-          self.$Message.success(response.data.message)
-          self.table.selections = []
-          search(self)
-        }
+        if (response.data.code !== 1001) {
+          self.$Message.error(response.data.message)
+          return
+        } 
+        self.$Message.success(response.data.message)
+        self.table.selections = []
+        search(self)
       }).catch(error => {
         console.log(error)
         self.$Message.error('批量激活或冻结数据失败，稍候再试')
       })
+    } else {
+      self.$Message.warning('没有需要批量' + (isActive === 0 ? '激活' : '冻结') + '的数据')
     }
   }
 }
@@ -231,7 +240,7 @@ export const search = (self) => {
   }).then(response => {
     self.loading['search'] = false
     self.table.loading = false
-    if (response.data.code !== 1001) {
+    if (response.data.code != 1001) {
       self.$Message.error(response.data.message)
       return
     }
