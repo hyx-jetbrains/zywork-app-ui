@@ -3,20 +3,20 @@
     <Row>
       <i-col span="24">
         <Card>
-          <Button @click="showModal('add')" type="primary">添加</Button>&nbsp;
+          <Button @click="showModal('add')" type="primary">{{ $t('addButtonText') }}</Button>&nbsp;
           <Dropdown @on-click="batchOpt">
             <Button type="primary">
-              批量操作
+              {{ $t('batchOperationButtonText') }}
               <Icon type="ios-arrow-down"></Icon>
             </Button>
             <DropdownMenu slot="list">
-              <DropdownItem name="batchActive">批量激活</DropdownItem>
-              <DropdownItem name="batchInactive"><span style="color: red;">批量冻结</span></DropdownItem>
-              <DropdownItem name="batchRemove" divided><span style="color: red;">批量删除</span></DropdownItem>
+              <DropdownItem name="batchActive">{{ $t('batchActiveDropdownItemText') }}</DropdownItem>
+              <DropdownItem name="batchInactive"><span style="color: red;">{{ $t('batchFrozenDropdownItemText') }}</span></DropdownItem>
+              <DropdownItem name="batchRemove" divided><span style="color: red;">{{ $t('batchDeleteDropdownItemText') }}</span></DropdownItem>
             </DropdownMenu>
           </Dropdown>&nbsp;
-          <Button @click="showModal('search')" type="primary">高级搜索</Button>&nbsp;
-          <Tooltip content="刷新" placement="right">
+          <Button @click="showModal('search')" type="primary">{{ $t('advancedSearchButtonText') }}</Button>&nbsp;
+          <Tooltip :content="$t('refreshText')" placement="right">
             <Button icon="md-refresh" type="success" shape="circle" @click="search"></Button>
           </Tooltip>
           <Table ref="dataTable" stripe :loading="table.loading" :columns="table.tableColumns" :data="table.tableDetails" style="margin-top:20px;" @on-selection-change="changeSelection" @on-sort-change="changeSort"></Table>
@@ -484,7 +484,7 @@ sortable: true
                         size: 'small'
                       }
                     }, [
-                      '选择操作 ',
+                      this.$t('tableSelectOperationText'),
                       h('Icon', {
                         props: {
                           type: 'ios-arrow-down'
@@ -498,12 +498,12 @@ sortable: true
                         props:{
                           name: 'showEdit'
                         }
-                      }, '编辑'),
+                      }, this.$t('editDropdownItemText')),
                       h('DropdownItem', {
                         props:{
                           name: 'showDetail'
                         }
-                      }, '详情'),
+                      }, this.$t('detailDropdownItemText')),
                       h('DropdownItem', {
                         props:{
                           name: 'remove'
@@ -513,7 +513,7 @@ sortable: true
                           style: {
                             color: 'red'
                           }
-                        }, '删除')
+                        }, this.$t('deleteDropdownItemText'))
                       ])
                   ])
                 ])
