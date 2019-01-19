@@ -122,9 +122,6 @@
         <FormItem label="角色标题" prop="title">
           <Input v-model="searchForm.title" placeholder="请输入角色标题"/>
         </FormItem>
-        <FormItem label="角色描述" prop="description">
-          <Input v-model="searchForm.description" placeholder="请输入角色描述"/>
-        </FormItem>
         <FormItem label="是否激活" prop="isActive">
           <Select v-model="searchForm.isActive" placeholder="请选择是否激活" clearable filterable>
             <Option v-for="item in isActiveSelect" :value="item.value" :key="item.value">{{item.label}}</option>

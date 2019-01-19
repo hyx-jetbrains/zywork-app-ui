@@ -220,6 +220,15 @@ export default [
           icon: 'ios-paper'
         },
         component: () => import('@/view/sys-log/SysLog.vue')
+      },
+      {
+        path: 'Scheduler',
+        name: '定时任务',
+        meta: {
+          title: '定时任务',
+          icon: 'md-time'
+        },
+        component: () => import('@/view/scheduler/Scheduler.vue')
       }
     ]
   },
