@@ -49,15 +49,15 @@ export default [
       }
     ]
   },
-  {
-    path: '',
-    name: 'doc',
-    meta: {
-      title: '文档',
-      href: 'https://lison16.github.io/iview-admin-doc/#/',
-      icon: 'ios-book'
-    }
-  },
+  // {
+  //   path: '',
+  //   name: 'doc',
+  //   meta: {
+  //     title: '文档',
+  //     href: 'https://lison16.github.io/iview-admin-doc/#/',
+  //     icon: 'ios-book'
+  //   }
+  // },
   {
     path: '/admin',
     name: 'user_manage',
@@ -67,17 +67,6 @@ export default [
     },
     component: Main,
     children: [
-      {
-        path: 'Info',
-        name: 'info',
-        meta: {
-          title: '个人信息',
-          icon: 'ios-contact',
-          hideInMenu: true,
-          notCache: true
-        },
-        component: () => import('@/view/info/Info.vue')
-      },
       {
         path: 'User',
         name: 'user_list',
@@ -249,6 +238,28 @@ export default [
           icon: 'ios-notifications'
         },
         component: () => import('@/view/notice/Notice.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    name: 'hide_menu',
+    meta: {
+      icon: 'md-person',
+      title: '隐藏菜单'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'Info',
+        name: 'info',
+        meta: {
+          title: '个人信息',
+          icon: 'ios-contact',
+          hideInMenu: true,
+          notCache: true
+        },
+        component: () => import('@/view/info/Info.vue')
       }
     ]
   },

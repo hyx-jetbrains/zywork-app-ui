@@ -1,4 +1,5 @@
 import axios from '@/libs/api.request'
+import fileDownload from 'js-file-download'
 /**
  * 根据指定的modal名打开模态框
  * @param self this
@@ -331,5 +332,25 @@ export const openTab = (self, path, params) => {
   self.$router.push({
     path: path,
     query: params
+  })
+}
+
+/**
+ * 导出json文件
+ * @param self this
+ */
+export const exportJson = (self) => {
+  axios.request({
+    url: self.urls.exportUrl,
+    method: 'GET',
+    responseType: 'blob',
+    data: ''
+  }).then(response => {
+    console.log(response)
+    // fileDownload(JSON.stringify(response.data), self.exportFileName)
+    fileDownload(response.data, self.exportFileName)
+  }).catch(error => {
+    console.log(error)
+    self.$Message.error('导出失败，稍候再试')
   })
 }

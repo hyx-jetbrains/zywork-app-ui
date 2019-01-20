@@ -5,6 +5,19 @@
         <Card>
           <Button @click="showModal('add')" type="primary">添加</Button>&nbsp;
           <Dropdown @on-click="batchOpt">
+            <Button type="info">导入导出
+              <Icon type="ios-arrow-down"></Icon>
+            </Button>
+            <DropdownMenu slot="list">
+              <DropdownItem name="import">
+                导入权限
+              </DropdownItem>
+              <DropdownItem name="export">
+                <span style="color: green;">导出权限</span>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>&nbsp;
+          <Dropdown @on-click="batchOpt">
             <Button type="primary">批量操作
               <Icon type="ios-arrow-down"></Icon>
             </Button>
@@ -48,6 +61,7 @@
         </Card>
       </i-col>
     </Row>
+    <import-json ref="importJson" @search="search" :title="importTitle" :importUrl="importUrl" :importTemplate="importTemplate"></import-json>
     <Modal
       v-model="modal.add"
       title="添加"
@@ -262,13 +276,30 @@
 import * as utils from '@/api/utils'
 import { isActiveSelect, isDefaultSelect } from '@/api/select'
 import rolePermission from '@/view/role-permission/RolePermission.vue'
+import importJson from '_c/import-json'
 export default {
   name: 'Role',
   components: {
-    rolePermission
+    rolePermission,
+    importJson
   },
   data() {
     return {
+      exportFileName: 'roles.json',
+      importTitle: '导入角色信息',
+      importUrl: '/permission-import-export/import-role',
+      importTemplate: [
+        {
+          "title": "super_sys_admin",
+          "description": "超级系统管理员",
+          "isDefault": 0
+        },
+        {
+          "title": "sys_admin",
+          "description": "系统管理员",
+          "isDefault": 0
+        }
+      ],
       modal: {
         add: false,
         edit: false,
@@ -291,7 +322,8 @@ export default {
         batchRemoveUrl: '/role/admin/batch-remove',
         detailUrl: '/role/admin/one/',
         activeUrl: '/role/admin/active',
-        batchActiveUrl: '/role/admin/batch-active'
+        batchActiveUrl: '/role/admin/batch-active',
+        exportUrl: '/permission-import-export/export-roles'
       },
       page: {
         total: 0
@@ -615,6 +647,10 @@ export default {
         utils.batchActive(this, 1)
       } else if (itemName === 'batchRemove') {
         utils.batchRemove(this)
+      } else if (itemName === 'import') {
+        this.showImportModal()
+      } else if (itemName === 'export') {
+        utils.exportJson(this)
       }
     },
     userOpt(itemName, row) {
@@ -665,7 +701,11 @@ export default {
         'updateTime',
         'isActive'
       ])
+    },
+    showImportModal() {
+      this.$refs.importJson.importModal = true
     }
+    
   }
 }
 </script>
