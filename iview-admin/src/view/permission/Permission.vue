@@ -5,7 +5,7 @@
         <Card>
           <Button @click="showModal('add')" type="primary">添加</Button>&nbsp;
           <Dropdown @on-click="batchOpt">
-            <Button type="info">导入导出
+            <Button type="primary">导入导出
               <Icon type="ios-arrow-down"></Icon>
             </Button>
             <DropdownMenu slot="list">

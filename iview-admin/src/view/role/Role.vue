@@ -5,15 +5,15 @@
         <Card>
           <Button @click="showModal('add')" type="primary">添加</Button>&nbsp;
           <Dropdown @on-click="batchOpt">
-            <Button type="info">导入导出
+            <Button type="primary">导入导出
               <Icon type="ios-arrow-down"></Icon>
             </Button>
             <DropdownMenu slot="list">
               <DropdownItem name="import">
-                导入权限
+                导入角色
               </DropdownItem>
               <DropdownItem name="export">
-                <span style="color: green;">导出权限</span>
+                <span style="color: green;">导出角色</span>
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>&nbsp;

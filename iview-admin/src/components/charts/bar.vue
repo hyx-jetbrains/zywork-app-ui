@@ -10,48 +10,55 @@ echarts.registerTheme('tdTheme', tdTheme)
 export default {
   name: 'ChartBar',
   props: {
-    value: Object,
+    // value: Object,
     text: String,
-    subtext: String
+    subtext: String,
+    xAxisData: '',
+    seriesData: ''
   },
-  data () {
+  data() {
     return {
       dom: null
     }
   },
   methods: {
-    resize () {
+    resize() {
       this.dom.resize()
+    },
+    initData() {
+      this.$nextTick(() => {
+        // let xAxisData = Object.keys(this.value)
+        // let seriesData = Object.values(this.value)
+        let xAxisData = this.xAxisData
+        let seriesData = this.seriesData
+        let option = {
+          title: {
+            text: this.text,
+            subtext: this.subtext,
+            x: 'center'
+          },
+          xAxis: {
+            type: 'category',
+            data: xAxisData
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              data: seriesData,
+              type: 'bar'
+            }
+          ]
+        }
+        this.dom = echarts.init(this.$refs.dom, 'tdTheme')
+        this.dom.setOption(option)
+        on(window, 'resize', this.resize)
+      })
     }
   },
-  mounted () {
-    this.$nextTick(() => {
-      let xAxisData = Object.keys(this.value)
-      let seriesData = Object.values(this.value)
-      let option = {
-        title: {
-          text: this.text,
-          subtext: this.subtext,
-          x: 'center'
-        },
-        xAxis: {
-          type: 'category',
-          data: xAxisData
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [{
-          data: seriesData,
-          type: 'bar'
-        }]
-      }
-      this.dom = echarts.init(this.$refs.dom, 'tdTheme')
-      this.dom.setOption(option)
-      on(window, 'resize', this.resize)
-    })
-  },
-  beforeDestroy () {
+  mounted() {},
+  beforeDestroy() {
     off(window, 'resize', this.resize)
   }
 }
