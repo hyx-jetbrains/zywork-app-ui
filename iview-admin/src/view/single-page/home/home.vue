@@ -20,7 +20,7 @@
         <Card shadow>
           <DatePicker @on-change="setDauSearchDate" type="daterange" split-panels placeholder="选择查询周期" style="width: 200px" />
           <Divider />
-          <home-echarts ref="dauEcharts" style="height: 300px;" :xAxisData="dauXAxisData" :seriesData="dauSeriesData" :text="dauTitle"/>
+          <home-echarts ref="dauEcharts" style="height: 300px;" :xAxisData="dauXAxisData" :seriesData="dauSeriesData" :text="dauTitle" :titleName="dauTitleName"/>
         </Card>
       </i-col>
     </Row>
@@ -28,7 +28,7 @@
       <Card shadow>
         <DatePicker @on-change="setRegCountSearchDate" type="daterange" split-panels placeholder="选择查询周期" style="width: 200px" />
         <Divider />
-        <home-echarts style="height: 310px;" ref="regCountCharts" :xAxisData="regCountXAxisData" :seriesData="regCountSeriesData" :text="regCountTitle" />
+        <home-echarts style="height: 310px;" ref="regCountCharts" :xAxisData="regCountXAxisData" :seriesData="regCountSeriesData" :text="regCountTitle" :titleName="regCountTitleName" />
       </Card>
     </Row>
   </div>
@@ -71,11 +71,13 @@ export default {
         },
         { title: '一周活跃', icon: 'md-map', count: 0, color: '#9A66E4' }
       ],
+      dauTitleName: '',
       dauTitle: '用户活跃量统计',
-      dauXAxisData: '',
+      dauXAxisData: '活跃用户',
       dauSeriesData: '',
       dauBeginDate: '',
       dauEndDate: '',
+      regCountTitle: '新增用户',
       regCountTitle: '新增用户量统计',
       regCountXAxisData: '',
       regCountSeriesData: '',

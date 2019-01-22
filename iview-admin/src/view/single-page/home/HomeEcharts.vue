@@ -11,7 +11,8 @@ export default {
     text: String,
     subtext: String,
     xAxisData: '',
-    seriesData: ''
+    seriesData: '',
+    titleName: ''
   },
   data() {
     return {
@@ -26,6 +27,7 @@ export default {
       this.$nextTick(() => {
         let xAxisData = this.xAxisData
         let seriesData = this.seriesData
+        let titleName = this.titleName
         const option = {
           title: {
             text: this.text,
@@ -60,7 +62,7 @@ export default {
           },
           series: [
             {
-              name: '新增用户',
+              name: titleName,
               type: 'line',
               data: seriesData,
               markPoint: {
