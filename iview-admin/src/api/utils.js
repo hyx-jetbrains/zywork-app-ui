@@ -176,9 +176,9 @@ export const active = (self, row) => {
   }).then(response => {
     if (response.data.code !== 1001) {
       self.$Message.error(response.data.message)
-      return
-    } 
-    self.$Message.success(response.data.message)
+    } else {
+      self.$Message.success(response.data.message)
+    }
     search(self)
   }).catch(error => {
     console.log(error)
