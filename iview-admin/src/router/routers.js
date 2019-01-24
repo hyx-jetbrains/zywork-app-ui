@@ -58,6 +58,35 @@ export default [
   //     icon: 'ios-book'
   //   }
   // },
+	{
+	  path: '/admin',
+	  name: 'organization_manage',
+	  meta: {
+	    icon: 'md-people',
+	    title: '组织部门管理'
+	  },
+	  component: Main,
+	  children: [
+	    {
+	      path: 'Organization',
+	      name: 'organization',
+	      meta: {
+	        title: '组织部门管理',
+	        icon: 'md-people'
+	      },
+	      component: () => import('@/view/organization/Organization.vue')
+	    },
+			{
+			  path: 'UserOrganization',
+			  name: 'user_organization',
+			  meta: {
+			    title: '用户组织部门查询',
+			    icon: 'ios-people'
+			  },
+			  component: () => import('@/view/user-organization/UserOrganization.vue')
+			}
+	  ]
+	},
   {
     path: '/admin',
     name: 'user_manage',
@@ -82,7 +111,7 @@ export default [
         path: 'User',
         name: 'user_list',
         meta: {
-          title: '用户列表',
+          title: '用户基础信息管理',
           icon: 'ios-person'
         },
         component: () => import('@/view/user/User.vue')
@@ -178,7 +207,7 @@ export default [
     path: '/admin',
     name: 'sys_content_manage',
     meta: {
-      icon: 'md-list',
+      icon: 'md-book',
       title: '系统内容管理'
     },
     component: Main,
@@ -187,7 +216,7 @@ export default [
         path: 'SysConfig',
         name: 'system_config',
         meta: {
-          title: '系统配置',
+          title: '系统配置管理',
           icon: 'ios-cog-outline'
         },
         component: () => import('@/view/sys-config/SysConfig.vue')
@@ -196,10 +225,28 @@ export default [
         path: 'Notice',
         name: 'system_notice',
         meta: {
-          title: '系统公告',
+          title: '系统公告管理',
           icon: 'ios-notifications'
         },
         component: () => import('@/view/notice/Notice.vue')
+      },
+      {
+        path: 'Message',
+        name: 'system_message',
+        meta: {
+          title: '消息管理',
+          icon: 'ios-information-circle'
+        },
+        component: () => import('@/view/message/Message.vue')
+      },
+      {
+        path: 'UserMessage',
+        name: 'user_message',
+        meta: {
+          title: '用户消息查询',
+          icon: 'ios-information-circle-outline'
+        },
+        component: () => import('@/view/user-message/UserMessage.vue')
       }
     ]
   },
@@ -212,32 +259,32 @@ export default [
     },
     component: Main,
     children: [
+			{
+			  path: 'SysLog',
+			  name: 'system_log',
+			  meta: {
+			    title: '系统日志管理',
+			    icon: 'ios-paper'
+			  },
+			  component: () => import('@/view/sys-log/SysLog.vue')
+			},
+			{
+			  path: 'Scheduler',
+			  name: 'timing_task',
+			  meta: {
+			    title: '定时任务管理',
+			    icon: 'md-time'
+			  },
+			  component: () => import('@/view/scheduler/Scheduler.vue')
+			},
       {
         path: 'RedisCache',
         name: 'redis_cache',
         meta: {
-          title: 'Redis缓存',
+          title: 'Redis缓存管理',
           icon: 'ios-ionitron-outline'
         },
         component: () => import('@/view/redis-cache/RedisCache.vue')
-      }, 
-      {
-        path: 'SysLog',
-        name: 'system_log',
-        meta: {
-          title: '系统日志',
-          icon: 'ios-paper'
-        },
-        component: () => import('@/view/sys-log/SysLog.vue')
-      },
-      {
-        path: 'Scheduler',
-        name: 'timing_task',
-        meta: {
-          title: '定时任务',
-          icon: 'md-time'
-        },
-        component: () => import('@/view/scheduler/Scheduler.vue')
       }
     ]
   },
