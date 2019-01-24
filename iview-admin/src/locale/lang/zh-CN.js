@@ -18,6 +18,7 @@ export default {
   system_premissoin_manage: '系统权限管理',
   role_manage: '角色管理',
   module_manage: '模块管理',
+  module_permission_query: '模块权限查询',
   permission_manage: '权限管理',
   role_permission_query: '角色权限查询',
   system_config_manage: '系统配置管理',

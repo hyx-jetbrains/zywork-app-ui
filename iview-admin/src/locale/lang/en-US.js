@@ -18,6 +18,7 @@ export default {
   system_premissoin_manage: 'System Permission Management',
   role_manage: 'Role Management',
   module_manage: 'Module Management',
+  module_permission_query: 'Module Permission Query',
   permission_manage: 'Permission Management',
   role_permission_query: 'Role Permission Query',
   system_config_manage: 'System Config Management',

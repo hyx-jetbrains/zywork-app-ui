@@ -219,6 +219,7 @@ export default [
         },
         component: () => import('@/view/module/Module.vue')
       },
+			
       {
         path: 'Permission',
         name: 'permission_manage',
@@ -228,6 +229,15 @@ export default [
         },
         component: () => import('@/view/permission/Permission.vue')
       },
+			{
+			  path: 'ModulePermission',
+			  name: 'module_permission_query',
+			  meta: {
+			    title: '模块权限查询',
+			    icon: 'md-options'
+			  },
+			  component: () => import('@/view/module-permission/ModulePermission.vue')
+			},
 			{
 				path: 'role-permission-page',
 				name: 'role_permission_query',
