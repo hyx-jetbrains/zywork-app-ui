@@ -109,13 +109,40 @@ export default [
       },
       {
         path: 'User',
-        name: 'user_list',
+        name: 'user_basic',
         meta: {
           title: '用户基础信息管理',
           icon: 'ios-person'
         },
         component: () => import('@/view/user/User.vue')
       },
+			{
+			  path: 'UserDetail',
+			  name: 'user_detail_query',
+			  meta: {
+			    title: '用户详情管理',
+			    icon: 'md-information-circle'
+			  },
+			  component: () => import('@/view/user-detail/UserUserDetail.vue')
+			},
+			{
+			  path: 'UserSocial',
+			  name: 'user_social_query',
+			  meta: {
+			    title: '用户第三方登录管理',
+			    icon: 'md-share'
+			  },
+			  component: () => import('@/view/user-social/UserUserSocial.vue')
+			},
+			{
+			  path: 'UserRole',
+			  name: 'user_role_query',
+			  meta: {
+			    title: '用户角色查询',
+			    icon: 'ios-lock'
+			  },
+			  component: () => import('@/view/user-role/UserRole.vue')
+			},
       {
         path: 'ShippingAddress',
         name: 'receiving_address_manage',
@@ -131,7 +158,7 @@ export default [
     path: '/admin',
     name: 'user_fund_manage',
     meta: {
-      icon: 'logo-usd',
+      icon: 'logo-yen',
       title: '用户资金管理'
     },
     component: Main,
@@ -159,7 +186,7 @@ export default [
         name: 'user_account_manage',
         meta: {
           title: '用户账目管理',
-          icon: 'ios-clipboard-outline'
+          icon: 'md-list-box'
         },
         component: () => import('@/view/account-detail/AccountDetail.vue')
       }
@@ -167,10 +194,10 @@ export default [
   },
   {
     path: '/admin',
-    name: 'system_manage',
+    name: 'system_premissoin_manage',
     meta: {
-      icon: 'ios-cog',
-      title: '系统管理'
+      icon: 'ios-lock',
+      title: '系统权限管理'
     },
     component: Main,
     children: [
@@ -179,7 +206,7 @@ export default [
         name: 'role_manage',
         meta: {
           title: '角色管理',
-          icon: 'md-medal'
+          icon: 'md-lock'
         },
         component: () => import('@/view/role/Role.vue')
       },
@@ -188,7 +215,7 @@ export default [
         name: 'module_manage',
         meta: {
           title: '模块管理',
-          icon: 'ios-color-filter'
+          icon: 'ios-list-box'
         },
         component: () => import('@/view/module/Module.vue')
       },
@@ -197,10 +224,19 @@ export default [
         name: 'permission_manage',
         meta: {
           title: '权限管理',
-          icon: 'ios-color-filter-outline'
+          icon: 'ios-key'
         },
         component: () => import('@/view/permission/Permission.vue')
-      }
+      },
+			{
+				path: 'role-permission-page',
+				name: 'role_permission_query',
+				meta: {
+					title: '角色权限查询',
+					icon: 'md-key'
+				},
+				component: () => import('@/view/role-permission/RolePermissions.vue')
+			}
     ]
   },
   {
@@ -217,7 +253,7 @@ export default [
         name: 'system_config',
         meta: {
           title: '系统配置管理',
-          icon: 'ios-cog-outline'
+          icon: 'ios-cog'
         },
         component: () => import('@/view/sys-config/SysConfig.vue')
       },
@@ -244,7 +280,7 @@ export default [
         name: 'user_message',
         meta: {
           title: '用户消息查询',
-          icon: 'ios-information-circle-outline'
+          icon: 'ios-information-circle'
         },
         component: () => import('@/view/user-message/UserMessage.vue')
       }
@@ -282,32 +318,12 @@ export default [
         name: 'redis_cache',
         meta: {
           title: 'Redis缓存管理',
-          icon: 'ios-ionitron-outline'
+          icon: 'ios-ionitron'
         },
         component: () => import('@/view/redis-cache/RedisCache.vue')
       }
     ]
   },
-  // {
-  //   path: '/user',
-  //   name: '单独页面',
-  //   meta: {
-  //     hideInMenu: true
-  //   },
-  //   component: Main,
-  //   children: [
-  //     {
-  //       path: 'role-permission-page',
-  //       name: '角色权限分配',
-  //       meta: {
-  //         title: '角色权限分配',
-  //         notCache: true,
-  //         icon: 'ios-build'
-  //       },
-  //       component: () => import('@/view/role-permission/RolePermission.vue')
-  //     }
-  //   ]
-  // },
   {
     path: '/401',
     name: 'error_401',
