@@ -509,6 +509,9 @@ export default {
                     'on-click': itemName => {
                       this.userOpt(itemName, params.row)
                     }
+                  },
+                  props: {
+                    transfer: true
                   }
                 },
                 [
