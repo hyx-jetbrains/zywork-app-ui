@@ -21,6 +21,7 @@ export default {
   timing_task: 'Timing Task',
   notice_manage: 'Notice Management',
   system_notice: 'System Notice',
+  sys_content_manage: 'System Content Manage',
   addButtonText: 'add',
   batchOperationButtonText: 'batch operation',
   batchActiveDropdownItemText: 'batch active',

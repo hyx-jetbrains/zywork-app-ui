@@ -78,7 +78,7 @@ export default {
       dauBeginDate: '',
       dauEndDate: '',
       regCountTitle: '新增用户',
-      regCountTitle: '新增用户量统计',
+      regCountTitleName: '新增用户量统计',
       regCountXAxisData: '',
       regCountSeriesData: '',
       regCountBeginDate: '',

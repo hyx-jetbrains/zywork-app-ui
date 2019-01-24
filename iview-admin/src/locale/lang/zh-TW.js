@@ -21,6 +21,7 @@ export default {
   timing_task: '定時任務',
   notice_manage: '公告管理',
   system_notice: '系統公告',
+  sys_content_manage: '系統內容管理',
   addButtonText: '添加',
   batchOperationButtonText: '批量操作',
   batchActiveDropdownItemText: '批量啟動',

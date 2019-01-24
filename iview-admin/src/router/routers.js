@@ -176,10 +176,10 @@ export default [
   },
   {
     path: '/admin',
-    name: 'system_config_manage',
+    name: 'sys_content_manage',
     meta: {
-      icon: 'md-cog',
-      title: '系统配置管理'
+      icon: 'md-list',
+      title: '系统内容管理'
     },
     component: Main,
     children: [
@@ -191,6 +191,15 @@ export default [
           icon: 'ios-cog-outline'
         },
         component: () => import('@/view/sys-config/SysConfig.vue')
+      },
+      {
+        path: 'Notice',
+        name: 'system_notice',
+        meta: {
+          title: '系统公告',
+          icon: 'ios-notifications'
+        },
+        component: () => import('@/view/notice/Notice.vue')
       }
     ]
   },
@@ -229,26 +238,6 @@ export default [
           icon: 'md-time'
         },
         component: () => import('@/view/scheduler/Scheduler.vue')
-      }
-    ]
-  },
-  {
-    path: '/admin',
-    name: 'notice_manage',
-    meta: {
-      icon: 'md-notifications',
-      title: '公告管理'
-    },
-    component: Main,
-    children: [
-      {
-        path: 'Notice',
-        name: 'system_notice',
-        meta: {
-          title: '系统公告',
-          icon: 'ios-notifications'
-        },
-        component: () => import('@/view/notice/Notice.vue')
       }
     ]
   },
