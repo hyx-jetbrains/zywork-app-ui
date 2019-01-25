@@ -53,7 +53,7 @@
                   </p>
                   <p>
                     <strong>是否激活：</strong>
-                    <i-switch :value="item.isActive === 0" size="large" @on-change="active(index)">
+                    <i-switch v-model="jobStatusArr[index]" size="large" @on-change="active(index)">
                       <span slot="open">激活</span>
                       <span slot="close">冻结</span>
                     </i-switch>
@@ -472,6 +472,7 @@
 </template>
 
 <script>
+import axios from '@/libs/api.request'
 import * as utils from '@/api/utils'
 import {
   jobClassess,
@@ -931,7 +932,8 @@ export default {
       jobClassessList: [],
       jobStatusList: jobStatusSelect,
       isActiveList: isActiveSelect,
-      showDemo: false
+      showDemo: false,
+      jobStatusArr: []
     }
   },
   computed: {},
@@ -1048,9 +1050,36 @@ export default {
     active(index) {
       const row = this.table.tableDetails[index]
       utils.active(this, row)
+      this.search()
     },
     search() {
-      utils.search(this)
+      // utils.search(this)
+      this.jobStatusArr = []
+      this.loading['search'] = true
+      this.table.loading = true
+      axios.request({
+        url: this.urls.searchUrl,
+        method: 'POST',
+        data: this.searchForm
+      }).then(response => {
+        this.loading['search'] = false
+        this.table.loading = false
+        if (response.data.code != 1001) {
+          this.$Message.error(response.data.message)
+          return
+        }
+        this.page.total = response.data.data.total
+        this.table.tableDetails = response.data.data.rows
+        this.table.tableDetails.forEach(item => {
+          this.jobStatusArr.push(item.isActive === 0)
+        })
+        console.log(this.jobStatusArr)
+      }).catch(error => {
+        console.log(error)
+        this.loading['search'] = false
+        this.table.loading = false
+        this.$Message.error('加载数据失败，稍候再试')
+      })
     },
     changeSelection(selections) {
       utils.changeSelections(this, selections)

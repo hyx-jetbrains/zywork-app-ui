@@ -75,7 +75,7 @@ export default {
         verifyCode: ''
       },
       urls: {
-        verifyCodeUrl: '/auth/verify-code'
+        verifyCodeUrl: '/auth/verify-code' + '?' + Math.random()
       },
       imgUrl: ''
     }
