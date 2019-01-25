@@ -85,7 +85,6 @@ export default {
             // 认证成功
             const data = res.data
             commit('setToken', data.data)
-            resolve()
           } else if (res.data.code === 1006) {
             // Token 失效，需要移除token
             commit('removeToken')
@@ -94,6 +93,7 @@ export default {
           } else {
             loginView.$Message.error(res.data.message)
           }
+					resolve()
         }).catch(err => {
           reject(err)
         })
