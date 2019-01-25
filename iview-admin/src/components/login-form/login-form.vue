@@ -1,27 +1,24 @@
 <template>
   <Form ref="loginForm" :model="form" :rules="rules" @keydown.enter.native="handleSubmit">
     <FormItem prop="username">
-      <Input v-model="form.username" placeholder="请输入用户名">
-        <span slot="prepend">
-          <Icon :size="16" type="ios-person"></Icon>
-        </span>
-      </Input>
+      <Input v-model="form.username" placeholder="请输入用户名" />
+      <span slot="prepend">
+        <Icon :size="16" type="ios-person"></Icon>
+      </span>
     </FormItem>
     <FormItem prop="password">
-      <Input type="password" v-model="form.password" placeholder="请输入密码">
-        <span slot="prepend">
-          <Icon :size="14" type="md-lock"></Icon>
-        </span>
-      </Input>
+      <Input type="password" v-model="form.password" placeholder="请输入密码" />
+      <span slot="prepend">
+        <Icon :size="14" type="md-lock"></Icon>
+      </span>
     </FormItem>
     <FormItem prop="verifyCode">
       <Row>
         <i-col span="18">
-          <Input v-model="form.verifyCode" placeholder="请输入验证码">
+          <Input v-model="form.verifyCode" placeholder="请输入验证码" />
           <span slot="prepend">
-              <Icon :size="14" type="ios-color-wand"></Icon>
-            </span>
-          </Input>
+            <Icon :size="14" type="ios-color-wand"></Icon>
+          </span>
         </i-col>
         <i-col span="6">
           <Tooltip content="刷新验证码" placement="top">
@@ -31,7 +28,7 @@
       </Row>
     </FormItem>
     <FormItem>
-      <Button @click="handleSubmit" type="primary" long>登录</Button>
+      <Button @click="handleSubmit" type="primary" :loading="loginBtn" long>登录</Button>
     </FormItem>
   </Form>
 
@@ -67,7 +64,8 @@ export default {
           trigger: 'blur'
         }]
       }
-    }
+    },
+    loginBtn: false
   },
   data () {
     return {

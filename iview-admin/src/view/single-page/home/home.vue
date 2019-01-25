@@ -71,7 +71,7 @@ export default {
         },
         { title: '一周活跃', icon: 'md-map', count: 0, color: '#9A66E4' }
       ],
-      dauTitleName: '',
+      dauTitleName: '活跃用户量统计',
       dauTitle: '用户活跃量统计',
       dauXAxisData: '活跃用户',
       dauSeriesData: '',

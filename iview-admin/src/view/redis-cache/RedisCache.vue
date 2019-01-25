@@ -449,7 +449,6 @@ export default {
       var params = {
         keys: keys
       }
-      console.log(keys)
       delKeys(keys)
         .then(res => {
           const data = res.data

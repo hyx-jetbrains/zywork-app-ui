@@ -7,7 +7,7 @@
     <div class="login-con">
       <Card icon="log-in" title="欢迎登录" :bordered="false">
         <div class="form-con">
-          <login-form @on-success-valid="handleSubmit"></login-form>
+          <login-form @on-success-valid="handleSubmit" :loginBtn="loginBtn"></login-form>
           <!-- <p class="login-tip">输入任意用户名和密码即可</p> -->
           <other-login></other-login>
         </div>
@@ -31,7 +31,8 @@ export default {
         'username': '',
         'password': '',
         'verifyCode': ''
-      }
+      },
+      loginBtn: false
     }
   },
   methods: {
@@ -43,7 +44,9 @@ export default {
       this.loginForm.username = username
       this.loginForm.password = password
       this.loginForm.verifyCode = verifyCode
+      this.loginBtn = true
       this.handleLogin(this).then(res => {
+        this.loginBtn = false
         // 登入成功获取用户信息
         this.getUserInfo().then(res => {
           // 成功获取用户信息，清除tab菜单并进入首页

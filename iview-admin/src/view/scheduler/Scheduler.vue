@@ -983,8 +983,13 @@ export default {
       } else if (itemName === 'remove') {
         utils.remove(this, row)
       } else if (itemName === 'showEditCron') {
-        utils.showModal(this, 'editCron')
-        this.initCronForm(row)
+        if (row.jobStatus === 0) {
+          utils.showModal(this, 'edit')
+          this.form = JSON.parse(JSON.stringify(row))
+        } else {
+          utils.showModal(this, 'editCron')
+          this.initCronForm(row)
+        }
       } else if (itemName === 'stop') {
         this.initCronForm(row)
         this.optOneJob(this.urls.stopJobUrl)
