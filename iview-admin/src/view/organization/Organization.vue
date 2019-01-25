@@ -3,7 +3,7 @@
     <Card>
       <Tabs value="orgTree">
         <TabPane label="结构树" name="orgTree">
-          <Row style="height: 600px;">
+          <Row style="height: 550px;">
             <div class="department-outer">
               <div class="tip-box">
                 <!-- <b style="margin-right: 20px;">powered by <a target="blank" href="https://github.com/lison16">Lison</a></b>
@@ -350,7 +350,7 @@ export default {
   data() {
     return {
       orgTreeData: null,
-      zoom: 80,
+      zoom: 100,
       orgTreeSpinShow: false,
       modal: {
         add: false,
