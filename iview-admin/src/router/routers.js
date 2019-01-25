@@ -151,6 +151,15 @@ export default [
           icon: 'ios-home'
         },
         component: () => import('@/view/shipping-address/ShippingAddress.vue')
+      },
+      {
+        path: 'StatisticsDau',
+        name: 'statistics_dau',
+        meta: {
+          title: 'DAU管理',
+          icon: 'ios-podium'
+        },
+        component: () => import('@/view/statistics-dau/StatisticsDau.vue')
       }
     ]
   },

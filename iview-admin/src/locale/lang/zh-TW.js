@@ -11,6 +11,7 @@ export default {
   user_social_query: '用戶第三方登錄查询', 
   user_role_query: '用戶角色查詢',
   receiving_address_manage: '用戶收貨地址管理',
+  statistics_dau: 'DAU統計管理',
   user_fund_manage: '用戶資金管理',
   wallet_manage: '用戶錢包管理',
   bank_card_manage: '用戶銀行卡管理',

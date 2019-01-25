@@ -11,6 +11,7 @@ export default {
   user_social_query: 'User Social Query', 
   user_role_query: 'User Role Query',
   receiving_address_manage: 'User Shipping Address Management',
+  statistics_dau: 'DAU Statistics Management',
   user_fund_manage: 'User Funds Management',
   wallet_manage: 'User Wallet Management',
   bank_card_manage: 'User Bank Card Management',
