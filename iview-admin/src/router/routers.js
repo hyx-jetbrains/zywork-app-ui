@@ -75,7 +75,16 @@ export default [
 	        icon: 'md-people'
 	      },
 	      component: () => import('@/view/organization/Organization.vue')
-	    },
+      },
+      {
+        path: 'org_tree_page',
+        name: 'org_tree_page',
+        meta: {
+          icon: 'ios-people',
+          title: '组织结构树'
+        },
+        component: () => import('@/view/components/org-tree')
+      },
 			{
 			  path: 'UserOrganization',
 			  name: 'user_organization',
