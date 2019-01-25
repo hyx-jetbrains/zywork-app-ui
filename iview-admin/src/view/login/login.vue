@@ -58,7 +58,17 @@ export default {
           })
         })
       })
+    },
+    notice() {
+      this.$Notice.info({
+        title: '体验账号密码',
+        desc: '账号：demo@zywork.top 密码：Demo123456',
+        duration: 5
+      });
     }
+  },
+  mounted() {
+    this.notice()
   }
 }
 </script>

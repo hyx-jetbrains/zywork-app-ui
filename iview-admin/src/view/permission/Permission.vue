@@ -512,7 +512,62 @@ export default {
             title: '所属模块',
             key: 'moduleId',
             width: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(
+                'Dropdown',
+                {
+                  on: {
+                    'on-click': itemName => {
+                      this.userOpt(itemName, params.row)
+                    }
+                  },
+                    props: {
+                      transfer: true
+                    }
+                },
+                [
+                  h(
+                    'span',
+                    [
+                      params.row.moduleId,
+                      h('Icon', {
+                        props: {
+                          type: 'ios-eye-outline',
+                          size: '25'
+                        }
+                      })
+                    ]
+                  ),
+                  h(
+                    'DropdownMenu',
+                    {
+                      slot: 'list'
+                    },
+                    [
+                      h(
+                        'DropdownItem',
+                        {
+                          props: {
+                            name: 'search'
+                          }
+                        },
+                        '查看'
+                      ),
+                      h(
+                        'DropdownItem',
+                        {
+                          props: {
+                            name: 'detail'
+                          }
+                        },
+                        '详情'
+                      )
+                    ]
+                  )
+                ]
+              )
+            }
           },
           {
             title: '权限标题',
