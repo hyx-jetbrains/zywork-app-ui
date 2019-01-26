@@ -32,29 +32,33 @@ export const resetForm = (self, formRef) => {
  * @param self this
  */
 export const add = (self) => {
-  self.$refs['addForm'].validate(valid => {
-    if (valid) {
-      self.loading['add'] = true
-      axios.request({
-        url: self.urls.addUrl,
-        method: 'POST',
-        data: self.form
-      }).then(response => {
-        self.loading['add'] = false
-        if (response.data.code !== 1001) {
-          self.$Message.error(response.data.message)
-          return
-        }
-        self.$Message.success(response.data.message)
-        resetForm(self, 'addForm')
-        cancelModal(self, 'add')
-        search(self)
-      }).catch(error => {
-        console.log(error)
-        self.loading['add'] = false
-        self.$Message.error('添加数据失败，稍候再试')
-      })
-    }
+  return new Promise((resolve, reject) => {
+    self.$refs['addForm'].validate(valid => {
+      if (valid) {
+        self.loading['add'] = true
+        axios.request({
+          url: self.urls.addUrl,
+          method: 'POST',
+          data: self.form
+        }).then(response => {
+          self.loading['add'] = false
+          if (response.data.code !== 1001) {
+            self.$Message.error(response.data.message)
+          } else {
+            self.$Message.success(response.data.message)
+            resetForm(self, 'addForm')
+            cancelModal(self, 'add')
+            search(self)
+          }
+          resolve(response)
+        }).catch(error => {
+          console.log(error)
+          self.loading['add'] = false
+          self.$Message.error('添加数据失败，稍候再试')
+          reject(error)
+        })
+      }
+    })
   })
 }
 
@@ -63,29 +67,33 @@ export const add = (self) => {
  * @param self this
  */
 export const edit = (self) => {
-  self.$refs['editForm'].validate(valid => {
-    if (valid) {
-      self.loading['edit'] = true
-      axios.request({
-        url: self.urls.editUrl,
-        method: 'POST',
-        data: self.form
-      }).then(response => {
-        self.loading['edit'] = false
-        if (response.data.code !== 1001) {
-          self.$Message.error(response.data.message)
-          return
-        }
-        self.$Message.success(response.data.message)
-        resetForm(self, 'editForm')
-        cancelModal(self, 'edit')
-        search(self)
-      }).catch(error => {
-        self.loading['edit'] = false
-        console.log(error)
-        self.$Message.error('修改数据失败，稍候再试')
-      })
-    }
+  return new Promise((resolve, reject) => {
+    self.$refs['editForm'].validate(valid => {
+      if (valid) {
+        self.loading['edit'] = true
+        axios.request({
+          url: self.urls.editUrl,
+          method: 'POST',
+          data: self.form
+        }).then(response => {
+          self.loading['edit'] = false
+          if (response.data.code !== 1001) {
+            self.$Message.error(response.data.message)
+          } else {
+            self.$Message.success(response.data.message)
+            resetForm(self, 'editForm')
+            cancelModal(self, 'edit')
+            search(self)
+          }
+          resolve(response)
+        }).catch(error => {
+          self.loading['edit'] = false
+          console.log(error)
+          self.$Message.error('修改数据失败，稍候再试')
+          reject(error)
+        })
+      }
+    })
   })
 }
 
@@ -95,27 +103,31 @@ export const edit = (self) => {
  * @param row 需要删除的数据对象
  */
 export const remove = (self, row) => {
-  self.$Modal.confirm({
-    title: '确认删除吗？',
-    content: '确认删除选择的数据吗？',
-    onOk: () => {
-      axios.request({
-        url: self.urls.removeUrl + row.id,
-        method: 'GET'
-      }).then(response => {
-        if (response.data.code !== 1001) {
-          self.$Message.error(response.data.message)
-          return
-        } 
-        search(self)
-      }).catch(error => {
-        console.log(error)
-        self.$Message.error('删除数据失败，稍候再试')
-      })
-    },
-    onCancel: () => {
+  return new Promise((resolve, reject) => {
+    self.$Modal.confirm({
+      title: '确认删除吗？',
+      content: '确认删除选择的数据吗？',
+      onOk: () => {
+        axios.request({
+          url: self.urls.removeUrl + row.id,
+          method: 'GET'
+        }).then(response => {
+          if (response.data.code !== 1001) {
+            self.$Message.error(response.data.message)
+          } else {
+            search(self)
+          }
+          resolve(response)
+        }).catch(error => {
+          console.log(error)
+          self.$Message.error('删除数据失败，稍候再试')
+          reject(error)
+        })
+      },
+      onCancel: () => {
 
-    }
+      }
+    })
   })
 }
 
@@ -124,39 +136,43 @@ export const remove = (self, row) => {
  * @param self this
  */
 export const batchRemove = (self) => {
-  if (self.table.selections.length === 0) {
-    self.$Message.warning('请选择需要批量删除的数据')
-  } else {
-    self.$Modal.confirm({
-      title: '确认删除吗？',
-      content: '确认批量删除选择的数据吗？',
-      onOk: () => {
-        let ids = []
-        self.table.selections.forEach((row, index) => {
-          ids.push(row.id)
-        })
-        axios.request({
-          url: self.urls.batchRemoveUrl,
-          method: 'POST',
-          data: ids
-        }).then(response => {
-          if (response.data.code !== 1001) {
-            self.$Message.error(response.data.message)
-            return
-          } 
-          self.$Message.success(response.data.message)
-          self.table.selections = []
-          search(self)
-        }).catch(error => {
-          console.log(error)
-          self.$Message.error('批量删除数据失败，稍候再试')
-        })
-      },
-      onCancel: () => {
+  return new Promise((resolve, reject) => {
+    if (self.table.selections.length === 0) {
+      self.$Message.warning('请选择需要批量删除的数据')
+    } else {
+      self.$Modal.confirm({
+        title: '确认删除吗？',
+        content: '确认批量删除选择的数据吗？',
+        onOk: () => {
+          let ids = []
+          self.table.selections.forEach((row, index) => {
+            ids.push(row.id)
+          })
+          axios.request({
+            url: self.urls.batchRemoveUrl,
+            method: 'POST',
+            data: ids
+          }).then(response => {
+            if (response.data.code !== 1001) {
+              self.$Message.error(response.data.message)
+            } else {
+              self.$Message.success(response.data.message)
+              self.table.selections = []
+              search(self)
+            }
+            resolve(response)
+          }).catch(error => {
+            console.log(error)
+            self.$Message.error('批量删除数据失败，稍候再试')
+            reject(error)
+          })
+        },
+        onCancel: () => {
 
-      }
-    })
-  }
+        }
+      })
+    }
+  })
 }
 
 /**
@@ -165,24 +181,28 @@ export const batchRemove = (self) => {
  * @param row 需要激活或冻结的数据对象
  */
 export const active = (self, row) => {
-  let isActive = row.isActive === 0 ? 1 : 0
-  axios.request({
-    url: self.urls.activeUrl,
-    method: 'POST',
-    data: {
-      id: row.id,
-      isActive: isActive
-    }
-  }).then(response => {
-    if (response.data.code !== 1001) {
-      self.$Message.error(response.data.message)
-    } else {
-      self.$Message.success(response.data.message)
-    }
-    search(self)
-  }).catch(error => {
-    console.log(error)
-    self.$Message.error('激活或冻结数据失败，稍候再试')
+  return new Promise((resolve, reject) => {
+    let isActive = row.isActive === 0 ? 1 : 0
+    axios.request({
+      url: self.urls.activeUrl,
+      method: 'POST',
+      data: {
+        id: row.id,
+        isActive: isActive
+      }
+    }).then(response => {
+      if (response.data.code !== 1001) {
+        self.$Message.error(response.data.message)
+      } else {
+        self.$Message.success(response.data.message)
+      }
+      search(self)
+      resolve(response)
+    }).catch(error => {
+      console.log(error)
+      self.$Message.error('激活或冻结数据失败，稍候再试')
+      reject(error)
+    })
   })
 }
 
@@ -192,39 +212,43 @@ export const active = (self, row) => {
  * @param isActive 0表示需要激活，1表示需要冻结
  */
 export const batchActive = (self, isActive) => {
-  let rowArray = []
-  if (self.table.selections.length === 0) {
-    self.$Message.warning('请选择需要批量' + (isActive === 0 ? '激活' : '冻结') + '的数据')
-  } else {
-    self.table.selections.forEach((row, index) => {
-      if (row.isActive !== isActive) {
-        rowArray.push({
-          id: row.id,
-          isActive: isActive
-        })
-      }
-    })
-    if (rowArray.length > 0) {
-      axios.request({
-        url: self.urls.batchActiveUrl,
-        method: 'POST',
-        data: rowArray
-      }).then(response => {
-        if (response.data.code !== 1001) {
-          self.$Message.error(response.data.message)
-          return
-        } 
-        self.$Message.success(response.data.message)
-        self.table.selections = []
-        search(self)
-      }).catch(error => {
-        console.log(error)
-        self.$Message.error('批量激活或冻结数据失败，稍候再试')
-      })
+  return new Promise((resolve, reject) => {
+    let rowArray = []
+    if (self.table.selections.length === 0) {
+      self.$Message.warning('请选择需要批量' + (isActive === 0 ? '激活' : '冻结') + '的数据')
     } else {
-      self.$Message.warning('没有需要批量' + (isActive === 0 ? '激活' : '冻结') + '的数据')
+      self.table.selections.forEach((row, index) => {
+        if (row.isActive !== isActive) {
+          rowArray.push({
+            id: row.id,
+            isActive: isActive
+          })
+        }
+      })
+      if (rowArray.length > 0) {
+        axios.request({
+          url: self.urls.batchActiveUrl,
+          method: 'POST',
+          data: rowArray
+        }).then(response => {
+          if (response.data.code !== 1001) {
+            self.$Message.error(response.data.message)
+          } else {
+            self.$Message.success(response.data.message)
+            self.table.selections = []
+            search(self)
+          }
+          resolve(response)
+        }).catch(error => {
+          console.log(error)
+          self.$Message.error('批量激活或冻结数据失败，稍候再试')
+          reject(error)
+        })
+      } else {
+        self.$Message.warning('没有需要批量' + (isActive === 0 ? '激活' : '冻结') + '的数据')
+      }
     }
-  }
+  })
 }
 
 /**
@@ -232,26 +256,30 @@ export const batchActive = (self, isActive) => {
  * @param self this
  */
 export const search = (self) => {
-  self.loading['search'] = true
-  self.table.loading = true
-  axios.request({
-    url: self.urls.searchUrl,
-    method: 'POST',
-    data: self.searchForm
-  }).then(response => {
-    self.loading['search'] = false
-    self.table.loading = false
-    if (response.data.code != 1001) {
-      self.$Message.error(response.data.message)
-      return
-    }
-    self.page.total = response.data.data.total
-    self.table.tableDetails = response.data.data.rows
-  }).catch(error => {
-    console.log(error)
-    self.loading['search'] = false
-    self.table.loading = false
-    self.$Message.error('加载数据失败，稍候再试')
+  return new Promise((resolve, reject) => {
+    self.loading['search'] = true
+    self.table.loading = true
+    axios.request({
+      url: self.urls.searchUrl,
+      method: 'POST',
+      data: self.searchForm
+    }).then(response => {
+      self.loading['search'] = false
+      self.table.loading = false
+      if (response.data.code !== 1001) {
+        self.$Message.error(response.data.message)
+      } else {
+        self.page.total = response.data.data.total
+        self.table.tableDetails = response.data.data.rows
+        }
+      resolve(response)
+    }).catch(error => {
+      console.log(error)
+      self.loading['search'] = false
+      self.table.loading = false
+      self.$Message.error('加载数据失败，稍候再试')
+      reject(error)
+    })
   })
 }
 
