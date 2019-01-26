@@ -8,7 +8,9 @@
               <div class="tip-box">
                 <!-- <b style="margin-right: 20px;">powered by <a target="blank" href="https://github.com/lison16">Lison</a></b>
                 <a target="blank" href="https://github.com/lison16/v-org-tree" style="margin-right: 10px;">v-org-tree文档</a>-->
-                <Button @click="getDepartmentData" type="success" icon="ios-refresh">刷新</Button>&nbsp;
+                <Tooltip content="刷新" placement="right">
+                  <Button icon="md-refresh" type="success" shape="circle" @click="getDepartmentData"></Button>
+                </Tooltip>
               </div>
               <div class="zoom-box">
                 <zoom-controller v-model="zoom" :min="20" :max="200"></zoom-controller>
