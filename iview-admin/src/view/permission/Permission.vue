@@ -533,7 +533,7 @@ export default {
                       params.row.moduleId,
                       h('Icon', {
                         props: {
-                          type: 'ios-eye-outline',
+                          type: 'ios-list',
                           size: '25'
                         }
                       })
@@ -549,19 +549,19 @@ export default {
                         'DropdownItem',
                         {
                           props: {
-                            name: 'search'
+                            name: 'detail'
                           }
                         },
-                        '查看'
+                        '详情'
                       ),
                       h(
                         'DropdownItem',
                         {
                           props: {
-                            name: 'detail'
+                            name: 'search'
                           }
                         },
-                        '详情'
+                        '搜索'
                       )
                     ]
                   )
