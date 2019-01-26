@@ -687,12 +687,12 @@ export default {
         this.showModal('add')
       } else if (keyStr === '"delete"') {
         // 删除部门
-        utils.remove(this, row)
+        utils.remove(this, row).then(res => {
+          if (res.data.code === 1001) {
+            this.getDepartmentData()
+          }
+        })
       }
-      // this.$Message.success({
-      //   duration: 5,
-      //   content: `点击了《${data.label}》节点的'${menuDic[key]}'菜单`
-      // })
     },
     getDepartmentData() {
       this.orgTreeSpinShow = true
@@ -817,14 +817,26 @@ export default {
         utils.showModal(this, 'detail')
         this.form = JSON.parse(JSON.stringify(row))
       } else if (itemName === 'remove') {
-        utils.remove(this, row)
+        utils.remove(this, row).then(res => {
+          if (res.data.code === 1001) {
+            this.getDepartmentData()
+          }
+        })
       }
     },
     add() {
-      utils.add(this)
+      utils.add(this).then(res => {
+        if (res.data.code === 1001) {
+          this.getDepartmentData()
+        }
+      })
     },
     edit() {
-      utils.edit(this)
+      utils.edit(this).then(res => {
+        if (res.data.code === 1001) {
+          this.getDepartmentData()
+        }
+      })
     },
     active(row) {
       utils.active(this, row)
