@@ -788,6 +788,7 @@ export default {
     },
     resetForm(formRef) {
       utils.resetForm(this, formRef)
+      this.searchForm.moduleId = null
     },
     cancelModal(modal) {
       utils.cancelModal(this, modal)
@@ -885,7 +886,9 @@ export default {
     },
     confirmSelection(moduleId) {
       this.searchForm.moduleId = moduleId
-      this.search()
+      utils.search(this).then(res => {
+        this.searchForm.moduleId = null
+      })
     },
     setSearchModal(val) {
       this.modal.mainTableSearch = val
