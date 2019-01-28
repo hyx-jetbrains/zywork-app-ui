@@ -321,16 +321,29 @@
         <span v-text="form.isActive"></span>
       </p>
     </Modal>
+    <main-table-view-modal :form="mainTableForm" :detail="modal.mainTableDetail" v-on:setDetail="setDetailModal"/>
+    <Modal
+      :translate="false"
+      fullscreen
+      v-model="modal.mainTableSearch"
+      title="搜索主表信息">
+      <module-list />
+    </Modal>
   </div>
 </template>
 
 <script>
 import * as utils from '@/api/utils'
 import importJson from '_c/import-json'
+import mainTableViewModal from '@/view/module/ViewModal.vue'
+import moduleList from '@/view/module/ModuleList.vue'
+import {getModuleById} from '@/api/id'
 export default {
   name: 'Permission',
   components: {
-    importJson
+    importJson,
+    mainTableViewModal,
+    moduleList
   },
   data() {
     return {
@@ -368,7 +381,9 @@ export default {
         add: false,
         edit: false,
         search: false,
-        detail: false
+        detail: false,
+        mainTableDetail: false,
+        mainTableSearch: false
       },
       loading: {
         add: false,
@@ -397,6 +412,15 @@ export default {
         moduleId: null,
         title: null,
         permission: null,
+        description: null,
+        version: null,
+        createTime: null,
+        updateTime: null,
+        isActive: null
+      },
+      mainTableForm: {
+        id: null,
+        title: null,
         description: null,
         version: null,
         createTime: null,
@@ -549,7 +573,7 @@ export default {
                         'DropdownItem',
                         {
                           props: {
-                            name: 'detail'
+                            name: 'mainTableDetail'
                           }
                         },
                         '详情'
@@ -558,7 +582,7 @@ export default {
                         'DropdownItem',
                         {
                           props: {
-                            name: 'search'
+                            name: 'showSearch'
                           }
                         },
                         '搜索'
@@ -798,6 +822,10 @@ export default {
         this.form = JSON.parse(JSON.stringify(row))
       } else if (itemName === 'remove') {
         utils.remove(this, row)
+      } else if (itemName === 'mainTableDetail') {
+        this.showMainTableModal(row.moduleId)
+      } else if (itemName === 'showSearch') {
+        utils.showModal(this, 'mainTableSearch')
       }
     },
     add() {
@@ -836,6 +864,24 @@ export default {
         'updateTime',
         'isActive'
       ])
+    },
+    setDetailModal(val) {
+      this.modal.mainTableDetail = val
+    },
+    showMainTableModal(id) {
+      getModuleById(id)
+        .then(res => {
+          const data = res.data
+          if (data.code === 1001) {
+            this.mainTableForm = data.data
+            this.modal.mainTableDetail = true
+          } else {
+            this.$Message.error(data.message)
+          }
+        })
+        .catch(err => {
+          this.$Message.error(err)
+        })
     }
   }
 }

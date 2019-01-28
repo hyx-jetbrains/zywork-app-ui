@@ -257,7 +257,7 @@ export const batchActive = (self, isActive) => {
  */
 export const search = (self) => {
   return new Promise((resolve, reject) => {
-    self.loading['search'] = true
+    self.loading.search = true
     self.table.loading = true
     axios.request({
       url: self.urls.searchUrl,

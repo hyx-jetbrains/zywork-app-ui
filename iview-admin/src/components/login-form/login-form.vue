@@ -1,13 +1,13 @@
 <template>
   <Form ref="loginForm" :model="form" :rules="rules" @keydown.enter.native="handleSubmit">
     <FormItem prop="username">
-      <Input v-model="form.username" placeholder="请输入用户名" />
+      <Input v-model="form.username" placeholder="请输入用户名" clearable />
       <span slot="prepend">
         <Icon :size="16" type="ios-person"></Icon>
       </span>
     </FormItem>
     <FormItem prop="password">
-      <Input type="password" v-model="form.password" placeholder="请输入密码" />
+      <Input type="password" v-model="form.password" placeholder="请输入密码" clearable />
       <span slot="prepend">
         <Icon :size="14" type="md-lock"></Icon>
       </span>
@@ -15,7 +15,7 @@
     <FormItem prop="verifyCode">
       <Row>
         <i-col span="18">
-          <Input v-model="form.verifyCode" placeholder="请输入验证码" />
+          <Input v-model="form.verifyCode" placeholder="请输入验证码" clearable />
           <span slot="prepend">
             <Icon :size="14" type="ios-color-wand"></Icon>
           </span>
