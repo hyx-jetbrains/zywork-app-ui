@@ -289,43 +289,43 @@ export default {
           {
             title: '模块编号',
             key: 'id',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '模块标题',
             key: 'title',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '模块描述',
             key: 'description',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '版本号',
             key: 'version',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '创建时间',
             key: 'createTime',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '更新时间',
             key: 'updateTime',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '是否激活',
             key: 'isActive',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
 
@@ -366,7 +366,6 @@ export default {
   },
   computed: {},
   mounted() {
-    this.fitTable()
     this.search()
   },
   methods: {
@@ -410,17 +409,6 @@ export default {
     },
     changePageSize(pageSize) {
       utils.changePageSize(this, pageSize)
-    },
-    fitTable() {
-      utils.fitTable(this, 'dataTable', this.table.tableColumns, [
-        'id',
-        'title',
-        'description',
-        'version',
-        'createTime',
-        'updateTime',
-        'isActive'
-      ])
     },
     confirmSelection() {
       // 确认选择的逻辑

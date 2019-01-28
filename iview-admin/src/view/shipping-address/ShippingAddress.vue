@@ -580,86 +580,86 @@ export default {
           {
             title: '地址编号',
             key: 'id',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '用户编号',
             key: 'userId',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '收货人',
             key: 'realName',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '手机号',
             key: 'phone',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '省',
             key: 'province',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '市',
             key: 'city',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '区/县',
             key: 'district',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '详细地址',
             key: 'address',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '是否默认',
             key: 'isDefault',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '版本号',
             key: 'version',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '创建时间',
             key: 'createTime',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '更新时间',
             key: 'updateTime',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '是否激活',
             key: 'isActive',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
 
           {
             title: '激活状态',
             key: 'isActive',
-            width: 100,
+            minWidth: 100,
             align: 'center',
             render: (h, params) => {
               return h(
@@ -791,7 +791,6 @@ export default {
   },
   computed: {},
   mounted() {
-    this.fitTable()
     this.search()
   },
   methods: {
@@ -893,23 +892,6 @@ export default {
     },
     changePageSize(pageSize) {
       utils.changePageSize(this, pageSize)
-    },
-    fitTable() {
-      utils.fitTable(this, 'dataTable', this.table.tableColumns, [
-        'id',
-        'userId',
-        'realName',
-        'phone',
-        'province',
-        'city',
-        'district',
-        'address',
-        'isDefault',
-        'version',
-        'createTime',
-        'updateTime',
-        'isActive'
-      ])
     }
   }
 }

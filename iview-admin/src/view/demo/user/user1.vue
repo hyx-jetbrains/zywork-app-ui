@@ -206,40 +206,40 @@
             {
               title: '用户名',
               key: 'name',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '昵称',
               key: 'nickname',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '年龄',
               key: 'age',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '故乡',
               key: 'hometown',
-              width: 120
+              minWidth: 120
             },
             {
               title: '毕业学校',
               key: 'school',
-              width: 120
+              minWidth: 120
             },
             {
               title: '个人评价',
               key: 'comment',
-              width: 120
+              minWidth: 120
             },
             {
               title: '激活状态',
               key: 'isActive',
-              width: 120,
+              minWidth: 100,
               align: 'center',
               render: (h, params) => {
                 return h('i-switch', {

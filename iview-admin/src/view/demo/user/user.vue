@@ -326,67 +326,67 @@
             {
               title: '编号',
               key: 'id',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '邮箱',
               key: 'email',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '手机号',
               key: 'phone',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '账户名',
               key: 'accountName',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '年龄',
               key: 'age',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '密码',
               key: 'password',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '加密盐值',
               key: 'salt',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '创建时间',
               key: 'createTime',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '更新时间',
               key: 'updateTime',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '是否激活',
               key: 'isActive',
-              width: 120,
+              minWidth: 120,
               sortable: true
             },
             {
               title: '激活状态',
               key: 'isActive',
-              width: 120,
+              minWidth: 100,
               align: 'center',
               render: (h, params) => {
                 return h('i-switch', {
@@ -470,7 +470,6 @@
     },
     computed: {},
     mounted() {
-      this.fitTable()
       this.search()
     },
     methods: {
@@ -558,9 +557,6 @@
       },
       changePageSize(pageSize) {
         utils.changePageSize(this, pageSize)
-      },
-      fitTable() {
-        utils.fitTable(this, 'dataTable', this.table.tableColumns, ['email', 'phone', 'accountName', 'password', 'isActive'])
       }
     }
   }

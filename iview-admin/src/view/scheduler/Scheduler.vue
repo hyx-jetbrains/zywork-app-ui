@@ -726,92 +726,92 @@ export default {
         //   {
         //     title: '作业编号',
         //     key: 'id',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '作业名称',
         //     key: 'name',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '完整类名',
         //     key: 'className',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: 'cron表达式',
         //     key: 'cronExpression',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '作业组名称',
         //     key: 'groupName',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '触发器名称',
         //     key: 'triggerName',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '触发器组',
         //     key: 'triggerGroup',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '作业描述',
         //     key: 'description',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '作业状态',
         //     key: 'jobStatus',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '状态更新时间',
         //     key: 'jobStatusTime',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '版本号',
         //     key: 'version',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '创建时间',
         //     key: 'createTime',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '更新时间',
         //     key: 'updateTime',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
         //   {
         //     title: '是否激活',
         //     key: 'isActive',
-        //     width: 120,
+        //     minWidth: 120,
         //     sortable: true
         //   },
 
         //   {
         //     title: '激活状态',
         //     key: 'isActive',
-        //     width: 100,
+        //     minWidth: 100,
         //     align: 'center',
         //     render: (h, params) => {
         //       return h(
@@ -955,7 +955,6 @@ export default {
   },
   computed: {},
   mounted() {
-    // this.fitTable()
     this.search()
     this.getJobClassess()
   },
@@ -1169,24 +1168,6 @@ export default {
           this.$Message.error(err)
         })
     }
-    // fitTable() {
-    //   utils.fitTable(this, 'dataTable', this.table.tableColumns, [
-    //     'id',
-    //     'name',
-    //     'className',
-    //     'cronExpression',
-    //     'groupName',
-    //     'triggerName',
-    //     'triggerGroup',
-    //     'description',
-    //     'jobStatus',
-    //     'jobStatusTime',
-    //     'version',
-    //     'createTime',
-    //     'updateTime',
-    //     'isActive'
-    //   ])
-    // }
   }
 }
 </script>

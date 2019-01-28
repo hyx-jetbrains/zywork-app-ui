@@ -529,13 +529,13 @@ export default {
           {
             title: '权限编号',
             key: 'id',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '所属模块',
             key: 'moduleId',
-            width: 120,
+            minWidth: 120,
             sortable: true,
             render: (h, params) => {
               return h(
@@ -596,50 +596,50 @@ export default {
           {
             title: '权限标题',
             key: 'title',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '权限字符串',
             key: 'permission',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '权限描述',
             key: 'description',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '版本号',
             key: 'version',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '创建时间',
             key: 'createTime',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '更新时间',
             key: 'updateTime',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '是否激活',
             key: 'isActive',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
 
           {
             title: '激活状态',
             key: 'isActive',
-            width: 100,
+            minWidth: 100,
             align: 'center',
             render: (h, params) => {
               return h(
@@ -771,7 +771,6 @@ export default {
   },
   computed: {},
   mounted() {
-    this.fitTable()
     this.search()
   },
   methods: {
@@ -852,19 +851,6 @@ export default {
     },
     changePageSize(pageSize) {
       utils.changePageSize(this, pageSize)
-    },
-    fitTable() {
-      utils.fitTable(this, 'dataTable', this.table.tableColumns, [
-        'id',
-        'moduleId',
-        'title',
-        'permission',
-        'description',
-        'version',
-        'createTime',
-        'updateTime',
-        'isActive'
-      ])
     },
     setDetailModal(val) {
       this.modal.mainTableDetail = val

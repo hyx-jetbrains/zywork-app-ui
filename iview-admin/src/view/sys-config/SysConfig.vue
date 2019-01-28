@@ -409,55 +409,55 @@ export default {
           {
             title: '配置编号',
             key: 'id',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '配置名称',
             key: 'name',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '配置内容(JSON)',
             key: 'value',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '中文说明',
             key: 'description',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '配置注释',
             key: 'comment',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '版本号',
             key: 'version',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '创建时间',
             key: 'createTime',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '更新时间',
             key: 'updateTime',
-            width: 120,
+            minWidth: 120,
             sortable: true
           },
           {
             title: '激活状态',
             key: 'isActive',
-            width: 100,
+            minWidth: 100,
             align: 'center',
             render: (h, params) => {
               return h(
@@ -594,7 +594,6 @@ export default {
   },
   computed: {},
   mounted() {
-    this.fitTable()
     this.search()
     
   },
@@ -672,19 +671,6 @@ export default {
     },
     changePageSize(pageSize) {
       utils.changePageSize(this, pageSize)
-    },
-    fitTable() {
-      utils.fitTable(this, 'dataTable', this.table.tableColumns, [
-        'id',
-        'name',
-        'value',
-        'description',
-        'comment',
-        'version',
-        'createTime',
-        'updateTime',
-        'isActive'
-      ])
     }
   }
 }
