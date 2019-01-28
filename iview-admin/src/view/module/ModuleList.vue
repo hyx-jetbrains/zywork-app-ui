@@ -424,6 +424,12 @@ export default {
     },
     confirmSelection() {
       // 确认选择的逻辑
+      if (this.table.selections.length != 1) {
+        this.$Message.warning("请选择一条数据")
+        return
+      }
+      this.$emit("confirmSelection", this.table.selections[0].id)
+      this.$emit("setSearchModal", false)
     }
   }
 }

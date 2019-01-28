@@ -327,7 +327,7 @@
       fullscreen
       v-model="modal.mainTableSearch"
       title="搜索主表信息">
-      <module-list />
+      <module-list v-on:confirmSelection="confirmSelection" v-on:setSearchModal="setSearchModal" />
     </Modal>
   </div>
 </template>
@@ -882,6 +882,13 @@ export default {
         .catch(err => {
           this.$Message.error(err)
         })
+    },
+    confirmSelection(moduleId) {
+      this.searchForm.moduleId = moduleId
+      this.search()
+    },
+    setSearchModal(val) {
+      this.modal.mainTableSearch = val
     }
   }
 }

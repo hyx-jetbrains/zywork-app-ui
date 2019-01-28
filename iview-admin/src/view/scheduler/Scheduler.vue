@@ -48,6 +48,13 @@
                 </span>
                 <Scroll height="280">
                   <p>
+                    <strong>自动启动：</strong>
+                    <i-switch v-model="autoStartArr[index]" @on-change="editAutoStatus(index)">
+                      <span slot="open">是</span>
+                      <span slot="close">否</span>
+                    </i-switch>
+                  </p>
+                  <p>
                     <strong>类名：</strong>
                     <span v-text="item.className" />
                   </p>
@@ -274,6 +281,11 @@
         <FormItem label="作业名称" prop="name">
           <Input v-model="searchForm.name" placeholder="请输入作业名称"/>
         </FormItem>
+        <FormItem label="自动启动">
+          <Select v-model="searchForm.autoStart" placeholder="请选择是否自动启动的状态" clearable filterable>
+            <Option v-for="item in isDefaultList" :value="item.value" :key="item.value">{{item.label}}</option>
+          </Select>
+        </FormItem>
         <FormItem label="完整类名" prop="className">
           <Select v-model="searchForm.className" placeholder="请选择类名称" clearable filterable>
             <Option v-for="item in jobClassessList" :value="item" :key="item">{{item}}</option>
@@ -481,7 +493,8 @@ import {
 } from '@/api/scheduler'
 import {
   jobStatusSelect,
-  isActiveSelect
+  isActiveSelect,
+  isDefaultSelect
 } from '@/api/select'
 import cronDemo from './CronDemo.vue'
 import './Scheduler.less'
@@ -535,6 +548,7 @@ export default {
         triggerName: null,
         triggerGroup: null,
         description: null,
+        autoStart: null,
         jobStatus: null,
         jobStatusTime: null,
         version: null,
@@ -666,6 +680,7 @@ export default {
         triggerName: null,
         triggerGroup: null,
         description: null,
+        autoStart: null,
         jobStatus: null,
         jobStatusMin: null,
         jobStatusMax: null,
@@ -932,8 +947,10 @@ export default {
       jobClassessList: [],
       jobStatusList: jobStatusSelect,
       isActiveList: isActiveSelect,
+      isDefaultList: isDefaultSelect,
       showDemo: false,
-      jobStatusArr: []
+      jobStatusArr: [],
+      autoStartArr: []
     }
   },
   computed: {},
@@ -1052,9 +1069,33 @@ export default {
       utils.active(this, row)
       this.search()
     },
+    editAutoStatus(index) {
+      const row = this.table.tableDetails[index]
+      this.form = JSON.parse(JSON.stringify(row))
+      if (this.form.autoStart === 0) {
+        this.form.autoStart = 1
+      } else {
+        this.form.autoStart = 0
+      }
+      axios.request({
+          url: this.urls.editUrl,
+          method: 'POST',
+          data: this.form
+        }).then(response => {
+          if (response.data.code !== 1001) {
+            this.$Message.error(response.data.message)
+          } else {
+            this.$Message.success(response.data.message)
+          }
+          this.search()
+        }).catch(error => {
+          this.$Message.error('修改数据失败，稍候再试')
+        })
+    },
     search() {
       // utils.search(this)
       this.jobStatusArr = []
+      this.autoStartArr = []
       this.loading['search'] = true
       this.table.loading = true
       axios.request({
@@ -1072,8 +1113,8 @@ export default {
         this.table.tableDetails = response.data.data.rows
         this.table.tableDetails.forEach(item => {
           this.jobStatusArr.push(item.isActive === 0)
+          this.autoStartArr.push(item.autoStart === 1)
         })
-        console.log(this.jobStatusArr)
       }).catch(error => {
         console.log(error)
         this.loading['search'] = false
