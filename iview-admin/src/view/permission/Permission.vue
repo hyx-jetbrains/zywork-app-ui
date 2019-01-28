@@ -323,7 +323,7 @@
     </Modal>
     <main-table-view-modal :form="mainTableForm" :detail="modal.mainTableDetail" v-on:setDetail="setDetailModal"/>
     <Modal
-      :translate="false"
+      :transfer="false"
       fullscreen
       v-model="modal.mainTableSearch"
       title="搜索主表信息">
