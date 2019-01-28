@@ -1,4 +1,7 @@
 import Main from '@/components/main'
+import config from '../config';
+
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.devServer : config.baseUrl.proServer
 
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
@@ -340,6 +343,24 @@ export default [
           icon: 'ios-ionitron'
         },
         component: () => import('@/view/redis-cache/RedisCache.vue')
+      },
+      {
+        path: 'DruidSql',
+        name: 'druid_sql',
+        meta: {
+          title: 'Druid SQL监控',
+          href: baseUrl + ':8088/druid/index.html',
+          icon: 'md-trending-up'
+        }
+      },
+      {
+        path: 'SpringBootAdmin',
+        name: 'spring_boot_admin',
+        meta: {
+          title: 'SpringBoot Admin',
+          href: baseUrl + ':8086',
+          icon: 'md-speedometer'
+        }
       }
     ]
   },

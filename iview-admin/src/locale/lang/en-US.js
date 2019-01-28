@@ -28,6 +28,8 @@ export default {
   redis_cache: 'Redis Cache Management',
   system_log: 'System Log Management',
   timing_task: 'Timing Task Management',
+  druid_sql: 'Druid SQL',
+  spring_boot_admin: 'SpringBoot Admin',
   notice_manage: 'Notice Management',
   system_notice: 'System Notice Management',
   system_message: 'System Message Management',

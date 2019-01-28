@@ -18,7 +18,9 @@ export default {
    */
   baseUrl: {
     dev: 'http://localhost:8088',
-    pro: 'http://39.108.116.103:8088'
+    pro: 'http://39.108.116.103:8088',
+    devServer: 'http://localhost',
+    proServer: 'http://39.108.116.103'
   },
   /**
    * @description 默认打开的首页的路由name值，默认为home
