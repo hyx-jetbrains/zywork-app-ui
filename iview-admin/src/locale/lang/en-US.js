@@ -5,7 +5,7 @@ export default {
   organization: 'Organization Management',
   user_organization: 'User Organization Query',
   user_manage: 'User Management',
-  info: 'Personal Information',
+  user_info: 'Personal Information',
   user_basic: 'User Basic Info Management',
   user_detail_query: 'User Detail Query',
   user_social_query: 'User Social Query', 
@@ -46,8 +46,6 @@ export default {
   editDropdownItemText: 'edit',
   deleteDropdownItemText: 'delete',
   detailDropdownItemText: 'detail',
-
-
   components: 'Components',
   count_to_page: 'Count-to',
   tables_page: 'Table',

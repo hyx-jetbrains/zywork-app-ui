@@ -5,7 +5,7 @@ export default {
   organization: '组织部门管理',
   user_organization: '用户组织部门查询',
   user_manage: '用户管理',
-  info: '个人信息',
+  user_info: '个人信息',
   user_basic: '用户基础信息管理',
   user_detail_query: '用户详情查询',
   user_social_query: '用户第三方登录查询', 
@@ -46,8 +46,6 @@ export default {
   editDropdownItemText: '编辑',
   deleteDropdownItemText: '删除',
   detailDropdownItemText: '详情',
-
-
   components: '组件',
   count_to_page: '数字渐变',
   tables_page: '多功能表格',

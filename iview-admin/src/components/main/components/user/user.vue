@@ -61,7 +61,7 @@ export default {
     },
     info () {
       this.$router.push({
-        path: '/admin/Info'
+        path: '/UserInfo'
       })
     },
     handleClick (name) {

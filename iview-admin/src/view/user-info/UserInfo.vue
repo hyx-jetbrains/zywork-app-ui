@@ -4,54 +4,66 @@
       <p slot="title">
         <Icon type="ios-contact"/>个人信息
       </p>
-      <Form :model="user" label-position="left" :label-width="100">
-        <Divider orientation="left">核心信息</Divider>
-        <FormItem label="手机号">
-          <Input v-model="user.userPhone" placeholder="请输入手机号码" readonly/>
-        </FormItem>
-        <FormItem label="邮箱">
-          <Input v-model="user.userEmail" placeholder="请输入邮箱"/>
-        </FormItem>
-        <FormItem label="登入密码">
-          <a href="javascript:;" @click="editPasswordModal = true">修改密码</a>
-        </FormItem>
-        <Divider orientation="left">基础信息</Divider>
-        <FormItem label="昵称">
-          <Input v-model="user.userDetailNickname" placeholder="请输入昵称"/>
-        </FormItem>
-        <FormItem label="性别">
-          <RadioGroup v-model="user.userDetailGender">
-            <Radio label="0">
-              <Icon type="md-help-circle"/>未知
-            </Radio>
-            <Radio label="1">
-              <Icon type="md-male"/>男
-            </Radio>
-            <Radio label="2">
-              <Icon type="md-female"/>女
-            </Radio>
-          </RadioGroup>
-        </FormItem>
-        <FormItem label="生日">
-          <DatePicker type="date" placeholder="请选择生日" @on-change="setDate" />
-        </FormItem>
-        <FormItem label="年龄">
-          <Input v-model="user.userDetailAge" placeholder="请选择生日" readonly/>
-        </FormItem>
-        <Divider orientation="left">社交信息</Divider>
-        <FormItem label="QQ">
-          <Input v-model="user.userDetailWechat" placeholder="请输入QQ号"/>
-        </FormItem>
-        <FormItem label="微信">
-          <Input v-model="user.userDetailWechat" placeholder="请输入微信号"/>
-        </FormItem>
-        <FormItem label="支付宝">
-          <Input v-model="user.userDetailAlipay" placeholder="请输入微信号"/>
-        </FormItem>
-        <FormItem>
-          <Button type="primary" @click="saveInfo" :loading="saveBtnLoading">保存</Button>
-        </FormItem>
-      </Form>
+      <Tabs value="basic-info">
+        <TabPane label="基础信息" name="basic-info">
+          <Form :model="user" label-position="left" :label-width="100">
+            <FormItem label="手机号">
+              <Input v-model="user.userPhone" placeholder="请输入手机号码" readonly/>
+            </FormItem>
+            <FormItem label="邮箱">
+              <Input v-model="user.userEmail" placeholder="请输入邮箱"/>
+            </FormItem>
+            <FormItem label="登入密码">
+              <a href="javascript:;" @click="editPasswordModal = true">修改密码</a>
+            </FormItem>
+          </Form>
+        </TabPane>
+        <TabPane label="详细信息" name="detail-info">
+          <Form :model="user" label-position="left" :label-width="100">
+            <FormItem label="昵称">
+              <Input v-model="user.userDetailNickname" placeholder="请输入昵称"/>
+            </FormItem>
+            <FormItem label="性别">
+              <RadioGroup v-model="user.userDetailGender">
+                <Radio label="0">
+                  <Icon type="md-help-circle"/>未知
+                </Radio>
+                <Radio label="1">
+                  <Icon type="md-male"/>男
+                </Radio>
+                <Radio label="2">
+                  <Icon type="md-female"/>女
+                </Radio>
+              </RadioGroup>
+            </FormItem>
+            <FormItem label="生日">
+              <DatePicker type="date" placeholder="请选择生日" @on-change="setDate" />
+            </FormItem>
+            <FormItem label="年龄">
+              <Input v-model="user.userDetailAge" placeholder="请选择生日" readonly/>
+            </FormItem>
+            <FormItem>
+              <Button type="primary" @click="saveInfo" :loading="saveBtnLoading">保存</Button>
+            </FormItem>
+          </Form>
+        </TabPane>
+        <TabPane label="社交信息" name="social-info">
+          <Form :model="user" label-position="left" :label-width="100">
+            <FormItem label="QQ">
+              <Input v-model="user.userDetailWechat" placeholder="请输入QQ号"/>
+            </FormItem>
+            <FormItem label="微信">
+              <Input v-model="user.userDetailWechat" placeholder="请输入微信号"/>
+            </FormItem>
+            <FormItem label="支付宝">
+              <Input v-model="user.userDetailAlipay" placeholder="请输入微信号"/>
+            </FormItem>
+            <FormItem>
+              <Button type="primary" @click="saveInfo" :loading="saveBtnLoading">保存</Button>
+            </FormItem>
+          </Form>
+        </TabPane>
+      </Tabs>
     </Card>
     <Modal v-model="editPasswordModal" title="修改登入密码">
       <Form ref="passwordForm" :model="passwordForm" :label-width="80" :rules="validateRules">
@@ -83,7 +95,7 @@
 import { getUserInfo, updateLoaginPassword, logout } from '@/api/user.js'
 import { removeToken } from '@/libs/util'
 export default {
-  name: 'Info',
+  name: 'UserInfo',
   components: {},
   data() {
     return {

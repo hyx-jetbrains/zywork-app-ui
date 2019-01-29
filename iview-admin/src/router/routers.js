@@ -49,7 +49,18 @@ export default [
           icon: 'md-home'
         },
         component: () => import('@/view/single-page/home')
-      }
+      },
+      {
+        path: 'UserInfo',
+        name: 'user_info',
+        meta: {
+          title: '个人信息',
+          icon: 'ios-contact',
+          hideInMenu: true,
+          notCache: true
+        },
+        component: () => import('@/view/user-info/UserInfo.vue')
+      },
     ]
   },
   // {
@@ -99,17 +110,6 @@ export default [
     },
     component: Main,
     children: [
-      {
-        path: 'Info',
-        name: 'info',
-        meta: {
-          title: '个人信息',
-          icon: 'ios-contact',
-          hideInMenu: true,
-          notCache: true
-        },
-        component: () => import('@/view/info/Info.vue')
-      },
       {
         path: 'User',
         name: 'user_basic',
