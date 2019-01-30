@@ -1,9 +1,7 @@
 <template>
   <div class="user-avator-dropdown">
     <Dropdown @on-click="handleClick">
-      <Badge :dot="!!messageUnreadCount">
-        <Avatar :src="userAvator"/>
-      </Badge>
+      
       <span class="main-user-name">{{username === 'null' ? '' : username}}</span>
       <Icon :size="18" type="md-arrow-dropdown"></Icon>
       <DropdownMenu slot="list">
@@ -14,6 +12,9 @@
         <DropdownItem name="logout">退出登录</DropdownItem>
       </DropdownMenu>
     </Dropdown>
+    <Badge :dot="!!messageUnreadCount">
+        <Avatar :src="userAvator"/>
+      </Badge>
   </div>
 </template>
 
