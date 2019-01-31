@@ -151,11 +151,13 @@
     <p>支付宝: <span v-text="userDetail.userDetailAlipay"></span></p>
     <p>分享码: <span v-text="userDetail.userDetailShareCode"></span></p>
   </Modal>
+  <user-role-drawer ref="userRoleDrawer" />
 </div>
 </template>
 
 <script>
 import * as utils from '@/api/utils'
+import userRoleDrawer from './UserRoleDrawer.vue'
 import {
   isActiveSelect
 } from '@/api/select'
@@ -164,6 +166,9 @@ import {
 } from '@/api/user'
 export default {
   name: 'User',
+  components: {
+    userRoleDrawer
+  },
   data() {
     return {
       modal: {
@@ -437,7 +442,16 @@ export default {
                             "删除"
                           )
                         ]
-                      )
+                      ),
+                      h(
+                        'DropdownItem',
+                        {
+                          props: {
+                            name: 'role'
+                          }
+                        },
+                        '角色'
+                      ),
                     ]
                   )
                 ]
@@ -514,6 +528,9 @@ export default {
         })
       } else if (itemName === "remove") {
         utils.remove(this, row);
+      } else if (itemName === 'role') {
+        // 分配用户角色
+        this.$refs.userRoleDrawer.initData(row.id)
       }
     },
     add() {

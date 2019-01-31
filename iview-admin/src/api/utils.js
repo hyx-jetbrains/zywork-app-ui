@@ -271,6 +271,7 @@ export const search = (self) => {
       } else {
         self.page.total = response.data.data.total
         self.table.tableDetails = response.data.data.rows
+        
         }
       resolve(response)
     }).catch(error => {

@@ -3,11 +3,11 @@
     <Row>
       <i-col span="24">
         <Card>
-          <Button @click="confirmSelection" type="primary">确认选择</Button>&nbsp;
-          <Button @click="showModal('search')" type="primary">高级搜索</Button>&nbsp;
-          <Tooltip content="刷新" placement="right">
+          <Button @click="confirmSelection" type="primary">分配角色</Button>&nbsp;
+          <!-- <Button @click="showModal('search')" type="primary">高级搜索</Button>&nbsp; -->
+          <!-- <Tooltip content="刷新" placement="right">
             <Button icon="md-refresh" type="success" shape="circle" @click="search"></Button>
-          </Tooltip>
+          </Tooltip> -->
           <Table
             ref="dataTable"
             stripe
@@ -195,7 +195,7 @@
       <div slot="footer">
         <Button type="text" size="large" @click="resetForm('searchForm')">清空</Button>
         <Button type="text" size="large" @click="cancelModal('search')">取消</Button>
-        <Button type="primary" size="large" @click="searchOkModal('search')">确定</Button>
+        <Button type="primary" size="large" @click="searchOkModal('search')" :loading="loading.search">确定</Button>
       </div>
     </Modal>
     <Modal v-model="modal.detail" title="详情">
@@ -229,6 +229,7 @@
 
 <script>
 import * as utils from '@/api/utils'
+import axios from '@/libs/api.request'
 
 export default {
   name: 'RoleList',
@@ -239,6 +240,9 @@ export default {
         edit: false,
         search: false,
         detail: false
+      },
+      loading: {
+        search: false,
       },
       urls: {
         searchUrl: '/role/admin/pager-cond',
@@ -394,7 +398,7 @@ export default {
   },
   computed: {},
   mounted() {
-    this.search()
+    // this.search()
   },
   methods: {
     showModal(modal) {
@@ -440,6 +444,45 @@ export default {
     },
     confirmSelection() {
       // 确认选择的逻辑
+      console.log(this.table.selections)
+    },
+    // 初始化表格数据
+    initTableData(userRoleList) {
+      this.loading.search = true
+      this.table.loading = true
+      axios.request({
+        url: this.urls.searchUrl,
+        method: 'POST',
+        data: this.searchForm
+      }).then(response => {
+        this.loading.search = false
+        this.table.loading = false
+        if (response.data.code !== 1001) {
+          this.$Message.error(response.data.message)
+        } else {
+          response.data.data.rows.forEach((roleItem,index) => {
+            if (userRoleList !== undefined && userRoleList.length > 0) {
+              userRoleList.forEach(userRoleItem => {
+                if (roleItem.title === userRoleItem.roleTitle) {
+                  response.data.data.rows[index]._checked = true
+                  this.table.selections.push(response.data.data.rows[index])
+                }
+              }) 
+            }
+          })
+          this.page.total = response.data.data.total
+          this.table.tableDetails = response.data.data.rows
+        }
+      }).catch(error => {
+        console.log(error)
+        this.loading.search = false
+        this.table.loading = false
+        this.$Message.error('加载数据失败，稍候再试')
+      })
+    },
+    // 取消选择
+    cancelSelect() {
+      this.$refs.dataTable.selectAll(false);
     }
   }
 }
