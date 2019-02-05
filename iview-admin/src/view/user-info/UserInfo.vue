@@ -11,83 +11,85 @@
         </i-col>
         <i-col span="18">
           <Row v-if="menuItem == 1">
-            <Form :model="user" label-position="left" :label-width="100">
-              <Divider orientation="left">{{itemMenuName1}}</Divider>
-              <!-- 暂时注释，后面实现 -->
-              <!-- <FormItem label="头像">
-                <div class="demo-upload-list" v-for="item in uploadList" :key="item.name">
-                  <template v-if="item.status === 'finished'">
-                    <img :src="item.url">
-                    <div class="demo-upload-list-cover">
-                      <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
-                    </div>
-                  </template>
-                  <template v-else>
-                    <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
-                  </template>
-                </div>
-                <Upload
-                  ref="upload"
-                  :show-upload-list="false"
-                  :default-file-list="defaultList"
-                  :on-success="handleSuccess"
-                  :format="['jpg','jpeg','png']"
-                  :max-size="2048"
-                  :on-format-error="handleFormatError"
-                  :on-exceeded-size="handleMaxSize"
-                  :before-upload="handleBeforeUpload"
-                  multiple
-                  type="drag"
-                  action="//jsonplaceholder.typicode.com/posts/"
-                  style="display: inline-block;width:58px;"
-                >
-                  <div style="width: 58px;height:58px;line-height: 58px;">
-                    <Icon type="ios-camera" size="20"></Icon>
+            <i-col span="23" offset="1">
+              <Form :model="user" label-position="left" :label-width="100">
+                <Divider orientation="left">{{itemMenuName1}}</Divider>
+                <!-- 暂时注释，后面实现 -->
+                <!-- <FormItem label="头像">
+                  <div class="demo-upload-list" v-for="item in uploadList" :key="item.name">
+                    <template v-if="item.status === 'finished'">
+                      <img :src="item.url">
+                      <div class="demo-upload-list-cover">
+                        <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
+                      </div>
+                    </template>
+                    <template v-else>
+                      <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
+                    </template>
                   </div>
-                </Upload>
-              </FormItem> -->
-              <FormItem label="昵称">
-                <Input v-model="user.userDetailNickname" placeholder="请输入昵称" style="width: 200px;"/>
-              </FormItem>
-              <FormItem label="性别">
-                <RadioGroup v-model="user.userDetailGender">
-                  <Radio label="0">
-                    <Icon type="md-help-circle"/>未知
-                  </Radio>
-                  <Radio label="1">
-                    <Icon type="md-male"/>男
-                  </Radio>
-                  <Radio label="2">
-                    <Icon type="md-female"/>女
-                  </Radio>
-                </RadioGroup>
-              </FormItem>
-              <FormItem label="生日">
-                <DatePicker
-                  type="date"
-                  placeholder="请选择生日"
-                  @on-change="setDate"
-                  style="width: 200px;"
-                />
-              </FormItem>
-              <FormItem label="年龄">
-                <Input
-                  v-model="user.userDetailAge"
-                  placeholder="请选择生日"
-                  readonly
-                  style="width: 200px;"
-                />
-              </FormItem>
-              <FormItem label="注册时间">
-                <span v-text="user.userCreateTime"/>
-              </FormItem>
-              <FormItem>
-                <Button type="primary" @click="saveInfo" :loading="saveBtnLoading" style="width: 100px;">保存</Button>
-              </FormItem>
-            </Form>
+                  <Upload
+                    ref="upload"
+                    :show-upload-list="false"
+                    :default-file-list="defaultList"
+                    :on-success="handleSuccess"
+                    :format="['jpg','jpeg','png']"
+                    :max-size="2048"
+                    :on-format-error="handleFormatError"
+                    :on-exceeded-size="handleMaxSize"
+                    :before-upload="handleBeforeUpload"
+                    multiple
+                    type="drag"
+                    action="//jsonplaceholder.typicode.com/posts/"
+                    style="display: inline-block;width:58px;"
+                  >
+                    <div style="width: 58px;height:58px;line-height: 58px;">
+                      <Icon type="ios-camera" size="20"></Icon>
+                    </div>
+                  </Upload>
+                </FormItem> -->
+                <FormItem label="昵称">
+                  <Input v-model="user.userDetailNickname" placeholder="请输入昵称" style="width: 200px;"/>
+                </FormItem>
+                <FormItem label="性别">
+                  <RadioGroup v-model="user.userDetailGender">
+                    <Radio label="0">
+                      <Icon type="md-help-circle"/>未知
+                    </Radio>
+                    <Radio label="1">
+                      <Icon type="md-male"/>男
+                    </Radio>
+                    <Radio label="2">
+                      <Icon type="md-female"/>女
+                    </Radio>
+                  </RadioGroup>
+                </FormItem>
+                <FormItem label="生日">
+                  <DatePicker
+                    type="date"
+                    placeholder="请选择生日"
+                    @on-change="setDate"
+                    style="width: 200px;"
+                  />
+                </FormItem>
+                <FormItem label="年龄">
+                  <Input
+                    v-model="user.userDetailAge"
+                    placeholder="请选择生日"
+                    readonly
+                    style="width: 200px;"
+                  />
+                </FormItem>
+                <FormItem label="注册时间">
+                  <span v-text="user.userCreateTime"/>
+                </FormItem>
+                <FormItem>
+                  <Button type="primary" @click="saveInfo" :loading="saveBtnLoading" style="width: 100px;">保存</Button>
+                </FormItem>
+              </Form>
+            </i-col>
           </Row>
           <Row v-if="menuItem == 2">
-            <i-col span="24">
+            <i-col span="23" offset="1">
               <Divider orientation="left">{{itemMenuName2}}</Divider>
               <Row>
                 <i-col span="2">
@@ -133,7 +135,7 @@
             </i-col>
           </Row>
           <Row v-if="menuItem == 3">
-            <i-col span="24">
+            <i-col span="23" offset="1">
               <Divider orientation="left">{{itemMenuName3}}</Divider>
               <Row>
                 <i-col span="20">
