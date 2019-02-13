@@ -206,6 +206,44 @@ export default [
   },
   {
     path: '/admin',
+    name: 'cms_management',
+    meta: {
+      icon: 'ios-book',
+      title: '内容管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'ArticleCategory',
+        name: 'article_category',
+        meta: {
+          title: '文章类别管理',
+          icon: 'md-filing'
+        },
+        component: () => import('@/view/article-category/ArticleCategory.vue')
+      },
+      {
+        path: 'Article',
+        name: 'article_management',
+        meta: {
+          title: '文章管理',
+          icon: 'ios-paper'
+        },
+        component: () => import('@/view/article/Article.vue')
+      },
+      {
+        path: 'ArticleComment',
+        name: 'article_comment',
+        meta: {
+          title: '文章评论管理',
+          icon: 'ios-text'
+        },
+        component: () => import('@/view/article-comment/ArticleComment.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
     name: 'system_premissoin_manage',
     meta: {
       icon: 'ios-lock',
@@ -231,7 +269,6 @@ export default [
         },
         component: () => import('@/view/module/Module.vue')
       },
-			
       {
         path: 'Permission',
         name: 'permission_manage',
