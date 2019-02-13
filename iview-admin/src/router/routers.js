@@ -1,4 +1,5 @@
 import Main from '@/components/main'
+import parentView from '@/components/parent-view'
 import config from '../config';
 
 const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.devServer : config.baseUrl.proServer
@@ -239,6 +240,189 @@ export default [
           icon: 'ios-text'
         },
         component: () => import('@/view/article-comment/ArticleComment.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    name: 'mall_management',
+    meta: {
+      icon: 'ios-cart',
+      title: '商城管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'GoodsBasic',
+        name: 'goods_basic_management',
+        meta: {
+          icon: 'ios-create',
+          title: '商城基础信息管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'GoodsAttribute',
+            name: 'goods_attribute',
+            meta: {
+              icon: 'ios-keypad',
+              title: '商品属性管理'
+            },
+            component: () => import('@/view/goods-attribute/GoodsAttribute.vue')
+          },
+          {
+            path: 'GoodsCategory',
+            name: 'goods_category',
+            meta: {
+              icon: 'md-funnel',
+              title: '商品类目管理'
+            },
+            component: () => import('@/view/goods-category/GoodsCategory.vue')
+          },
+          {
+            path: 'CategoryAttribute',
+            name: 'category_attribute',
+            meta: {
+              icon: 'md-link',
+              title: '类目属性管理'
+            },
+            component: () => import('@/view/goods-category-attr/GoodsCategoryAttribute.vue')
+          }
+        ]
+      },
+      {
+        path: 'shops',
+        name: 'shops_management',
+        meta: {
+          icon: 'logo-skype',
+          title: '店铺管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'Shop',
+            name: 'shop_info',
+            meta: {
+              icon: 'ios-grid',
+              title: '店铺管理'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          },
+          {
+            path: 'ShopCertificate',
+            name: 'shop_certificate',
+            meta: {
+              icon: 'md-checkmark-circle',
+              title: '店铺认证'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          },
+          {
+            path: 'ShopCheck',
+            name: 'shop_check',
+            meta: {
+              icon: 'md-checkbox',
+              title: '店铺审核历史'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          }
+        ]
+      },
+      {
+        path: 'goods',
+        name: 'goods_management',
+        meta: {
+          icon: 'ios-globe',
+          title: '商品管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'GoodsInfo',
+            name: 'goods_info',
+            meta: {
+              icon: 'md-grid',
+              title: '商品管理'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          },
+          {
+            path: 'GoodsDetail',
+            name: 'goods_detail',
+            meta: {
+              icon: 'ios-grid',
+              title: '商品详情查询'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          }
+        ]
+      },
+      {
+        path: 'coupons',
+        name: 'coupons_management',
+        meta: {
+          icon: 'ios-medal',
+          title: '优惠券管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'GoodsCoupon',
+            name: 'goods_coupon',
+            meta: {
+              icon: 'md-medal',
+              title: '优惠券管理'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          },
+          {
+            path: 'UserCoupon',
+            name: 'user_coupon',
+            meta: {
+              icon: 'md-star',
+              title: '用户优惠券管理'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          }
+        ]
+      },
+      {
+        path: 'orders',
+        name: 'orders_management',
+        meta: {
+          icon: 'md-list',
+          title: '购物车及订单管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'Cart',
+            name: 'cart_management',
+            meta: {
+              icon: 'md-cart',
+              title: '购物车管理'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          },
+          {
+            path: 'GoodsOrder',
+            name: 'goods_order',
+            meta: {
+              icon: 'md-basket',
+              title: '订单管理'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          },
+          {
+            path: 'OrderLogistics',
+            name: 'order_logistics',
+            meta: {
+              icon: 'md-bus',
+              title: '订单物流管理'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          }
+        ]
       }
     ]
   },
