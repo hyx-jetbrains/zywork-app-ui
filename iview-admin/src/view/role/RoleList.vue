@@ -230,6 +230,7 @@
 <script>
 import * as utils from '@/api/utils'
 import axios from '@/libs/api.request'
+import {allotUserRole} from '@/api/user'
 
 export default {
   name: 'RoleList',
@@ -285,7 +286,7 @@ export default {
         updateTime: null,
         updateTimeMin: null,
         updateTimeMax: null,
-        isActive: null,
+        isActive: 0,
         isActiveMin: null,
         isActiveMax: null
       },
@@ -392,7 +393,8 @@ export default {
           }
         ],
         tableDetails: [],
-        selections: []
+        selections: [],
+        userId: ''
       }
     }
   },
@@ -444,10 +446,34 @@ export default {
     },
     confirmSelection() {
       // 确认选择的逻辑
-      console.log(this.table.selections)
+      if (this.userId === '') {
+        this.$Message.error('请刷新页面重试')
+        return
+      }
+      var params = []
+      this.table.selections.forEach(item => {
+        params.push({
+          roleId: item.id,
+          userId: this.userId
+        })
+      })
+      allotUserRole(params)
+        .then(res => {
+          const data = res.data
+          if (data.code === 1001) {
+            this.$Message.info("分配成功")
+            this.$emit('closeDrawer')
+          } else {
+            this.$Message.error(data.message)
+          }
+        })
+        .catch(err => {
+          this.$Message.error(err)
+        })
     },
     // 初始化表格数据
-    initTableData(userRoleList) {
+    initTableData(userRoleList, userId) {
+      this.userId = userId
       this.loading.search = true
       this.table.loading = true
       axios.request({

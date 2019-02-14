@@ -349,8 +349,10 @@ export default {
         .then(res => {
           const data = res.data
           if (data.code === 1001) {
-            this.user = data.data.rows[0]
-            this.user.userDetailGender = this.user.userDetailGender + ''
+            if (data.data.total !== 0) {
+              this.user = data.data.rows[0]
+              this.user.userDetailGender = this.user.userDetailGender + ''
+            }
           } else {
             this.$Message.error(data.message)
           }
