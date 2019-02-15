@@ -346,21 +346,21 @@ export default {
     },
     // 初始化用户信息
     initUserInfo() {
-      getUserInfo()
-        .then(res => {
+      getUserInfo().then(res => {
           const data = res.data
           if (data.code === 1001) {
             if (data.data.total !== 0) {
               this.user = data.data.rows[0]
               this.user.userDetailGender = this.user.userDetailGender + ''
-              this.user.userDetailBirthday = this.user.userDetailBirthday.split(' ')[0]
+              if (this.user.userDetailBirthday != null) {
+                this.user.userDetailBirthday = this.user.userDetailBirthday.split(' ')[0]
+              }
             }
           } else {
             this.$Message.error(data.message)
           }
-        })
-        .catch(err => {
-          this.$Message.error(err)
+        }).catch(err => {
+          console.log(err)
         })
     },
     generatorUserParam() {
