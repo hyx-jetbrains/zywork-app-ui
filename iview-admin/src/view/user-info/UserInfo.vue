@@ -66,6 +66,7 @@
                 <FormItem label="生日">
                   <DatePicker
                     type="date"
+                    v-model="user.userDetailBirthday"
                     placeholder="请选择生日"
                     @on-change="setDate"
                     style="width: 200px;"
@@ -209,7 +210,7 @@
 </template>
 
 <script>
-import { getUserInfo, updateLoaginPassword, logout } from '@/api/user.js'
+import { getUserInfo, updateLoaginPassword, logout, updateUserInfo } from '@/api/user.js'
 import { removeToken } from '@/libs/util'
 import qqImg from '@/assets/images/QQ.png'
 import weChatImg from '@/assets/images/WeChat.png'
@@ -352,6 +353,7 @@ export default {
             if (data.data.total !== 0) {
               this.user = data.data.rows[0]
               this.user.userDetailGender = this.user.userDetailGender + ''
+              this.user.userDetailBirthday = this.user.userDetailBirthday.split(' ')[0]
             }
           } else {
             this.$Message.error(data.message)
@@ -361,9 +363,43 @@ export default {
           this.$Message.error(err)
         })
     },
+    generatorUserParam() {
+      var userForm = {
+        age: this.user.userDetailAge,
+        alipay: this.user.userDetailAlipay,
+        alipayQrcode: this.user.userDetailAlipayQrcode,
+        birthday: this.user.userDetailBirthday + ' 00:00:00',
+        createTime: this.user.userCreateTime,
+        gender: this.user.userDetailGender,
+        headicon: this.user.userDetailHeadicon,
+        id: this.user.userId,
+        isActive: this.user.isActive,
+        nickname: this.user.userDetailNickname,
+        qq: this.user.userDetailQq,
+        qqQrcode: this.user.userDetailQqQrcode,
+        shareCode: this.user.userDetailShareCode,
+        updateTime: this.user.updateTime,
+        version: this.user.version,
+        wechat: this.user.wechat,
+        wechatQrcode: this.user.wechatQrcode
+      }
+      return userForm
+    },
     // 保存用户信息
     saveInfo() {
-      this.$Message.warning("暂未实现")
+      var userForm = this.generatorUserParam()
+      updateUserInfo(userForm)
+        .then(res => {
+          const data = res.data
+          if (data.code !== 1001) {
+            this.$Message.error(data.message)
+            return
+          }
+          this.$Message.success(data.message)
+        })
+        .catch(err => {
+          this.$Message.error(err)
+        })
     },
     // 用户操作
     userOpt(type) {

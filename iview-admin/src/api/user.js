@@ -70,6 +70,14 @@ export const allotUserRole = (params) => {
   })
 }
 
+export const updateUserInfo = (params) => {
+  return axios.request({
+    url: 'user-detail/user/update',
+    method: 'POST',
+    data: params
+  })
+}
+
 export const getUnreadCount = () => {
   return axios.request({
     url: 'message/count',
