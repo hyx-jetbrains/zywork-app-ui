@@ -245,6 +245,62 @@ export default [
   },
   {
     path: '/admin',
+    name: 'processes_management',
+    meta: {
+      icon: 'md-repeat',
+      title: '流程管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'Process',
+        name: 'process_management',
+        meta: {
+          title: '流程文件管理',
+          icon: 'md-swap'
+        },
+        component: () => import('@/view/process/Process.vue')
+      },
+      {
+        path: 'ProcessDeployment',
+        name: 'process_deployment_management',
+        meta: {
+          title: '流程部署管理',
+          icon: 'md-sync'
+        },
+        component: () => import('@/view/demo/ComingSoon.vue')
+      },
+      {
+        path: 'ProcessDefinition',
+        name: 'process_definition_management',
+        meta: {
+          title: '流程定义管理',
+          icon: 'md-switch'
+        },
+        component: () => import('@/view/demo/ComingSoon.vue')
+      },
+      {
+        path: 'ProcessTask',
+        name: 'process_task_management',
+        meta: {
+          title: '流程任务管理',
+          icon: 'ios-stopwatch'
+        },
+        component: () => import('@/view/demo/ComingSoon.vue')
+      },
+      {
+        path: 'ProcessDesign',
+        name: 'process_design',
+        meta: {
+          title: '流程设计',
+          icon: 'md-pricetag'
+        },
+        component: () => import('@/view/demo/ComingSoon.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
     name: 'mall_management',
     meta: {
       icon: 'ios-cart',

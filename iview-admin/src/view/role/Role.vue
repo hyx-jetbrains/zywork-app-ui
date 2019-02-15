@@ -61,7 +61,10 @@
         </Card>
       </i-col>
     </Row>
-    <import-json ref="importJson" @search="search" :title="importTitle" :importUrl="importUrl" :importTemplate="importTemplate"></import-json>
+    <UploadModal ref="uploadModal"
+      @search="search"
+      :title="uploadModal.title"
+      :format="uploadModal.format"/>
     <Modal
       v-model="modal.add"
       title="添加"
@@ -276,30 +279,21 @@
 import * as utils from '@/api/utils'
 import { isActiveSelect, isDefaultSelect } from '@/api/select'
 import rolePermission from '@/view/role-permission/RolePermission.vue'
-import importJson from '_c/import-json'
+import UploadModal from '_c/upload-modal'
 export default {
   name: 'Role',
   components: {
     rolePermission,
-    importJson
+    UploadModal
   },
   data() {
     return {
+      uploadModal: {
+        title: '导入角色信息',
+        format: ['json'],
+        uploadUrl: '/permission-import-export/import-role'
+      },
       exportFileName: 'roles.json',
-      importTitle: '导入角色信息',
-      importUrl: '/permission-import-export/import-role',
-      importTemplate: [
-        {
-          "title": "super_sys_admin",
-          "description": "超级系统管理员",
-          "isDefault": 0
-        },
-        {
-          "title": "sys_admin",
-          "description": "系统管理员",
-          "isDefault": 0
-        }
-      ],
       modal: {
         add: false,
         edit: false,
@@ -647,7 +641,7 @@ export default {
       } else if (itemName === 'batchRemove') {
         utils.batchRemove(this)
       } else if (itemName === 'import') {
-        this.showImportModal()
+        this.showUploadModal()
       } else if (itemName === 'export') {
         utils.exportJson(this)
       }
@@ -689,8 +683,9 @@ export default {
     changePageSize(pageSize) {
       utils.changePageSize(this, pageSize)
     },
-    showImportModal() {
-      this.$refs.importJson.importModal = true
+    showUploadModal() {
+      this.$refs.uploadModal.uploadUrl = this.uploadModal.uploadUrl
+      this.$refs.uploadModal.uploadModal = true
     }
     
   }

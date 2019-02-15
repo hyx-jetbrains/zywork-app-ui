@@ -60,13 +60,10 @@
         </Card>
       </i-col>
     </Row>
-    <import-json
-      ref="importJson"
+    <UploadModal ref="uploadModal"
       @search="search"
-      :title="importTitle"
-      :importUrl="importUrl"
-      :importTemplate="importTemplate"
-    ></import-json>
+      :title="uploadModal.title"
+      :format="uploadModal.format"/>
     <Modal
       v-model="modal.add"
       title="添加"
@@ -334,49 +331,25 @@
 
 <script>
 import * as utils from '@/api/utils'
-import importJson from '_c/import-json'
+import UploadModal from '_c/upload-modal'
 import mainTableViewModal from '@/view/module/ViewModal.vue'
 import moduleList from '@/view/module/ModuleList.vue'
 import {getModuleById} from '@/api/id'
 export default {
   name: 'Permission',
   components: {
-    importJson,
+    UploadModal,
     mainTableViewModal,
     moduleList
   },
   data() {
     return {
+      uploadModal: {
+        title: '导入权限信息',
+        format: ['json'],
+        uploadUrl: '/permission-import-export/import-permission'
+      },
       exportFileName: 'permission.json',
-      importTitle: '导入权限信息',
-      importUrl: '/permission-import-export/import-permission',
-      importTemplate: [
-        {
-          moduleTitle: '测试模块',
-          permissions: [
-            {
-              title: '测试添加',
-              permission: '/test/add',
-              roles: ['super_sys_admin', 'sys_user', 'sys_admin']
-            },
-            {
-              title: '测试修改',
-              permission: '/test/edit',
-              roles: ['super_sys_admin', 'sys_user', 'sys_admin']
-            },
-            {
-              title: '测试删除',
-              permission: '/test/remove/*',
-              roles: ['sys_user']
-            },
-            {
-              title: '测试文件上传',
-              permission: '/test/upload',
-              roles: ['super_sys_admin', 'sys_admin', 'sys_user']
-            }
-          ]
-        }
-      ],
       modal: {
         add: false,
         edit: false,
@@ -774,8 +747,9 @@ export default {
     this.search()
   },
   methods: {
-    showImportModal() {
-      this.$refs.importJson.importModal = true
+    showUploadModal() {
+      this.$refs.uploadModal.uploadUrl = this.uploadModal.uploadUrl
+      this.$refs.uploadModal.uploadModal = true
     },
     showModal(modal) {
       utils.showModal(this, modal)
@@ -808,7 +782,7 @@ export default {
       } else if (itemName === 'batchRemove') {
         utils.batchRemove(this)
       } else if (itemName === 'import') {
-        this.showImportModal()
+        this.showUploadModal()
       } else if (itemName === 'export') {
         utils.exportJson(this)
       }
