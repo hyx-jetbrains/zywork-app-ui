@@ -280,6 +280,15 @@ export default [
         component: () => import('@/view/demo/ComingSoon.vue')
       },
       {
+        path: 'ProcessInstance',
+        name: 'process_instance_management',
+        meta: {
+          title: '流程实例管理',
+          icon: 'ios-browsers'
+        },
+        component: () => import('@/view/demo/ComingSoon.vue')
+      },
+      {
         path: 'ProcessTask',
         name: 'process_task_management',
         meta: {
@@ -289,10 +298,19 @@ export default [
         component: () => import('@/view/demo/ComingSoon.vue')
       },
       {
+        path: 'HistoricProcess',
+        name: 'historic_process_management',
+        meta: {
+          title: '流程历史管理',
+          icon: 'ios-barcode'
+        },
+        component: () => import('@/view/demo/ComingSoon.vue')
+      },
+      {
         path: 'ProcessDesign',
         name: 'process_design',
         meta: {
-          title: '流程设计',
+          title: '流程在线设计',
           icon: 'md-pricetag'
         },
         component: () => import('@/view/demo/ComingSoon.vue')
