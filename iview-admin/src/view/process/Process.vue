@@ -593,7 +593,7 @@ sortable: true
       doDeploy(row) {
         this.$Notice.info({
           title: '流程部署',
-          desc: '正在部署流程：' + process.processName
+          desc: '正在部署流程：' + row.processName
         })
         let self = this
         process.deploy(row).then(response => {
