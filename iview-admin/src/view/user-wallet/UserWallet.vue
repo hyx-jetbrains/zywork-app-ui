@@ -468,7 +468,7 @@ export default {
             sortable: true
           },
           {
-            title: '人民币余额',
+            title: '人民币余额（元）',
             key: 'rmbBalance',
             minWidth: 120,
             sortable: true,
@@ -478,12 +478,12 @@ export default {
               return h(
                 'span',
                 {},
-                '¥' + money
+                money
               )
             }
           },
           {
-            title: '可用余额',
+            title: '可用余额（元）',
             key: 'usableRmbBalance',
             minWidth: 120,
             sortable: true,
@@ -493,12 +493,12 @@ export default {
               return h(
                 'span',
                 {},
-                '¥' + money
+                money
               )
             }
           },
           {
-            title: '冻结余额',
+            title: '冻结余额（元）',
             key: 'frozenRmbBalance',
             minWidth: 120,
             sortable: true,
@@ -508,7 +508,7 @@ export default {
               return h(
                 'span',
                 {},
-                '¥' + money
+                money
               )
             }
           },

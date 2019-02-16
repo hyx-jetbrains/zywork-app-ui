@@ -400,10 +400,19 @@ minWidth: 120,
 sortable: true
 },
 {
-title: '金额',
+title: '金额（元）',
 key: 'amount',
 minWidth: 120,
-sortable: true
+sortable: true,
+render: (h, params) => {
+              let row = params.row
+              let money = row.amount / 100
+              return h(
+                'span',
+                {},
+                money
+              )
+            }
 },
 {
 title: '积分',
