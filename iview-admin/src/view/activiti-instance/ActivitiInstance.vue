@@ -47,9 +47,6 @@
       <p>流程编号:
         <span v-text="form.id"></span>
       </p>
-      <p>租户ID:
-        <span v-text="form.tenantId"></span>
-      </p>
       <p>流程实例ID:
         <span v-text="form.processInstanceId"></span>
       </p>
@@ -85,6 +82,9 @@
       </p>
       <p>修订版本:
         <span v-text="form.revision"></span>
+      </p>
+      <p>租户ID:
+        <span v-text="form.tenantId"></span>
       </p>
     </Modal>
   </div>
@@ -165,11 +165,6 @@ export default {
             minWidth: 120
           },
           {
-            title: '租户ID',
-            key: 'tenantId',
-            minWidth: 120
-          },
-          {
             title: '流程实例ID',
             key: 'processInstanceId',
             minWidth: 120
@@ -227,6 +222,11 @@ export default {
           {
             title: '修订版本',
             key: 'revision',
+            minWidth: 120
+          },
+          {
+            title: '租户ID',
+            key: 'tenantId',
             minWidth: 120
           },
           {

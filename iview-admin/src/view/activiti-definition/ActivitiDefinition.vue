@@ -47,9 +47,6 @@
       <p>流程编号:
         <span v-text="form.id"></span>
       </p>
-      <p>租户ID:
-        <span v-text="form.tenantId"></span>
-      </p>
       <p>流程Name:
         <span v-text="form.name"></span>
       </p>
@@ -61,9 +58,6 @@
       </p>
       <p>部署ID:
         <span v-text="form.deploymentId"></span>
-      </p>
-      <p>部署时间:
-        <span v-text="form.deploymentTime"></span>
       </p>
       <p>说明:
         <span v-text="form.description"></span>
@@ -82,6 +76,9 @@
       </p>
       <p>修订版本:
         <span v-text="form.revision"></span>
+      </p>
+      <p>租户ID:
+        <span v-text="form.tenantId"></span>
       </p>
     </Modal>
   </div>
@@ -161,11 +158,6 @@ export default {
             minWidth: 120
           },
           {
-            title: '租户ID',
-            key: 'tenantId',
-            minWidth: 120
-          },
-          {
             title: '流程Name',
             key: 'name',
             minWidth: 120
@@ -183,11 +175,6 @@ export default {
           {
             title: '部署ID',
             key: 'deploymentId',
-            minWidth: 120
-          },
-          {
-            title: '部署时间',
-            key: 'deploymentTime',
             minWidth: 120
           },
           {
@@ -218,6 +205,11 @@ export default {
           {
             title: '修订版本',
             key: 'revision',
+            minWidth: 120
+          },
+          {
+            title: '租户ID',
+            key: 'tenantId',
             minWidth: 120
           },
           {
