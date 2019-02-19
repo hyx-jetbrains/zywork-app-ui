@@ -311,9 +311,9 @@ export default [
         name: 'process_design',
         meta: {
           title: '流程在线设计',
+          href: baseUrl + ':8080/activiti-app',
           icon: 'md-pricetag'
-        },
-        component: () => import('@/view/demo/ComingSoon.vue')
+        }
       }
     ]
   },
