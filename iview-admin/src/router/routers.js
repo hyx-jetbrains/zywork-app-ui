@@ -268,7 +268,7 @@ export default [
           title: '流程部署管理',
           icon: 'md-sync'
         },
-        component: () => import('@/view/demo/ComingSoon.vue')
+        component: () => import('@/view/activiti-deployment/ActivitiDeployment.vue')
       },
       {
         path: 'ProcessDefinition',
@@ -277,7 +277,7 @@ export default [
           title: '流程定义管理',
           icon: 'md-switch'
         },
-        component: () => import('@/view/demo/ComingSoon.vue')
+        component: () => import('@/view/activiti-definition/ActivitiDefinition.vue')
       },
       {
         path: 'ProcessInstance',
@@ -286,7 +286,7 @@ export default [
           title: '流程实例管理',
           icon: 'ios-browsers'
         },
-        component: () => import('@/view/demo/ComingSoon.vue')
+        component: () => import('@/view/activiti-instance/ActivitiInstance.vue')
       },
       {
         path: 'ProcessTask',
@@ -295,7 +295,7 @@ export default [
           title: '流程任务管理',
           icon: 'ios-stopwatch'
         },
-        component: () => import('@/view/demo/ComingSoon.vue')
+        component: () => import('@/view/activiti-task/ActivitiTask.vue')
       },
       {
         path: 'HistoricProcess',
@@ -304,7 +304,7 @@ export default [
           title: '流程历史管理',
           icon: 'ios-barcode'
         },
-        component: () => import('@/view/demo/ComingSoon.vue')
+        component: () => import('@/view/activiti-his-instance/ActivitiHisInstance.vue')
       },
       {
         path: 'ProcessDesign',
