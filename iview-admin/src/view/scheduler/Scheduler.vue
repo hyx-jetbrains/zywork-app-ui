@@ -34,13 +34,13 @@
                     <Icon type="ios-more"></Icon>未启动
                   </span>
                   <span v-if="item.jobStatus === 1" style="color: #2af543;">
-                    <Icon type="ios-pause"></Icon>运行中
+                    <Icon type="ios-play"></Icon>运行中
                   </span>
                   <span v-if="item.jobStatus === 2" style="color: #f70404;">
                     <Icon type="ios-power"></Icon>已停止
                   </span>
                   <span v-if="item.jobStatus === 3" style="color: #2d8cf0">
-                    <Icon type="ios-play-outline"></Icon>已暂停
+                    <Icon type="ios-pause"></Icon>已暂停
                   </span>
                   <span v-if="item.jobStatus === 4" style="color: #750312;">
                     <Icon type="ios-trash-outline"></Icon>已删除
@@ -108,13 +108,13 @@
                 <Divider />
                 <Row class="opt-row">
                   <span v-if="item.jobStatus === 0 || item.jobStatus === 2 || item.jobStatus === 4">
-                    <Button @click="userOpt('start', index)" icon="ios-pause" type="primary" size="small">启动</Button>&nbsp;
+                    <Button @click="userOpt('start', index)" icon="ios-play" type="primary" size="small">启动</Button>&nbsp;
                   </span>
                   <span v-if="item.jobStatus === 3">
-                    <Button @click="userOpt('resume', index)" icon="ios-pause" type="primary" size="small">恢复启动</Button>&nbsp;
+                    <Button @click="userOpt('resume', index)" icon="ios-play" type="primary" size="small">恢复启动</Button>&nbsp;
                   </span>
                   <span v-if="item.jobStatus === 1">
-                    <Button @click="userOpt('pause', index)" icon="ios-play-outline" type="success" size="small">暂停</Button>&nbsp;
+                    <Button @click="userOpt('pause', index)" icon="ios-pause" type="warning" size="small">暂停</Button>&nbsp;
                   </span>
                   <span v-if="item.jobStatus === 1 || item.jobStatus === 3">
                     <Button @click="userOpt('stop', index)" icon="ios-power" type="error" size="small">停止</Button>&nbsp;
