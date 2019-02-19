@@ -4,7 +4,7 @@
       <p slot="title">
         <Icon type="ios-ionitron"></Icon>Redis缓存管理
       </p>
-      <a href="#" slot="extra" @click.prevent="searchKeys">
+      <a href="javascript:;" slot="extra" @click="searchKeys">
         <Icon type="ios-refresh"></Icon>刷新
       </a>
       <div class="demo-split">
@@ -95,19 +95,26 @@
             </Split>
           </div>
           <div slot="right" class="demo-split-pane">
-            <h3 class="server-info-title">Redis 服务器信息</h3>
+            <h3 class="server-info-title">
+              Redis 服务器信息
+              <small>
+                <a href="javascript:;" @click="getRedisCacheInfo">
+                  <Icon type="ios-refresh"></Icon>刷新
+                </a>
+              </small>
+            </h3>
             <Divider>基本信息</Divider>
             <Row class="server-info-title">
               <i-col span="12">
                 <CellGroup>
-                  <Cell title="Redis 版本" :label="redisInfo.gcc_version"/>
+                  <Cell title="Redis 版本" :label="redisInfo.redis_version"/>
                   <Cell title="已执行的命令" :label="redisInfo.total_commands_processed"/>
                 </CellGroup>
               </i-col>
               <i-col span="12">
                 <CellGroup>
                   <Cell title="已使用的内存" :label="redisInfo.used_memory_rss"/>
-                  <Cell title="正常运行时间" :label="redisInfo.uptime_in_days"/>
+                  <Cell title="正常运行时间" :label="redisInfo.uptime_in_seconds"/>
                 </CellGroup>
               </i-col>
             </Row>
@@ -294,7 +301,8 @@ export default {
         size: '',
         expire: '',
         expireFormat: ''
-      }
+      },
+      valueInterval: null
     }
   },
   computed: {},
@@ -302,6 +310,9 @@ export default {
     this.getRedisCacheInfo()
     this.getKeysCount()
     // this.searchKeys()
+  },
+  beforeDestroy() {
+    clearInterval(this.valueInterval)
   },
   methods: {
     // 切换数据库面板
@@ -388,15 +399,23 @@ export default {
       var params = {
         key: key
       }
+      if (this.valueInterval != null) {
+        clearInterval(this.valueInterval)
+      }
       getValueByKey(params)
         .then(res => {
           const data = res.data
           if (data.code === 1001) {
             this.valueInfo = data.data
             if (this.valueInfo.expire !== -1) {
-              const time = (this.valueInfo.expire / 1000).toFixed(0)
+              let time = (this.valueInfo.expire / 1000).toFixed(0)
               this.valueInfo.expire = time + " s"
               this.valueInfo.expireFormat = "（" + this.formaturDing(time) + "）"
+              this.valueInterval = setInterval(() => {
+                time -= 1
+                this.valueInfo.expire = time + " s"
+                this.valueInfo.expireFormat = "（" + this.formaturDing(time) + "）"
+              }, 1000)
             }
             this.valueInfo.size = this.valueInfo.size + " byte"
           } else {
