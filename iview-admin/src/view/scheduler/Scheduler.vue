@@ -48,22 +48,8 @@
                 </span>
                 <Scroll height="280">
                   <p>
-                    <strong>自动启动：</strong>
-                    <i-switch v-model="autoStartArr[index]" @on-change="editAutoStatus(index)">
-                      <span slot="open">是</span>
-                      <span slot="close">否</span>
-                    </i-switch>
-                  </p>
-                  <p>
                     <strong>类名：</strong>
                     <span v-text="item.className" />
-                  </p>
-                  <p>
-                    <strong>是否激活：</strong>
-                    <i-switch v-model="jobStatusArr[index]" size="large" @on-change="active(index)">
-                      <span slot="open">激活</span>
-                      <span slot="close">冻结</span>
-                    </i-switch>
                   </p>
                   <p>
                     <strong>作业组名称：</strong>
@@ -93,16 +79,30 @@
                     <span v-text="item.version" />
                   </p>
                   <p>
+                    <strong>自动启动：</strong>
+                    <i-switch v-model="autoStartArr[index]" @on-change="editAutoStatus(index)">
+                      <span slot="open">是</span>
+                      <span slot="close">否</span>
+                    </i-switch>
+                  </p>
+                  <p>
+                    <strong>是否激活：</strong>
+                    <i-switch v-model="jobStatusArr[index]" size="large" @on-change="active(index)">
+                      <span slot="open">激活</span>
+                      <span slot="close">冻结</span>
+                    </i-switch>
+                  </p>
+                  <p>
+                    <strong>状态更新时间：</strong>
+                    <span v-text="item.jobStatusTime" />
+                  </p>
+                  <p>
                     <strong>创建时间：</strong>
                     <span v-text="item.createTime" />
                   </p>
                   <p>
                     <strong>更新时间：</strong>
                     <span v-text="item.updateTime" />
-                  </p>
-                  <p>
-                    <strong>状态更新时间：</strong>
-                    <span v-text="item.jobStatusTime" />
                   </p>
                 </Scroll>
                 <Divider />
