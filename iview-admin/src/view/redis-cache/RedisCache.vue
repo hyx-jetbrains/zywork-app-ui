@@ -86,9 +86,7 @@
                 <Divider class="server-value-divider" style="margin-top: 0px;"></Divider>
                 <Row class="server-value-val">
                   <Scroll height="200">
-                    <pre>
-                      {{valueInfo.value}}
-                    </pre>
+                    <pre style="padding-left: 20px;">{{valueInfo.value}}</pre>
                   </Scroll>
                 </Row>
               </div>
