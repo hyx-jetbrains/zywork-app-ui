@@ -155,15 +155,6 @@ export default [
           icon: 'ios-home'
         },
         component: () => import('@/view/shipping-address/ShippingAddress.vue')
-      },
-      {
-        path: 'StatisticsDau',
-        name: 'statistics_dau',
-        meta: {
-          title: 'DAU管理',
-          icon: 'ios-podium'
-        },
-        component: () => import('@/view/statistics-dau/StatisticsDau.vue')
       }
     ]
   },
@@ -497,6 +488,35 @@ export default [
             component: () => import('@/view/demo/ComingSoon.vue')
           }
         ]
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    name: 'report_statistics_management',
+    meta: {
+      icon: 'ios-podium',
+      title: '报表统计管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'StatisticsDau',
+        name: 'statistics_dau',
+        meta: {
+          title: 'DAU统计管理',
+          icon: 'ios-walk'
+        },
+        component: () => import('@/view/statistics-dau/StatisticsDau.vue')
+      },
+      {
+        path: 'DauReport',
+        name: 'dau_report',
+        meta: {
+          title: 'DAU统计报表',
+          icon: 'ios-stats'
+        },
+        component: () => import('@/view/statistics-dau/dau-report.vue')
       }
     ]
   },

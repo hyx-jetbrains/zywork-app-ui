@@ -387,3 +387,28 @@ export const exportJson = (self) => {
     self.$Message.error('导出失败，稍候再试')
   })
 }
+
+/**
+ * 取指定多少天前或多少天后的时间
+ * getDate(7)：7天后的时间
+ * getDate(-7)：7天前的时间
+ */
+export const getDate = (days) => {
+  var date1 = new Date()
+  var time1 =
+    date1.getFullYear() +
+    '-' +
+    (date1.getMonth() + 1) +
+    '-' +
+    date1.getDate()
+  var date2 = new Date(date1)
+  date2.setDate(date1.getDate() + days)
+  var time2 =
+    date2.getFullYear() +
+    '-' +
+    ((date2.getMonth() + 1) < 10 ? '0' + (date2.getMonth() + 1) : (date2.getMonth() + 1)) +
+    '-' +
+    (date2.getDate() < 10 ? '0' + date2.getDate() : date2.getDate())
+  return time2
+}
+    

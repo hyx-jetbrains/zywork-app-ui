@@ -1,3 +1,4 @@
 import ChartPie from './pie.vue'
 import ChartBar from './bar.vue'
-export { ChartPie, ChartBar }
+import BasicEcharts from './BasicEcharts.vue'
+export { ChartPie, ChartBar, BasicEcharts}

@@ -1,12 +1,12 @@
 <template>
-  <div ref="homeEcharts"></div>
+  <div ref="basicEcharts"></div>
 </template>
 
 <script>
 import echarts from 'echarts'
 import { on, off } from '@/libs/tools'
 export default {
-  name: 'HomeEcharts',
+  name: 'BasicEcharts',
   props: {
     text: String,
     subtext: String,
@@ -16,12 +16,12 @@ export default {
   },
   data() {
     return {
-      homeEcharts: null
+      basicEcharts: null
     }
   },
   methods: {
     resize() {
-      this.homeEcharts.resize()
+      this.basicEcharts.resize()
     },
     initData() {
       this.$nextTick(() => {
@@ -95,8 +95,8 @@ export default {
           ]
         }
         this.$nextTick(() => {
-          this.homeEcharts = echarts.init(this.$refs.homeEcharts)
-          this.homeEcharts.setOption(option)
+          this.basicEcharts = echarts.init(this.$refs.basicEcharts)
+          this.basicEcharts.setOption(option)
           on(window, 'resize', this.resize)
         })
       })
