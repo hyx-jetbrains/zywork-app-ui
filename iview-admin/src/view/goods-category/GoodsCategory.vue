@@ -175,14 +175,20 @@
 <p>是否激活: <span v-text="form.isActive"></span></p>
 
     </Modal>
+
+    <GoodsCategoryAttrsDrawer ref="goodsCategoryAttrsDrawer" />
   </div>
 </template>
 
 <script>
   import * as utils from '@/api/utils'
+  import GoodsCategoryAttrsDrawer from './GoodsCategoryAttrsDrawer.vue'
 
   export default {
     name: 'GoodsCategory',
+    components: {
+      GoodsCategoryAttrsDrawer
+    },
     data() {
       return {
         modal: {
@@ -412,7 +418,17 @@ sortable: true
                             color: 'red'
                           }
                         }, '删除')
-                      ])
+                      ]),
+                      h('DropdownItem', {
+                        props:{
+                          name: 'showAttrs'
+                        }
+                      }, '分配属性'),
+                      h('DropdownItem', {
+                        props:{
+                          name: 'orderAttrs'
+                        }
+                      }, '属性排序')
                   ])
                 ])
               }
@@ -468,6 +484,10 @@ sortable: true
           this.form = JSON.parse(JSON.stringify(row))
         } else if (itemName === 'remove') {
           utils.remove(this, row)
+        } else if (itemName === 'showAttrs') {
+          this.$refs.goodsCategoryAttrsDrawer.initData(row.id)
+        } else if (itemName === 'orderAttrs') {
+          
         }
       },
       add() {

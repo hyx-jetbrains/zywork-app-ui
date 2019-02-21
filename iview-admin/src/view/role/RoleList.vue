@@ -3,7 +3,7 @@
     <Row>
       <i-col span="24">
         <Card>
-          <Button @click="confirmSelection" type="primary">分配角色</Button>&nbsp;
+          <Button @click="confirmSelection" type="primary">确认选择</Button>&nbsp;
           <Button @click="showModal('search')" type="primary">高级搜索</Button>&nbsp;
           <Tooltip content="刷新" placement="right">
             <Button icon="md-refresh" type="success" shape="circle" @click="search"></Button>
@@ -230,7 +230,7 @@
 <script>
 import * as utils from '@/api/utils'
 import axios from '@/libs/api.request'
-import {allotUserRole} from '@/api/user'
+import {saveUserRole} from '@/api/user'
 
 export default {
   name: 'RoleList',
@@ -428,7 +428,7 @@ export default {
     },
     searchOkModal(modal) {
       utils.cancelModal(this, modal)
-      utils.search(this)
+      utils.initSelectTableData(this)
     },
     search() {
       utils.search(this)
@@ -458,11 +458,11 @@ export default {
           userId: this.extraData.userId
         })
       })
-      allotUserRole(params)
+      saveUserRole(params)
         .then(res => {
           const data = res.data
           if (data.code === 1001) {
-            this.$Message.info("分配成功")
+            this.$Message.info("分配角色成功")
             this.$emit('closeDrawer')
           } else {
             this.$Message.error(data.message)

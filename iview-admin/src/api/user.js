@@ -62,7 +62,7 @@ export const updateLoaginPassword = (params) => {
 /**
  * 分配用户角色
  */
-export const allotUserRole = (params) => {
+export const saveUserRole = (params) => {
   return axios.request({
     url: '/user-role/admin/batch-save',
     method: 'POST',

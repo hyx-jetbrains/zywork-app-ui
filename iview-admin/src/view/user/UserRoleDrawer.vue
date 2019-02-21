@@ -4,7 +4,7 @@
       <role-list ref="roleList" :selectedData="selectedData" :selectedDataId="selectedDataId" :extraData="extraData" @closeDrawer="closeDrawer"/>
       <div class="demo-drawer-footer">
         <Button style="margin-right: 8px" @click="closeDrawer">取消</Button>
-        <Button type="primary" @click="updateRole">分配角色</Button>
+        <Button type="primary" @click="updateRole">确认选择</Button>
       </div>
     </Drawer>
   </div>

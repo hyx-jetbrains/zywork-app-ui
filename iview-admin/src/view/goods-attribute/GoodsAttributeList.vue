@@ -131,7 +131,7 @@
       <div slot="footer">
         <Button type="text" size="large" @click="resetForm('searchForm')">清空</Button>
         <Button type="text" size="large" @click="cancelModal('search')">取消</Button>
-        <Button type="primary" size="large" @click="searchOkModal('search')">确定</Button>
+        <Button type="primary" size="large" @click="searchOkModal('search')" :loading="loading.search">确定</Button>
       </div>
     </Modal>
     <Modal v-model="modal.detail" title="详情">
@@ -152,9 +152,15 @@
 
 <script>
   import * as utils from '@/api/utils'
+  import {saveCategoryAttrs} from '@/api/goods_category'
 
   export default {
     name: 'GoodsAttributeList',
+    props: {
+      selectedData: null,
+      selectedDataId: null,
+      extraData: null
+    },
     data() {
       return {
         modal: {
@@ -162,6 +168,9 @@
           edit: false,
           search: false,
           detail: false
+        },
+        loading: {
+          search: false
         },
         urls: {
           searchUrl: '/goods-attribute/admin/pager-cond',
@@ -328,7 +337,7 @@ sortable: true
     },
     computed: {},
     mounted() {
-      this.search()
+      // this.search()
     },
     methods: {
       showModal(modal) {
@@ -355,7 +364,7 @@ sortable: true
       },
       searchOkModal(modal) {
         utils.cancelModal(this, modal)
-        utils.search(this)
+        utils.initSelectTableData(this)
       },
       search() {
         utils.search(this)
@@ -364,16 +373,42 @@ sortable: true
         utils.changeSelections(this, selections)
       },
       changeSort(sortColumn) {
-        utils.changeSort(this, sortColumn)
+        utils.changeSelectTableSort(this, sortColumn)
       },
       changePageNo(pageNo) {
-        utils.changePageNo(this, pageNo)
+        utils.changeSelectTablePageNo(this, pageNo)
       },
       changePageSize(pageSize) {
-        utils.changePageSize(this, pageSize)
+        utils.changeSelectTablePageSize(this, pageSize)
       },
       confirmSelection() {
         // 确认选择的逻辑
+        var params = []
+        this.table.selections.forEach(item => {
+          params.push({
+            goodsCategoryId: this.extraData.categoryId,
+            goodsAttributeId: item.id
+          })
+        })
+        saveCategoryAttrs(params).then(res => {
+            const data = res.data
+            if (data.code === 1001) {
+              this.$Message.info("分配属性成功")
+              this.$emit('closeDrawer')
+            } else {
+              this.$Message.error(data.message)
+            }
+          }).catch(err => {
+            this.$Message.error(err)
+          })
+      },
+      // 初始化表格数据
+      initTableData() {
+        utils.initSelectTableData(this)
+      },
+      // 取消选择
+      cancelSelect() {
+        this.$refs.dataTable.selectAll(false);
       }
     }
   }
