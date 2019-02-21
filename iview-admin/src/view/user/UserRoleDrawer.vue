@@ -12,7 +12,7 @@
 
 <script>
 import roleList from '@/view/role/RoleList.vue'
-import { getUserRoleByUserId } from '@/api/id'
+import { getUserRoleByUserId } from '@/api/role'
 export default {
   name: 'UserRoleDrawer',
   components: {

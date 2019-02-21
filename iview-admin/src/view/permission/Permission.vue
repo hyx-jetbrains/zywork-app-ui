@@ -334,7 +334,7 @@ import * as utils from '@/api/utils'
 import UploadModal from '_c/upload-modal'
 import mainTableViewModal from '@/view/module/ViewModal.vue'
 import moduleListSingle from '@/view/module/ModuleListSingle.vue'
-import {getModuleById} from '@/api/id'
+import {getModuleById} from '@/api/module'
 export default {
   name: 'Permission',
   components: {

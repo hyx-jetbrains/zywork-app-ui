@@ -17,12 +17,12 @@
 </template>
 <script>
 import {
-  getAllModule,
   getAllPermission,
   getMultiPermission,
   getUserPermission,
   batchSavePermission
 } from '@/api/role'
+import {getAllModule} from '@/api/module'
 export default {
   name: 'RolePerminission',
   props: {},

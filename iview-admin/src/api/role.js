@@ -1,14 +1,5 @@
 import axios from '@/libs/api.request'
-/**
- * 获取所有模块
- */
-export const getAllModule = () => {
-  return axios.request({
-    url: '/module/admin/all',
-    method: 'GET',
-    data: ''
-  })
-}
+
 /**
  * 获取指定角色权限
  */
@@ -39,5 +30,16 @@ export const batchSavePermission = (params) => {
     url: '/role-permission/admin/batch-save',
     method: 'POST',
     data: params
+  })
+}
+
+/**
+ * 根据用户id查询用户角色
+ */
+export const getUserRoleByUserId = (id) => {
+  return axios.request({
+    url: '/user-role/admin/multi/' + id,
+    method: 'GET',
+    data: ''
   })
 }
