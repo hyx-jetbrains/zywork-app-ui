@@ -3,19 +3,20 @@
     <Row>
       <i-col span="24">
         <Card>
-          <Button @click="confirmSelection" type="primary">分配角色</Button>&nbsp;
+          <Button @click="confirmSelection" type="primary">确认选择</Button>&nbsp;
           <Button @click="showModal('search')" type="primary">高级搜索</Button>&nbsp;
           <Tooltip content="刷新" placement="right">
             <Button icon="md-refresh" type="success" shape="circle" @click="search"></Button>
           </Tooltip>
           <Table
+            highlight-row
             ref="dataTable"
             stripe
             :loading="table.loading"
             :columns="table.tableColumns"
             :data="table.tableDetails"
             style="margin-top:20px;"
-            @on-selection-change="changeSelection"
+            @on-current-change="changeCurrent"
             @on-sort-change="changeSort"
           ></Table>
           <div style="margin: 20px;overflow: hidden">
@@ -35,13 +36,13 @@
     </Row>
     <Modal v-model="modal.search" title="高级搜索">
       <Form ref="searchForm" :model="searchForm" :label-width="80">
-        <FormItem label="角色编号">
+        <FormItem label="模块编号">
           <Row>
             <i-col span="11">
               <FormItem prop="idMin">
                 <InputNumber
                   v-model="searchForm.idMin"
-                  placeholder="请输入开始角色编号"
+                  placeholder="请输入开始模块编号"
                   style="width: 100%;"
                 />
               </FormItem>
@@ -51,41 +52,18 @@
               <FormItem prop="idMax">
                 <InputNumber
                   v-model="searchForm.idMax"
-                  placeholder="请输入结束角色编号"
+                  placeholder="请输入结束模块编号"
                   style="width: 100%;"
                 />
               </FormItem>
             </i-col>
           </Row>
         </FormItem>
-        <FormItem label="角色标题" prop="title">
-          <Input v-model="searchForm.title" placeholder="请输入角色标题"/>
+        <FormItem label="模块标题" prop="title">
+          <Input v-model="searchForm.title" placeholder="请输入模块标题"/>
         </FormItem>
-        <FormItem label="角色描述" prop="description">
-          <Input v-model="searchForm.description" placeholder="请输入角色描述"/>
-        </FormItem>
-        <FormItem label="是否默认角色">
-          <Row>
-            <i-col span="11">
-              <FormItem prop="isDefaultMin">
-                <InputNumber
-                  v-model="searchForm.isDefaultMin"
-                  placeholder="请输入开始是否默认角色"
-                  style="width: 100%;"
-                />
-              </FormItem>
-            </i-col>
-            <i-col span="2" style="text-align: center">-</i-col>
-            <i-col span="11">
-              <FormItem prop="isDefaultMax">
-                <InputNumber
-                  v-model="searchForm.isDefaultMax"
-                  placeholder="请输入结束是否默认角色"
-                  style="width: 100%;"
-                />
-              </FormItem>
-            </i-col>
-          </Row>
+        <FormItem label="模块描述" prop="description">
+          <Input v-model="searchForm.description" placeholder="请输入模块描述"/>
         </FormItem>
         <FormItem label="版本号">
           <Row>
@@ -195,21 +173,23 @@
       <div slot="footer">
         <Button type="text" size="large" @click="resetForm('searchForm')">清空</Button>
         <Button type="text" size="large" @click="cancelModal('search')">取消</Button>
-        <Button type="primary" size="large" @click="searchOkModal('search')" :loading="loading.search">确定</Button>
+        <Button
+          type="primary"
+          size="large"
+          @click="searchOkModal('search')"
+          :loading="loading.search"
+        >确定</Button>
       </div>
     </Modal>
     <Modal v-model="modal.detail" title="详情">
-      <p>角色编号:
+      <p>模块编号:
         <span v-text="form.id"></span>
       </p>
-      <p>角色标题:
+      <p>模块标题:
         <span v-text="form.title"></span>
       </p>
-      <p>角色描述:
+      <p>模块描述:
         <span v-text="form.description"></span>
-      </p>
-      <p>是否默认角色:
-        <span v-text="form.isDefault"></span>
       </p>
       <p>版本号:
         <span v-text="form.version"></span>
@@ -229,16 +209,9 @@
 
 <script>
 import * as utils from '@/api/utils'
-import axios from '@/libs/api.request'
-import {allotUserRole} from '@/api/user'
 
 export default {
-  name: 'RoleList',
-  props: {
-    selectedData: null,
-    selectedDataId: null,
-    extraData: null
-  },
+  name: 'ModuleListSingle',
   data() {
     return {
       modal: {
@@ -248,12 +221,13 @@ export default {
         detail: false
       },
       loading: {
-        search: false,
+        search: false
       },
       urls: {
-        searchUrl: '/role/admin/pager-cond',
-        allUrl: '/role/admin/all',
-        detailUrl: '/role/admin/one/'
+        searchUrl: '/module/admin/pager-cond',
+        allUrl: '/module/admin/all',
+        detailUrl: '/module/admin/one/',
+        multiUrl: '/module/admin/multi/'
       },
       page: {
         total: 0
@@ -262,7 +236,6 @@ export default {
         id: null,
         title: null,
         description: null,
-        isDefault: null,
         version: null,
         createTime: null,
         updateTime: null,
@@ -278,9 +251,6 @@ export default {
         idMax: null,
         title: null,
         description: null,
-        isDefault: null,
-        isDefaultMin: null,
-        isDefaultMax: null,
         version: null,
         versionMin: null,
         versionMax: null,
@@ -290,20 +260,13 @@ export default {
         updateTime: null,
         updateTimeMin: null,
         updateTimeMax: null,
-        isActive: 0,
+        isActive: null,
         isActiveMin: null,
         isActiveMax: null
       },
       table: {
         loading: false,
         tableColumns: [
-          {
-            type: 'selection',
-            width: 45,
-            key: 'id',
-            align: 'center',
-            fixed: 'left'
-          },
           {
             width: 60,
             align: 'center',
@@ -318,26 +281,20 @@ export default {
             }
           },
           {
-            title: '角色编号',
+            title: '模块编号',
             key: 'id',
             minWidth: 120,
             sortable: true
           },
           {
-            title: '角色标题',
+            title: '模块标题',
             key: 'title',
             minWidth: 120,
             sortable: true
           },
           {
-            title: '角色描述',
+            title: '模块描述',
             key: 'description',
-            minWidth: 120,
-            sortable: true
-          },
-          {
-            title: '是否默认角色',
-            key: 'isDefault',
             minWidth: 120,
             sortable: true
           },
@@ -397,12 +354,14 @@ export default {
           }
         ],
         tableDetails: [],
-        selections: []
+        currentRow: {}
       }
     }
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    this.search()
+  },
   methods: {
     showModal(modal) {
       utils.showModal(this, modal)
@@ -433,52 +392,21 @@ export default {
     search() {
       utils.search(this)
     },
-    changeSelection(selections) {
-      utils.changeSelections(this, selections)
-    },
+    changeCurrent(currentRow, oldCurrentRow) {
+        utils.changeCurrent(this, currentRow, oldCurrentRow)
+      },
     changeSort(sortColumn) {
-      utils.changeSelectTableSort(this, sortColumn)
+      utils.changeSort(this, sortColumn)
     },
     changePageNo(pageNo) {
-      utils.changeSelectTablePageNo(this, pageNo)
+      utils.changePageNo(this, pageNo)
     },
     changePageSize(pageSize) {
-      utils.changeSelectTablePageSize(this, pageSize)
+      utils.changePageSize(this, pageSize)
     },
     confirmSelection() {
-      // 确认选择的逻辑
-      if (this.extraData.userId === '') {
-        this.$Message.error('请刷新页面重试')
-        return
-      }
-      var params = []
-      this.table.selections.forEach(item => {
-        params.push({
-          roleId: item.id,
-          userId: this.extraData.userId
-        })
-      })
-      allotUserRole(params)
-        .then(res => {
-          const data = res.data
-          if (data.code === 1001) {
-            this.$Message.info("分配成功")
-            this.$emit('closeDrawer')
-          } else {
-            this.$Message.error(data.message)
-          }
-        })
-        .catch(err => {
-          this.$Message.error(err)
-        })
-    },
-    // 初始化表格数据
-    initTableData() {
-      utils.initSelectTableData(this)
-    },
-    // 取消选择
-    cancelSelect() {
-      this.$refs.dataTable.selectAll(false);
+      this.$emit("confirmSelection", this.table.currentRow.id)
+      this.$emit("setSearchModal", false)
     }
   }
 }

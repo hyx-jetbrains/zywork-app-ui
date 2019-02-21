@@ -1,7 +1,7 @@
 <template>
   <div>
     <Drawer title="分配角色权限" v-model="userRoleDrawerFlag" width="900" @on-close="closeDrawer">
-      <role-list ref="roleList" @closeDrawer="closeDrawer"/>
+      <role-list ref="roleList" :selectedData="selectedData" :selectedDataId="selectedDataId" :extraData="extraData" @closeDrawer="closeDrawer"/>
       <div class="demo-drawer-footer">
         <Button style="margin-right: 8px" @click="closeDrawer">取消</Button>
         <Button type="primary" @click="updateRole">分配角色</Button>
@@ -20,7 +20,12 @@ export default {
   },
   data() {
     return {
-      userRoleDrawerFlag: false
+      userRoleDrawerFlag: false,
+      selectedData: null,
+      selectedDataId: 'roleId',
+      extraData: {
+        userId: ''
+      }
     }
   },
   computed: {},
@@ -35,7 +40,9 @@ export default {
             return
           }
           this.userRoleDrawerFlag = true
-          this.$refs.roleList.initTableData(data.data.rows, id)
+          this.selectedData = data.data.rows
+          this.extraData.userId = id
+          this.$refs.roleList.initTableData()
         })
         .catch(err => {
           this.$Message.error(err)

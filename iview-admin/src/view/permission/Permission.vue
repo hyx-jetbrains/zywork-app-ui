@@ -324,7 +324,7 @@
       fullscreen
       v-model="modal.mainTableSearch"
       title="搜索主表信息">
-      <module-list v-on:confirmSelection="confirmSelection" v-on:setSearchModal="setSearchModal" />
+      <module-list-single v-on:confirmSelection="confirmSelection" v-on:setSearchModal="setSearchModal" />
     </Modal>
   </div>
 </template>
@@ -333,14 +333,14 @@
 import * as utils from '@/api/utils'
 import UploadModal from '_c/upload-modal'
 import mainTableViewModal from '@/view/module/ViewModal.vue'
-import moduleList from '@/view/module/ModuleList.vue'
+import moduleListSingle from '@/view/module/ModuleListSingle.vue'
 import {getModuleById} from '@/api/id'
 export default {
   name: 'Permission',
   components: {
     UploadModal,
     mainTableViewModal,
-    moduleList
+    moduleListSingle
   },
   data() {
     return {
