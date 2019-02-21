@@ -50,7 +50,7 @@ export default {
   goods_basic_management: 'Goods Basic Management',
   goods_category: 'Goods Category Management',
   goods_attribute: 'Goods Attibute Management',
-  category_attribute: 'Category Attribute Management',
+  category_attribute: 'Category Attribute Query',
   shops_management: 'Shops Management',
   shop_info: 'Shop Info Management',
   shop_certificate: 'Shop Certificate Management',

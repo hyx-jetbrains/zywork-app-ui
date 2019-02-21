@@ -50,7 +50,7 @@ export default {
   goods_basic_management: '商城基础信息管理',
   goods_category: '商品类目管理',
   goods_attribute: '商品属性管理',
-  category_attribute: '类目属性管理',
+  category_attribute: '类目属性查询',
   shops_management: '店铺管理',
   shop_info: '店铺信息管理',
   shop_certificate: '店铺认证管理',

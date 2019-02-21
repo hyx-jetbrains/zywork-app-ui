@@ -349,7 +349,7 @@ export default [
             name: 'category_attribute',
             meta: {
               icon: 'md-link',
-              title: '类目属性管理'
+              title: '类目属性查询'
             },
             component: () => import('@/view/goods-category-attr/GoodsCategoryAttribute.vue')
           }
