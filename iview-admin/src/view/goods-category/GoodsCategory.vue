@@ -177,17 +177,27 @@
     </Modal>
 
     <GoodsCategoryAttrsDrawer ref="goodsCategoryAttrsDrawer" />
+
+    <Modal :transfer="false" v-model="modal.attrsOrder" title="设置属性排序" width="60%">
+      <GoodsAttributeOrder ref="goodsAttributeOrder" v-on:hideModal="hideModal"/>
+      <div slot="footer">
+        <Button type="text" size="large" @click="cancelModal('attrsOrder')">取消</Button>
+        <Button type="primary" size="large" @click="attrsOrder">确认排序</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
   import * as utils from '@/api/utils'
   import GoodsCategoryAttrsDrawer from './GoodsCategoryAttrsDrawer.vue'
+  import GoodsAttributeOrder from '../goods-attribute/GoodsAttributeOrder.vue'
 
   export default {
     name: 'GoodsCategory',
     components: {
-      GoodsCategoryAttrsDrawer
+      GoodsCategoryAttrsDrawer,
+      GoodsAttributeOrder
     },
     data() {
       return {
@@ -195,7 +205,8 @@
           add: false,
           edit: false,
           search: false,
-          detail: false
+          detail: false,
+          attrsOrder: false
         },
         loading: {
           add: false,
@@ -423,7 +434,7 @@ sortable: true
                         props:{
                           name: 'showAttrs'
                         }
-                      }, '分配属性'),
+                      }, '属性分配'),
                       h('DropdownItem', {
                         props:{
                           name: 'orderAttrs'
@@ -487,7 +498,8 @@ sortable: true
         } else if (itemName === 'showAttrs') {
           this.$refs.goodsCategoryAttrsDrawer.initData(row.id)
         } else if (itemName === 'orderAttrs') {
-          
+          utils.showModal(this, 'attrsOrder')
+          this.$refs.goodsAttributeOrder.initData(row.id)
         }
       },
       add() {
@@ -513,6 +525,12 @@ sortable: true
       },
       changePageSize(pageSize) {
         utils.changePageSize(this, pageSize)
+      },
+      attrsOrder() {
+        this.$refs.goodsAttributeOrder.confirmSelection()
+      },
+      hideModal() {
+        this.modal.attrsOrder = false
       }
     }
   }

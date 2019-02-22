@@ -406,7 +406,6 @@ export default {
     },
     confirmSelection() {
       this.$emit("confirmSelection", this.table.currentRow.id)
-      this.$emit("setSearchModal", false)
     }
   }
 }

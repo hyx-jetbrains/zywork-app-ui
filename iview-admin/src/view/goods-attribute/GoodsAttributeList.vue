@@ -390,6 +390,14 @@ sortable: true
             goodsAttributeId: item.id
           })
         })
+        // 保留原始属性的排序
+        params.forEach((param, index) => {
+          this.selectedData.forEach((data, idx) => {
+            if (data.goodsAttributeId === param.goodsAttributeId) {
+              param.goodsCategoryAttributeAttrOrder = data.goodsCategoryAttributeAttrOrder
+            }
+          })
+        })
         saveCategoryAttrs(params).then(res => {
             const data = res.data
             if (data.code === 1001) {

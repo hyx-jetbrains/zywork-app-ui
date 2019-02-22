@@ -12,7 +12,7 @@
 
 <script>
 import GoodsAttributeList from '@/view/goods-attribute/GoodsAttributeList.vue'
-import { getAttrsByCategoryId } from '@/api/goods_attribute'
+import { getAttrsByCategory } from '@/api/goods_attribute'
 export default {
   name: 'GoodsCategoryAttrsDrawer',
   components: {
@@ -32,7 +32,10 @@ export default {
   mounted() {},
   methods: {
     initData(id) {
-      getAttrsByCategoryId(id)
+      var params = {
+        goodsCategoryId: id
+      }
+      getAttrsByCategory(params)
         .then(res => {
           const data = res.data
           if (data.code !== 1001) {
@@ -42,7 +45,6 @@ export default {
           this.goodsCategoryAttrsDrawer = true
           this.selectedData = data.data.rows
           this.extraData.categoryId = id
-          console.log(this.selectedData)
           this.$refs.goodsAttributeList.initTableData()
         })
         .catch(err => {

@@ -324,7 +324,11 @@
       fullscreen
       v-model="modal.mainTableSearch"
       title="搜索主表信息">
-      <module-list-single v-on:confirmSelection="confirmSelection" v-on:setSearchModal="setSearchModal" />
+      <module-list-single ref="moduleListSingle" v-on:confirmSelection="confirmSelection"/>
+      <div slot="footer">
+        <Button type="text" size="large" @click="cancelModal('mainTableSearch')">取消</Button>
+        <Button type="primary" size="large" @click="confirm">确认选择</Button>
+      </div>
     </Modal>
   </div>
 </template>
@@ -845,13 +849,14 @@ export default {
         })
     },
     confirmSelection(moduleId) {
+      this.modal.mainTableSearch = false
       this.searchForm.moduleId = moduleId
       utils.search(this).then(res => {
         this.searchForm.moduleId = null
       })
     },
-    setSearchModal(val) {
-      this.modal.mainTableSearch = val
+    confirm() {
+      this.$refs.moduleListSingle.confirmSelection()
     }
   }
 }
