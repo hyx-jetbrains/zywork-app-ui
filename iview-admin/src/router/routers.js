@@ -371,7 +371,7 @@ export default [
               icon: 'ios-grid',
               title: '店铺管理'
             },
-            component: () => import('@/view/demo/ComingSoon.vue')
+            component: () => import('@/view/goods-shop/GoodsShop.vue')
           },
           {
             path: 'ShopCertificate',
@@ -380,7 +380,7 @@ export default [
               icon: 'md-checkmark-circle',
               title: '店铺认证'
             },
-            component: () => import('@/view/demo/ComingSoon.vue')
+            component: () => import('@/view/goods-shop-certification/GoodsShopCertification.vue')
           },
           {
             path: 'ShopCheck',
@@ -389,7 +389,7 @@ export default [
               icon: 'md-checkbox',
               title: '店铺审核历史'
             },
-            component: () => import('@/view/demo/ComingSoon.vue')
+            component: () => import('@/view/goods-shop-certification-check/GoodsShopCertificationCheck.vue')
           }
         ]
       },
