@@ -137,3 +137,24 @@ export const removeAll = (self, row) => {
     })
   })
 }
+
+/**
+ * 查询待办任务,用于首页查询三个待办任务：指派人任务，候选人任务，候选组任务
+ */
+export const searchWaitTask = (self, url) => {
+  return new Promise((resolve, reject) => {
+    axios.request({
+      url: url,
+      method: 'POST',
+      data: Qs.stringify(self.taskParamForm)
+    }).then(response => {
+      resolve(response)
+    }).catch(error => {
+      console.log(error)
+      self.loading['search'] = false
+      self.table.loading = false
+      self.$Message.error('加载数据失败，稍候再试')
+      reject(error)
+    })
+  })
+}

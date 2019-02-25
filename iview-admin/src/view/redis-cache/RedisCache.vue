@@ -94,12 +94,18 @@
           </div>
           <div slot="right" class="demo-split-pane">
             <h3 class="server-info-title">
-              Redis 服务器信息
-              <small>
-                <a href="javascript:;" @click="getRedisCacheInfo">
-                  <Icon type="ios-refresh"></Icon>刷新
-                </a>
-              </small>
+              <Row>
+                <i-col span="12" style="text-align: left; padding-left: 15px;">
+                  Redis 服务器信息
+                </i-col>
+                <i-col span="12" style="text-align: right; padding-right: 15px;">
+                  <small>
+                    <a href="javascript:;" @click="getRedisCacheInfo">
+                      <Icon type="ios-refresh"></Icon>刷新
+                    </a>
+                  </small>
+                </i-col>
+              </Row>
             </h3>
             <Divider>基本信息</Divider>
             <Row class="server-info-title">

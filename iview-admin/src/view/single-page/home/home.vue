@@ -14,12 +14,84 @@
         </infor-card>
       </i-col>
     </Row>
+    <Row style="margin-bottom: 20px;">
+      <i-col :xs="24" :md="12" :lg="8">
+        <Card style="width:350px">
+          <p slot="title">
+              <Icon type="ios-alarm"></Icon>
+                指派人任务&nbsp;&nbsp;-（{{assigneeCount}}）
+          </p>
+          <a href="javascript:;" slot="extra" @click="showTaskDetail(0)">
+            <Tooltip content="更多">
+              <Icon type="ios-more"></Icon>
+            </Tooltip>
+          </a>
+          <p class="not-data" v-if="assigneeDataShow">
+            <Icon type="md-close-circle" />暂无任务
+          </p>
+          <ul style="list-style-type:none" v-if="!assigneeDataShow">
+            <Tooltip content="点击查看详情">
+              <li v-for="(item,index) in assigneeTaskList" :key="index">
+                <a href="javascript:;" @click="showTaskDetail(0)">{{ item.name }}</a>
+              </li>
+            </Tooltip>
+        </ul>
+        </Card>
+      </i-col>
+      <i-col :xs="24" :md="12" :lg="8">
+        <Card style="width:350px">
+          <p slot="title">
+              <Icon type="ios-alarm-outline"></Icon>
+                候选人任务&nbsp;&nbsp;-（{{candidateCount}}）
+          </p>
+          <a href="javascript:;" slot="extra" @click="showTaskDetail(1)">
+            <Tooltip content="更多">
+              <Icon type="ios-more"></Icon>
+            </Tooltip>
+          </a>
+          <p class="not-data" v-if="candidateDataShow">
+            <Icon type="md-close-circle" />暂无任务
+          </p>
+          <ul style="list-style-type:none" v-if="!candidateDataShow">
+            <Tooltip content="点击查看详情">
+              <li v-for="(item,index) in candidateTaskList" :key="index">
+                <a href="javascript:;" @click="showTaskDetail(1)">{{ item.name }}</a>
+              </li>
+            </Tooltip>
+        </ul>
+        </Card>
+      </i-col>
+      <i-col :xs="24" :md="12" :lg="8">
+        <Card style="width:350px">
+          <p slot="title">
+              <Icon type="md-alarm"></Icon>
+                候选组任务&nbsp;&nbsp;-（{{groupCount}}）
+          </p>
+          <a href="javascript:;" slot="extra" @click="showTaskDetail(2)">
+            <Tooltip content="更多">
+              <Icon type="ios-more"></Icon>
+            </Tooltip>
+          </a>
+          <p class="not-data" v-if="groupDataShow">
+            <Icon type="md-close-circle" />暂无任务
+          </p>
+          <ul style="list-style-type:none" v-if="!groupDataShow">
+            <Tooltip content="点击查看详情">
+              <li v-for="(item,index) in groupTaskList" :key="index">
+                <a href="javascript:;" @click="showTaskDetail(1)">{{ item.name }}</a>
+              </li>
+            </Tooltip>
+        </ul>
+        </Card>
+      </i-col>
+    </Row>
     <DauEcharts/>
   </div>
 </template>
 
 <script>
 import { regCount, regAllCountByDate, allDau} from '@/api/home'
+import {searchWaitTask} from '@/api/process'
 import {getDate} from '@/api/utils'
 import InforCard from '_c/info-card'
 import CountTo from '_c/count-to'
@@ -55,7 +127,25 @@ export default {
           color: '#E46CBB'
         },
         { title: '一周活跃', icon: 'md-map', count: 0, color: '#9A66E4' }
-      ]
+      ],
+      taskUrls: {
+        assigneeTasksUrl: '/process-activiti/admin/query/assignee-tasks',
+        candidateTasksUrl: '/process-activiti/admin/query/candidate-tasks',
+        groupTasksUrl: '/process-activiti/admin/query/group-tasks'
+      },
+      taskParamForm: {
+        pageNo: 1,
+        pageSize: 3
+      },
+      assigneeDataShow: true,
+      assigneeCount: 0,
+      assigneeTaskList: [],
+      candidateDataShow: true,
+      candidateCount: 0,
+      candidateTaskList: [],
+      groupDataShow: true,
+      groupCount: 0,
+      groupTaskList: [],
     }
   },
   mounted() {
@@ -113,6 +203,75 @@ export default {
         .catch(err => {
           this.$Message.error(err)
         })
+
+      // 取指派人任务
+      this.assigneeDataShow = true
+      searchWaitTask(this, this.taskUrls.assigneeTasksUrl)
+        .then(res => {
+          const data = res.data
+          if (data.code !== 1001) {
+            self.$Message.error(res.data.message)
+            return
+          }
+          this.assigneeCount = data.data.total
+          if (data.data.total === 0) {
+            this.assigneeDataShow = true
+          } else {
+            this.assigneeDataShow = false
+            this.assigneeTaskList = data.data.rows
+          }
+        })
+        .catch(err => {
+          this.$Message.error(err)
+        })
+      // 取候选人任务
+      this.candidateDataShow = true
+      searchWaitTask(this, this.taskUrls.candidateTasksUrl)
+        .then(res => {
+          const data = res.data
+          if (data.code !== 1001) {
+            self.$Message.error(res.data.message)
+            return
+          }
+          this.candidateCount = data.data.total
+          if (data.data.total === 0) {
+            this.candidateDataShow = true
+          } else {
+            this.candidateDataShow = false
+            this.candidateTaskList = data.data.rows
+          }
+        })
+        .catch(err => {
+          this.$Message.error(err)
+        })
+      // 取候选组任务
+      this.groupDataShow = true
+      searchWaitTask(this, this.taskUrls.groupTasksUrl)
+        .then(res => {
+          const data = res.data
+          if (data.code !== 1001) {
+            self.$Message.error(res.data.message)
+            return
+          }
+          this.groupCount = data.data.total
+          if (data.data.total === 0) {
+            this.groupDataShow = true
+          } else {
+            this.groupDataShow = false
+            this.groupTaskList = data.data.rows
+          }
+        })
+        .catch(err => {
+          this.$Message.error(err)
+        })
+    },
+    showTaskDetail(type) {
+      this.$router.push({
+        name: 'activiti_tasks',
+        params: {
+          type: type
+        }
+      })
     }
   }
 }
@@ -121,5 +280,9 @@ export default {
 <style lang="less">
 .count-style {
   font-size: 50px;
+}
+.not-data {
+  text-align: center;
+  color: red;
 }
 </style>

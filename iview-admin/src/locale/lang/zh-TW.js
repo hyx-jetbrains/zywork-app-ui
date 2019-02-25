@@ -27,6 +27,7 @@ export default {
   spring_boot_admin: 'SpringBoot Admin',
   redis_cache: 'Redis緩存管理',
   system_log: '系統日誌管理',
+  activiti_tasks: '任務管理',
   timing_task: '定時任務管理',
   druid_sql: 'Druid SQL監控',
   notice_manage: '公告管理',

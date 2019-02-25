@@ -26,6 +26,7 @@ export default {
   system_monitoring: 'System Monitoring Management',
   redis_cache: 'Redis Cache Management',
   system_log: 'System Log Management',
+  activiti_tasks: 'Activiti Tasks',
   timing_task: 'Timing Task Management',
   druid_sql: 'Druid SQL',
   spring_boot_admin: 'SpringBoot Admin',

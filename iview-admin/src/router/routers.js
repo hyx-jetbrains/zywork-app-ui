@@ -62,6 +62,18 @@ export default [
         },
         component: () => import('@/view/user-info/UserInfo.vue')
       },
+      {
+        path: 'ActivitiTasks',
+        name: 'activiti_tasks',
+        meta: {
+          title: '任务管理',
+          icon: 'ios-contact',
+          hideInMenu: true,
+          notCache: true,
+          notCache: true
+        },
+        component: () => import('@/view/activiti-tasks/ActivitiTasks.vue')
+      },
     ]
   },
   // {
