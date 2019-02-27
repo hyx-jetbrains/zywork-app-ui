@@ -66,7 +66,7 @@ export default [
         path: 'ActivitiTasks',
         name: 'activiti_tasks',
         meta: {
-          title: '任务管理',
+          title: '我的流程任务',
           icon: 'ios-contact',
           hideInMenu: true,
           notCache: true,

@@ -16,7 +16,7 @@
     </Row>
     <Row style="margin-bottom: 20px;">
       <i-col :xs="24" :md="12" :lg="8">
-        <Card style="width:350px">
+        <Card>
           <p slot="title">
               <Icon type="ios-alarm"></Icon>
                 指派人任务&nbsp;&nbsp;-（{{assigneeCount}}）
@@ -27,7 +27,7 @@
             </Tooltip>
           </a>
           <p class="not-data" v-if="assigneeDataShow">
-            <Icon type="md-close-circle" />暂无任务
+            <Icon type="md-close-circle" /> 暂无任务
           </p>
           <ul style="list-style-type:none" v-if="!assigneeDataShow">
             <Tooltip content="点击查看详情">
@@ -39,7 +39,7 @@
         </Card>
       </i-col>
       <i-col :xs="24" :md="12" :lg="8">
-        <Card style="width:350px">
+        <Card>
           <p slot="title">
               <Icon type="ios-alarm-outline"></Icon>
                 候选人任务&nbsp;&nbsp;-（{{candidateCount}}）
@@ -50,7 +50,7 @@
             </Tooltip>
           </a>
           <p class="not-data" v-if="candidateDataShow">
-            <Icon type="md-close-circle" />暂无任务
+            <Icon type="md-close-circle" /> 暂无任务
           </p>
           <ul style="list-style-type:none" v-if="!candidateDataShow">
             <Tooltip content="点击查看详情">
@@ -62,7 +62,7 @@
         </Card>
       </i-col>
       <i-col :xs="24" :md="12" :lg="8">
-        <Card style="width:350px">
+        <Card>
           <p slot="title">
               <Icon type="md-alarm"></Icon>
                 候选组任务&nbsp;&nbsp;-（{{groupCount}}）
@@ -73,7 +73,7 @@
             </Tooltip>
           </a>
           <p class="not-data" v-if="groupDataShow">
-            <Icon type="md-close-circle" />暂无任务
+            <Icon type="md-close-circle" /> 暂无任务
           </p>
           <ul style="list-style-type:none" v-if="!groupDataShow">
             <Tooltip content="点击查看详情">
@@ -283,6 +283,6 @@ export default {
 }
 .not-data {
   text-align: center;
-  color: red;
+  color: #515a6e;
 }
 </style>

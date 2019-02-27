@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Row :gutter="20">
+    <Row>
       <i-col :xs="24" :md="24" :lg="24" style="margin-bottom: 20px;">
         <Card shadow>
           <DatePicker @on-change="setDauSearchDate" type="daterange" split-panels placeholder="选择查询周期" style="width: 200px" />
