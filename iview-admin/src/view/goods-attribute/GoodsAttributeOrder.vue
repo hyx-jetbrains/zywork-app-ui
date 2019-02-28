@@ -96,6 +96,10 @@
         // this.handleList.push(`${src} => ${target}, ${oldIndex} => ${newIndex}`)
       },
       confirmSelection() {
+        if (this.attributes.length === 0) {
+          this.$Message.warning('商品类目没有属性，请先分配商品属性')
+          return;
+        }
         this.$Spin.show()
         // 保存属性排序
         var params = []

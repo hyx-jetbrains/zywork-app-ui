@@ -98,6 +98,10 @@
         // this.handleList.push(`${src} => ${target}, ${oldIndex} => ${newIndex}`)
       },
       confirmSelection() {
+        if (this.pics.length === 0) {
+          this.$Message.warning('商品没有图片，请先上传商品图片')
+          return;
+        }
         this.$Spin.show()
         // 保存属性排序
         var params = []
