@@ -136,12 +136,10 @@ export default {
       })
     },
     updateUploadList () {
-      if (this.$refs.upload.fileList.length === 0 && this.defaultList.length > 0) {
-        // fileList中的status属性，第一次打开上传组件时，为undefined，所以在查询出所有默认图片时，需要增加status: finished
-        this.defaultList.forEach((item, index) => {
-          item.status = 'finished'
-        })
-      }
+      // fileList中的status属性，第一次打开上传组件时，为undefined，所以在查询出所有默认图片时，需要增加status: finished
+      this.defaultList.forEach((item, index) => {
+        item.status = 'finished'
+      })
       this.$refs.upload.fileList = this.defaultList
       this.uploadList = this.$refs.upload.fileList
     }
