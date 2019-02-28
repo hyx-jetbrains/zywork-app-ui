@@ -9,9 +9,11 @@
           </Tooltip>
           <div class="drag-box-card">
             <Spin size="large" fix v-if="spinShow"></Spin>
-            <drag-list-single :list.sync="attributes" :dropConClass="dropConClass" @on-change="handleChange">
+            <drag-list-single :list.sync="pics" :dropConClass="dropConClass" @on-change="handleChange">
               <h4 slot="title">鼠标拖动以修改属性顺序</h4>
-              <Card class="drag-item" slot="content" slot-scope="content">{{ (content.index + 1) + '. ' + content.item.name }}</Card>
+              <div class="drag-item" slot="content" slot-scope="content" style="text-align: center;">
+                <img :src="content.item.name" style="width: 120px; height: 120px;">
+              </div>
             </drag-list-single>
           </div>
         </Card>
@@ -23,17 +25,17 @@
 <script>
   import DragListSingle from '_c/drag-list-single'
   import * as utils from '@/api/utils'
-  import {getAttrsByCategory, updateGoodsCategoryAttr} from '@/api/goods_attribute'
+  import {allPicByGoods, updateGoodsPic} from '@/api/goods_pic'
 
   export default {
-    name: 'GoodsAttributeOrder',
+    name: 'GoodsPicOrder',
     components: {
       DragListSingle
     },
     data() {
       return {
-        categoryId: null,
-        attributes: [],
+        goodsId: null,
+        pics: [],
         dropConClass: {
           left: ['drop-box', 'left-drop-box'],
           right: ['drop-box', 'right-drop-box']
@@ -47,9 +49,9 @@
           search: false
         },
         urls: {
-          searchUrl: '/goods-category-attr/admin/pager-cond',
-          allUrl: '/goods-category-attr/admin/all',
-          detailUrl: '/goods-category-attr/admin/one/'
+          searchUrl: '/goods-pic/admin/pager-cond',
+          allUrl: '/goods-pic/admin/all',
+          detailUrl: '/goods-pic/admin/one/'
         },
         page: {
           total: 0
@@ -59,16 +61,16 @@
     computed: {},
     mounted() {},
     methods: {
-      initData(categoryId) {
+      initData(goodsId) {
         this.spinShow = true
-        this.categoryId = categoryId
-        this.attributes.splice(0, this.attributes.length)
+        this.goodsId = goodsId
+        this.pics.splice(0, this.pics.length)
         var params = {
-          goodsCategoryId: categoryId,
-          sortColumn: 'goodsCategoryAttributeAttrOrder',
+          goodsId: goodsId,
+          sortColumn: 'picOrder',
           sortOrder: 'asc'
         }
-        getAttrsByCategory(params).then(res => {
+        allPicByGoods(params).then(res => {
           this.spinShow = false
           const data = res.data
           if (data.code !== 1001) {
@@ -77,10 +79,10 @@
           }
           if (data.data.rows.length > 0) {
             data.data.rows.forEach((row, index) => {
-              this.attributes.push(
+              this.pics.push(
                 {
-                  id: row.goodsAttributeId, 
-                  name: row.goodsAttributeAttrName
+                  id: row.id, 
+                  name: row.picUrl
                 }
               )
             })
@@ -90,7 +92,7 @@
         })
       },
       search() {
-        this.initData(this.categoryId)
+        this.initData(this.goodsId)
       },
       handleChange ({ src, target, oldIndex, newIndex }) {
         // this.handleList.push(`${src} => ${target}, ${oldIndex} => ${newIndex}`)
@@ -99,17 +101,16 @@
         this.$Spin.show()
         // 保存属性排序
         var params = []
-        for (let i = 0, len = this.attributes.length; i < len; i++) {
+        for (let i = 0, len = this.pics.length; i < len; i++) {
           params.push({
-            goodsCategoryId: this.categoryId,
-            goodsAttributeId: this.attributes[i].id,
-            goodsCategoryAttributeAttrOrder: i + 1
+            id: this.pics[i].id,
+            picOrder: i + 1
           })
         }
-        updateGoodsCategoryAttr(params).then(response => {
+        updateGoodsPic(params).then(response => {
           this.$Spin.hide()
           if (response.data.code === 1001) {
-            this.$Message.success('成功更新商品类目属性排序')
+            this.$Message.success('成功更新商品图片排序')
             this.$emit("hideModal")
           } else {
             this.$Message.error(response.data.message)

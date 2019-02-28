@@ -421,14 +421,14 @@ export default [
               icon: 'md-grid',
               title: '商品管理'
             },
-            component: () => import('@/view/demo/ComingSoon.vue')
+            component: () => import('@/view/goods-info/GoodsInfo.vue')
           },
           {
             path: 'GoodsDetail',
             name: 'goods_detail',
             meta: {
               icon: 'ios-grid',
-              title: '商品详情查询'
+              title: '商品SKU管理'
             },
             component: () => import('@/view/demo/ComingSoon.vue')
           }

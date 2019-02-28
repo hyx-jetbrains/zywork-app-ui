@@ -2,7 +2,7 @@
   <Modal v-model="uploadModal" :title="title" :mask-closable="true"> 
     <Upload type="drag" :format="format" :before-upload="handleBeforeUpload" :show-upload-list="false"
       :on-format-error="handleFormatError" :on-success="handleSuccess" :on-error="handleError"
-      :action="baseUrl + uploadUrl" :headers="uploadHeaders">
+      :action="baseUrl + uploadUrl" :headers="uploadHeaders" :multiple="multiple">
       <div style="padding: 20px 0">
         <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
         <p>单击或拖动文件到此处上传</p>
@@ -23,7 +23,8 @@ export default {
   props: {
     title: '',
     name: '',
-    format: ''
+    format: '',
+    multiple: false
   },
   components: {
   },
@@ -66,7 +67,7 @@ export default {
       }
     },
     handleError(file) {
-      this.$Notice.warning({
+      this.$Notice.error({
         title: '文件上传失败',
         desc: '文件 ' + file.name + ' 上传失败，请重新上传' 
       })
