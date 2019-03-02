@@ -152,7 +152,7 @@
 
 <script>
   import * as utils from '@/api/utils'
-  import {saveCategoryAttrs} from '@/api/goods_category'
+  import {updateGoodsCategoryAttr} from '@/api/goods_category'
 
   export default {
     name: 'GoodsAttributeList',
@@ -390,15 +390,17 @@ sortable: true
             goodsAttributeId: item.id
           })
         })
-        // 保留原始属性的排序
-        params.forEach((param, index) => {
-          this.selectedData.forEach((data, idx) => {
-            if (data.goodsAttributeId === param.goodsAttributeId) {
-              param.goodsCategoryAttributeAttrOrder = data.goodsCategoryAttributeAttrOrder
-            }
+        if (this.selectedData !== null && this.selectedData.length > 0) {
+          // 保留原始属性的排序
+          params.forEach((param, index) => {
+            this.selectedData.forEach((data, idx) => {
+              if (data.goodsAttributeId === param.goodsAttributeId) {
+                param.goodsCategoryAttributeAttrOrder = data.goodsCategoryAttributeAttrOrder
+              }
+            })
           })
-        })
-        saveCategoryAttrs(params).then(res => {
+        }
+        updateGoodsCategoryAttr(params).then(res => {
             const data = res.data
             if (data.code === 1001) {
               this.$Message.info("分配属性成功")

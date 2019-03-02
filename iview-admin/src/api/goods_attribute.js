@@ -16,7 +16,7 @@ export const getAttrsByCategory = (params) => {
  * 批量更新类目属性排序
  * @param {*} params 
  */
-export const saveCategoryAttrsOrder = (params) => {
+export const updateGoodsCategoryAttr = (params) => {
     return axios.request({
         url: '/goods-category-attr/admin/batch-update',
         method: 'POST',
