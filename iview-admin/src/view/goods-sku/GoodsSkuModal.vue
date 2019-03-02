@@ -30,14 +30,11 @@
     </Row>
     <Modal v-model="modal.add" title="添加" @on-visible-change="changeModalVisibleResetForm('addForm', $event)">
       <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
-        <FormItem label="店铺编号" prop="shopId">
-	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
+        <FormItem label="商品编号" prop="goodsId">
+	<InputNumber readonly v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
 </FormItem>
-<FormItem label="类目编号" prop="categoryId">
-	<InputNumber v-model="form.categoryId" placeholder="请输入类目编号" style="width: 100%;"/>
-</FormItem>
-<FormItem label="图文详情" prop="intro">
-	<Input v-model="form.intro" placeholder="请输入图文详情"/>
+<FormItem label="商品图片编号" prop="picId">
+	<InputNumber v-model="form.picId" placeholder="请输入商品图片编号" style="width: 100%;"/>
 </FormItem>
 <FormItem label="上架状态" prop="shelfStatus">
 	<InputNumber v-model="form.shelfStatus" placeholder="请输入上架状态" style="width: 100%;"/>
@@ -51,14 +48,11 @@
     </Modal>
     <Modal v-model="modal.edit" title="修改" @on-visible-change="changeModalVisibleResetForm('editForm', $event)">
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
-        <FormItem label="店铺编号" prop="shopId">
-	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
+        <FormItem label="商品编号" prop="goodsId">
+	<InputNumber readonly v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
 </FormItem>
-<FormItem label="类目编号" prop="categoryId">
-	<InputNumber v-model="form.categoryId" placeholder="请输入类目编号" style="width: 100%;"/>
-</FormItem>
-<FormItem label="图文详情" prop="intro">
-	<Input v-model="form.intro" placeholder="请输入图文详情"/>
+<FormItem label="商品图片编号" prop="picId">
+	<InputNumber v-model="form.picId" placeholder="请输入商品图片编号" style="width: 100%;"/>
 </FormItem>
 <FormItem label="上架状态" prop="shelfStatus">
 	<InputNumber v-model="form.shelfStatus" placeholder="请输入上架状态" style="width: 100%;"/>
@@ -72,50 +66,47 @@
     </Modal>
     <Modal v-model="modal.search" title="高级搜索">
       <Form ref="searchForm" :model="searchForm" :label-width="80">
-        <FormItem label="商品编号"><Row>
+        <FormItem label="SKU编号"><Row>
 	<i-col span="11">
 	<FormItem prop="idMin">
-	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始商品编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始SKU编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
 	<FormItem prop="idMax">
-	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束商品编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束SKU编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
-<FormItem label="店铺编号"><Row>
+<FormItem label="商品编号"><Row>
 	<i-col span="11">
-	<FormItem prop="shopIdMin">
-	<InputNumber v-model="searchForm.shopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
+	<FormItem prop="goodsIdMin">
+	<InputNumber v-model="searchForm.goodsIdMin" placeholder="请输入开始商品编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="shopIdMax">
-	<InputNumber v-model="searchForm.shopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
+	<FormItem prop="goodsIdMax">
+	<InputNumber v-model="searchForm.goodsIdMax" placeholder="请输入结束商品编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
-<FormItem label="类目编号"><Row>
+<FormItem label="商品图片编号"><Row>
 	<i-col span="11">
-	<FormItem prop="categoryIdMin">
-	<InputNumber v-model="searchForm.categoryIdMin" placeholder="请输入开始类目编号" style="width: 100%;"/>
+	<FormItem prop="picIdMin">
+	<InputNumber v-model="searchForm.picIdMin" placeholder="请输入开始商品图片编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="categoryIdMax">
-	<InputNumber v-model="searchForm.categoryIdMax" placeholder="请输入结束类目编号" style="width: 100%;"/>
+	<FormItem prop="picIdMax">
+	<InputNumber v-model="searchForm.picIdMax" placeholder="请输入结束商品图片编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
-</FormItem>
-<FormItem label="图文详情" prop="intro">
-	<Input v-model="searchForm.intro" placeholder="请输入图文详情"/>
 </FormItem>
 <FormItem label="上架状态"><Row>
 	<i-col span="11">
@@ -196,10 +187,9 @@
       </div>
     </Modal>
     <Modal v-model="modal.detail" title="详情" @on-visible-change="changeModalVisibleResetForm('editForm', $event)">
-      <p>商品编号: <span v-text="form.id"></span></p>
-<p>店铺编号: <span v-text="form.shopId"></span></p>
-<p>类目编号: <span v-text="form.categoryId"></span></p>
-<p>图文详情: <span v-text="form.intro"></span></p>
+      <p>SKU编号: <span v-text="form.id"></span></p>
+<p>商品编号: <span v-text="form.goodsId"></span></p>
+<p>商品图片编号: <span v-text="form.picId"></span></p>
 <p>上架状态: <span v-text="form.shelfStatus"></span></p>
 <p>版本号: <span v-text="form.version"></span></p>
 <p>创建时间: <span v-text="form.createTime"></span></p>
@@ -208,57 +198,54 @@
 
     </Modal>
 
-    <UploadImgModal
-      ref="uploadModal"
-      :title="uploadModal.title"
-      :format="uploadModal.format"
-      :multiple="true"/>
-
-    <Modal :transfer="false" v-model="modal.picOrder" title="设置属性排序" width="60%">
-      <GoodsPicOrder ref="goodsPicOrder" v-on:hideModal="hideModal"/>
-      <div slot="footer">
-        <Button type="text" size="large" @click="cancelModal('picOrder')">取消</Button>
-        <Button type="primary" size="large" @click="picOrder">确认排序</Button>
+    <Modal v-model="modal.imgModal" title="选择SKU图片">
+      <div v-if="choosePic.id !== 0">
+        <img :src="choosePic.url" style="width: 120px; height: 120px;">
       </div>
+        <div class="demo-upload-list" v-for="pic in pics" :key="pic.name">
+              <img :src="pic.picUrl">
+              <div class="demo-upload-list-cover">
+                  <Icon type="ios-eye-outline" @click="handleView(pic.picUrl)"></Icon>
+                  <Icon type="md-checkmark" @click="handleChoose(pic)"></Icon>
+              </div>
+        </div>
     </Modal>
 
-    <Modal :transfer="false" v-model="modal.skuModal" title="商品SKU管理" width="80%">
-      <GoodsSkuModal ref="goodsSkuModal"/>
+    <Modal v-model="modal.imgViewModal" title="查看图片">
+      <img :src="picUrl" v-if="modal.imgViewModal" style="width: 100%">
     </Modal>
+
+    <SkuDetailModal ref="skuDetailModal" style="width: 100%;"/>
   </div>
 </template>
 
 <script>
   import * as utils from '@/api/utils'
-  import UploadImgModal from '_c/upload-img-modal'
-  import GoodsPicOrder from '../goods-pic/GoodsPicOrder.vue'
-  import {allPicByGoods} from '@/api/goods_pic'
-  import GoodsSkuModal from '../goods-sku/GoodsSkuModal.vue'
-  import config from '@/config'
-  const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+  import axios from '@/libs/api.request'
+  import {allPicByGoods, getPicById} from '@/api/goods_pic'
+  import SkuDetailModal from '_c/sku-detail-modal'
 
   export default {
-    name: 'GoodsInfo',
+    name: 'GoodsSkuModal',
     components: {
-      UploadImgModal,
-      GoodsPicOrder,
-      GoodsSkuModal
+      SkuDetailModal
     },
     data() {
       return {
-        uploadModal: {
-          title: '商品图片管理',
-          format: ['jpg','jpeg','png','bmp'],
-          uploadUrl: '/goods-pic/admin/upload/',
-          removeUrl: '/goods-pic/admin/remove/'
+        categoryId: 0,
+        choosePic: {
+          id: 0,
+          url: ''
         },
+        picUrl: '',
+        pics: [],
         modal: {
           add: false,
           edit: false,
           search: false,
           detail: false,
-          picOrder: false,
-          skuModal: false
+          imgModal: false,
+          imgViewModal: false
         },
         loading: {
           add: false,
@@ -266,26 +253,25 @@
           search: false
         },
         urls: {
-          addUrl: '/goods-info/admin/save',
-          batchAddUrl: '/goods-info/admin/batch-save',
-          editUrl: '/goods-info/admin/update',
-          batchEditUrl: '/goods-info/admin/batch-update',
-          searchUrl: '/goods-info/admin/pager-cond',
-          allUrl: '/goods-info/admin/all',
-          removeUrl: '/goods-info/admin/remove/',
-          batchRemoveUrl: '/goods-info/admin/batch-remove',
-          detailUrl: '/goods-info/admin/one/',
-          activeUrl: '/goods-info/admin/active',
-          batchActiveUrl: '/goods-info/admin/batch-active'
+          addUrl: '/goods-sku/admin/save',
+          batchAddUrl: '/goods-sku/admin/batch-save',
+          editUrl: '/goods-sku/admin/update',
+          batchEditUrl: '/goods-sku/admin/batch-update',
+          searchUrl: '/goods-sku/admin/pager-cond',
+          allUrl: '/goods-sku/admin/all',
+          removeUrl: '/goods-sku/admin/remove/',
+          batchRemoveUrl: '/goods-sku/admin/batch-remove',
+          detailUrl: '/goods-sku/admin/one/',
+          activeUrl: '/goods-sku/admin/active',
+          batchActiveUrl: '/goods-sku/admin/batch-active'
         },
         page: {
           total: 0
         },
         form: {
           id: null,
-shopId: null,
-categoryId: null,
-intro: null,
+goodsId: null,
+picId: null,
 shelfStatus: null,
 version: null,
 createTime: null,
@@ -294,15 +280,8 @@ isActive: null,
 
         },
         validateRules: {
-          shopId: [
+          goodsId: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
-],
-categoryId: [
-{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
-],
-intro: [
-{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
-{type: 'string', min: 1, max: 65535, message: '必须1-65535个字符', trigger: 'blur'}
 ],
 
         },
@@ -314,13 +293,12 @@ intro: [
           id: null,
 idMin: null, 
 idMax: null, 
-shopId: null,
-shopIdMin: null, 
-shopIdMax: null, 
-categoryId: null,
-categoryIdMin: null, 
-categoryIdMax: null, 
-intro: null,
+goodsId: null,
+goodsIdMin: null, 
+goodsIdMax: null, 
+picId: null,
+picIdMin: null, 
+picIdMax: null, 
 shelfStatus: null,
 shelfStatusMin: null, 
 shelfStatusMax: null, 
@@ -357,26 +335,20 @@ isActiveMax: null,
               }
             },
             {
-title: '商品编号',
+title: 'SKU编号',
 key: 'id',
 minWidth: 120,
 sortable: true
 },
 {
-title: '店铺编号',
-key: 'shopId',
+title: '商品编号',
+key: 'goodsId',
 minWidth: 120,
 sortable: true
 },
 {
-title: '类目编号',
-key: 'categoryId',
-minWidth: 120,
-sortable: true
-},
-{
-title: '图文详情',
-key: 'intro',
+title: '商品图片编号',
+key: 'picId',
 minWidth: 120,
 sortable: true
 },
@@ -496,19 +468,14 @@ sortable: true
                       ]),
                       h('DropdownItem', {
                         props:{
-                          name: 'imgMgrModal'
+                          name: 'imgModal'
                         }
-                      }, '图片管理'),
+                      }, '图片设置'),
                       h('DropdownItem', {
                         props:{
-                          name: 'imgOrderModal'
+                          name: 'detailModal'
                         }
-                      }, '图片排序'),
-                      h('DropdownItem', {
-                        props:{
-                          name: 'skuMgrModal'
-                        }
-                      }, '商品SKU管理')
+                      }, '详情设置')
                   ])
                 ])
               }
@@ -521,26 +488,35 @@ sortable: true
     },
     computed: {},
     mounted() {
-      this.search()
+      // this.search()
     },
     methods: {
       showModal(modal) {
         utils.showModal(this, modal)
       },
       changeModalVisibleResetForm(formRef, visible) {
+        let goodsId = this.form.goodsId
         if (!visible) {
           utils.resetForm(this, formRef)
         }
+        this.form.goodsId = goodsId
+        this.searchForm.goodsId = goodsId
       },
       resetForm(formRef) {
+        let goodsId = this.form.goodsId
         utils.resetForm(this, formRef)
+        this.form.goodsId = goodsId
+        this.searchForm.goodsId = goodsId
       },
       cancelModal(modal) {
         utils.cancelModal(this, modal)
       },
       resetFormCancelModal(formRef, modal) {
         utils.cancelModal(this, modal)
+        let goodsId = this.form.goodsId
         utils.resetForm(this, formRef)
+        this.form.goodsId = goodsId
+        this.searchForm.goodsId = goodsId
       },
       searchOkModal(modal) {
         utils.cancelModal(this, modal)
@@ -564,24 +540,71 @@ sortable: true
           this.form = JSON.parse(JSON.stringify(row))
         } else if (itemName === 'remove') {
           utils.remove(this, row)
-        } else if (itemName === 'imgMgrModal') {
-          this.imgMgr(row)
-        } else if (itemName === 'imgOrderModal') {
-          utils.showModal(this, 'picOrder')
-          this.$refs.goodsPicOrder.initData(row.id)
-        } else if (itemName === 'skuMgrModal') {
-          utils.showModal(this, 'skuModal')
-          this.$refs.goodsSkuModal.form.goodsId = row.id
-          this.$refs.goodsSkuModal.searchForm.goodsId = row.id
-          this.$refs.goodsSkuModal.categoryId = row.categoryId
-          this.$refs.goodsSkuModal.search()
+        } else if (itemName === 'imgModal') {
+          utils.showModal(this, 'imgModal')
+          this.form.id = row.id
+          this.loadPics(row.picId)
+        } else if (itemName === 'detailModal') {
+          this.$refs.skuDetailModal.skuDetailModal = true
+          this.$refs.skuDetailModal.categoryId = this.categoryId
+          this.$refs.skuDetailModal.skuId = row.id
+          this.$refs.skuDetailModal.loadAllAttrVals()
         }
       },
       add() {
-        utils.add(this)
+        let goodsId = this.form.goodsId
+        this.$refs['addForm'].validate(valid => {
+          if (valid) {
+            let self = this
+            self.loading['add'] = true
+            axios.request({
+              url: self.urls.addUrl,
+              method: 'POST',
+              data: self.form
+            }).then(response => {
+              self.loading['add'] = false
+              if (response.data.code !== 1001) {
+                self.$Message.error(response.data.message)
+              } else {
+                self.$Message.success(response.data.message)
+                utils.resetForm(self, 'addForm')
+                utils.cancelModal(self, 'add')
+                self.form.goodsId = goodsId
+                self.searchForm.goodsId = goodsId
+                utils.search(self)
+              }
+            }).catch(error => {
+              console.log(error)
+              self.loading['add'] = false
+              self.$Message.error('添加数据失败，稍候再试')
+            })
+          }
+        })
       },
       edit() {
-        utils.edit(this)
+        let goodsId = this.form.goodsId
+        this.$refs['editForm'].validate(valid => {
+          if (valid) {
+            this.loading['edit'] = true
+            this.updateGoodsSku().then(response => {
+              this.loading['edit'] = false
+              if (response.data.code !== 1001) {
+                this.$Message.error(response.data.message)
+              } else {
+                this.$Message.success(response.data.message)
+                utils.resetForm(this, 'editForm')
+                utils.cancelModal(this, 'edit')
+                this.form.goodsId = goodsId
+                this.searchForm.goodsId = goodsId
+                utils.search(this)
+              }
+            }).catch(error => {
+              this.loading['edit'] = false
+              console.log(error)
+              this.$Message.error('修改数据失败，稍候再试')
+            })
+          }
+        })
       },
       active(row) {
         utils.active(this, row)
@@ -601,39 +624,106 @@ sortable: true
       changePageSize(pageSize) {
         utils.changePageSize(this, pageSize)
       },
-      imgMgr(row) {
-        let params = {
-            goodsId: row.id,
-            sortColumn: 'picOrder',
-            sortOrder: 'asc'
-          }
-          allPicByGoods(params).then(response => {
+      loadPics(picId) {
+        if (picId !== null && picId !== undefined) {
+          getPicById(picId).then(response => {
             if (response.data.code === 1001) {
-              this.$refs.uploadModal.defaultList = []
-              response.data.data.rows.forEach((img, index) => {
-                this.$refs.uploadModal.defaultList.push({
-                  name: img.id,
-                  url: '/' + img.picUrl
-                })
-              })
-              this.$refs.uploadModal.updateUploadList()
+              this.choosePic.id = picId
+              this.choosePic.url = response.data.data.picUrl
             }
           }).catch(error => {
             console.log(error)
           })
-          this.$refs.uploadModal.uploadUrl = this.uploadModal.uploadUrl + row.shopId
-          this.$refs.uploadModal.removeUrl = this.uploadModal.removeUrl
-          this.$refs.uploadModal.uploadModal = true
+        }
+        let params = {
+          goodsId: this.form.goodsId,
+          sortColumn: 'picOrder',
+          sortOrder: 'asc'
+        }
+        allPicByGoods(params).then(response => {
+          if (response.data.code === 1001) {
+            this.pics = response.data.data.rows
+          } else {
+            this.$Message.error(response.data.message)
+          }
+        }).catch(error => {
+          console.log(error)
+        })
       },
-      picOrder() {
-        this.$refs.goodsPicOrder.confirmSelection()
+      handleView (picUrl) {
+        this.picUrl = picUrl
+        utils.showModal(this, 'imgViewModal')
       },
-      hideModal() {
-        this.modal.picOrder = false
+      handleChoose(pic) {
+        this.$Spin.show()
+        this.choosePic.url = pic.picUrl
+        this.choosePic.id = pic.id
+        this.form.picId = pic.id
+        this.updateGoodsSku().then(response => {
+          this.$Spin.hide()
+          if (response.data.code !== 1001) {
+                this.$Message.error(response.data.message)
+              } else {
+                this.$Message.success(response.data.message)
+                utils.search(this)
+              }
+        }).catch(error => {
+          console.log(error)
+        })
+      },
+      updateGoodsSku() {
+        return new Promise((resolve, reject) => {
+            axios.request({
+              url: this.urls.editUrl,
+              method: 'POST',
+              data: this.form
+            }).then(response => {
+              resolve(response)
+            }).catch(error => {
+              reject(error)
+            })
+        })
       }
     }
   }
 </script>
 
 <style>
+    .demo-upload-list {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #fff;
+        position: relative;
+        box-shadow: 0 1px 1px rgba(0,0,0,.2);
+        margin-right: 4px;
+    }
+    .demo-upload-list img{
+        width: 100%;
+        height: 100%;
+    }
+    .demo-upload-list-cover{
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,.6);
+    }
+    .demo-upload-list:hover .demo-upload-list-cover{
+        display: block;
+    }
+    .demo-upload-list-cover i{
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        margin: 0 2px;
+    }
 </style>
+

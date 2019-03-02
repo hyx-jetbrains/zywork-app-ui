@@ -23,3 +23,15 @@ export const saveCategoryAttrsOrder = (params) => {
         data: params
       })
 }
+
+/**
+ * 根据条件查询sku属性值
+ * @param {*} params 
+ */
+export const skuAttrVals = (params) => {
+  return axios.request({
+    url: '/goods-sku-attr-val/admin/all-cond',
+    method: 'POST',
+    data: params
+  }) 
+}

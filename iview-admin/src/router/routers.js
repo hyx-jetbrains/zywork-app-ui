@@ -428,9 +428,9 @@ export default [
             name: 'goods_detail',
             meta: {
               icon: 'ios-grid',
-              title: '商品SKU管理'
+              title: '商品SKU属性查询'
             },
-            component: () => import('@/view/demo/ComingSoon.vue')
+            component: () => import('@/view/goods-sku-attribute-value/GoodsSkuAttributeValue.vue')
           }
         ]
       },

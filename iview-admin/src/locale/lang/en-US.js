@@ -58,7 +58,7 @@ export default {
   shop_check: 'Shop Check History',
   goods_management: 'Goods Management',
   goods_info: 'Goods Basic Management',
-  goods_detail: 'Goods SKU Management',
+  goods_detail: 'Goods SKU Attribute Value Query',
   coupons_management: 'Coupons Management',
   goods_coupon: 'Goods Coupons Management',
   user_coupon: 'User Coupons Management',

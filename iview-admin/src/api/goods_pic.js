@@ -28,6 +28,18 @@ export const updateGoodsPic = (params) => {
   return axios.request({
     url: '/goods-pic/admin/batch-update',
     method: 'POST',
-    data: params
+    data: ''
+  })
+}
+
+/**
+ * 根据图片id获取图片信息
+ * @param {*} id 
+ */
+export const getPicById = (id) => {
+  return axios.request({
+    url: '/goods-pic/admin/one/' + id,
+    method: 'GET',
+    data: null
   })
 }

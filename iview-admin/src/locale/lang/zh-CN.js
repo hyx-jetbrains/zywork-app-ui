@@ -58,7 +58,7 @@ export default {
   shop_check: '店铺审核历史',
   goods_management: '商品管理',
   goods_info: '商品基础信息管理',
-  goods_detail: '商品SKU管理',
+  goods_detail: '商品SKU属性查询',
   coupons_management: '优惠券管理',
   goods_coupon: '商品优惠券管理',
   user_coupon: '用户优惠券管理',

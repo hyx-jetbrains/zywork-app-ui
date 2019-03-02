@@ -63,7 +63,7 @@
         this.spinShow = true
         this.categoryId = categoryId
         this.attributes.splice(0, this.attributes.length)
-        var params = {
+        let params = {
           goodsCategoryId: categoryId,
           sortColumn: 'goodsCategoryAttributeAttrOrder',
           sortOrder: 'asc'
