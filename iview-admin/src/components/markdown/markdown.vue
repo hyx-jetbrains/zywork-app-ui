@@ -20,7 +20,7 @@ export default {
         return {}
       }
     },
-    localCache: {
+    cache: {
       type: Boolean,
       default: true
     }
@@ -34,7 +34,7 @@ export default {
     addEvents () {
       this.editor.codemirror.on('change', () => {
         let value = this.editor.value()
-        if (this.localCache) localStorage.markdownContent = value
+        if (this.cache) localStorage.editorCache = value
         this.$emit('input', value)
         this.$emit('on-change', value)
       })
@@ -44,6 +44,9 @@ export default {
       this.editor.codemirror.on('blur', () => {
         this.$emit('on-blur', this.editor.value())
       })
+    },
+    setHtml(val) {
+      localStorage.editorCache = val
     }
   },
   mounted () {
@@ -55,7 +58,7 @@ export default {
      * https://codemirror.net/doc/manual.html#events
      */
     this.addEvents()
-    let content = localStorage.markdownContent
+    let content = this.value || localStorage.editorCache
     if (content) this.editor.value(content)
   }
 }

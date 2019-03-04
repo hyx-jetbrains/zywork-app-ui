@@ -40,6 +40,32 @@ export default {
       default: true
     }
   },
+  data() {
+    return {
+      menu: [
+        'head', // 标题
+        'bold', // 加粗
+        'fontSize', // 字号
+        'fontName', // 字体
+        'italic', // 斜体
+        'underline', // 下划线
+        'strikeThrough', // 删除线
+        'foreColor', // 字体颜色
+        'backColor', // 背景颜色
+        'link', // 插入连接
+        'list', // 列表
+        'justify', // 对其方式
+        'quote', // 引用
+        'emoticon', // 表情
+        'image', // 插入图片
+        'table', // 插入表格
+        'video', // 插入视频
+        'code', // 插入代码
+        'undo', // 撤销
+        'redo' // 重复
+      ]
+    }
+  },
   computed: {
     editorId () {
       return `editor${this._uid}`
@@ -59,6 +85,34 @@ export default {
       this.$emit('on-change', html, text)
     }
     this.editor.customConfig.onchangeTimeout = this.changeInterval
+    // 设置菜单
+    // this.editor.customConfig.menus = this.menu
+    // 设置图片上传信息
+    this.editor.customConfig.uploadImgShowBase64 = true // base 64 存储图片
+    this.editor.customConfig.uploadImgServer = ''// 配置服务器端地址
+    this.editor.customConfig.uploadImgHeaders = {      }// 自定义 header
+    this.editor.customConfig.uploadFileName = '' // 后端接受上传文件的参数名
+    this.editor.customConfig.uploadImgMaxSize = 2 * 1024 * 1024 // 将图片大小限制为 2M
+    this.editor.customConfig.uploadImgMaxLength = 6 // 限制一次最多上传 3 张图片
+    this.editor.customConfig.uploadImgTimeout = 3 * 60 * 1000 // 设置超时时间
+    // 文件上传回调
+    this.editor.customConfig.uploadImgHooks = {
+      fail: (xhr, editor, result) => {
+        // 插入图片失败回调
+      },
+      success: (xhr, editor, result) => {
+        // 图片上传成功回调
+      },
+      timeout: (xhr, editor) => {
+        // 网络超时的回调
+      },
+      error: (xhr, editor) => {
+       // 图片上传错误的回调
+      },
+      customInsert: (insertImg, result, editor) => {
+        // 图片上传成功，插入图片的回调
+      }
+    }
     // create这个方法一定要在所有配置项之后调用
     this.editor.create()
     // 如果本地有存储加载本地存储内容
@@ -71,5 +125,14 @@ export default {
 <style lang="less">
 .editor-wrapper *{
   z-index: 100 !important;
+}
+.w-e-menu{
+  z-index: 2 !important;
+}
+.w-e-text-container{
+  z-index: 1 !important;
+}
+.w-e-toolbar{
+  flex-wrap:wrap;
 }
 </style>
