@@ -1,4 +1,5 @@
 import { getLocalStorageToken } from '@/libs/util'
+import {parseJson, arrayBufferToReader, arrayBufferToImage} from "@/api/utils"
 import axios from '@/libs/api.request'
 import Qs from 'qs'
 
@@ -153,6 +154,41 @@ export const searchWaitTask = (self, url) => {
       console.log(error)
       self.loading['search'] = false
       self.table.loading = false
+      self.$Message.error('加载数据失败，稍候再试')
+      reject(error)
+    })
+  })
+}
+
+/**
+ * 显示流程图
+ * @param self this
+ * @param row 显示流程图的对象
+ */
+export const showActivitiImg = (self, params) => {
+  return new Promise((resolve, reject) => {
+    axios.request({
+      url: self.urls.showActivitiImgUrl,
+      method: 'POST',
+      data: Qs.stringify(params),
+      responseType: "arraybuffer"
+    }).then(response => {
+      let arrayBufferData = response.data
+      let reader = arrayBufferToReader(arrayBufferData)
+      reader.onload = function (e) {
+        parseJson(reader.result).then(json => {
+          if (json.code !== 1001) {
+            self.$Message.error(json.message)
+            return
+          }
+        }).catch(error => {
+          self.modal.img = true
+          self.imgUrl = arrayBufferToImage('png', arrayBufferData)
+        })
+      }
+      resolve(response)
+    }).catch(error => {
+      console.log(error)
       self.$Message.error('加载数据失败，稍候再试')
       reject(error)
     })

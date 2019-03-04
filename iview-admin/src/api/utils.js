@@ -493,4 +493,37 @@ export const getDate = (days) => {
     (date2.getDate() < 10 ? '0' + date2.getDate() : date2.getDate())
   return time2
 }
+
+/**
+ * 解析text文本到JSON对象
+ * @param {*} data 
+ */
+export const parseJson = (data) => {
+  return new Promise((resolve, reject) => {
+    let json = JSON.parse(data)
+    resolve(json)
+  })
+}
+
+/**
+ * 读取arrayBuffer数据到FileReader对象中，FileReader中存储字符串
+ * @param {*} arrayBufferData 
+ */
+export const arrayBufferToReader = (arrayBufferData) => {
+  let blob = new Blob([arrayBufferData])
+  let reader = new FileReader()
+  reader.readAsText(blob, 'utf-8')
+  return reader
+}
+
+/**
+ * 把arrayBuffer数据转化成指定类型的图片
+ * @param {*} imageType 
+ * @param {*} arrayBufferData 
+ */
+export const arrayBufferToImage = (imageType, arrayBufferData) => {
+  return 'data:image/' + imageType + ';base64,' + btoa(
+    new Uint8Array(arrayBufferData).reduce((data, byte) => data + String.fromCharCode(byte), '')
+  )
+}
     

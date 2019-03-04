@@ -84,6 +84,11 @@
         <span v-text="form.tenantId"></span>
       </p>
     </Modal>
+    <Modal v-model="modal.img" title="流程图" width="1200">
+      <Row style="text-align: center;">
+        <img :src="imgUrl" />
+      </Row>
+    </Modal>
   </div>
 </template>
 
@@ -99,13 +104,16 @@ export default {
     return {
       modal: {
         select: false,
-        detail: false
+        detail: false,
+        img: false
       },
+      imgUrl: '',
       loading: {
         search: false
       },
       urls: {
-        searchUrl: '/process-activiti/admin/query/all-tasks'
+        searchUrl: '/process-activiti/admin/query/all-tasks',
+        showActivitiImgUrl: '/process-activiti/user/query/bpmn-activity-png'
       },
       page: {
         total: 0
@@ -287,6 +295,15 @@ export default {
                           }
                         },
                         '详情'
+                      ),
+                      h(
+                        'DropdownItem',
+                        {
+                          props: {
+                            name: 'showImg'
+                          }
+                        },
+                        '显示动态图'
                       )
                     ]
                   )
@@ -339,6 +356,13 @@ export default {
       if (itemName === 'showDetail') {
         utils.showModal(this, 'detail')
         this.form = JSON.parse(JSON.stringify(row))
+      } else if (itemName === 'showImg') {
+        // 显示动态流程图
+        const params = {
+          processInstanceId: row.processInstanceId,
+          processKey: ''
+        }
+        process.showActivitiImg(this, params)
       }
     },
     changeSelection(selections) {

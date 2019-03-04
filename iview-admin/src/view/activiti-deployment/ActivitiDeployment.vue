@@ -314,7 +314,7 @@ export default {
       }
       const row = this.table.selections[0]
       process.removeAll(this, row)
-    } 
+    }
   }
 }
 </script>
