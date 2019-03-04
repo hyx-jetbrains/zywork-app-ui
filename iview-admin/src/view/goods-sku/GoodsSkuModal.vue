@@ -546,7 +546,7 @@ sortable: true
           this.form.id = row.id
           this.loadPics(row.picId)
         } else if (itemName === 'detailModal') {
-          this.$refs.skuDetailModal.skuDetailModal = true
+          this.$refs.skuDetailModal.modal.skuDetailModal = true
           this.$refs.skuDetailModal.categoryId = this.categoryId
           this.$refs.skuDetailModal.skuId = row.id
           this.$refs.skuDetailModal.chooseSkuId = row.id

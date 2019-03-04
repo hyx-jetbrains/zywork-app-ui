@@ -1,5 +1,5 @@
 <template>
-  <Modal v-model="skuDetailModal" title="商品SKU详情" :mask-closable="true" width="80%"> 
+  <Modal v-model="modal.skuDetailModal" title="商品SKU详情" :mask-closable="true" width="80%"> 
     <Row>
       <i-col :lg="24">
         <div style="margin-bottom: 10px; color: red;">
@@ -45,22 +45,25 @@
           </Row>
         </Form>
     <div slot="footer">
-      <Button type="default" size="large" @click="skuDetailModal = false">关闭</Button>
+      <Button type="default" size="large" @click="resetFormCancelModal('skuForm', 'skuDetailModal')">关闭</Button>
       <Button type="primary" size="large" @click="saveSkuDetail">保存</Button>
     </div>
   </Modal>
 </template>
 
 <script>
+import * as utils from '@/api/utils'
 import {getAttrsByCategory, skuAttrVals} from '@/api/goods_attribute'
-import {allSkusByGoods, batchSaveGoodsAttrVals} from "@/api/goods_sku"
+import {allSkusByGoods, batchSaveGoodsAttrVals} from '@/api/goods_sku'
 export default {
   name: 'SkuDetailModal',
   components: {
   },
   data () {
     return {
-      skuDetailModal: false,
+      modal: {
+        skuDetailModal: false
+      },
       categoryId: 0,
       skuId: 0,
       goodsId: 0,
@@ -72,6 +75,10 @@ export default {
     }
   },
   methods: {
+    resetFormCancelModal(formRef, modal) {
+      utils.cancelModal(this, modal)
+      utils.resetForm(this, formRef)
+    },
     loadSkusByGoodsId() {
       let params = {
         goodsId: this.goodsId,
@@ -173,7 +180,7 @@ export default {
             batchSaveGoodsAttrVals(params).then(response => {
               if (response.data.code === 1001) {
                 this.$Message.success(response.data.message)
-                this.skuDetailModal = false
+                this.resetFormCancelModal('skuForm', 'skuDetailModal')
               } else {
                 this.$Message.error(response.data.message)
               }
