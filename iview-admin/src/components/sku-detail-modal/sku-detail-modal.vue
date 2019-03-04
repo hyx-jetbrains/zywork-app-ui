@@ -2,6 +2,9 @@
   <Modal v-model="skuDetailModal" title="商品SKU详情" :mask-closable="true" width="80%"> 
     <Row>
       <i-col :lg="24">
+        <div style="margin-bottom: 10px; color: red;">
+          当前SKU编号：{{skuId}}
+        </div>
         <div style="margin-bottom: 10px;">
           请选择SKU编号加载SKU详情：
           <RadioGroup v-model="chooseSkuId" type="button" @on-change="changeSkuId">
