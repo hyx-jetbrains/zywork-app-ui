@@ -1,7 +1,7 @@
 import axios from '@/libs/api.request'
 
 /**
- * 指保存商品类目的属性
+ * 批量保存商品类目的属性
  * @param {*} id 
  */
 export const updateGoodsCategoryAttr = (params) => {

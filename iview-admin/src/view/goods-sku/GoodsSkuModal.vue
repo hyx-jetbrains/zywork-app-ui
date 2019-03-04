@@ -520,6 +520,7 @@ sortable: true
       },
       searchOkModal(modal) {
         utils.cancelModal(this, modal)
+        this.searchForm.pageNo = 1
         utils.search(this)
       },
       batchOpt(itemName) {
@@ -548,6 +549,9 @@ sortable: true
           this.$refs.skuDetailModal.skuDetailModal = true
           this.$refs.skuDetailModal.categoryId = this.categoryId
           this.$refs.skuDetailModal.skuId = row.id
+          this.$refs.skuDetailModal.chooseSkuId = row.id
+          this.$refs.skuDetailModal.goodsId = this.form.goodsId
+          this.$refs.skuDetailModal.loadSkusByGoodsId()
           this.$refs.skuDetailModal.loadAllAttrVals()
         }
       },
