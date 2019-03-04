@@ -53,13 +53,15 @@
       @on-visible-change="changeModalVisibleResetForm('addForm', $event)"
     >
       <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
-        <Input v-model="form.title" placeholder="输入公告标题"/>
-        <Row style="margin: 10px 0px;">
-          <editor ref="editorAdd" :value="form.content" @on-change="handleChange" />
-        </Row>
+        <FormItem label="公告标题" prop="title">
+          <Input v-model="form.title" placeholder="请输入公告标题"/>
+        </FormItem>
         <FormItem label="公告摘要" prop="summary">
           <Input v-model="form.summary" type="textarea" :autosize="descriptionAutoSize" placeholder="请输入文章摘要"/>
         </FormItem>
+        <Row style="margin: 10px 0px;">
+          <editor ref="editorAdd" :value="form.content" @on-change="handleChange" />
+        </Row>
         <FormItem label="截止时间" prop="endTime">
           <DatePicker
             @on-change="form.endTime=$event"
@@ -85,13 +87,15 @@
       @on-visible-change="changeModalVisibleResetForm('editForm', $event)"
     >
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
-        <Input v-model="form.title" placeholder="输入公告标题"/>
-        <Row style="margin: 10px 0px;">
-          <editor ref="editorEdit" :value="form.content" @on-change="handleChange" />
-        </Row>
+        <FormItem label="公告标题" prop="title">
+          <Input v-model="form.title" placeholder="请输入公告标题"/>
+        </FormItem>
         <FormItem label="公告摘要" prop="summary">
           <Input v-model="form.summary" type="textarea" :autosize="descriptionAutoSize" placeholder="请输入文章摘要"/>
         </FormItem>
+        <Row style="margin: 10px 0px;">
+          <editor ref="editorAdd" :value="form.content" @on-change="handleChange" />
+        </Row>
         <FormItem label="截止时间" prop="endTime">
           <DatePicker
             @on-change="form.endTime=$event"

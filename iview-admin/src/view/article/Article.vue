@@ -55,11 +55,9 @@
       :fullscreen="true"
     >
       <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
-        <Input v-model="form.title" placeholder="输入文章标题"/>
-        <Row style="margin: 10px 0px;">
-          <editor ref="editorAdd" :value="form.content" @on-change="handleChange" />
-        </Row>
-
+        <FormItem label="文章标题" prop="title">
+          <Input v-model="form.title" placeholder="输入文章标题"/>
+        </FormItem>
         <FormItem label="文章类别" prop="categoryId">
           <Select v-model="form.categoryId" placeholder="请选择文章类别" filterable>
             <Option v-for="item in articleCategorySelect" :value="item.id" :key="item.id">{{item.title}}</option>
@@ -71,6 +69,9 @@
         <FormItem label="文章摘要" prop="summary">
           <Input v-model="form.summary" type="textarea" :autosize="descriptionAutoSize" placeholder="请输入文章摘要"/>
         </FormItem>
+        <Row style="margin: 10px 0px;">
+          <editor ref="editorAdd" :value="form.content" @on-change="handleChange" />
+        </Row>
       </Form>
       <div slot="footer">
         <Button type="text" size="large" @click="resetFormCancelModal('addForm', 'add')">取消</Button>
@@ -83,9 +84,9 @@
       @on-visible-change="changeModalVisibleResetForm('editForm', $event)"
     >
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
-        <Input v-model="form.title" placeholder="输入文章标题"/>
-        <editor ref="editor" :value="form.content" @on-change="handleChange" style="margin: 10px 0px;" />
-
+        <FormItem label="文章标题" prop="title">
+          <Input v-model="form.title" placeholder="输入文章标题"/>
+        </FormItem>
         <FormItem label="文章类别" prop="categoryId">
           <Select v-model="form.categoryId" placeholder="请选择文章类别" filterable>
             <Option v-for="item in articleCategorySelect" :value="item.id" :key="item.id">{{item.title}}</option>
@@ -97,6 +98,7 @@
         <FormItem label="文章摘要" prop="summary">
           <Input v-model="form.summary" type="textarea" :autosize="descriptionAutoSize" placeholder="请输入文章摘要"/>
         </FormItem>
+        <editor ref="editor" :value="form.content" @on-change="handleChange" style="margin: 10px 0px;" />
       </Form>
       <div slot="footer">
         <Button type="text" size="large" @click="resetFormCancelModal('editForm', 'edit')">取消</Button>
