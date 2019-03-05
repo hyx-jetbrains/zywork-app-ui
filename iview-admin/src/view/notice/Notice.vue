@@ -60,7 +60,7 @@
           <Input v-model="form.summary" type="textarea" :autosize="descriptionAutoSize" placeholder="请输入文章摘要"/>
         </FormItem>
         <Row style="margin: 10px 0px;">
-          <editor ref="editorAdd" :value="form.content" @on-change="handleChange" />
+          <editor ref="editorEdit" :value="form.content" @on-change="handleChange" />
         </Row>
         <FormItem label="截止时间" prop="endTime">
           <DatePicker
