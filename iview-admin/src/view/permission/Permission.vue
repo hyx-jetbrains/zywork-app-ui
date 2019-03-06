@@ -850,10 +850,9 @@ export default {
     },
     confirmSelection(moduleId) {
       this.modal.mainTableSearch = false
-      this.searchForm.moduleId = moduleId
-      utils.search(this).then(res => {
-        this.searchForm.moduleId = null
-      })
+      this.searchForm.moduleIdMin = moduleId
+      this.searchForm.moduleIdMax = moduleId
+      utils.search(this)
     },
     confirm() {
       this.$refs.moduleListSingle.confirmSelection()
