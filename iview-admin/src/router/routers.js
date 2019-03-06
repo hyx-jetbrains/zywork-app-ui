@@ -435,6 +435,64 @@ export default [
         ]
       },
       {
+        path: 'cart',
+        name: 'carts_management',
+        meta: {
+          icon: 'ios-cart',
+          title: '购物车管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'Cart',
+            name: 'cart_management',
+            meta: {
+              icon: 'md-cart',
+              title: '购物车管理'
+            },
+            component: () => import('@/view/goods-cart/GoodsCart.vue')
+          },
+          {
+            path: 'CartQuery',
+            name: 'cart_query',
+            meta: {
+              icon: 'ios-cart',
+              title: '购物车查询'
+            },
+            component: () => import('@/view/user-goods-cart/UserGoodsCart.vue')
+          }
+        ]
+      },
+      {
+        path: 'orders',
+        name: 'orders_management',
+        meta: {
+          icon: 'md-list',
+          title: '订单管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'GoodsOrder',
+            name: 'goods_order',
+            meta: {
+              icon: 'md-basket',
+              title: '订单管理'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          },
+          {
+            path: 'OrderLogistics',
+            name: 'order_logistics',
+            meta: {
+              icon: 'md-bus',
+              title: '订单物流管理'
+            },
+            component: () => import('@/view/demo/ComingSoon.vue')
+          }
+        ]
+      },
+      {
         path: 'coupons',
         name: 'coupons_management',
         meta: {
@@ -458,44 +516,6 @@ export default [
             meta: {
               icon: 'md-star',
               title: '用户优惠券管理'
-            },
-            component: () => import('@/view/demo/ComingSoon.vue')
-          }
-        ]
-      },
-      {
-        path: 'orders',
-        name: 'orders_management',
-        meta: {
-          icon: 'md-list',
-          title: '购物车及订单管理'
-        },
-        component: parentView,
-        children: [
-          {
-            path: 'Cart',
-            name: 'cart_management',
-            meta: {
-              icon: 'md-cart',
-              title: '购物车管理'
-            },
-            component: () => import('@/view/demo/ComingSoon.vue')
-          },
-          {
-            path: 'GoodsOrder',
-            name: 'goods_order',
-            meta: {
-              icon: 'md-basket',
-              title: '订单管理'
-            },
-            component: () => import('@/view/demo/ComingSoon.vue')
-          },
-          {
-            path: 'OrderLogistics',
-            name: 'order_logistics',
-            meta: {
-              icon: 'md-bus',
-              title: '订单物流管理'
             },
             component: () => import('@/view/demo/ComingSoon.vue')
           }
