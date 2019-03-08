@@ -1,6 +1,4 @@
-import { getLocalStorageToken } from '@/libs/util'
 import axios from '@/libs/api.request'
-import Qs from 'qs'
 
 /**
  * 条件查询商品图片

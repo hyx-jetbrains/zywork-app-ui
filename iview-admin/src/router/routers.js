@@ -525,6 +525,44 @@ export default [
   },
   {
     path: '/admin',
+    name: 'distribution_management',
+    meta: {
+      icon: 'md-share',
+      title: '分销管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'UserHierarchyQuery',
+        name: 'user_hierarchy_query',
+        meta: {
+          title: '用户层级关系查询',
+          icon: 'md-git-branch'
+        },
+        component: () => import('@/view/distribution/UserHierarchy.vue')
+      },
+      {
+        path: 'UserPath',
+        name: 'user_path_management',
+        meta: {
+          title: '用户路径管理',
+          icon: 'md-git-network'
+        },
+        component: () => import('@/view/user-path/UserPath.vue')
+      },
+      {
+        path: 'TopDistribution',
+        name: 'top_distribution',
+        meta: {
+          title: '顶级分销商查询',
+          icon: 'ios-thumbs-up'
+        },
+        component: () => import('@/view/distribution/TopDistribution.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
     name: 'report_statistics_management',
     meta: {
       icon: 'ios-podium',
