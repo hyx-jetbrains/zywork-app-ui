@@ -26,7 +26,7 @@ export const updateGoodsPic = (params) => {
   return axios.request({
     url: '/goods-pic/admin/batch-update',
     method: 'POST',
-    data: ''
+    data: params
   })
 }
 

@@ -84,8 +84,7 @@ export default {
     },
     handleSuccess(response, file) {
       if (response.code === 1001) {
-        console.log(response)
-        file.url = response.data.picUrl
+        file.url = '/' + response.data.picUrl
         file.name = response.data.id;
         this.$Notice.success({
           title: '图片上传成功',
@@ -135,12 +134,14 @@ export default {
         }
       })
     },
-    updateUploadList () {
+    updateUploadList (type) {
       // fileList中的status属性，第一次打开上传组件时，为undefined，所以在查询出所有默认图片时，需要增加status: finished
       this.defaultList.forEach((item, index) => {
         item.status = 'finished'
       })
-      this.$refs.upload.fileList = this.defaultList
+      if (type === 'default') {
+        this.$refs.upload.fileList = this.defaultList
+      }
       this.uploadList = this.$refs.upload.fileList
     }
   },

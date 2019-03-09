@@ -617,7 +617,7 @@ sortable: true
                   url: '/' + img.picUrl
                 })
               })
-              this.$refs.uploadModal.updateUploadList()
+              this.$refs.uploadModal.updateUploadList('default')
             }
           }).catch(error => {
             console.log(error)

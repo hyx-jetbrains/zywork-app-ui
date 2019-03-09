@@ -82,7 +82,7 @@
               this.pics.push(
                 {
                   id: row.id, 
-                  name: row.picUrl
+                  name: '/' + row.picUrl
                 }
               )
             })

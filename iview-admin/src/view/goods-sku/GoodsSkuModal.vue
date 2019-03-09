@@ -199,11 +199,11 @@
     </Modal>
 
     <Modal v-model="modal.imgModal" title="选择SKU图片">
-      <div v-if="choosePic.id !== 0">
-        <img :src="choosePic.url" style="width: 120px; height: 120px;">
+      <div v-if="choosePic.id != 0">
+        <img :src="'/' + choosePic.url" style="width: 120px; height: 120px;">
       </div>
         <div class="demo-upload-list" v-for="pic in pics" :key="pic.name">
-              <img :src="pic.picUrl">
+              <img :src="'/' + pic.picUrl">
               <div class="demo-upload-list-cover">
                   <Icon type="ios-eye-outline" @click="handleView(pic.picUrl)"></Icon>
                   <Icon type="md-checkmark" @click="handleChoose(pic)"></Icon>
@@ -212,7 +212,7 @@
     </Modal>
 
     <Modal v-model="modal.imgViewModal" title="查看图片">
-      <img :src="picUrl" v-if="modal.imgViewModal" style="width: 100%">
+      <img :src="'/' + picUrl" v-if="modal.imgViewModal" style="width: 100%">
     </Modal>
 
     <SkuDetailModal ref="skuDetailModal" style="width: 100%;"/>
