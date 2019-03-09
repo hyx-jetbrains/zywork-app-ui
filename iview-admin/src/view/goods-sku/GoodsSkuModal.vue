@@ -199,7 +199,7 @@
     </Modal>
 
     <Modal v-model="modal.imgModal" title="选择SKU图片">
-      <div v-if="choosePic.id != 0">
+      <div v-if="choosePic.id !== 0">
         <img :src="'/' + choosePic.url" style="width: 120px; height: 120px;">
       </div>
         <div class="demo-upload-list" v-for="pic in pics" :key="pic.name">
@@ -629,6 +629,10 @@ sortable: true
         utils.changePageSize(this, pageSize)
       },
       loadPics(picId) {
+        this.choosePic = {
+          id: 0,
+          url: ''
+        }
         if (picId !== null && picId !== undefined) {
           getPicById(picId).then(response => {
             if (response.data.code === 1001) {
