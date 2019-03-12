@@ -479,7 +479,16 @@ export default [
               icon: 'md-basket',
               title: '订单管理'
             },
-            component: () => import('@/view/demo/ComingSoon.vue')
+            component: () => import('@/view/goods-order/GoodsOrder.vue')
+          },
+          {
+            path: 'GoodsOrderItem',
+            name: 'goods_order_item',
+            meta: {
+              icon: 'ios-basket',
+              title: '订单项管理'
+            },
+            component: () => import('@/view/goods-order-item/GoodsOrderItem.vue')
           },
           {
             path: 'OrderLogistics',
@@ -488,7 +497,34 @@ export default [
               icon: 'md-bus',
               title: '订单物流管理'
             },
-            component: () => import('@/view/demo/ComingSoon.vue')
+            component: () => import('@/view/goods-order-logistics/GoodsOrderLogistics.vue')
+          },
+          {
+            path: 'OrderQuery',
+            name: 'order_query',
+            meta: {
+              icon: 'md-bookmarks',
+              title: '用户订单查询'
+            },
+            component: () => import('@/view/user-goods-order/UserGoodsOrder.vue')
+          },
+          {
+            path: 'OrderItemQuery',
+            name: 'order_item_query',
+            meta: {
+              icon: 'ios-bookmarks',
+              title: '用户订单项查询'
+            },
+            component: () => import('@/view/user-goods-order-item/UserGoodsOrderItem.vue')
+          },
+          {
+            path: 'OrderLogisticsQuery',
+            name: 'order_logistics_query',
+            meta: {
+              icon: 'ios-bus',
+              title: '用户订单物流查询'
+            },
+            component: () => import('@/view/user-goods-order-logistics/UserGoodsOrderLogistics.vue')
           }
         ]
       },
