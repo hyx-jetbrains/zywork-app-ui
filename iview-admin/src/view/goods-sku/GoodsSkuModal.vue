@@ -3,7 +3,7 @@
     <Row>
       <i-col span="24">
         <Card>
-          <Button @click="showModal('add')" type="primary">添加</Button>&nbsp;
+          <Button @click="showAdd" type="primary">添加</Button>&nbsp;
           <Dropdown @on-click="batchOpt">
             <Button type="primary">
               批量操作
@@ -233,6 +233,7 @@
     data() {
       return {
         categoryId: 0,
+        defaultPicId: null,
         choosePic: {
           id: 0,
           url: ''
@@ -493,6 +494,10 @@ sortable: true
     methods: {
       showModal(modal) {
         utils.showModal(this, modal)
+      },
+      showAdd() {
+        this.form.picId = this.defaultPicId
+        utils.showModal(this, 'add')
       },
       changeModalVisibleResetForm(formRef, visible) {
         let goodsId = this.form.goodsId

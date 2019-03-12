@@ -571,11 +571,33 @@ sortable: true
           utils.showModal(this, 'picOrder')
           this.$refs.goodsPicOrder.initData(row.id)
         } else if (itemName === 'skuMgrModal') {
-          utils.showModal(this, 'skuModal')
-          this.$refs.goodsSkuModal.form.goodsId = row.id
-          this.$refs.goodsSkuModal.searchForm.goodsId = row.id
-          this.$refs.goodsSkuModal.categoryId = row.categoryId
-          this.$refs.goodsSkuModal.search()
+          let params = {
+            goodsId: row.id,
+            sortColumn: 'picOrder',
+            sortOrder: 'asc'
+          }
+          allPicByGoods(params).then(response => {
+            if (response.data.code === 1001) {
+              if (response.data.data.rows.length > 0) {
+                utils.showModal(this, 'skuModal')
+                this.$refs.goodsSkuModal.form.goodsId = row.id
+                this.$refs.goodsSkuModal.searchForm.goodsId = row.id
+                this.$refs.goodsSkuModal.categoryId = row.categoryId
+                this.$refs.goodsSkuModal.defaultPicId = response.data.data.rows[0].id
+                this.$refs.goodsSkuModal.search()
+              } else {
+                this.$Notice.warning({
+                  title: '提示',
+                  desc: '此商品还未设置图片，请先进入图片管理菜单设置图片'
+                })
+              }
+            } else {
+              this.$Message.error(response.data.message)
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+          
         }
       },
       add() {
