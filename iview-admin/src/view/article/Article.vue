@@ -588,7 +588,17 @@ export default {
             title: '文章内容',
             key: 'content',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('a', {
+                  on: {
+                    click: () => {
+                       utils.showModal(this, 'edit')
+                      this.form = JSON.parse(JSON.stringify(params.row))
+                    }
+                  }
+                },'点击查看')
+            }
           },
           {
             title: '阅读量',
@@ -825,7 +835,9 @@ export default {
         utils.showModal(this, 'edit')
         this.form = JSON.parse(JSON.stringify(row))
       } else if (itemName === 'showDetail') {
-        utils.showModal(this, 'detail')
+        // utils.showModal(this, 'detail')
+        // this.form = JSON.parse(JSON.stringify(row))
+        utils.showModal(this, 'edit')
         this.form = JSON.parse(JSON.stringify(row))
       } else if (itemName === 'remove') {
         utils.remove(this, row)
@@ -856,7 +868,7 @@ export default {
       utils.changePageSize(this, pageSize)
     },
     handleChange (html, text) {
-      console.log(html, text)
+      this.form.content = html
     },
   }
 }
