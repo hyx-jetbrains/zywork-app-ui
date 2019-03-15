@@ -99,7 +99,7 @@
         <FormItem label="文章摘要" prop="summary">
           <Input v-model="form.summary" type="textarea" :autosize="descriptionAutoSize" placeholder="请输入文章摘要"/>
         </FormItem>
-        <editor ref="editor" :value="form.content" @on-change="handleChange" style="margin: 10px 0px;" />
+        <editor ref="editorEdit" :value="form.content" @on-change="handleChange" style="margin: 10px 0px;" />
       </Form>
       <div slot="footer">
         <Button type="text" size="large" @click="resetFormCancelModal('editForm', 'edit')">取消</Button>
@@ -594,8 +594,9 @@ export default {
               return h('a', {
                   on: {
                     click: () => {
-                       utils.showModal(this, 'edit')
+                      utils.showModal(this, 'edit')
                       this.form = JSON.parse(JSON.stringify(params.row))
+                      this.$refs.editorEdit.setHtml(this.form.content)
                     }
                   }
                 },'点击查看')
@@ -835,11 +836,12 @@ export default {
       if (itemName === 'showEdit') {
         utils.showModal(this, 'edit')
         this.form = JSON.parse(JSON.stringify(row))
+        this.$refs.editorEdit.setHtml(this.form.content)
       } else if (itemName === 'showDetail') {
         // utils.showModal(this, 'detail')
-        // this.form = JSON.parse(JSON.stringify(row))
         utils.showModal(this, 'edit')
         this.form = JSON.parse(JSON.stringify(row))
+        this.$refs.editorEdit.setHtml(this.form.content)
       } else if (itemName === 'remove') {
         utils.remove(this, row)
       }

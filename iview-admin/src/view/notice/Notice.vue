@@ -51,6 +51,7 @@
       v-model="modal.add"
       title="添加"
       @on-visible-change="changeModalVisibleResetForm('addForm', $event)"
+      :fullscreen="true"
     >
       <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
         <FormItem label="公告标题" prop="title">
@@ -60,7 +61,7 @@
           <Input v-model="form.summary" type="textarea" :autosize="descriptionAutoSize" placeholder="请输入文章摘要"/>
         </FormItem>
         <Row style="margin: 10px 0px;">
-          <editor ref="editorEdit" :value="form.content" @on-change="handleChange" />
+          <editor ref="editorAdd" :value="form.content" @on-change="handleChange" />
         </Row>
         <FormItem label="截止时间" prop="endTime">
           <DatePicker
@@ -85,6 +86,7 @@
       v-model="modal.edit"
       title="修改"
       @on-visible-change="changeModalVisibleResetForm('editForm', $event)"
+      :fullscreen="true"
     >
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
         <FormItem label="公告标题" prop="title">
@@ -94,7 +96,7 @@
           <Input v-model="form.summary" type="textarea" :autosize="descriptionAutoSize" placeholder="请输入文章摘要"/>
         </FormItem>
         <Row style="margin: 10px 0px;">
-          <editor ref="editorAdd" :value="form.content" @on-change="handleChange" />
+          <editor ref="editorEdit" :value="form.content" @on-change="handleChange" />
         </Row>
         <FormItem label="截止时间" prop="endTime">
           <DatePicker
@@ -522,7 +524,18 @@ export default {
             title: '公告内容',
             key: 'content',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h('a', {
+                  on: {
+                    click: () => {
+                      utils.showModal(this, 'edit')
+                      this.form = JSON.parse(JSON.stringify(params.row))
+                      this.$refs.editorEdit.setHtml(this.form.content)
+                    }
+                  }
+                },'点击查看')
+            }
           },
           {
             title: '截止时间',
@@ -741,8 +754,10 @@ export default {
         this.form = JSON.parse(JSON.stringify(row))
         this.$refs.editorEdit.setHtml(this.form.content)
       } else if (itemName === 'showDetail') {
-        utils.showModal(this, 'detail')
+        // utils.showModal(this, 'detail')
+        utils.showModal(this, 'edit')
         this.form = JSON.parse(JSON.stringify(row))
+        this.$refs.editorEdit.setHtml(this.form.content)
       } else if (itemName === 'remove') {
         utils.remove(this, row)
       }
