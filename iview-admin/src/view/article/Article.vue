@@ -82,6 +82,7 @@
       v-model="modal.edit"
       title="修改"
       @on-visible-change="changeModalVisibleResetForm('editForm', $event)"
+      :fullscreen="true"
     >
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
         <FormItem label="文章标题" prop="title">
