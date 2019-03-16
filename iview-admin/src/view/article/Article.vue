@@ -781,6 +781,8 @@ export default {
   mounted() {
     this.search()
     this.initArticleCategorySelect()
+    this.$refs.editorAdd.initEditor('/article/admin/upload-img')
+    this.$refs.editorEdit.initEditor('/article/admin/upload-img')
   },
   methods: {
     // 初始化文章分类下拉框

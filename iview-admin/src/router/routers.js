@@ -1,6 +1,6 @@
 import Main from '@/components/main'
 import parentView from '@/components/parent-view'
-import config from '../config';
+import config from '../config'
 
 const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.devServer : config.baseUrl.proServer
 

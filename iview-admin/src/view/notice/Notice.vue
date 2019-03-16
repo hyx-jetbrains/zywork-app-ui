@@ -714,6 +714,8 @@ export default {
   computed: {},
   mounted() {
     this.search()
+    this.$refs.editorAdd.initEditor('/notice/admin/upload-img')
+    this.$refs.editorEdit.initEditor('/notice/admin/upload-img')
   },
   methods: {
     showModal(modal) {
