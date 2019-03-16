@@ -332,6 +332,7 @@
       v-model="modal.detail"
       title="详情"
       @on-visible-change="changeModalVisibleResetForm('editForm', $event)"
+      width="70%"
     >
       <p>文章编号:
         <span v-text="form.id"></span>
@@ -348,9 +349,9 @@
       <p>文章摘要:
         <span v-text="form.summary"></span>
       </p>
-      <p>文章内容:
-        <span v-text="form.content"></span>
-      </p>
+      <div>文章内容:
+        <p v-html="form.content"></p>
+      </div>
       <p>阅读量:
         <span v-text="form.viewCount"></span>
       </p>
@@ -594,9 +595,8 @@ export default {
               return h('a', {
                   on: {
                     click: () => {
-                      utils.showModal(this, 'edit')
+                      utils.showModal(this, 'detail')
                       this.form = JSON.parse(JSON.stringify(params.row))
-                      this.$refs.editorEdit.setHtml(this.form.content)
                     }
                   }
                 },'点击查看')
@@ -838,10 +838,8 @@ export default {
         this.form = JSON.parse(JSON.stringify(row))
         this.$refs.editorEdit.setHtml(this.form.content)
       } else if (itemName === 'showDetail') {
-        // utils.showModal(this, 'detail')
-        utils.showModal(this, 'edit')
+        utils.showModal(this, 'detail')
         this.form = JSON.parse(JSON.stringify(row))
-        this.$refs.editorEdit.setHtml(this.form.content)
       } else if (itemName === 'remove') {
         utils.remove(this, row)
       }
