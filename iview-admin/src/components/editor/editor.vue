@@ -11,6 +11,7 @@ import { oneOf } from '@/libs/tools'
 import config from '@/config'
 import {getLocalStorageToken} from '@/libs/util'
 const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+const cdnUrl = config.baseUrl.cdnUrl
 
 export default {
   name: 'Editor',
@@ -123,7 +124,7 @@ export default {
         },
         customInsert: (insertImg, result, editor) => {
           // 图片上传成功，插入图片的回调
-          insertImg('/' + result.data)
+          insertImg(cdnUrl + "/" + result.data)
         }
       }
       // create这个方法一定要在所有配置项之后调用

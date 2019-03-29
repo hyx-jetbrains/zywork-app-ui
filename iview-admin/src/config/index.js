@@ -20,7 +20,8 @@ export default {
     dev: 'http://localhost:8088',
     pro: 'http://39.108.116.103:8088',
     devServer: 'http://localhost',
-    proServer: 'http://39.108.116.103'
+    proServer: 'http://39.108.116.103',
+    cdnUrl: '' // 如果是本地存储，不需要填写，为空；如果使用云存储，则配置cdn url，如http://cdn.zywork.top
   },
   /**
    * @description 默认打开的首页的路由name值，默认为home
