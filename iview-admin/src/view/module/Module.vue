@@ -230,17 +230,17 @@
         >搜索</Button>
       </div>
     </Modal>
-    <view-modal :form="form" :detail="modal.detail" v-on:setDetail="setDetailModal"/>
+    <module-detail :form="form" :detail="modal.detail" v-on:setDetail="setDetailModal"/>
   </div>
 </template>
 
 <script>
 import * as utils from '@/api/utils'
-import viewModal from './ViewModal.vue'
+import moduleDetail from './ModuleDetail.vue'
 export default {
   name: 'Module',
   components: {
-    viewModal
+    moduleDetail
   },
   data() {
     return {

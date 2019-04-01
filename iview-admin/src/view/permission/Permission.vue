@@ -318,15 +318,15 @@
         <span v-text="form.isActive"></span>
       </p>
     </Modal>
-    <main-table-view-modal :form="mainTableForm" :detail="modal.mainTableDetail" v-on:setDetail="setDetailModal"/>
+    <moduleDetail :form="moduleDetailForm" :detail="modal.moduleDetail" v-on:setDetail="setDetailModal"/>
     <Modal
       :transfer="false"
       fullscreen
-      v-model="modal.mainTableSearch"
+      v-model="modal.moduleSearch"
       title="搜索主表信息">
       <module-list-single ref="moduleListSingle" v-on:confirmSelection="confirmSelection"/>
       <div slot="footer">
-        <Button type="text" size="large" @click="cancelModal('mainTableSearch')">取消</Button>
+        <Button type="text" size="large" @click="cancelModal('moduleSearch')">取消</Button>
         <Button type="primary" size="large" @click="confirm">确认选择</Button>
       </div>
     </Modal>
@@ -336,14 +336,14 @@
 <script>
 import * as utils from '@/api/utils'
 import UploadModal from '_c/upload-modal'
-import mainTableViewModal from '@/view/module/ViewModal.vue'
+import moduleDetail from '@/view/module/ModuleDetail.vue'
 import moduleListSingle from '@/view/module/ModuleListSingle.vue'
 import {getModuleById} from '@/api/module'
 export default {
   name: 'Permission',
   components: {
     UploadModal,
-    mainTableViewModal,
+    moduleDetail,
     moduleListSingle
   },
   data() {
@@ -359,8 +359,8 @@ export default {
         edit: false,
         search: false,
         detail: false,
-        mainTableDetail: false,
-        mainTableSearch: false
+        moduleDetail: false,
+        moduleSearch: false
       },
       loading: {
         add: false,
@@ -395,7 +395,7 @@ export default {
         updateTime: null,
         isActive: null
       },
-      mainTableForm: {
+      moduleDetailForm: {
         id: null,
         title: null,
         description: null,
@@ -550,7 +550,7 @@ export default {
                         'DropdownItem',
                         {
                           props: {
-                            name: 'mainTableDetail'
+                            name: 'moduleDetail'
                           }
                         },
                         '详情'
@@ -800,10 +800,10 @@ export default {
         this.form = JSON.parse(JSON.stringify(row))
       } else if (itemName === 'remove') {
         utils.remove(this, row)
-      } else if (itemName === 'mainTableDetail') {
-        this.showMainTableModal(row.moduleId)
+      } else if (itemName === 'moduleDetail') {
+        this.showModuleDetailModal(row.moduleId)
       } else if (itemName === 'showSearch') {
-        utils.showModal(this, 'mainTableSearch')
+        utils.showModal(this, 'moduleSearch')
       }
     },
     add() {
@@ -831,15 +831,15 @@ export default {
       utils.changePageSize(this, pageSize)
     },
     setDetailModal(val) {
-      this.modal.mainTableDetail = val
+      this.modal.moduleDetail = val
     },
-    showMainTableModal(id) {
+    showModuleDetailModal(id) {
       getModuleById(id)
         .then(res => {
           const data = res.data
           if (data.code === 1001) {
-            this.mainTableForm = data.data
-            this.modal.mainTableDetail = true
+            this.moduleDetailForm = data.data
+            this.modal.moduleDetail = true
           } else {
             this.$Message.error(data.message)
           }
@@ -849,7 +849,7 @@ export default {
         })
     },
     confirmSelection(moduleId) {
-      this.modal.mainTableSearch = false
+      this.modal.moduleSearch = false
       this.searchForm.moduleIdMin = moduleId
       this.searchForm.moduleIdMax = moduleId
       utils.search(this)
