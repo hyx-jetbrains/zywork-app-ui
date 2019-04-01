@@ -39,17 +39,17 @@
 <FormItem label="金额" prop="amount">
 	<InputNumber v-model="form.amount" placeholder="请输入金额" style="width: 100%;"/>
 </FormItem>
-<FormItem label="积分" prop="integral">
-	<InputNumber v-model="form.integral" placeholder="请输入积分" style="width: 100%;"/>
+<FormItem label="FROM" prop="fromUserId">
+	<InputNumber v-model="form.fromUserId" placeholder="请输入FROM" style="width: 100%;"/>
 </FormItem>
-<FormItem label="收入或支出" prop="type">
-	<InputNumber v-model="form.type" placeholder="请输入收入或支出" style="width: 100%;"/>
+<FormItem label="TO" prop="toUserId">
+	<InputNumber v-model="form.toUserId" placeholder="请输入TO" style="width: 100%;"/>
 </FormItem>
-<FormItem label="收支类型" prop="subType">
-	<Input v-model="form.subType" placeholder="请输入收支类型"/>
+<FormItem label="类型" prop="transferType">
+	<Input v-model="form.transferType" placeholder="请输入类型"/>
 </FormItem>
-<FormItem label="支付方式" prop="payType">
-	<InputNumber v-model="form.payType" placeholder="请输入支付方式" style="width: 100%;"/>
+<FormItem label="描述" prop="transferDescription">
+	<Input v-model="form.transferDescription" placeholder="请输入描述"/>
 </FormItem>
 
       </Form>
@@ -69,17 +69,17 @@
 <FormItem label="金额" prop="amount">
 	<InputNumber v-model="form.amount" placeholder="请输入金额" style="width: 100%;"/>
 </FormItem>
-<FormItem label="积分" prop="integral">
-	<InputNumber v-model="form.integral" placeholder="请输入积分" style="width: 100%;"/>
+<FormItem label="FROM" prop="fromUserId">
+	<InputNumber v-model="form.fromUserId" placeholder="请输入FROM" style="width: 100%;"/>
 </FormItem>
-<FormItem label="收入或支出" prop="type">
-	<InputNumber v-model="form.type" placeholder="请输入收入或支出" style="width: 100%;"/>
+<FormItem label="TO" prop="toUserId">
+	<InputNumber v-model="form.toUserId" placeholder="请输入TO" style="width: 100%;"/>
 </FormItem>
-<FormItem label="收支类型" prop="subType">
-	<Input v-model="form.subType" placeholder="请输入收支类型"/>
+<FormItem label="类型" prop="transferType">
+	<Input v-model="form.transferType" placeholder="请输入类型"/>
 </FormItem>
-<FormItem label="支付方式" prop="payType">
-	<InputNumber v-model="form.payType" placeholder="请输入支付方式" style="width: 100%;"/>
+<FormItem label="描述" prop="transferDescription">
+	<Input v-model="form.transferDescription" placeholder="请输入描述"/>
 </FormItem>
 
       </Form>
@@ -90,16 +90,16 @@
     </Modal>
     <Modal v-model="modal.search" title="高级搜索">
       <Form ref="searchForm" :model="searchForm" :label-width="80">
-        <FormItem label="账目编号"><Row>
+        <FormItem label="转账编号"><Row>
 	<i-col span="11">
 	<FormItem prop="idMin">
-	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始账目编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始转账编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
 	<FormItem prop="idMax">
-	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束账目编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束转账编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -135,50 +135,39 @@
 </i-col>
 </Row>
 </FormItem>
-<FormItem label="积分"><Row>
+<FormItem label="FROM"><Row>
 	<i-col span="11">
-	<FormItem prop="integralMin">
-	<InputNumber v-model="searchForm.integralMin" placeholder="请输入开始积分" style="width: 100%;"/>
+	<FormItem prop="fromUserIdMin">
+	<InputNumber v-model="searchForm.fromUserIdMin" placeholder="请输入开始FROM" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="integralMax">
-	<InputNumber v-model="searchForm.integralMax" placeholder="请输入结束积分" style="width: 100%;"/>
+	<FormItem prop="fromUserIdMax">
+	<InputNumber v-model="searchForm.fromUserIdMax" placeholder="请输入结束FROM" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
-<FormItem label="收入或支出"><Row>
+<FormItem label="TO"><Row>
 	<i-col span="11">
-	<FormItem prop="typeMin">
-	<InputNumber v-model="searchForm.typeMin" placeholder="请输入开始收入或支出" style="width: 100%;"/>
+	<FormItem prop="toUserIdMin">
+	<InputNumber v-model="searchForm.toUserIdMin" placeholder="请输入开始TO" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="typeMax">
-	<InputNumber v-model="searchForm.typeMax" placeholder="请输入结束收入或支出" style="width: 100%;"/>
+	<FormItem prop="toUserIdMax">
+	<InputNumber v-model="searchForm.toUserIdMax" placeholder="请输入结束TO" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
-<FormItem label="收支类型" prop="subType">
-	<Input v-model="searchForm.subType" placeholder="请输入收支类型"/>
+<FormItem label="类型" prop="transferType">
+	<Input v-model="searchForm.transferType" placeholder="请输入类型"/>
 </FormItem>
-<FormItem label="支付方式"><Row>
-	<i-col span="11">
-	<FormItem prop="payTypeMin">
-	<InputNumber v-model="searchForm.payTypeMin" placeholder="请输入开始支付方式" style="width: 100%;"/>
-</FormItem>
-</i-col>
-	<i-col span="2" style="text-align: center">-</i-col>
-	<i-col span="11">
-	<FormItem prop="payTypeMax">
-	<InputNumber v-model="searchForm.payTypeMax" placeholder="请输入结束支付方式" style="width: 100%;"/>
-</FormItem>
-</i-col>
-</Row>
+<FormItem label="描述" prop="transferDescription">
+	<Input v-model="searchForm.transferDescription" placeholder="请输入描述"/>
 </FormItem>
 <FormItem label="版本号"><Row>
 	<i-col span="11">
@@ -245,14 +234,14 @@
       </div>
     </Modal>
     <Modal v-model="modal.detail" title="详情" @on-visible-change="changeModalVisibleResetForm('editForm', $event)">
-      <p>账目编号: <span v-text="form.id"></span></p>
+      <p>转账编号: <span v-text="form.id"></span></p>
 <p>交易编号: <span v-text="form.transactionNo"></span></p>
 <p>用户编号: <span v-text="form.userId"></span></p>
 <p>金额: <span v-text="form.amount"></span></p>
-<p>积分: <span v-text="form.integral"></span></p>
-<p>收入或支出: <span v-text="form.type"></span></p>
-<p>收支类型: <span v-text="form.subType"></span></p>
-<p>支付方式: <span v-text="form.payType"></span></p>
+<p>FROM: <span v-text="form.fromUserId"></span></p>
+<p>TO: <span v-text="form.toUserId"></span></p>
+<p>类型: <span v-text="form.transferType"></span></p>
+<p>描述: <span v-text="form.transferDescription"></span></p>
 <p>版本号: <span v-text="form.version"></span></p>
 <p>创建时间: <span v-text="form.createTime"></span></p>
 <p>更新时间: <span v-text="form.updateTime"></span></p>
@@ -266,7 +255,7 @@
   import * as utils from '@/api/utils'
 
   export default {
-    name: 'AccountDetail',
+    name: 'FundsTransfer',
     data() {
       return {
         modal: {
@@ -281,17 +270,17 @@
           search: false
         },
         urls: {
-          addUrl: '/accoundetail/admin/save',
-          batchAddUrl: '/accoundetail/admin/batch-save',
-          editUrl: '/accoundetail/admin/update',
-          batchEditUrl: '/accoundetail/admin/batch-update',
-          searchUrl: '/accoundetail/admin/pager-cond',
-          allUrl: '/accoundetail/admin/all',
-          removeUrl: '/accoundetail/admin/remove/',
-          batchRemoveUrl: '/accoundetail/admin/batch-remove',
-          detailUrl: '/accoundetail/admin/one/',
-          activeUrl: '/accoundetail/admin/active',
-          batchActiveUrl: '/accoundetail/admin/batch-active'
+          addUrl: '/funds-transfer/admin/save',
+          batchAddUrl: '/funds-transfer/admin/batch-save',
+          editUrl: '/funds-transfer/admin/update',
+          batchEditUrl: '/funds-transfer/admin/batch-update',
+          searchUrl: '/funds-transfer/admin/pager-cond',
+          allUrl: '/funds-transfer/admin/all',
+          removeUrl: '/funds-transfer/admin/remove/',
+          batchRemoveUrl: '/funds-transfer/admin/batch-remove',
+          detailUrl: '/funds-transfer/admin/one/',
+          activeUrl: '/funds-transfer/admin/active',
+          batchActiveUrl: '/funds-transfer/admin/batch-active'
         },
         page: {
           total: 0
@@ -301,10 +290,10 @@
 transactionNo: null,
 userId: null,
 amount: null,
-integral: null,
-type: null,
-subType: null,
-payType: null,
+fromUserId: null,
+toUserId: null,
+transferType: null,
+transferDescription: null,
 version: null,
 createTime: null,
 updateTime: null,
@@ -319,8 +308,14 @@ isActive: null,
 userId: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
-subType: [
-{type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
+amount: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+transferType: [
+{type: 'string', min: 1, max: 10, message: '必须1-10个字符', trigger: 'blur'}
+],
+transferDescription: [
+{type: 'string', min: 1, max: 255, message: '必须1-255个字符', trigger: 'blur'}
 ],
 
         },
@@ -339,16 +334,14 @@ userIdMax: null,
 amount: null,
 amountMin: null, 
 amountMax: null, 
-integral: null,
-integralMin: null, 
-integralMax: null, 
-type: null,
-typeMin: null, 
-typeMax: null, 
-subType: null,
-payType: null,
-payTypeMin: null, 
-payTypeMax: null, 
+fromUserId: null,
+fromUserIdMin: null, 
+fromUserIdMax: null, 
+toUserId: null,
+toUserIdMin: null, 
+toUserIdMax: null, 
+transferType: null,
+transferDescription: null,
 version: null,
 versionMin: null, 
 versionMax: null, 
@@ -382,7 +375,7 @@ isActiveMax: null,
               }
             },
             {
-title: '账目编号',
+title: '转账编号',
 key: 'id',
 minWidth: 120,
 sortable: true
@@ -406,26 +399,26 @@ minWidth: 120,
 sortable: true
 },
 {
-title: '积分',
-key: 'integral',
+title: 'FROM',
+key: 'fromUserId',
 minWidth: 120,
 sortable: true
 },
 {
-title: '收入或支出',
-key: 'type',
+title: 'TO',
+key: 'toUserId',
 minWidth: 120,
 sortable: true
 },
 {
-title: '收支类型',
-key: 'subType',
+title: '类型',
+key: 'transferType',
 minWidth: 120,
 sortable: true
 },
 {
-title: '支付方式',
-key: 'payType',
+title: '描述',
+key: 'transferDescription',
 minWidth: 120,
 sortable: true
 },

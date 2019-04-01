@@ -468,49 +468,22 @@ export default {
             sortable: true
           },
           {
-            title: '人民币余额（元）',
+            title: '人民币余额',
             key: 'rmbBalance',
             minWidth: 120,
-            sortable: true,
-            render: (h, params) => {
-              let row = params.row
-              let money = row.rmbBalance / 100
-              return h(
-                'span',
-                {},
-                money
-              )
-            }
+            sortable: true
           },
           {
-            title: '可用余额（元）',
+            title: '可用余额',
             key: 'usableRmbBalance',
             minWidth: 120,
-            sortable: true,
-            render: (h, params) => {
-              let row = params.row
-              let money = row.usableRmbBalance / 100
-              return h(
-                'span',
-                {},
-                money
-              )
-            }
+            sortable: true
           },
           {
-            title: '冻结余额（元）',
+            title: '冻结余额',
             key: 'frozenRmbBalance',
             minWidth: 120,
-            sortable: true,
-            render: (h, params) => {
-              let row = params.row
-              let money = row.frozenRmbBalance / 100
-              return h(
-                'span',
-                {},
-                money
-              )
-            }
+            sortable: true
           },
           {
             title: '总积分',

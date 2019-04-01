@@ -30,26 +30,20 @@
     </Row>
     <Modal v-model="modal.add" title="添加" @on-visible-change="changeModalVisibleResetForm('addForm', $event)">
       <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
-        <FormItem label="交易编号" prop="transactionNo">
+        <FormItem label="提现编号" prop="withdrawId">
+	<InputNumber v-model="form.withdrawId" placeholder="请输入提现编号" style="width: 100%;"/>
+</FormItem>
+<FormItem label="交易编号" prop="transactionNo">
 	<Input v-model="form.transactionNo" placeholder="请输入交易编号"/>
 </FormItem>
-<FormItem label="用户编号" prop="userId">
-	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
+<FormItem label="提现状态" prop="withdrawStatus">
+	<InputNumber v-model="form.withdrawStatus" placeholder="请输入提现状态" style="width: 100%;"/>
 </FormItem>
-<FormItem label="金额" prop="amount">
-	<InputNumber v-model="form.amount" placeholder="请输入金额" style="width: 100%;"/>
+<FormItem label="提现描述" prop="withdrawDescription">
+	<Input v-model="form.withdrawDescription" placeholder="请输入提现描述"/>
 </FormItem>
-<FormItem label="积分" prop="integral">
-	<InputNumber v-model="form.integral" placeholder="请输入积分" style="width: 100%;"/>
-</FormItem>
-<FormItem label="收入或支出" prop="type">
-	<InputNumber v-model="form.type" placeholder="请输入收入或支出" style="width: 100%;"/>
-</FormItem>
-<FormItem label="收支类型" prop="subType">
-	<Input v-model="form.subType" placeholder="请输入收支类型"/>
-</FormItem>
-<FormItem label="支付方式" prop="payType">
-	<InputNumber v-model="form.payType" placeholder="请输入支付方式" style="width: 100%;"/>
+<FormItem label="审核人编号" prop="checkedUserId">
+	<InputNumber v-model="form.checkedUserId" placeholder="请输入审核人编号" style="width: 100%;"/>
 </FormItem>
 
       </Form>
@@ -60,26 +54,20 @@
     </Modal>
     <Modal v-model="modal.edit" title="修改" @on-visible-change="changeModalVisibleResetForm('editForm', $event)">
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
-        <FormItem label="交易编号" prop="transactionNo">
+        <FormItem label="提现编号" prop="withdrawId">
+	<InputNumber v-model="form.withdrawId" placeholder="请输入提现编号" style="width: 100%;"/>
+</FormItem>
+<FormItem label="交易编号" prop="transactionNo">
 	<Input v-model="form.transactionNo" placeholder="请输入交易编号"/>
 </FormItem>
-<FormItem label="用户编号" prop="userId">
-	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
+<FormItem label="提现状态" prop="withdrawStatus">
+	<InputNumber v-model="form.withdrawStatus" placeholder="请输入提现状态" style="width: 100%;"/>
 </FormItem>
-<FormItem label="金额" prop="amount">
-	<InputNumber v-model="form.amount" placeholder="请输入金额" style="width: 100%;"/>
+<FormItem label="提现描述" prop="withdrawDescription">
+	<Input v-model="form.withdrawDescription" placeholder="请输入提现描述"/>
 </FormItem>
-<FormItem label="积分" prop="integral">
-	<InputNumber v-model="form.integral" placeholder="请输入积分" style="width: 100%;"/>
-</FormItem>
-<FormItem label="收入或支出" prop="type">
-	<InputNumber v-model="form.type" placeholder="请输入收入或支出" style="width: 100%;"/>
-</FormItem>
-<FormItem label="收支类型" prop="subType">
-	<Input v-model="form.subType" placeholder="请输入收支类型"/>
-</FormItem>
-<FormItem label="支付方式" prop="payType">
-	<InputNumber v-model="form.payType" placeholder="请输入支付方式" style="width: 100%;"/>
+<FormItem label="审核人编号" prop="checkedUserId">
+	<InputNumber v-model="form.checkedUserId" placeholder="请输入审核人编号" style="width: 100%;"/>
 </FormItem>
 
       </Form>
@@ -90,16 +78,30 @@
     </Modal>
     <Modal v-model="modal.search" title="高级搜索">
       <Form ref="searchForm" :model="searchForm" :label-width="80">
-        <FormItem label="账目编号"><Row>
+        <FormItem label="提现审核编号"><Row>
 	<i-col span="11">
 	<FormItem prop="idMin">
-	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始账目编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始提现审核编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
 	<FormItem prop="idMax">
-	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束账目编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束提现审核编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+<FormItem label="提现编号"><Row>
+	<i-col span="11">
+	<FormItem prop="withdrawIdMin">
+	<InputNumber v-model="searchForm.withdrawIdMin" placeholder="请输入开始提现编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="withdrawIdMax">
+	<InputNumber v-model="searchForm.withdrawIdMax" placeholder="请输入结束提现编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -107,75 +109,33 @@
 <FormItem label="交易编号" prop="transactionNo">
 	<Input v-model="searchForm.transactionNo" placeholder="请输入交易编号"/>
 </FormItem>
-<FormItem label="用户编号"><Row>
+<FormItem label="提现状态"><Row>
 	<i-col span="11">
-	<FormItem prop="userIdMin">
-	<InputNumber v-model="searchForm.userIdMin" placeholder="请输入开始用户编号" style="width: 100%;"/>
+	<FormItem prop="withdrawStatusMin">
+	<InputNumber v-model="searchForm.withdrawStatusMin" placeholder="请输入开始提现状态" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="userIdMax">
-	<InputNumber v-model="searchForm.userIdMax" placeholder="请输入结束用户编号" style="width: 100%;"/>
+	<FormItem prop="withdrawStatusMax">
+	<InputNumber v-model="searchForm.withdrawStatusMax" placeholder="请输入结束提现状态" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
-<FormItem label="金额"><Row>
+<FormItem label="提现描述" prop="withdrawDescription">
+	<Input v-model="searchForm.withdrawDescription" placeholder="请输入提现描述"/>
+</FormItem>
+<FormItem label="审核人编号"><Row>
 	<i-col span="11">
-	<FormItem prop="amountMin">
-	<InputNumber v-model="searchForm.amountMin" placeholder="请输入开始金额" style="width: 100%;"/>
+	<FormItem prop="checkedUserIdMin">
+	<InputNumber v-model="searchForm.checkedUserIdMin" placeholder="请输入开始审核人编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="amountMax">
-	<InputNumber v-model="searchForm.amountMax" placeholder="请输入结束金额" style="width: 100%;"/>
-</FormItem>
-</i-col>
-</Row>
-</FormItem>
-<FormItem label="积分"><Row>
-	<i-col span="11">
-	<FormItem prop="integralMin">
-	<InputNumber v-model="searchForm.integralMin" placeholder="请输入开始积分" style="width: 100%;"/>
-</FormItem>
-</i-col>
-	<i-col span="2" style="text-align: center">-</i-col>
-	<i-col span="11">
-	<FormItem prop="integralMax">
-	<InputNumber v-model="searchForm.integralMax" placeholder="请输入结束积分" style="width: 100%;"/>
-</FormItem>
-</i-col>
-</Row>
-</FormItem>
-<FormItem label="收入或支出"><Row>
-	<i-col span="11">
-	<FormItem prop="typeMin">
-	<InputNumber v-model="searchForm.typeMin" placeholder="请输入开始收入或支出" style="width: 100%;"/>
-</FormItem>
-</i-col>
-	<i-col span="2" style="text-align: center">-</i-col>
-	<i-col span="11">
-	<FormItem prop="typeMax">
-	<InputNumber v-model="searchForm.typeMax" placeholder="请输入结束收入或支出" style="width: 100%;"/>
-</FormItem>
-</i-col>
-</Row>
-</FormItem>
-<FormItem label="收支类型" prop="subType">
-	<Input v-model="searchForm.subType" placeholder="请输入收支类型"/>
-</FormItem>
-<FormItem label="支付方式"><Row>
-	<i-col span="11">
-	<FormItem prop="payTypeMin">
-	<InputNumber v-model="searchForm.payTypeMin" placeholder="请输入开始支付方式" style="width: 100%;"/>
-</FormItem>
-</i-col>
-	<i-col span="2" style="text-align: center">-</i-col>
-	<i-col span="11">
-	<FormItem prop="payTypeMax">
-	<InputNumber v-model="searchForm.payTypeMax" placeholder="请输入结束支付方式" style="width: 100%;"/>
+	<FormItem prop="checkedUserIdMax">
+	<InputNumber v-model="searchForm.checkedUserIdMax" placeholder="请输入结束审核人编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -245,14 +205,12 @@
       </div>
     </Modal>
     <Modal v-model="modal.detail" title="详情" @on-visible-change="changeModalVisibleResetForm('editForm', $event)">
-      <p>账目编号: <span v-text="form.id"></span></p>
+      <p>提现审核编号: <span v-text="form.id"></span></p>
+<p>提现编号: <span v-text="form.withdrawId"></span></p>
 <p>交易编号: <span v-text="form.transactionNo"></span></p>
-<p>用户编号: <span v-text="form.userId"></span></p>
-<p>金额: <span v-text="form.amount"></span></p>
-<p>积分: <span v-text="form.integral"></span></p>
-<p>收入或支出: <span v-text="form.type"></span></p>
-<p>收支类型: <span v-text="form.subType"></span></p>
-<p>支付方式: <span v-text="form.payType"></span></p>
+<p>提现状态: <span v-text="form.withdrawStatus"></span></p>
+<p>提现描述: <span v-text="form.withdrawDescription"></span></p>
+<p>审核人编号: <span v-text="form.checkedUserId"></span></p>
 <p>版本号: <span v-text="form.version"></span></p>
 <p>创建时间: <span v-text="form.createTime"></span></p>
 <p>更新时间: <span v-text="form.updateTime"></span></p>
@@ -266,7 +224,7 @@
   import * as utils from '@/api/utils'
 
   export default {
-    name: 'AccountDetail',
+    name: 'FundsWithdrawCheck',
     data() {
       return {
         modal: {
@@ -281,30 +239,28 @@
           search: false
         },
         urls: {
-          addUrl: '/accoundetail/admin/save',
-          batchAddUrl: '/accoundetail/admin/batch-save',
-          editUrl: '/accoundetail/admin/update',
-          batchEditUrl: '/accoundetail/admin/batch-update',
-          searchUrl: '/accoundetail/admin/pager-cond',
-          allUrl: '/accoundetail/admin/all',
-          removeUrl: '/accoundetail/admin/remove/',
-          batchRemoveUrl: '/accoundetail/admin/batch-remove',
-          detailUrl: '/accoundetail/admin/one/',
-          activeUrl: '/accoundetail/admin/active',
-          batchActiveUrl: '/accoundetail/admin/batch-active'
+          addUrl: '/funds-withdraw-check/admin/save',
+          batchAddUrl: '/funds-withdraw-check/admin/batch-save',
+          editUrl: '/funds-withdraw-check/admin/update',
+          batchEditUrl: '/funds-withdraw-check/admin/batch-update',
+          searchUrl: '/funds-withdraw-check/admin/pager-cond',
+          allUrl: '/funds-withdraw-check/admin/all',
+          removeUrl: '/funds-withdraw-check/admin/remove/',
+          batchRemoveUrl: '/funds-withdraw-check/admin/batch-remove',
+          detailUrl: '/funds-withdraw-check/admin/one/',
+          activeUrl: '/funds-withdraw-check/admin/active',
+          batchActiveUrl: '/funds-withdraw-check/admin/batch-active'
         },
         page: {
           total: 0
         },
         form: {
           id: null,
+withdrawId: null,
 transactionNo: null,
-userId: null,
-amount: null,
-integral: null,
-type: null,
-subType: null,
-payType: null,
+withdrawStatus: null,
+withdrawDescription: null,
+checkedUserId: null,
 version: null,
 createTime: null,
 updateTime: null,
@@ -312,15 +268,21 @@ isActive: null,
 
         },
         validateRules: {
-          transactionNo: [
+          withdrawId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+transactionNo: [
 {type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
 {type: 'string', min: 1, max: 32, message: '必须1-32个字符', trigger: 'blur'}
 ],
-userId: [
+withdrawStatus: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
-subType: [
-{type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
+withdrawDescription: [
+{type: 'string', min: 1, max: 255, message: '必须1-255个字符', trigger: 'blur'}
+],
+checkedUserId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
 
         },
@@ -332,23 +294,17 @@ subType: [
           id: null,
 idMin: null, 
 idMax: null, 
+withdrawId: null,
+withdrawIdMin: null, 
+withdrawIdMax: null, 
 transactionNo: null,
-userId: null,
-userIdMin: null, 
-userIdMax: null, 
-amount: null,
-amountMin: null, 
-amountMax: null, 
-integral: null,
-integralMin: null, 
-integralMax: null, 
-type: null,
-typeMin: null, 
-typeMax: null, 
-subType: null,
-payType: null,
-payTypeMin: null, 
-payTypeMax: null, 
+withdrawStatus: null,
+withdrawStatusMin: null, 
+withdrawStatusMax: null, 
+withdrawDescription: null,
+checkedUserId: null,
+checkedUserIdMin: null, 
+checkedUserIdMax: null, 
 version: null,
 versionMin: null, 
 versionMax: null, 
@@ -382,8 +338,14 @@ isActiveMax: null,
               }
             },
             {
-title: '账目编号',
+title: '提现审核编号',
 key: 'id',
+minWidth: 120,
+sortable: true
+},
+{
+title: '提现编号',
+key: 'withdrawId',
 minWidth: 120,
 sortable: true
 },
@@ -394,38 +356,20 @@ minWidth: 120,
 sortable: true
 },
 {
-title: '用户编号',
-key: 'userId',
+title: '提现状态',
+key: 'withdrawStatus',
 minWidth: 120,
 sortable: true
 },
 {
-title: '金额',
-key: 'amount',
+title: '提现描述',
+key: 'withdrawDescription',
 minWidth: 120,
 sortable: true
 },
 {
-title: '积分',
-key: 'integral',
-minWidth: 120,
-sortable: true
-},
-{
-title: '收入或支出',
-key: 'type',
-minWidth: 120,
-sortable: true
-},
-{
-title: '收支类型',
-key: 'subType',
-minWidth: 120,
-sortable: true
-},
-{
-title: '支付方式',
-key: 'payType',
+title: '审核人编号',
+key: 'checkedUserId',
 minWidth: 120,
 sortable: true
 },

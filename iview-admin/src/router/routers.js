@@ -198,10 +198,64 @@ export default [
         component: () => import('@/view/user-bankcard/UserBankcard.vue')
       },
       {
+        path: 'FundsRecharge',
+        name: 'funds_recharge',
+        meta: {
+          title: '充值管理',
+          icon: 'md-add-circle'
+        },
+        component: () => import('@/view/funds-recharge/FundsRecharge.vue')
+      },
+      {
+        path: 'FundsTransfer',
+        name: 'funds_transfer',
+        meta: {
+          title: '转账管理',
+          icon: 'md-swap'
+        },
+        component: () => import('@/view/funds-transfer/FundsTransfer.vue')
+      },
+      {
+        path: 'FundsFrezee',
+        name: 'funds_frezee',
+        meta: {
+          title: '冻结管理',
+          icon: 'md-snow'
+        },
+        component: () => import('@/view/funds-frezee/FundsFrezee.vue')
+      },
+      {
+        path: 'FundsWithdraw',
+        name: 'funds_withdraw',
+        meta: {
+          title: '提现管理',
+          icon: 'md-checkmark-circle'
+        },
+        component: () => import('@/view/funds-withdraw/FundsWithdraw.vue')
+      },
+      {
+        path: 'FundsWithdrawCheck',
+        name: 'funds_withdraw_check',
+        meta: {
+          title: '提现审核管理',
+          icon: 'md-open'
+        },
+        component: () => import('@/view/funds-withdraw-check/FundsWithdrawCheck.vue')
+      },
+      {
+        path: 'UserWithdrawCheck',
+        name: 'funds_withdraw_check_query',
+        meta: {
+          title: '提现审核查询',
+          icon: 'ios-pint'
+        },
+        component: () => import('@/view/funds-withdraw-check-query/UserWithdrawCheck.vue')
+      },
+      {
         path: 'AccountDetail',
         name: 'user_account_manage',
         meta: {
-          title: '用户账目管理',
+          title: '账目管理',
           icon: 'md-list-box'
         },
         component: () => import('@/view/account-detail/AccountDetail.vue')

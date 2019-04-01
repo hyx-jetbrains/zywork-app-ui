@@ -30,26 +30,32 @@
     </Row>
     <Modal v-model="modal.add" title="添加" @on-visible-change="changeModalVisibleResetForm('addForm', $event)">
       <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
-        <FormItem label="交易编号" prop="transactionNo">
-	<Input v-model="form.transactionNo" placeholder="请输入交易编号"/>
-</FormItem>
-<FormItem label="用户编号" prop="userId">
+        <FormItem label="用户编号" prop="userId">
 	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
 </FormItem>
-<FormItem label="金额" prop="amount">
-	<InputNumber v-model="form.amount" placeholder="请输入金额" style="width: 100%;"/>
+<FormItem label="交易编号" prop="transactionNo">
+	<Input v-model="form.transactionNo" placeholder="请输入交易编号"/>
 </FormItem>
-<FormItem label="积分" prop="integral">
-	<InputNumber v-model="form.integral" placeholder="请输入积分" style="width: 100%;"/>
+<FormItem label="提现金额" prop="amount">
+	<InputNumber v-model="form.amount" placeholder="请输入提现金额" style="width: 100%;"/>
 </FormItem>
-<FormItem label="收入或支出" prop="type">
-	<InputNumber v-model="form.type" placeholder="请输入收入或支出" style="width: 100%;"/>
+<FormItem label="提现银行卡" prop="bankcardId">
+	<InputNumber v-model="form.bankcardId" placeholder="请输入提现银行卡" style="width: 100%;"/>
 </FormItem>
-<FormItem label="收支类型" prop="subType">
-	<Input v-model="form.subType" placeholder="请输入收支类型"/>
+<FormItem label="提现状态" prop="withdrawStatus">
+	<InputNumber v-model="form.withdrawStatus" placeholder="请输入提现状态" style="width: 100%;"/>
 </FormItem>
-<FormItem label="支付方式" prop="payType">
-	<InputNumber v-model="form.payType" placeholder="请输入支付方式" style="width: 100%;"/>
+<FormItem label="提现描述" prop="withdrawDescription">
+	<Input v-model="form.withdrawDescription" placeholder="请输入提现描述"/>
+</FormItem>
+<FormItem label="审核人编号" prop="checkedUserId">
+	<InputNumber v-model="form.checkedUserId" placeholder="请输入审核人编号" style="width: 100%;"/>
+</FormItem>
+<FormItem label="审核时间" prop="checkedTime">
+	<DatePicker @on-change="form.checkedTime=$event" :value="form.checkedTime" placeholder="请输入审核时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+<FormItem label="完成时间" prop="completeTime">
+	<DatePicker @on-change="form.completeTime=$event" :value="form.completeTime" placeholder="请输入完成时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
 
       </Form>
@@ -60,26 +66,32 @@
     </Modal>
     <Modal v-model="modal.edit" title="修改" @on-visible-change="changeModalVisibleResetForm('editForm', $event)">
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
-        <FormItem label="交易编号" prop="transactionNo">
-	<Input v-model="form.transactionNo" placeholder="请输入交易编号"/>
-</FormItem>
-<FormItem label="用户编号" prop="userId">
+        <FormItem label="用户编号" prop="userId">
 	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
 </FormItem>
-<FormItem label="金额" prop="amount">
-	<InputNumber v-model="form.amount" placeholder="请输入金额" style="width: 100%;"/>
+<FormItem label="交易编号" prop="transactionNo">
+	<Input v-model="form.transactionNo" placeholder="请输入交易编号"/>
 </FormItem>
-<FormItem label="积分" prop="integral">
-	<InputNumber v-model="form.integral" placeholder="请输入积分" style="width: 100%;"/>
+<FormItem label="提现金额" prop="amount">
+	<InputNumber v-model="form.amount" placeholder="请输入提现金额" style="width: 100%;"/>
 </FormItem>
-<FormItem label="收入或支出" prop="type">
-	<InputNumber v-model="form.type" placeholder="请输入收入或支出" style="width: 100%;"/>
+<FormItem label="提现银行卡" prop="bankcardId">
+	<InputNumber v-model="form.bankcardId" placeholder="请输入提现银行卡" style="width: 100%;"/>
 </FormItem>
-<FormItem label="收支类型" prop="subType">
-	<Input v-model="form.subType" placeholder="请输入收支类型"/>
+<FormItem label="提现状态" prop="withdrawStatus">
+	<InputNumber v-model="form.withdrawStatus" placeholder="请输入提现状态" style="width: 100%;"/>
 </FormItem>
-<FormItem label="支付方式" prop="payType">
-	<InputNumber v-model="form.payType" placeholder="请输入支付方式" style="width: 100%;"/>
+<FormItem label="提现描述" prop="withdrawDescription">
+	<Input v-model="form.withdrawDescription" placeholder="请输入提现描述"/>
+</FormItem>
+<FormItem label="审核人编号" prop="checkedUserId">
+	<InputNumber v-model="form.checkedUserId" placeholder="请输入审核人编号" style="width: 100%;"/>
+</FormItem>
+<FormItem label="审核时间" prop="checkedTime">
+	<DatePicker @on-change="form.checkedTime=$event" :value="form.checkedTime" placeholder="请输入审核时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+<FormItem label="完成时间" prop="completeTime">
+	<DatePicker @on-change="form.completeTime=$event" :value="form.completeTime" placeholder="请输入完成时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
 
       </Form>
@@ -90,22 +102,19 @@
     </Modal>
     <Modal v-model="modal.search" title="高级搜索">
       <Form ref="searchForm" :model="searchForm" :label-width="80">
-        <FormItem label="账目编号"><Row>
+        <FormItem label="提现编号"><Row>
 	<i-col span="11">
 	<FormItem prop="idMin">
-	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始账目编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始提现编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
 	<FormItem prop="idMax">
-	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束账目编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束提现编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
-</FormItem>
-<FormItem label="交易编号" prop="transactionNo">
-	<Input v-model="searchForm.transactionNo" placeholder="请输入交易编号"/>
 </FormItem>
 <FormItem label="用户编号"><Row>
 	<i-col span="11">
@@ -121,61 +130,92 @@
 </i-col>
 </Row>
 </FormItem>
-<FormItem label="金额"><Row>
+<FormItem label="交易编号" prop="transactionNo">
+	<Input v-model="searchForm.transactionNo" placeholder="请输入交易编号"/>
+</FormItem>
+<FormItem label="提现金额"><Row>
 	<i-col span="11">
 	<FormItem prop="amountMin">
-	<InputNumber v-model="searchForm.amountMin" placeholder="请输入开始金额" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.amountMin" placeholder="请输入开始提现金额" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
 	<FormItem prop="amountMax">
-	<InputNumber v-model="searchForm.amountMax" placeholder="请输入结束金额" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.amountMax" placeholder="请输入结束提现金额" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
-<FormItem label="积分"><Row>
+<FormItem label="提现银行卡"><Row>
 	<i-col span="11">
-	<FormItem prop="integralMin">
-	<InputNumber v-model="searchForm.integralMin" placeholder="请输入开始积分" style="width: 100%;"/>
+	<FormItem prop="bankcardIdMin">
+	<InputNumber v-model="searchForm.bankcardIdMin" placeholder="请输入开始提现银行卡" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="integralMax">
-	<InputNumber v-model="searchForm.integralMax" placeholder="请输入结束积分" style="width: 100%;"/>
+	<FormItem prop="bankcardIdMax">
+	<InputNumber v-model="searchForm.bankcardIdMax" placeholder="请输入结束提现银行卡" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
-<FormItem label="收入或支出"><Row>
+<FormItem label="提现状态"><Row>
 	<i-col span="11">
-	<FormItem prop="typeMin">
-	<InputNumber v-model="searchForm.typeMin" placeholder="请输入开始收入或支出" style="width: 100%;"/>
+	<FormItem prop="withdrawStatusMin">
+	<InputNumber v-model="searchForm.withdrawStatusMin" placeholder="请输入开始提现状态" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="typeMax">
-	<InputNumber v-model="searchForm.typeMax" placeholder="请输入结束收入或支出" style="width: 100%;"/>
+	<FormItem prop="withdrawStatusMax">
+	<InputNumber v-model="searchForm.withdrawStatusMax" placeholder="请输入结束提现状态" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
-<FormItem label="收支类型" prop="subType">
-	<Input v-model="searchForm.subType" placeholder="请输入收支类型"/>
+<FormItem label="提现描述" prop="withdrawDescription">
+	<Input v-model="searchForm.withdrawDescription" placeholder="请输入提现描述"/>
 </FormItem>
-<FormItem label="支付方式"><Row>
+<FormItem label="审核人编号"><Row>
 	<i-col span="11">
-	<FormItem prop="payTypeMin">
-	<InputNumber v-model="searchForm.payTypeMin" placeholder="请输入开始支付方式" style="width: 100%;"/>
+	<FormItem prop="checkedUserIdMin">
+	<InputNumber v-model="searchForm.checkedUserIdMin" placeholder="请输入开始审核人编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="payTypeMax">
-	<InputNumber v-model="searchForm.payTypeMax" placeholder="请输入结束支付方式" style="width: 100%;"/>
+	<FormItem prop="checkedUserIdMax">
+	<InputNumber v-model="searchForm.checkedUserIdMax" placeholder="请输入结束审核人编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+<FormItem label="审核时间"><Row>
+	<i-col span="11">
+	<FormItem prop="checkedTimeMin">
+	<DatePicker @on-change="searchForm.checkedTimeMin=$event" :value="searchForm.checkedTimeMin" placeholder="请输入开始审核时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="checkedTimeMax">
+	<DatePicker @on-change="searchForm.checkedTimeMax=$event" :value="searchForm.checkedTimeMax" placeholder="请输入结束审核时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+<FormItem label="完成时间"><Row>
+	<i-col span="11">
+	<FormItem prop="completeTimeMin">
+	<DatePicker @on-change="searchForm.completeTimeMin=$event" :value="searchForm.completeTimeMin" placeholder="请输入开始完成时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="completeTimeMax">
+	<DatePicker @on-change="searchForm.completeTimeMax=$event" :value="searchForm.completeTimeMax" placeholder="请输入结束完成时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
 </i-col>
 </Row>
@@ -245,14 +285,16 @@
       </div>
     </Modal>
     <Modal v-model="modal.detail" title="详情" @on-visible-change="changeModalVisibleResetForm('editForm', $event)">
-      <p>账目编号: <span v-text="form.id"></span></p>
-<p>交易编号: <span v-text="form.transactionNo"></span></p>
+      <p>提现编号: <span v-text="form.id"></span></p>
 <p>用户编号: <span v-text="form.userId"></span></p>
-<p>金额: <span v-text="form.amount"></span></p>
-<p>积分: <span v-text="form.integral"></span></p>
-<p>收入或支出: <span v-text="form.type"></span></p>
-<p>收支类型: <span v-text="form.subType"></span></p>
-<p>支付方式: <span v-text="form.payType"></span></p>
+<p>交易编号: <span v-text="form.transactionNo"></span></p>
+<p>提现金额: <span v-text="form.amount"></span></p>
+<p>提现银行卡: <span v-text="form.bankcardId"></span></p>
+<p>提现状态: <span v-text="form.withdrawStatus"></span></p>
+<p>提现描述: <span v-text="form.withdrawDescription"></span></p>
+<p>审核人编号: <span v-text="form.checkedUserId"></span></p>
+<p>审核时间: <span v-text="form.checkedTime"></span></p>
+<p>完成时间: <span v-text="form.completeTime"></span></p>
 <p>版本号: <span v-text="form.version"></span></p>
 <p>创建时间: <span v-text="form.createTime"></span></p>
 <p>更新时间: <span v-text="form.updateTime"></span></p>
@@ -264,9 +306,10 @@
 
 <script>
   import * as utils from '@/api/utils'
+  import {check, confirm} from '@/api/withdraw.js'
 
   export default {
-    name: 'AccountDetail',
+    name: 'FundsWithdraw',
     data() {
       return {
         modal: {
@@ -281,30 +324,32 @@
           search: false
         },
         urls: {
-          addUrl: '/accoundetail/admin/save',
-          batchAddUrl: '/accoundetail/admin/batch-save',
-          editUrl: '/accoundetail/admin/update',
-          batchEditUrl: '/accoundetail/admin/batch-update',
-          searchUrl: '/accoundetail/admin/pager-cond',
-          allUrl: '/accoundetail/admin/all',
-          removeUrl: '/accoundetail/admin/remove/',
-          batchRemoveUrl: '/accoundetail/admin/batch-remove',
-          detailUrl: '/accoundetail/admin/one/',
-          activeUrl: '/accoundetail/admin/active',
-          batchActiveUrl: '/accoundetail/admin/batch-active'
+          addUrl: '/funds-withdraw/admin/save',
+          batchAddUrl: '/funds-withdraw/admin/batch-save',
+          editUrl: '/funds-withdraw/admin/update',
+          batchEditUrl: '/funds-withdraw/admin/batch-update',
+          searchUrl: '/funds-withdraw/admin/pager-cond',
+          allUrl: '/funds-withdraw/admin/all',
+          removeUrl: '/funds-withdraw/admin/remove/',
+          batchRemoveUrl: '/funds-withdraw/admin/batch-remove',
+          detailUrl: '/funds-withdraw/admin/one/',
+          activeUrl: '/funds-withdraw/admin/active',
+          batchActiveUrl: '/funds-withdraw/admin/batch-active'
         },
         page: {
           total: 0
         },
         form: {
           id: null,
-transactionNo: null,
 userId: null,
+transactionNo: null,
 amount: null,
-integral: null,
-type: null,
-subType: null,
-payType: null,
+bankcardId: null,
+withdrawStatus: null,
+withdrawDescription: null,
+checkedUserId: null,
+checkedTime: null,
+completeTime: null,
 version: null,
 createTime: null,
 updateTime: null,
@@ -312,15 +357,21 @@ isActive: null,
 
         },
         validateRules: {
-          transactionNo: [
+          userId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+transactionNo: [
 {type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
 {type: 'string', min: 1, max: 32, message: '必须1-32个字符', trigger: 'blur'}
 ],
-userId: [
+amount: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
-subType: [
-{type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
+bankcardId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+withdrawDescription: [
+{type: 'string', min: 1, max: 255, message: '必须1-255个字符', trigger: 'blur'}
 ],
 
         },
@@ -332,23 +383,29 @@ subType: [
           id: null,
 idMin: null, 
 idMax: null, 
-transactionNo: null,
 userId: null,
 userIdMin: null, 
 userIdMax: null, 
+transactionNo: null,
 amount: null,
 amountMin: null, 
 amountMax: null, 
-integral: null,
-integralMin: null, 
-integralMax: null, 
-type: null,
-typeMin: null, 
-typeMax: null, 
-subType: null,
-payType: null,
-payTypeMin: null, 
-payTypeMax: null, 
+bankcardId: null,
+bankcardIdMin: null, 
+bankcardIdMax: null, 
+withdrawStatus: null,
+withdrawStatusMin: null, 
+withdrawStatusMax: null, 
+withdrawDescription: null,
+checkedUserId: null,
+checkedUserIdMin: null, 
+checkedUserIdMax: null, 
+checkedTime: null,
+checkedTimeMin: null, 
+checkedTimeMax: null, 
+completeTime: null,
+completeTimeMin: null, 
+completeTimeMax: null, 
 version: null,
 versionMin: null, 
 versionMax: null, 
@@ -382,14 +439,8 @@ isActiveMax: null,
               }
             },
             {
-title: '账目编号',
+title: '提现编号',
 key: 'id',
-minWidth: 120,
-sortable: true
-},
-{
-title: '交易编号',
-key: 'transactionNo',
 minWidth: 120,
 sortable: true
 },
@@ -400,32 +451,50 @@ minWidth: 120,
 sortable: true
 },
 {
-title: '金额',
+title: '交易编号',
+key: 'transactionNo',
+minWidth: 120,
+sortable: true
+},
+{
+title: '提现金额',
 key: 'amount',
 minWidth: 120,
 sortable: true
 },
 {
-title: '积分',
-key: 'integral',
+title: '提现银行卡',
+key: 'bankcardId',
 minWidth: 120,
 sortable: true
 },
 {
-title: '收入或支出',
-key: 'type',
+title: '提现状态',
+key: 'withdrawStatus',
 minWidth: 120,
 sortable: true
 },
 {
-title: '收支类型',
-key: 'subType',
+title: '提现描述',
+key: 'withdrawDescription',
 minWidth: 120,
 sortable: true
 },
 {
-title: '支付方式',
-key: 'payType',
+title: '审核人编号',
+key: 'checkedUserId',
+minWidth: 120,
+sortable: true
+},
+{
+title: '审核时间',
+key: 'checkedTime',
+minWidth: 120,
+sortable: true
+},
+{
+title: '完成时间',
+key: 'completeTime',
 minWidth: 120,
 sortable: true
 },
@@ -536,7 +605,27 @@ sortable: true
                             color: 'red'
                           }
                         }, '删除')
-                      ])
+                      ]),
+                      h('DropdownItem', {
+                        props:{
+                          name: 'checkPass'
+                        }
+                      }, '审核通过'),
+                      h('DropdownItem', {
+                        props:{
+                          name: 'checkNotPass'
+                        }
+                      }, '审核不通过'),
+                      h('DropdownItem', {
+                        props:{
+                          name: 'withdrawSuccess'
+                        }
+                      }, '提现成功'),
+                      h('DropdownItem', {
+                        props:{
+                          name: 'withdrawFail'
+                        }
+                      }, '提现失败')
                   ])
                 ])
               }
@@ -593,6 +682,46 @@ sortable: true
           this.form = JSON.parse(JSON.stringify(row))
         } else if (itemName === 'remove') {
           utils.remove(this, row)
+        } else if (itemName === 'checkPass') {
+          check(row.transactionNo, 1).then(response => {
+            if (response.data.code === 1001) {
+              this.search()
+            } else {
+              this.$Message.error(response.data.message)
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        } else if (itemName === 'checkNotPass') {
+          check(row.transactionNo, 2).then(response => {
+            if (response.data.code === 1001) {
+              this.search()
+            } else {
+              this.$Message.error(response.data.message)
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        } else if (itemName === 'withdrawSuccess') {
+          confirm(row.transactionNo, 4).then(response => {
+            if (response.data.code === 1001) {
+              this.search()
+            } else {
+              this.$Message.error(response.data.message)
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        } else if (itemName === 'withdrawFail') {
+          confirm(row.transactionNo, 5).then(response => {
+            if (response.data.code === 1001) {
+              this.search()
+            } else {
+              this.$Message.error(response.data.message)
+            }
+          }).catch(error => {
+            console.log(error)
+          })
         }
       },
       add() {
