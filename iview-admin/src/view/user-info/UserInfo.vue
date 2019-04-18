@@ -212,6 +212,7 @@
 <script>
 import { getUserInfo, updateLoaginPassword, logout, updateUserInfo } from '@/api/user.js'
 import { removeToken } from '@/libs/util'
+import * as ResponseStatus from '@/api/response-status'
 import qqImg from '@/assets/images/QQ.png'
 import weChatImg from '@/assets/images/WeChat.png'
 import aliPayImg from '@/assets/images/AliPay.png'
@@ -348,7 +349,7 @@ export default {
     initUserInfo() {
       getUserInfo().then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             if (data.data.total !== 0) {
               this.user = data.data.rows[0]
               this.user.userDetailGender = this.user.userDetailGender + ''
@@ -391,7 +392,7 @@ export default {
       updateUserInfo(userForm)
         .then(res => {
           const data = res.data
-          if (data.code !== 1001) {
+          if (data.code !== ResponseStatus.OK) {
             this.$Message.error(data.message)
             return
           }
@@ -461,13 +462,13 @@ export default {
             .then(res => {
               this.editBtnLoading = false
               const data = res.data
-              if (data.code === 1001) {
+              if (data.code === ResponseStatus.OK) {
                 this.$Message.info(data.message)
                 this.cancle()
                 setTimeout(() => {
                   logout().then(res => {
                     const data = res.data
-                    if (data.code === 1001) {
+                    if (data.code === ResponseStatus.OK) {
                       removeToken()
                       this.$router.push({
                         name: 'login'

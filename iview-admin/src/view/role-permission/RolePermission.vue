@@ -23,6 +23,7 @@ import {
   batchSavePermission
 } from '@/api/role'
 import {getAllModule} from '@/api/module'
+import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'RolePerminission',
   props: {},
@@ -57,19 +58,19 @@ export default {
       getAllModule()
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.allModuleList = data.data.rows
             // 获取当前指定角色的权限
             getMultiPermission(roleId)
               .then(res => {
                 const data = res.data
-                if (data.code === 1001) {
+                if (data.code === ResponseStatus.OK) {
                   this.multiPermissionList = data.data.rows
                   // 获取当前登入用户的所有权限
                   getUserPermission()
                     .then(res => {
                       const data = res.data
-                      if (data.code === 1001) {
+                      if (data.code === ResponseStatus.OK) {
                         this.userPermissionList = data.data.rows
                         this.initPermissionData()
                       } else {
@@ -173,7 +174,7 @@ export default {
       batchSavePermission(params)
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.$Message.info("保存成功")
             this.drawerFlag = false
           } else {

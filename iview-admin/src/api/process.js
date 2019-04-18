@@ -2,6 +2,7 @@ import { getLocalStorageToken } from '@/libs/util'
 import {parseJson, arrayBufferToReader, arrayBufferToImage} from "@/api/utils"
 import axios from '@/libs/api.request'
 import Qs from 'qs'
+import * as ResponseStatus from '@/api/response-status'
 
 /**
  * 部署流程
@@ -44,7 +45,7 @@ export const searchTableData = (self) => {
     }).then(response => {
       self.loading['search'] = false
       self.table.loading = false
-      if (response.data.code !== 1001) {
+      if (response.data.code !== ResponseStatus.OK) {
         self.$Message.error(response.data.message)
       } else {
         self.page.total = response.data.data.total
@@ -83,7 +84,7 @@ export const removeOld = (self, row) => {
             processKey: row.key
           })
         }).then(response => {
-          if (response.data.code !== 1001) {
+          if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
             searchTableData(self)
@@ -120,7 +121,7 @@ export const removeAll = (self, row) => {
             processKey: row.key
           })
         }).then(response => {
-          if (response.data.code !== 1001) {
+          if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
             searchTableData(self)
@@ -177,7 +178,7 @@ export const showActivitiImg = (self, params) => {
       let reader = arrayBufferToReader(arrayBufferData)
       reader.onload = function (e) {
         parseJson(reader.result).then(json => {
-          if (json.code !== 1001) {
+          if (json.code !== ResponseStatus.OK) {
             self.$Message.error(json.message)
             return
           }

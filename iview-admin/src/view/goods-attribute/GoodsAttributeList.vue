@@ -153,6 +153,7 @@
 <script>
   import * as utils from '@/api/utils'
   import {updateGoodsCategoryAttr} from '@/api/goods_category'
+  import * as ResponseStatus from '@/api/response-status'
 
   export default {
     name: 'GoodsAttributeList',
@@ -402,7 +403,7 @@ sortable: true
         }
         updateGoodsCategoryAttr(params).then(res => {
             const data = res.data
-            if (data.code === 1001) {
+            if (data.code === ResponseStatus.OK) {
               this.$Message.info("分配属性成功")
               this.$emit('closeDrawer')
             } else {

@@ -13,6 +13,7 @@
 <script>
 import roleList from '@/view/role/RoleList.vue'
 import { getUserRoleByUserId } from '@/api/role'
+import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'UserRoleDrawer',
   components: {
@@ -35,7 +36,7 @@ export default {
       getUserRoleByUserId(id)
         .then(res => {
           const data = res.data
-          if (data.code !== 1001) {
+          if (data.code !== ResponseStatus.OK) {
             this.$Message.error(data.message)
             return
           }

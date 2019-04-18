@@ -375,6 +375,7 @@
 import * as utils from '@/api/utils'
 import UploadModal from '_c/upload-modal'
 import * as process from '@/api/process'
+import * as ResponseStatus from '@/api/response-status'
 
 export default {
   name: 'Process',
@@ -837,7 +838,7 @@ export default {
       process
         .deploy(row)
         .then(response => {
-          if (response.data.code !== 1001) {
+          if (response.data.code !== ResponseStatus.OK) {
             this.$Notice.error({
               title: '流程部署',
               desc: response.data.message

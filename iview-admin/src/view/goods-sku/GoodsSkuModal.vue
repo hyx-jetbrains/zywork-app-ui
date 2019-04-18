@@ -224,6 +224,7 @@
   import axios from '@/libs/api.request'
   import {allPicByGoods, getPicById} from '@/api/goods_pic'
   import SkuDetailModal from '_c/sku-detail-modal'
+  import * as ResponseStatus from '@/api/response-status'
 
   export default {
     name: 'GoodsSkuModal',
@@ -572,7 +573,7 @@ sortable: true
               data: self.form
             }).then(response => {
               self.loading['add'] = false
-              if (response.data.code !== 1001) {
+              if (response.data.code !== ResponseStatus.OK) {
                 self.$Message.error(response.data.message)
               } else {
                 self.$Message.success(response.data.message)
@@ -597,7 +598,7 @@ sortable: true
             this.loading['edit'] = true
             this.updateGoodsSku().then(response => {
               this.loading['edit'] = false
-              if (response.data.code !== 1001) {
+              if (response.data.code !== ResponseStatus.OK) {
                 this.$Message.error(response.data.message)
               } else {
                 this.$Message.success(response.data.message)
@@ -640,7 +641,7 @@ sortable: true
         }
         if (picId !== null && picId !== undefined) {
           getPicById(picId).then(response => {
-            if (response.data.code === 1001) {
+            if (response.data.code === ResponseStatus.OK) {
               this.choosePic.id = picId
               this.choosePic.url = response.data.data.picUrl
             }
@@ -654,7 +655,7 @@ sortable: true
           sortOrder: 'asc'
         }
         allPicByGoods(params).then(response => {
-          if (response.data.code === 1001) {
+          if (response.data.code === ResponseStatus.OK) {
             this.pics = response.data.data.rows
           } else {
             this.$Message.error(response.data.message)
@@ -674,7 +675,7 @@ sortable: true
         this.form.picId = pic.id
         this.updateGoodsSku().then(response => {
           this.$Spin.hide()
-          if (response.data.code !== 1001) {
+          if (response.data.code !== ResponseStatus.OK) {
                 this.$Message.error(response.data.message)
               } else {
                 this.$Message.success(response.data.message)

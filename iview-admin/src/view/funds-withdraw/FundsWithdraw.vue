@@ -307,6 +307,7 @@
 <script>
   import * as utils from '@/api/utils'
   import {check, confirm} from '@/api/withdraw.js'
+  import * as ResponseStatus from '@/api/response-status'
 
   export default {
     name: 'FundsWithdraw',
@@ -684,7 +685,7 @@ sortable: true
           utils.remove(this, row)
         } else if (itemName === 'checkPass') {
           check(row.transactionNo, 1).then(response => {
-            if (response.data.code === 1001) {
+            if (response.data.code === ResponseStatus.OK) {
               this.search()
             } else {
               this.$Message.error(response.data.message)
@@ -694,7 +695,7 @@ sortable: true
           })
         } else if (itemName === 'checkNotPass') {
           check(row.transactionNo, 2).then(response => {
-            if (response.data.code === 1001) {
+            if (response.data.code === ResponseStatus.OK) {
               this.search()
             } else {
               this.$Message.error(response.data.message)
@@ -704,7 +705,7 @@ sortable: true
           })
         } else if (itemName === 'withdrawSuccess') {
           confirm(row.transactionNo, 4).then(response => {
-            if (response.data.code === 1001) {
+            if (response.data.code === ResponseStatus.OK) {
               this.search()
             } else {
               this.$Message.error(response.data.message)
@@ -714,7 +715,7 @@ sortable: true
           })
         } else if (itemName === 'withdrawFail') {
           confirm(row.transactionNo, 5).then(response => {
-            if (response.data.code === 1001) {
+            if (response.data.code === ResponseStatus.OK) {
               this.search()
             } else {
               this.$Message.error(response.data.message)

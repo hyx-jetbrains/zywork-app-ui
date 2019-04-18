@@ -235,6 +235,7 @@
   import {allPicByGoods} from '@/api/goods_pic'
   import GoodsSkuModal from '../goods-sku/GoodsSkuModal.vue'
   import config from '@/config'
+  import * as ResponseStatus from '@/api/response-status'
   const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 
   export default {
@@ -577,7 +578,7 @@ sortable: true
             sortOrder: 'asc'
           }
           allPicByGoods(params).then(response => {
-            if (response.data.code === 1001) {
+            if (response.data.code === ResponseStatus.OK) {
               if (response.data.data.rows.length > 0) {
                 utils.showModal(this, 'skuModal')
                 this.$refs.goodsSkuModal.form.goodsId = row.id
@@ -631,7 +632,7 @@ sortable: true
             sortOrder: 'asc'
           }
           allPicByGoods(params).then(response => {
-            if (response.data.code === 1001) {
+            if (response.data.code === ResponseStatus.OK) {
               this.$refs.uploadModal.defaultList = []
               response.data.data.rows.forEach((img, index) => {
                 this.$refs.uploadModal.defaultList.push({

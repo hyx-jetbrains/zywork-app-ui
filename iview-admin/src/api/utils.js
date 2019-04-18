@@ -1,5 +1,6 @@
 import axios from '@/libs/api.request'
 import fileDownload from 'js-file-download'
+import * as ResponseStatus from '@/api/response-status'
 /**
  * 根据指定的modal名打开模态框
  * @param self this
@@ -42,7 +43,7 @@ export const add = (self) => {
           data: self.form
         }).then(response => {
           self.loading['add'] = false
-          if (response.data.code !== 1001) {
+          if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
             self.$Message.success(response.data.message)
@@ -77,7 +78,7 @@ export const edit = (self) => {
           data: self.form
         }).then(response => {
           self.loading['edit'] = false
-          if (response.data.code !== 1001) {
+          if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
             self.$Message.success(response.data.message)
@@ -112,7 +113,7 @@ export const remove = (self, row) => {
           url: self.urls.removeUrl + row.id,
           method: 'GET'
         }).then(response => {
-          if (response.data.code !== 1001) {
+          if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
             search(self)
@@ -153,7 +154,7 @@ export const batchRemove = (self) => {
             method: 'POST',
             data: ids
           }).then(response => {
-            if (response.data.code !== 1001) {
+            if (response.data.code !== ResponseStatus.OK) {
               self.$Message.error(response.data.message)
             } else {
               self.$Message.success(response.data.message)
@@ -191,7 +192,7 @@ export const active = (self, row) => {
         isActive: isActive
       }
     }).then(response => {
-      if (response.data.code !== 1001) {
+      if (response.data.code !== ResponseStatus.OK) {
         self.$Message.error(response.data.message)
       } else {
         self.$Message.success(response.data.message)
@@ -231,7 +232,7 @@ export const batchActive = (self, isActive) => {
           method: 'POST',
           data: rowArray
         }).then(response => {
-          if (response.data.code !== 1001) {
+          if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
             self.$Message.success(response.data.message)
@@ -266,7 +267,7 @@ export const search = (self) => {
     }).then(response => {
       self.loading['search'] = false
       self.table.loading = false
-      if (response.data.code !== 1001) {
+      if (response.data.code !== ResponseStatus.OK) {
         self.$Message.error(response.data.message)
       } else {
         self.page.total = response.data.data.total
@@ -379,7 +380,7 @@ export const initSelectTableData = (self) => {
     }).then(response => {
       self.loading.search = false
       self.table.loading = false
-      if (response.data.code !== 1001) {
+      if (response.data.code !== ResponseStatus.OK) {
         self.$Message.error(response.data.message)
       } else {
         if (self.selectedData != null) {

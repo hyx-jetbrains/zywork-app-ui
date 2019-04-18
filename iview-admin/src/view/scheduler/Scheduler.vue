@@ -496,6 +496,7 @@ import {
   isActiveSelect,
   isDefaultSelect
 } from '@/api/select'
+import * as ResponseStatus from '@/api/response-status'
 import cronDemo from './CronDemo.vue'
 import './Scheduler.less'
 export default {
@@ -1049,7 +1050,7 @@ export default {
             .then(res => {
               this.loading.editCorn = false
               const data = res.data
-              if (data.code === 1001) {
+              if (data.code === ResponseStatus.OK) {
                 this.$Message.success(data.message)
                 this.resetFormCancelModal('editCronForm', 'editCron')
                 this.search()
@@ -1081,7 +1082,7 @@ export default {
           method: 'POST',
           data: this.form
         }).then(response => {
-          if (response.data.code !== 1001) {
+          if (response.data.code !== ResponseStatus.OK) {
             this.$Message.error(response.data.message)
           } else {
             this.$Message.success(response.data.message)
@@ -1104,7 +1105,7 @@ export default {
       }).then(response => {
         this.loading['search'] = false
         this.table.loading = false
-        if (response.data.code != 1001) {
+        if (response.data.code != ResponseStatus.OK) {
           this.$Message.error(response.data.message)
           return
         }
@@ -1139,7 +1140,7 @@ export default {
         .then(res => {
           this.jobClassessSelect = false
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             if (data.data.total <= 0) {
               this.$Message.error("未获取到类名称")
               return
@@ -1157,7 +1158,7 @@ export default {
       optJob(url, this.cronForm) 
         .then(res => {
           const data = res.data
-          if (data.code !== 1001) {
+          if (data.code !== ResponseStatus.OK) {
             this.$Message.error(data.message)
             return
           }

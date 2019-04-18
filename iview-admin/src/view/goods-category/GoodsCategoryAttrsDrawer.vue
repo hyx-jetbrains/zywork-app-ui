@@ -13,6 +13,7 @@
 <script>
 import GoodsAttributeList from '@/view/goods-attribute/GoodsAttributeList.vue'
 import { getAttrsByCategory } from '@/api/goods_attribute'
+import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'GoodsCategoryAttrsDrawer',
   components: {
@@ -38,7 +39,7 @@ export default {
       getAttrsByCategory(params)
         .then(res => {
           const data = res.data
-          if (data.code !== 1001) {
+          if (data.code !== ResponseStatus.OK) {
             this.$Message.error(data.message)
             return
           }

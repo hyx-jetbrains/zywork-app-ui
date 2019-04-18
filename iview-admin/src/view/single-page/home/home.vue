@@ -96,6 +96,7 @@ import {getDate} from '@/api/utils'
 import InforCard from '_c/info-card'
 import CountTo from '_c/count-to'
 import DauEcharts from '_c/dau-echarts'
+import * as ResponseStatus from '@/api/response-status'
 
 export default {
   name: 'home',
@@ -158,7 +159,7 @@ export default {
       regCount()
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.inforCardData[0].count = data.data[0]
             this.inforCardData[1].count = data.data[1][0].totalCount
             this.inforCardData[2].count = data.data[1][1].totalCount
@@ -181,7 +182,7 @@ export default {
       regAllCountByDate(weekParams)
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.inforCardData[3].count = data.data === null ? 0 : data.data
           } else {
             this.$Message.error(data.message)
@@ -194,7 +195,7 @@ export default {
       allDau(weekParams)
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.inforCardData[4].count = data.data === null ? 0 : data.data
           } else {
             this.$Message.error(data.message)
@@ -209,7 +210,7 @@ export default {
       searchWaitTask(this, this.taskUrls.assigneeTasksUrl)
         .then(res => {
           const data = res.data
-          if (data.code !== 1001) {
+          if (data.code !== ResponseStatus.OK) {
             self.$Message.error(res.data.message)
             return
           }
@@ -229,7 +230,7 @@ export default {
       searchWaitTask(this, this.taskUrls.candidateTasksUrl)
         .then(res => {
           const data = res.data
-          if (data.code !== 1001) {
+          if (data.code !== ResponseStatus.OK) {
             self.$Message.error(res.data.message)
             return
           }
@@ -249,7 +250,7 @@ export default {
       searchWaitTask(this, this.taskUrls.groupTasksUrl)
         .then(res => {
           const data = res.data
-          if (data.code !== 1001) {
+          if (data.code !== ResponseStatus.OK) {
             self.$Message.error(res.data.message)
             return
           }

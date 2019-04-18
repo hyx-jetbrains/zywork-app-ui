@@ -335,6 +335,7 @@ import axios from '@/libs/api.request'
 import * as utils from '@/api/utils'
 import OrgView from './components/org-view.vue'
 import ZoomController from './components/zoom-controller.vue'
+import * as ResponseStatus from '@/api/response-status'
 import './index.less'
 const menuDic = {
   edit: '编辑部门',
@@ -689,7 +690,7 @@ export default {
       } else if (keyStr === '"delete"') {
         // 删除部门
         utils.remove(this, row).then(res => {
-          if (res.data.code === 1001) {
+          if (res.data.code === ResponseStatus.OK) {
             this.getDepartmentData()
           }
         })
@@ -706,7 +707,7 @@ export default {
       }).then(res => {
         this.orgTreeSpinShow = false
         const data = res.data
-        if (data.code !== 1001) {
+        if (data.code !== ResponseStatus.OK) {
           this.$Message.error(data.message)
           return
         }
@@ -819,7 +820,7 @@ export default {
         this.form = JSON.parse(JSON.stringify(row))
       } else if (itemName === 'remove') {
         utils.remove(this, row).then(res => {
-          if (res.data.code === 1001) {
+          if (res.data.code === ResponseStatus.OK) {
             this.getDepartmentData()
           }
         })
@@ -827,14 +828,14 @@ export default {
     },
     add() {
       utils.add(this).then(res => {
-        if (res.data.code === 1001) {
+        if (res.data.code === ResponseStatus.OK) {
           this.getDepartmentData()
         }
       })
     },
     edit() {
       utils.edit(this).then(res => {
-        if (res.data.code === 1001) {
+        if (res.data.code === ResponseStatus.OK) {
           this.getDepartmentData()
         }
       })

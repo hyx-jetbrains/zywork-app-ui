@@ -94,6 +94,7 @@
 <script>
 import { getUserInfo, updateLoaginPassword, logout } from '@/api/user.js'
 import { removeToken } from '@/libs/util'
+import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'UserInfo',
   components: {},
@@ -163,7 +164,7 @@ export default {
       getUserInfo()
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.user = data.data.rows[0]
             this.user.userDetailGender = this.user.userDetailGender + ''
           } else {
@@ -194,13 +195,13 @@ export default {
             .then(res => {
               this.editBtnLoading = false
               const data = res.data
-              if (data.code === 1001) {
+              if (data.code === ResponseStatus.OK) {
                 this.$Message.info(data.message)
                 this.cancle()
                 setTimeout(() => {
                   logout().then(res => {
                     const data = res.data
-                    if (data.code === 1001) {
+                    if (data.code === ResponseStatus.OK) {
                       removeToken()
                       this.$router.push({
                         name: 'login'

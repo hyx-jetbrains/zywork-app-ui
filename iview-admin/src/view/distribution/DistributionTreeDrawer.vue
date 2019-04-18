@@ -16,6 +16,7 @@
 <script>
 import {directBelowUsers, directAboveUsers} from '@/api/distribution'
 import headImg from '@/assets/images/head.png'
+import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'DistributionTreeDrawer',
   props: {},
@@ -124,7 +125,7 @@ export default {
     belowUsers(item, callback) {
       directBelowUsers(item.id).then(response => {
         let children = []
-        if (response.data.code === 1001) {
+        if (response.data.code === ResponseStatus.OK) {
           if (response.data.data.total > 0) {
             item.total = response.data.data.total
             response.data.data.rows.forEach((row, index) => {
@@ -156,7 +157,7 @@ export default {
     aboveUsers(item, callback) {
       directAboveUsers(item.id).then(response => {
         let children = []
-        if (response.data.code === 1001) {
+        if (response.data.code === ResponseStatus.OK) {
           if (response.data.data.total > 0) {
             item.total = response.data.data.total
             response.data.data.rows.forEach((row, index) => {

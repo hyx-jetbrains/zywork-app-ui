@@ -378,6 +378,7 @@
 import * as utils from '@/api/utils'
 import Editor from '_c/editor'
 import {getArticleCategorySelect} from '@/api/article'
+import * as ResponseStatus from '@/api/response-status'
 
 export default {
   name: 'Article',
@@ -790,7 +791,7 @@ export default {
       getArticleCategorySelect()
         .then(res => {
           const data = res.data
-          if (data.code !== 1001) {
+          if (data.code !== ResponseStatus.OK) {
             this.$Message.error(data.message)
             return
           }

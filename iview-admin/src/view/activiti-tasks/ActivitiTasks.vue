@@ -96,6 +96,7 @@
 <script>
 import * as utils from '@/api/utils'
 import * as process from '@/api/process'
+import * as ResponseStatus from '@/api/response-status'
 
 export default {
   name: 'ActivitiInstance',
@@ -401,7 +402,7 @@ export default {
       this.searchForm.processKey = processRow.processKey
       process.searchTableData(this)
         .then(res => {
-          if (res.data.code === 1001) {
+          if (res.data.code === ResponseStatus.OK) {
             this.modal.select = false
           }
         })

@@ -10,6 +10,7 @@ import {
   getUnreadCount
 } from '@/api/user'
 import { setToken, getToken, removeToken, setUsername } from '@/libs/util'
+import * as ResponseStatus from '@/api/response-status'
 
 export default {
   state: {
@@ -81,11 +82,11 @@ export default {
     handleLogin ({ commit }, loginView) {
       return new Promise((resolve, reject) => {
         login(loginView).then(res => {
-          if (res.data.code === 1001) {
+          if (res.data.code === ResponseStatus.OK) {
             // 认证成功
             const data = res.data
             commit('setToken', data.data)
-          } else if (res.data.code === 1006) {
+          } else if (res.data.code === ResponseStatus.AUTHENTICATION_TOKEN_ERROR) {
             // Token 失效，需要移除token
             commit('removeToken')
             commit('setAccess', [])
@@ -121,7 +122,7 @@ export default {
       return new Promise((resolve, reject) => {
         getUserInfo().then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             if (data.data.total !== 0) {
               // 有获取到用户信息
               commit('setUserName', data.data.rows[0].userDetailNickname)

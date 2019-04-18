@@ -55,6 +55,7 @@
 import * as utils from '@/api/utils'
 import {getAttrsByCategory, skuAttrVals} from '@/api/goods_attribute'
 import {allSkusByGoods, batchSaveGoodsAttrVals} from '@/api/goods_sku'
+import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'SkuDetailModal',
   components: {
@@ -86,7 +87,7 @@ export default {
         sortOrder: 'asc'
       }
       allSkusByGoods(params).then(response => {
-        if (response.data.code === 1001) {
+        if (response.data.code === ResponseStatus.OK) {
           this.allSkuIds.splice(0, this.allSkuIds.length)
           response.data.data.rows.forEach((row, index) => {
             this.allSkuIds.push(row.id)
@@ -102,7 +103,7 @@ export default {
     loadAllAttrVals() {
       // 获取类目所有属性
       this.loadCategoryAttrs().then(response => {
-        if (response.data.code === 1001) {
+        if (response.data.code === ResponseStatus.OK) {
           this.formElements = response.data.data.rows
           let skuParams = {
             goodsSkuId: this.chooseSkuId,
@@ -111,7 +112,7 @@ export default {
           }
           // 获取已经设置值的属性
           skuAttrVals(skuParams).then(response => {
-            if (response.data.code === 1001) {
+            if (response.data.code === ResponseStatus.OK) {
               this.formElements.forEach((formItem, index) => {
                 this.$set(this.form, formItem.goodsAttributeId + '_' + formItem.goodsAttributeAttrCode, null)
                 response.data.data.rows.forEach((attrValue, index) => {
@@ -178,7 +179,7 @@ export default {
           }
           if (params.length > 0) {
             batchSaveGoodsAttrVals(params).then(response => {
-              if (response.data.code === 1001) {
+              if (response.data.code === ResponseStatus.OK) {
                 this.$Message.success(response.data.message)
                 this.resetFormCancelModal('skuForm', 'skuDetailModal')
               } else {

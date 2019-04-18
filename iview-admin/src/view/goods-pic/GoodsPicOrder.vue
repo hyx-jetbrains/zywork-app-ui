@@ -26,6 +26,7 @@
   import DragListSingle from '_c/drag-list-single'
   import * as utils from '@/api/utils'
   import {allPicByGoods, updateGoodsPic} from '@/api/goods_pic'
+  import * as ResponseStatus from '@/api/response-status'
 
   export default {
     name: 'GoodsPicOrder',
@@ -73,7 +74,7 @@
         allPicByGoods(params).then(res => {
           this.spinShow = false
           const data = res.data
-          if (data.code !== 1001) {
+          if (data.code !== ResponseStatus.OK) {
             this.$Message.error(data.message)
             return
           }
@@ -113,7 +114,7 @@
         }
         updateGoodsPic(params).then(response => {
           this.$Spin.hide()
-          if (response.data.code === 1001) {
+          if (response.data.code === ResponseStatus.OK) {
             this.$Message.success('成功更新商品图片排序')
             this.$emit("hideModal")
           } else {

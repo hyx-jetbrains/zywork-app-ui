@@ -161,6 +161,7 @@ import {
   delKey,
   delKeys
 } from '@/api/cache'
+import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'RedisCache',
   components: {},
@@ -336,7 +337,7 @@ export default {
       redisCacheInfo()
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.redisInfo = data.data
             this.redisInfo.uptime_in_days = this.redisInfo.uptime_in_days + "天"
             this.redisInfo.uptime_in_seconds = this.formaturDing(this.redisInfo.uptime_in_seconds)
@@ -354,7 +355,7 @@ export default {
       redisCacheKeysCount()
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.keysCount = data.data
           } else {
             this.$Message.error(data.message)
@@ -378,7 +379,7 @@ export default {
         .then(res => {
           this.keysSpin = false
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.getKeysCount()
             if (data.data.total === 0) {
               this.$Message.error('未获取到key')
@@ -409,7 +410,7 @@ export default {
       getValueByKey(params)
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.valueInfo = data.data
             if (this.valueInfo.expire !== -1) {
               let time = (this.valueInfo.expire / 1000).toFixed(0)
@@ -446,7 +447,7 @@ export default {
       delKey(params)
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.$Message.info(data.message)
             this.searchKeys()
           } else {
@@ -475,7 +476,7 @@ export default {
       delKeys(keys)
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.$Message.info(data.message)
             this.searchKeys()
           } else {

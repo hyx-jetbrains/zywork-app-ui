@@ -43,6 +43,7 @@
 import { getLocalStorageToken } from '@/libs/util'
 import axios from '@/libs/api.request'
 import config from '@/config'
+import * as ResponseStatus from '@/api/response-status'
 const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 export default {
   name: 'UploadImgModal',
@@ -83,7 +84,7 @@ export default {
       })
     },
     handleSuccess(response, file) {
-      if (response.code === 1001) {
+      if (response.code === ResponseStatus.OK) {
         file.url = '/' + response.data.picUrl
         file.name = response.data.id;
         this.$Notice.success({
@@ -118,7 +119,7 @@ export default {
             url: this.removeUrl + img.name,
             method: 'GET'
           }).then(response => {
-            if (response.data.code === 1001) {
+            if (response.data.code === ResponseStatus.OK) {
               const fileList = this.$refs.upload.fileList
               this.$refs.upload.fileList.splice(fileList.indexOf(img), 1)
               this.uploadList = this.$refs.upload.fileList

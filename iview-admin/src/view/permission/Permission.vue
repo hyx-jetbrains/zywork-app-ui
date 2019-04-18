@@ -339,6 +339,7 @@ import UploadModal from '_c/upload-modal'
 import moduleDetail from '@/view/module/ModuleDetail.vue'
 import moduleListSingle from '@/view/module/ModuleListSingle.vue'
 import {getModuleById} from '@/api/module'
+import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'Permission',
   components: {
@@ -837,7 +838,7 @@ export default {
       getModuleById(id)
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.moduleDetailForm = data.data
             this.modal.moduleDetail = true
           } else {

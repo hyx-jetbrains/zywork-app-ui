@@ -231,6 +231,7 @@
 import * as utils from '@/api/utils'
 import axios from '@/libs/api.request'
 import {saveUserRole} from '@/api/user'
+import * as ResponseStatus from '@/api/response-status'
 
 export default {
   name: 'RoleList',
@@ -461,7 +462,7 @@ export default {
       saveUserRole(params)
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.$Message.info("分配角色成功")
             this.$emit('closeDrawer')
           } else {

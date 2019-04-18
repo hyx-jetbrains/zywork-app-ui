@@ -23,6 +23,7 @@
 import {allDau, dauByDate, regCountByDate } from '@/api/home'
 import {getDate} from '@/api/utils'
 import BasicEcharts from '../charts/BasicEcharts'
+import * as ResponseStatus from '@/api/response-status'
 
 export default {
   name: 'DauEcharts',
@@ -65,7 +66,7 @@ export default {
       dauByDate(params)
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.dauTitle = data.message
             this.dauXAxisData = data.data.xAxisData
             this.dauSeriesData = data.data.seriesData
@@ -93,7 +94,7 @@ export default {
       regCountByDate(params)
         .then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             this.regCountTitle = data.message
             this.regCountXAxisData = data.data.xAxisData
             this.regCountSeriesData = data.data.seriesData

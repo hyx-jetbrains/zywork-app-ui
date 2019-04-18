@@ -17,6 +17,7 @@
 <script>
 import { getLocalStorageToken } from '@/libs/util'
 import config from '@/config'
+import * as ResponseStatus from '@/api/response-status'
 const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 export default {
   name: 'UploadModal',
@@ -52,7 +53,7 @@ export default {
       })
     },
     handleSuccess(response, file) {
-      if (response.code === 1001) {
+      if (response.code === ResponseStatus.OK) {
         this.$Notice.success({
           title: '文件上传成功',
           desc: response.message

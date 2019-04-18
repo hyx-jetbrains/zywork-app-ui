@@ -157,6 +157,7 @@
 
 <script>
 import * as utils from '@/api/utils'
+import * as ResponseStatus from '@/api/response-status'
 import userRoleDrawer from './UserRoleDrawer.vue'
 import {
   isActiveSelect
@@ -518,7 +519,7 @@ export default {
         this.form = JSON.parse(JSON.stringify(row));
         getUserDetail(row.id).then(res => {
           const data = res.data
-          if (data.code === 1001) {
+          if (data.code === ResponseStatus.OK) {
             if (data.data.total !== 0) {{
               this.userDetail = data.data.rows[0]
             }}

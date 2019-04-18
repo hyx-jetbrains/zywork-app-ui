@@ -24,6 +24,7 @@
   import DragListSingle from '_c/drag-list-single'
   import * as utils from '@/api/utils'
   import {getAttrsByCategory, updateGoodsCategoryAttr} from '@/api/goods_attribute'
+  import * as ResponseStatus from '@/api/response-status'
 
   export default {
     name: 'GoodsAttributeOrder',
@@ -71,7 +72,7 @@
         getAttrsByCategory(params).then(res => {
           this.spinShow = false
           const data = res.data
-          if (data.code !== 1001) {
+          if (data.code !== ResponseStatus.OK) {
             this.$Message.error(data.message)
             return
           }
@@ -112,7 +113,7 @@
         }
         updateGoodsCategoryAttr(params).then(response => {
           this.$Spin.hide()
-          if (response.data.code === 1001) {
+          if (response.data.code === ResponseStatus.OK) {
             this.$Message.success('成功更新商品类目属性排序')
             this.$emit("hideModal")
           } else {
