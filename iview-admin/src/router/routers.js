@@ -779,7 +779,7 @@ export default [
           title: '用户消息查询',
           icon: 'ios-information-circle'
         },
-        component: () => import('@/view/user-message/UserMessage.vue')
+        component: () => import('@/view/user-message/UserUserMessage.vue')
       }
     ]
   },
