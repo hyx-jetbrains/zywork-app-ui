@@ -70,6 +70,17 @@ export const saveUserRole = (params) => {
   })
 }
 
+/**
+ * 获取登录用户的所有角色 
+ */
+export const getUserRoles = () => {
+  return axios.request({
+    url: '/user-role/user/list', 
+    method: 'GET',
+    data: ''
+  })
+}
+
 export const updateUserInfo = (params) => {
   return axios.request({
     url: 'user-detail/user/update',
