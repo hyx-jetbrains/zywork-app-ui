@@ -297,8 +297,13 @@ export const changeCurrent = (tableComponent, currentRow, oldCurrentRow) => {
  * @param sortColumn 排序字段信息
  */
 export const changeSort = (tableComponent, sortColumn) => {
-  tableComponent.searchOpts.sortColumn = sortColumn.key
-  tableComponent.searchOpts.sortOrder = sortColumn.order
+  if (sortColumn.order === 'normal') {
+    tableComponent.searchOpts.sortColumn = ''
+    tableComponent.searchOpts.sortOrder = ''
+  } else {
+    tableComponent.searchOpts.sortColumn = sortColumn.key
+    tableComponent.searchOpts.sortOrder = sortColumn.order
+  }
   tableComponent.search()
 }
 
