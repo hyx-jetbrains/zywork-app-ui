@@ -3,7 +3,7 @@
     <Card>
       <Row>
         <i-col span="6">
-          <Menu theme="light" active-name="1" @on-select="switchMenu">
+          <Menu theme="light" active-name="1" @on-select="switchMenu" style="z-index: 0;">
             <MenuItem name="1">{{itemMenuName1}}</MenuItem>
             <MenuItem name="2">{{itemMenuName2}}</MenuItem>
             <MenuItem name="3">{{itemMenuName3}}</MenuItem>
