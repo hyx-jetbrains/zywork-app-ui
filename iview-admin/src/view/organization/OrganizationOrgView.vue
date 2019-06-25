@@ -75,10 +75,6 @@ export default {
     this.getDepartmentData()
   },
   methods: {
-    setDepartmentData(data) {
-      data.isRoot = true
-      return data
-    },
     handleMenuClick({ data, key }) {
       const keyStr = JSON.stringify(key)
       const row = this.getRow(data.id)
