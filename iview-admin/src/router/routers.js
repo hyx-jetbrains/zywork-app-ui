@@ -110,7 +110,7 @@ export default [
 			    title: '用户组织部门查询',
 			    icon: 'ios-people'
 			  },
-			  component: () => import('@/view/user-organization/UserOrganization.vue')
+			  component: () => import('@/view/user-organization/UserOrganizationMain.vue')
 			}
 	  ]
 	},
