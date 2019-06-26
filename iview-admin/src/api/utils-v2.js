@@ -253,14 +253,14 @@ export const search = (self) => {
       method: 'POST',
       data: searchComponent.searchForm
     }).then(response => {
-      searchComponent.loading.search = false
-      tableComponent.table.loading = false
       if (response.data.code !== ResponseStatus.OK) {
         tableComponent.$Message.error(response.data.message)
       } else {
         tableComponent.pager.total = response.data.data.total
         tableComponent.table.tableRows = response.data.data.rows
       }
+      searchComponent.loading.search = false
+      tableComponent.table.loading = false
       resolve(response)
     }).catch(error => {
       console.log(error)
@@ -328,72 +328,47 @@ export const changePageSize = (tableComponent, pageSize) => {
 }
 
 /**
- * table表格排序事件处理
- * @param self this
- * @param sortColumn 排序字段信息
- */
-export const changeSelectTableSort = (self, sortColumn) => {
-  self.searchForm.sortColumn = sortColumn.key
-  self.searchForm.sortOrder = sortColumn.order
-  initSelectTableData(self)
-}
-
-/**
- * 分页组件页码改变事件处理
- * @param self this
- * @param pageNo 修改后的页码
- */
-export const changeSelectTablePageNo = (self, pageNo) => {
-  self.searchForm.pageNo = pageNo
-  initSelectTableData(self)
-}
-
-/**
- * 分页组件每页大小改变事件处理
- * @param self this
- * @param pageSize 修改后的每页大小
- */
-export const changeSelectTablePageSize = (self, pageSize) => {
-  self.searchForm.pageSize = pageSize
-  initSelectTableData(self)
-}
-
-/**
- * 
+ * 带有选中数据表格的搜索，需要把已经选中的数据勾选上
  * @param {*} self this
  */
 export const initSelectTableData = (self) => {
   return new Promise((resolve, reject) => {
-    self.loading.search = true
-    self.table.loading = true
+    let tableComponent = self.$refs.table
+    let searchComponent = self.$refs.searchModal
+    searchComponent.searchForm.pageNo = tableComponent.pager.pageNo
+    searchComponent.searchForm.pageSize = tableComponent.pager.pageSize
+    searchComponent.searchForm.sortColumn = tableComponent.searchOpts.sortColumn
+    searchComponent.searchForm.sortOrder = tableComponent.searchOpts.sortOrder
+    searchComponent.loading.search = true
+    tableComponent.table.loading = true
     axios.request({
-      url: self.urls.searchUrl,
+      url: tableComponent.urls.searchUrl,
       method: 'POST',
-      data: self.searchForm
+      data: searchComponent.searchForm
     }).then(response => {
-      self.loading.search = false
-      self.table.loading = false
       if (response.data.code !== ResponseStatus.OK) {
         self.$Message.error(response.data.message)
       } else {
-        if (self.selectedData != null) {
-          response.data.data.rows.forEach((dataItem,index) => {
-            self.selectedData.forEach(dataRow => {
-              if (dataItem.id === dataRow[self.selectedDataId]) {
+        if (self.selectedData != null && self.selectedDataIdProp != null) {
+          response.data.data.rows.forEach((dataItem, index) => {
+            self.selectedData.forEach(selectedDataRow => {
+              if (dataItem.id === selectedDataRow[self.selectedDataIdProp]) {
                 response.data.data.rows[index]._checked = true
-                self.table.selections.push(response.data.data.rows[index])
+                tableComponent.table.selections.push(response.data.data.rows[index])
               }
             }) 
           })
         }
-        self.page.total = response.data.data.total
-        self.table.tableDetails = response.data.data.rows
+        tableComponent.pager.total = response.data.data.total
+        tableComponent.table.tableRows = response.data.data.rows
+        searchComponent.loading.search = false
+        tableComponent.table.loading = false
       }
       resolve(response)
     }).catch(error => {
       console.log(error)
-      self.loading.search = false
-      self.table.loading = false
+      searchComponent.loading.search = false
+      tableComponent.table.loading = false
       self.$Message.error('加载数据失败，稍候再试')
       reject(error)
     })
