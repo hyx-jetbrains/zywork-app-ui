@@ -3,44 +3,39 @@
         <Row>
             <i-col span="24">
                 <Card>
-                    <Button @click="confirmSelection" type="primary">确认选择</Button>&nbsp;
                     <Button @click="showSearchModal" type="primary">高级搜索</Button>&nbsp;
                     <Tooltip content="刷新" placement="right">
                         <Button icon="md-refresh" type="success" shape="circle" @click="searchTable"></Button>
                     </Tooltip>
-                    <OrganizationTableSingle ref="table" v-on:searchTable="searchTable" v-on:showDetailModal="showDetailModal"/>
+                    <RoleTableShow ref="table" v-on:searchTable="searchTable" v-on:showDetailModal="showDetailModal"/>
                 </Card>
             </i-col>
         </Row>
-        <OrganizationSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
-        <OrganizationDetailModal ref="detailModal"/>
+        <RoleSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
+        <RoleDetailModal ref="detailModal"/>
     </div>
 </template>
 
 <script>
     import * as utils from '@/api/utils-v2'
-    import OrganizationTableSingle from './OrganizationTableSingle.vue'
-    import OrganizationSearchModal from './OrganizationSearchModal.vue'
-    import OrganizationDetailModal from './OrganizationDetailModal.vue'
+    import RoleTableShow from './RoleTableShow.vue'
+    import RoleSearchModal from './RoleSearchModal.vue'
+    import RoleDetailModal from './RoleDetailModal.vue'
     export default {
-        name: 'OrganizationMainMultiple',
+        name: 'RoleMainShow',
         components: {
-            OrganizationTableSingle,
-            OrganizationSearchModal,
-            OrganizationDetailModal
+            RoleTableShow,
+            RoleSearchModal,
+            RoleDetailModal
         },
         data() {
-            return {
-                selectedData: [],
-                selectedDataIdProp: '',
-                extraData: {}
-            }
+            return {}
         },
         computed: {},
         mounted() {},
         methods: {
             searchTable() {
-                utils.initSelectTableData(this)
+                utils.search(this)
             },
             showDetailModal(row) {
                 let detailModal = this.$refs.detailModal
@@ -50,9 +45,6 @@
             showSearchModal() {
                 let searchModal = this.$refs.searchModal
                 searchModal.modal.search = true
-            },
-            confirmSelection() {
-                // 确认选择的逻辑
             }
         }
     }

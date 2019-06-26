@@ -130,7 +130,7 @@ export default [
           title: '用户基础信息管理',
           icon: 'ios-person'
         },
-        component: () => import('@/view/user/User.vue')
+        component: () => import('@/view/user/UserMain.vue')
       },
 			{
 			  path: 'UserDetail',
@@ -696,7 +696,7 @@ export default [
           title: '角色管理',
           icon: 'md-lock'
         },
-        component: () => import('@/view/role/Role.vue')
+        component: () => import('@/view/role/RoleMain.vue')
       },
       {
         path: 'Module',
@@ -732,7 +732,7 @@ export default [
 					title: '角色权限查询',
 					icon: 'md-key'
 				},
-				component: () => import('@/view/role-permission/RolePermissions.vue')
+				component: () => import('@/view/role-permission/RolePermissionMain.vue')
 			}
     ]
   },

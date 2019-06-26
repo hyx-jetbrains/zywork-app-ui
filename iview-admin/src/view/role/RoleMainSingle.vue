@@ -8,26 +8,26 @@
                     <Tooltip content="刷新" placement="right">
                         <Button icon="md-refresh" type="success" shape="circle" @click="searchTable"></Button>
                     </Tooltip>
-                    <OrganizationTableSingle ref="table" v-on:searchTable="searchTable" v-on:showDetailModal="showDetailModal"/>
+                    <RoleTableSingle ref="table" v-on:searchTable="searchTable" v-on:showDetailModal="showDetailModal"/>
                 </Card>
             </i-col>
         </Row>
-        <OrganizationSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
-        <OrganizationDetailModal ref="detailModal"/>
+        <RoleSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
+        <RoleDetailModal ref="detailModal"/>
     </div>
 </template>
 
 <script>
     import * as utils from '@/api/utils-v2'
-    import OrganizationTableSingle from './OrganizationTableSingle.vue'
-    import OrganizationSearchModal from './OrganizationSearchModal.vue'
-    import OrganizationDetailModal from './OrganizationDetailModal.vue'
+    import RoleTableSingle from './RoleTableSingle.vue'
+    import RoleSearchModal from './RoleSearchModal.vue'
+    import RoleDetailModal from './RoleDetailModal.vue'
     export default {
-        name: 'OrganizationMainMultiple',
+        name: 'RoleMainMultiple',
         components: {
-            OrganizationTableSingle,
-            OrganizationSearchModal,
-            OrganizationDetailModal
+            RoleTableSingle,
+            RoleSearchModal,
+            RoleDetailModal
         },
         data() {
             return {

@@ -30,13 +30,17 @@
             OrganizationDetailModal
         },
         data() {
-            return {}
+            return {
+                selectedData: [],
+                selectedDataIdProp: '',
+                extraData: {}
+            }
         },
         computed: {},
         mounted() {},
         methods: {
             searchTable() {
-                utils.search(this)
+                utils.initSelectTableData(this)
             },
             showDetailModal(row) {
                 let detailModal = this.$refs.detailModal

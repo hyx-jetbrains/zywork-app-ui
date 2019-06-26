@@ -3,9 +3,10 @@
     <Drawer
         title="分配角色权限"
         :closable="true"
-        :mask-closable="false"
+        :mask-closable="true"
         @on-close="closeDrawer"
         v-model="drawerFlag"
+        width="400"
       >
         <Button size="small" type="primary" @click="savePermission">保存</Button>
         <Button size="small" style="margin-left: 10px" @click="closeDrawer">关闭</Button>
