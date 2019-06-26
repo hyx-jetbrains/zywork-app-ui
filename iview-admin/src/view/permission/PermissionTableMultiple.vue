@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Table ref="dataTable" highlight-row stripe :loading="table.loading" :columns="table.tableColumns" :data="table.tableRows"
-               style="margin-top:20px;" @on-current-change="changeCurrent" @on-sort-change="changeSort"></Table>
+        <Table ref="dataTable" stripe :loading="table.loading" :columns="table.tableColumns" :data="table.tableRows"
+               style="margin-top:20px;" @on-selection-change="changeSelection" @on-sort-change="changeSort"></Table>
         <div style="margin: 20px; overflow: hidden">
             <div style="float: right;">
                 <Page :total="pager.total" :current="pager.pageNo" @on-change="changePageNo" @on-page-size-change="changePageSize"
@@ -15,11 +15,11 @@
     import * as utils from '@/api/utils-v2'
 
     export default {
-        name: 'UserTableSingle',
+        name: 'PermissionTableMultiple',
         data() {
             return {
                 urls: {
-                    searchUrl: '/user/admin/pager-cond'
+                    searchUrl: '/permission/admin/pager-cond'
                 },
                 pager: {
                     pageNo: 1,
@@ -33,40 +33,47 @@
                 table: {
                     loading: false,
                     tableColumns: [{
-                        width: 60,
+                        type: 'selection',
+                        width: 45,
+                        key: 'id',
                         align: 'center',
-                        fixed: 'left',
-                        render: (h, params) => {
-                            return h('span', params.index + (this.pager.pageNo - 1) * this.pager.pageSize + 1)
-                        }
+                        fixed: 'left'
                     },
                         {
-title: '用户编号',
+                            width: 60,
+                            align: 'center',
+                            fixed: 'left',
+                            render: (h, params) => {
+                                return h('span', params.index + (this.pager.pageNo - 1) * this.pager.pageSize + 1)
+                            }
+                        },
+                        {
+title: '权限编号',
 key: 'id',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '手机号',
-key: 'phone',
+title: '所属模块',
+key: 'moduleId',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '用户邮箱',
-key: 'email',
+title: '权限标题',
+key: 'title',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '登录密码',
-key: 'password',
+title: '权限字符串',
+key: 'permission',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '加密盐值',
-key: 'salt',
+title: '权限描述',
+key: 'description',
 minWidth: 120,
 sortable: true,
 },
@@ -80,7 +87,7 @@ renderHeader: (h, params) => {
                 h('span', '版本号'),
                 h('Tooltip', {
                   props: {
-                    content: '用户版本号',
+                    content: '权限版本号',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -108,7 +115,7 @@ renderHeader: (h, params) => {
                 h('span', '创建时间'),
                 h('Tooltip', {
                   props: {
-                    content: '用户创建时间',
+                    content: '权限创建时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -136,7 +143,7 @@ renderHeader: (h, params) => {
                 h('span', '更新时间'),
                 h('Tooltip', {
                   props: {
-                    content: '用户更新时间',
+                    content: '权限更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -164,7 +171,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '用户是否激活',
+                    content: '权限是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -219,7 +226,7 @@ renderHeader: (h, params) => {
                         }
                     ],
                     tableRows: [],
-                    currentRow: {}
+                    selections: []
                 }
             }
         },
@@ -234,8 +241,8 @@ renderHeader: (h, params) => {
             showDetail(row) {
                 this.$emit('showDetailModal', row)
             },
-            changeCurrent(currentRow, oldCurrentRow) {
-                utils.changeCurrent(this, currentRow, oldCurrentRow)
+            changeSelection(selections) {
+                utils.changeSelections(this, selections)
             },
             changeSort(sortColumn) {
                 utils.changeSort(this, sortColumn)

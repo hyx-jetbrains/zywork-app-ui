@@ -705,7 +705,7 @@ export default [
           title: '模块管理',
           icon: 'ios-list-box'
         },
-        component: () => import('@/view/module/Module.vue')
+        component: () => import('@/view/module/ModuleMain.vue')
       },
       {
         path: 'Permission',
@@ -714,7 +714,7 @@ export default [
           title: '权限管理',
           icon: 'ios-key'
         },
-        component: () => import('@/view/permission/Permission.vue')
+        component: () => import('@/view/permission/PermissionMain.vue')
       },
 			{
 			  path: 'ModulePermission',
@@ -723,7 +723,7 @@ export default [
 			    title: '模块权限查询',
 			    icon: 'md-options'
 			  },
-			  component: () => import('@/view/module-permission/ModulePermission.vue')
+			  component: () => import('@/view/module-permission/ModulePermissionMain.vue')
 			},
 			{
 				path: 'role-permission-page',

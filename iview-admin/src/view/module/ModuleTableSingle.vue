@@ -15,11 +15,11 @@
     import * as utils from '@/api/utils-v2'
 
     export default {
-        name: 'UserTableSingle',
+        name: 'ModuleTableSingle',
         data() {
             return {
                 urls: {
-                    searchUrl: '/user/admin/pager-cond'
+                    searchUrl: '/module/admin/pager-cond'
                 },
                 pager: {
                     pageNo: 1,
@@ -41,32 +41,20 @@
                         }
                     },
                         {
-title: '用户编号',
+title: '模块编号',
 key: 'id',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '手机号',
-key: 'phone',
+title: '模块标题',
+key: 'title',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '用户邮箱',
-key: 'email',
-minWidth: 120,
-sortable: true,
-},
-{
-title: '登录密码',
-key: 'password',
-minWidth: 120,
-sortable: true,
-},
-{
-title: '加密盐值',
-key: 'salt',
+title: '模块描述',
+key: 'description',
 minWidth: 120,
 sortable: true,
 },
@@ -80,7 +68,7 @@ renderHeader: (h, params) => {
                 h('span', '版本号'),
                 h('Tooltip', {
                   props: {
-                    content: '用户版本号',
+                    content: '模块版本号',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -108,7 +96,7 @@ renderHeader: (h, params) => {
                 h('span', '创建时间'),
                 h('Tooltip', {
                   props: {
-                    content: '用户创建时间',
+                    content: '模块创建时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -136,7 +124,7 @@ renderHeader: (h, params) => {
                 h('span', '更新时间'),
                 h('Tooltip', {
                   props: {
-                    content: '用户更新时间',
+                    content: '模块更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -164,7 +152,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '用户是否激活',
+                    content: '模块是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -235,7 +223,7 @@ renderHeader: (h, params) => {
                 this.$emit('showDetailModal', row)
             },
             changeCurrent(currentRow, oldCurrentRow) {
-                utils.changeCurrent(this, currentRow, oldCurrentRow)
+              utils.changeCurrent(this, currentRow, oldCurrentRow)
             },
             changeSort(sortColumn) {
                 utils.changeSort(this, sortColumn)

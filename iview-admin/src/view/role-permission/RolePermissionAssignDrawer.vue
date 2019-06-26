@@ -107,7 +107,7 @@ export default {
         tempModuleChildren.expand = true
         var permissionChildern = []
         this.userPermissionList.forEach(permission => {
-          if (permission.permissionModuleId === module.id) {
+          if (permission.moduleId === module.id) {
             // 该权限是当前module下的权限
             var permissionId = permission.permissionId
             var tempPermissionChildern = {}

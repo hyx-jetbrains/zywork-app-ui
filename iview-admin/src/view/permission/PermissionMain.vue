@@ -10,10 +10,10 @@
                         </Button>
                         <DropdownMenu slot="list">
                         <DropdownItem name="import">
-                            导入角色
+                            导入权限
                         </DropdownItem>
                         <DropdownItem name="export">
-                            <span style="color: green;">导出角色</span>
+                            <span style="color: green;">导出权限</span>
                         </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>&nbsp;
@@ -32,50 +32,64 @@
                     <Tooltip content="刷新" placement="right">
                         <Button icon="md-refresh" type="success" shape="circle" @click="searchTable"></Button>
                     </Tooltip>
-                    <RoleTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" 
-                    v-on:showDetailModal="showDetailModal" v-on:showRolePermissionAssignDrawer="showRolePermissionAssignDrawer"/>
+                    <PermissionTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" 
+                    v-on:showDetailModal="showDetailModal" v-on:showModuleDetailModal="showModuleDetailModal"
+                    v-on:showModuleMainSingle="showModuleMainSingle"/>
                 </Card>
             </i-col>
         </Row>
-        <RoleAddEditModal ref="addEditModal" v-on:add="add" v-on:edit="edit"/>
-        <RoleSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
-        <RoleDetailModal ref="detailModal"/>
+        <PermissionAddEditModal ref="addEditModal" v-on:add="add" v-on:edit="edit"/>
+        <PermissionSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
+        <PermissionDetailModal ref="detailModal"/>
         <UploadModal ref="uploadModal" @search="searchTable" :title="uploadModal.title" :format="uploadModal.format"/>
-        <RolePermissionAssignDrawer ref="rolePermissionAssignDrawer"/>
+        <ModuleDetailModal ref="moduleDetailModal"/>
+        <Modal :transfer="false" fullscreen v-model="moduleMainSingle" title="搜索主表信息">
+            <ModuleMainSingle ref="moduleMainSingle" v-on:confirmSelection="confirmModuleMainSingleSelection"/>
+            <div slot="footer">
+                <Button type="text" size="large" @click="cancelModuleMainSingle">取消</Button>
+                <Button type="primary" size="large" @click="confirmModuleMainSingle">确认选择</Button>
+            </div>
+        </Modal>
+        
     </div>
 </template>
 
 <script>
     import * as utils from '@/api/utils-v2'
-    import RoleTableMain from './RoleTableMain.vue'
-    import RoleAddEditModal from './RoleAddEditModal.vue'
-    import RoleSearchModal from './RoleSearchModal.vue'
-    import RoleDetailModal from './RoleDetailModal.vue'
+    import PermissionTableMain from './PermissionTableMain.vue'
+    import PermissionAddEditModal from './PermissionAddEditModal.vue'
+    import PermissionSearchModal from './PermissionSearchModal.vue'
+    import PermissionDetailModal from './PermissionDetailModal.vue'
     import UploadModal from '_c/upload-modal'
-    import RolePermissionAssignDrawer from '@/view/role-permission/RolePermissionAssignDrawer.vue'
+    import ModuleDetailModal from '@/view/module/ModuleDetailModal.vue'
+    import ModuleMainSingle from '@/view/module/ModuleMainSingle.vue'
+    import {getModuleById} from '@/api/module'
+    import * as ResponseStatus from '@/api/response-status'
     export default {
-        name: 'RoleMain',
+        name: 'PermissionMain',
         components: {
-            RoleTableMain,
-            RoleAddEditModal,
-            RoleSearchModal,
-            RoleDetailModal,
+            PermissionTableMain,
+            PermissionAddEditModal,
+            PermissionSearchModal,
+            PermissionDetailModal,
             UploadModal,
-            RolePermissionAssignDrawer
+            ModuleDetailModal,
+            ModuleMainSingle
         },
         data() {
             return {
                 urls: {
-                    batchRemoveUrl: '/role/admin/batch-remove',
-                    batchActiveUrl: '/role/admin/batch-active',
-                    exportUrl: '/permission-import-export/export-roles'
+                    batchRemoveUrl: '/permission/admin/batch-remove',
+                    batchActiveUrl: '/permission/admin/batch-active',
+                    exportUrl: '/permission-import-export/export-permission'
                 },
                 uploadModal: {
-                    title: '导入角色信息',
+                    title: '导入权限信息',
                     format: ['json'],
-                    uploadUrl: '/permission-import-export/import-role'
+                    uploadUrl: '/permission-import-export/import-permission'
                 },
-                exportFileName: 'roles.json',
+                exportFileName: 'permission.json',
+                moduleMainSingle: false
             }
         },
         computed: {},
@@ -115,7 +129,7 @@
                     utils.batchActive(this, 1)
                 } else if (itemName === 'batchRemove') {
                     utils.batchRemove(this)
-                }   else if (itemName === 'import') {
+                } else if (itemName === 'import') {
                     this.showUploadModal()
                 } else if (itemName === 'export') {
                     utils.exportJson(this)
@@ -125,10 +139,35 @@
                 this.$refs.uploadModal.uploadUrl = this.uploadModal.uploadUrl
                 this.$refs.uploadModal.uploadModal = true
             },
-            showRolePermissionAssignDrawer(roleId) {
-                let rolePermissionAssignDrawer = this.$refs.rolePermissionAssignDrawer
-                rolePermissionAssignDrawer.drawerFlag = true
-                rolePermissionAssignDrawer.initData(roleId)
+            showModuleDetailModal(moduleId) {
+                getModuleById(moduleId).then(res => {
+                    const data = res.data
+                    if (data.code === ResponseStatus.OK) {
+                        let moduleDetailModal = this.$refs.moduleDetailModal
+                        moduleDetailModal.form = data.data
+                        moduleDetailModal.modal.detail = true
+                    } else {
+                        this.$Message.error(data.message)
+                    }
+                }).catch(err => {
+                    this.$Message.error(err)
+                })
+            }, 
+            showModuleMainSingle() {
+                this.moduleMainSingle = true
+            },
+            cancelModuleMainSingle() {
+                this.moduleMainSingle = false
+            },
+            confirmModuleMainSingleSelection(moduleId) {
+                this.moduleMainSingle= false
+                let searchModal = this.$refs.searchModal
+                searchModal.searchForm.moduleIdMin = moduleId
+                searchModal.searchForm.moduleIdMax = moduleId
+                utils.search(this)
+            },
+            confirmModuleMainSingle() {
+                this.$refs.moduleMainSingle.confirmSelection()
             }
         }
     }
