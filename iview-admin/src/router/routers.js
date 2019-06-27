@@ -148,7 +148,7 @@ export default [
 			    title: '用户第三方登录管理',
 			    icon: 'md-share'
 			  },
-			  component: () => import('@/view/user-social/UserUserSocial.vue')
+			  component: () => import('@/view/user-usersocial/UserUserSocialMain.vue')
 			},
 			{
 			  path: 'UserRole',
@@ -157,7 +157,7 @@ export default [
 			    title: '用户角色查询',
 			    icon: 'ios-lock'
 			  },
-			  component: () => import('@/view/user-role/UserRole.vue')
+			  component: () => import('@/view/user-role/UserRoleMain.vue')
 			},
       {
         path: 'ShippingAddress',
