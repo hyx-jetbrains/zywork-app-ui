@@ -166,7 +166,7 @@ export default [
           title: '收货地址管理',
           icon: 'ios-home'
         },
-        component: () => import('@/view/shipping-address/ShippingAddress.vue')
+        component: () => import('@/view/shipping-address/ShippingAddressMain.vue')
       }
     ]
   },
