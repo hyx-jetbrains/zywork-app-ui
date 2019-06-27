@@ -425,7 +425,8 @@ renderHeader: (h, params) => {
                                                     {
                                                         props: {
                                                             name: "removeJob",
-                                                            disabled: params.row.jobStatus === 0 ? false : true
+                                                            disabled: params.row.jobStatus === 2
+                                                            || params.row.jobStatus === 3 ? false : true
                                                         }
                                                     },
                                                     "移除任务"
@@ -487,7 +488,7 @@ renderHeader: (h, params) => {
                         this.optOneJob(this.urls.stopJobUrl)
                     }
                 } else if (itemName === "removeJob") {
-                    if (row.jobStatus === 0) {
+                    if (row.jobStatus === 2 || row.jobStatus === 3) {
                         this.initCronForm(row)
                         this.optOneJob(this.urls.removeJobUrl)
                     }
