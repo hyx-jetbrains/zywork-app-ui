@@ -799,7 +799,7 @@ export default [
 			    title: '系统日志管理',
 			    icon: 'ios-paper'
 			  },
-			  component: () => import('@/view/sys-log/SysLog.vue')
+			  component: () => import('@/view/sys-log/SysLogMain.vue')
 			},
 			{
 			  path: 'Scheduler',
