@@ -139,7 +139,7 @@ export default [
 			    title: '用户详情管理',
 			    icon: 'md-information-circle'
 			  },
-			  component: () => import('@/view/user-detail/UserUserDetail.vue')
+			  component: () => import('@/view/user-userdetail/UserUserDetailMain.vue')
 			},
 			{
 			  path: 'UserSocial',
