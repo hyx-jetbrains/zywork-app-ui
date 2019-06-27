@@ -808,7 +808,7 @@ export default [
 			    title: '定时任务管理',
 			    icon: 'md-time'
 			  },
-			  component: () => import('@/view/scheduler/Scheduler.vue')
+			  component: () => import('@/view/scheduler/SchedulerMain.vue')
 			},
       {
         path: 'RedisCache',

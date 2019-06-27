@@ -13,15 +13,25 @@
 
 <script>
     import * as utils from '@/api/utils-v2'
+    import {
+        modify,
+        optJob
+    } from '@/api/scheduler'
+    import * as ResponseStatus from '@/api/response-status'
 
     export default {
-        name: 'ProcessTableMain',
+        name: 'SchedulerTableMain',
         data() {
             return {
                 urls: {
-                    searchUrl: '/process/admin/pager-cond',
-                    activeUrl: '/process/admin/active',
-                    removeUrl: '/process/admin/remove/'
+                    searchUrl: '/scheduler/admin/pager-cond',
+                    activeUrl: '/scheduler/admin/active',
+                    removeUrl: '/scheduler/admin/remove/',
+                    startJobUrl: '/scheduler/admin/start',
+                    removeJobUrl: '/scheduler/admin/del',
+                    stopJobUrl: '/scheduler/admin/stop',
+                    pauseJobUrl: '/scheduler/admin/pause',
+                    resumeJobUrl: '/scheduler/admin/resume'
                 },
                 pager: {
                     pageNo: 1,
@@ -50,58 +60,98 @@
                             }
                         },
                         {
-title: '流程编号',
+title: '作业编号',
 key: 'id',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '流程Name',
-key: 'processName',
+title: '作业名称',
+key: 'name',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '流程Key',
-key: 'processKey',
+title: '完整类名',
+key: 'className',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '流程文件路径',
-key: 'filePath',
+title: 'cron表达式',
+key: 'cronExpression',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '流程描述',
+title: '作业组名称',
+key: 'groupName',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '触发器名称',
+key: 'triggerName',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '触发器组',
+key: 'triggerGroup',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '作业描述',
 key: 'description',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '是否部署',
-key: 'isDeploy',
+title: '作业状态',
+key: 'jobStatus',
 minWidth: 120,
 sortable: true,
 render: (h, params) => {
               const row = params.row
-              const color = row.isDeploy === 1 ? 'success' : row.isDeploy === 0 ? 'default' : 'error'
-              const text = row.isDeploy === 1 ? '已部署' : row.isDeploy === 0 ? '未部署': '未知'
+              let color;
+              let text;
+              if (row.jobStatus === 0) {
+                  color = '#696c6f'
+                  text = '未启动'
+              } else if (row.jobStatus === 1) {
+                  color = '#2af543'
+                  text = '运行中'
+              } else if (row.jobStatus === 2) {
+                  color = '#f70404'
+                  text = '已停止'
+              } else if (row.jobStatus === 3) {
+                  color = '#2d8cf0'
+                  text = '已暂停'
+              } else if (row.jobStatus === 4) {
+                  color = '#750312'
+                  text = '已移除'
+              }
               return h(
                 'Tag',
                 {
-                  props: {
-                      color: color
-                  }
+                    props: {
+                        color: color
+                    }
                 },
                 text
               )
             }
 },
 {
-title: '部署时间',
-key: 'deployTime',
+title: '状态更新时间',
+key: 'jobStatusTime',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '自动启动',
+key: 'autoStart',
 minWidth: 120,
 sortable: true,
 },
@@ -115,7 +165,7 @@ renderHeader: (h, params) => {
                 h('span', '版本号'),
                 h('Tooltip', {
                   props: {
-                    content: '流程版本号',
+                    content: '作业版本号',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -143,7 +193,7 @@ renderHeader: (h, params) => {
                 h('span', '创建时间'),
                 h('Tooltip', {
                   props: {
-                    content: '流程上传时间',
+                    content: '作业创建时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -171,7 +221,7 @@ renderHeader: (h, params) => {
                 h('span', '更新时间'),
                 h('Tooltip', {
                   props: {
-                    content: '流程更新时间',
+                    content: '作业更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -199,7 +249,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '流程是否激活',
+                    content: '作业是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -328,23 +378,58 @@ renderHeader: (h, params) => {
                                                     ]
                                                 ),
                                                 h(
-                                                    'DropdownItem',
+                                                    "DropdownItem",
                                                     {
-                                                    props: {
-                                                        name: 'showUploadModal'
-                                                    }
+                                                        props: {
+                                                            name: "startJob",
+                                                            disabled: (params.row.jobStatus === 0 
+                                                            || params.row.jobStatus === 2
+                                                            || params.row.jobStatus === 4) ? false : true
+                                                        }
                                                     },
-                                                    '上传流程ZIP'
+                                                    "启动任务"
                                                 ),
                                                 h(
-                                                    'DropdownItem',
+                                                    "DropdownItem",
                                                     {
-                                                    props: {
-                                                        name: 'deploy'
-                                                    }
+                                                        props: {
+                                                            name: "pauseJob",
+                                                            disabled: params.row.jobStatus === 1 ? false : true
+                                                        }
                                                     },
-                                                    '部署流程'
-                                                )
+                                                    "暂停任务"
+                                                ),
+                                                h(
+                                                    "DropdownItem",
+                                                    {
+                                                        props: {
+                                                            name: "resumeJob",
+                                                            disabled: params.row.jobStatus === 3 ? false : true
+                                                        }
+                                                    },
+                                                    "恢复任务"
+                                                ),
+                                                h(
+                                                    "DropdownItem",
+                                                    {
+                                                        props: {
+                                                            name: "stopJob",
+                                                            disabled: (params.row.jobStatus === 1
+                                                            || params.row.jobStatus === 3) ? false : true
+                                                        }
+                                                    },
+                                                    "停止任务"
+                                                ),
+                                                h(
+                                                    "DropdownItem",
+                                                    {
+                                                        props: {
+                                                            name: "removeJob",
+                                                            disabled: params.row.jobStatus === 0 ? false : true
+                                                        }
+                                                    },
+                                                    "移除任务"
+                                                ),
                                             ]
                                         )
                                     ]
@@ -354,7 +439,16 @@ renderHeader: (h, params) => {
                     ],
                     tableRows: [],
                     selections: []
-                }
+                },
+                cronForm: {
+                    cronExp: null,
+                    jobGroup: null,
+                    jobId: null,
+                    jobName: null,
+                    triggerGroup: null,
+                    triggerName: null,
+                    jobClassName: null
+                },
             }
         },
         computed: {},
@@ -372,10 +466,31 @@ renderHeader: (h, params) => {
                     this.$emit('showDetailModal', row)
                 } else if (itemName === "remove") {
                     utils.remove(this, row);
-                } else if (itemName === 'showUploadModal') {
-                    this.$emit('showUploadModal', row.id)
-                } else if (itemName === 'deploy') {
-                    this.deploy(row)
+                } else if (itemName === "startJob") {
+                    if (row.jobStatus === 0 || row.jobStatus === 2 || row.jobStatus === 4) {
+                        this.initCronForm(row)
+                        this.optOneJob(this.urls.startJobUrl)
+                    }
+                } else if (itemName === "pauseJob") {
+                    if (row.jobStatus === 1) {
+                        this.initCronForm(row)
+                        this.optOneJob(this.urls.pauseJobUrl)
+                    }
+                } else if (itemName === "resumeJob") {
+                    if (row.jobStatus === 3) {
+                        this.initCronForm(row)
+                        this.optOneJob(this.urls.resumeJobUrl)
+                    }
+                } else if (itemName === "stopJob") {
+                    if (row.jobStatus === 1 || row.jobStatus === 3) {
+                        this.initCronForm(row)
+                        this.optOneJob(this.urls.stopJobUrl)
+                    }
+                } else if (itemName === "removeJob") {
+                    if (row.jobStatus === 0) {
+                        this.initCronForm(row)
+                        this.optOneJob(this.urls.removeJobUrl)
+                    }
                 }
             },
             active(row) {
@@ -393,44 +508,28 @@ renderHeader: (h, params) => {
             changePageSize(pageSize) {
                 utils.changePageSize(this, pageSize)
             },
-            deploy(process) {
-                if (process.isDeploy === 1) {
-                    this.$Modal.confirm({
-                    title: '确认部署吗？',
-                    content: '此流程已经部署，是否再次部署？',
-                    onOk: () => {
-                        this.doDeploy(process)
-                    },
-                    onCancel: () => {}
-                    })
-                } else {
-                    this.doDeploy(process)
-                }
+            initCronForm(row) {
+                this.cronForm.cronExp = row.cronExpression
+                this.cronForm.jobGroup = row.groupName
+                this.cronForm.jobId = row.id
+                this.cronForm.jobName = row.name
+                this.cronForm.triggerName = row.triggerName
+                this.cronForm.triggerGroup = row.triggerGroup
+                this.cronForm.jobClassName = row.className
             },
-            doDeploy(row) {
-            this.$Notice.info({
-                title: '流程部署',
-                desc: '正在部署流程：' + row.processName
-            })
-            let self = this
-            process.deploy(row).then(response => {
-                if (response.data.code !== ResponseStatus.OK) {
-                    this.$Notice.error({
-                    title: '流程部署',
-                    desc: response.data.message
-                    })
-                } else {
-                    this.$Notice.success({
-                    title: '流程部署',
-                    desc: response.data.message
-                    })
-                    self.search(self)
-                }
-                }).catch(error => {
-                    console.log(error)
-                    self.$Message.error('流程部署失败，稍候再试')
+            optOneJob(url) {
+                optJob(url, this.cronForm).then(res => {
+                    const data = res.data
+                    if (data.code !== ResponseStatus.OK) {
+                        this.$Message.error(data.message)
+                        return
+                    }
+                    this.$Message.success(data.message)
+                    this.search()
+                }).catch(err => {
+                    this.$Message.error(err)
                 })
-            },
+            }
         }
     }
 </script>

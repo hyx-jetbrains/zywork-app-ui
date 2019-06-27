@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Table ref="dataTable" stripe :loading="table.loading" :columns="table.tableColumns" :data="table.tableRows"
+        <Table ref="dataTable" highlight-row stripe :loading="table.loading" :columns="table.tableColumns" :data="table.tableRows"
                style="margin-top:20px;" @on-selection-change="changeSelection" @on-sort-change="changeSort"></Table>
         <div style="margin: 20px; overflow: hidden">
             <div style="float: right;">
@@ -15,13 +15,11 @@
     import * as utils from '@/api/utils-v2'
 
     export default {
-        name: 'ProcessTableMain',
+        name: 'SchedulerTableShow',
         data() {
             return {
                 urls: {
-                    searchUrl: '/process/admin/pager-cond',
-                    activeUrl: '/process/admin/active',
-                    removeUrl: '/process/admin/remove/'
+                    searchUrl: '/scheduler/admin/pager-cond'
                 },
                 pager: {
                     pageNo: 1,
@@ -35,73 +33,76 @@
                 table: {
                     loading: false,
                     tableColumns: [{
-                        type: 'selection',
-                        width: 45,
-                        key: 'id',
+                        width: 60,
                         align: 'center',
-                        fixed: 'left'
+                        fixed: 'left',
+                        render: (h, params) => {
+                            return h('span', params.index + (this.pager.pageNo - 1) * this.pager.pageSize + 1)
+                        }
                     },
                         {
-                            width: 60,
-                            align: 'center',
-                            fixed: 'left',
-                            render: (h, params) => {
-                                return h('span', params.index + (this.pager.pageNo - 1) * this.pager.pageSize + 1)
-                            }
-                        },
-                        {
-title: '流程编号',
+title: '作业编号',
 key: 'id',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '流程Name',
-key: 'processName',
+title: '作业名称',
+key: 'name',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '流程Key',
-key: 'processKey',
+title: '完整类名',
+key: 'className',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '流程文件路径',
-key: 'filePath',
+title: 'cron表达式',
+key: 'cronExpression',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '流程描述',
+title: '作业组名称',
+key: 'groupName',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '触发器名称',
+key: 'triggerName',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '触发器组',
+key: 'triggerGroup',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '作业描述',
 key: 'description',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '是否部署',
-key: 'isDeploy',
+title: '作业状态',
+key: 'jobStatus',
 minWidth: 120,
 sortable: true,
-render: (h, params) => {
-              const row = params.row
-              const color = row.isDeploy === 1 ? 'success' : row.isDeploy === 0 ? 'default' : 'error'
-              const text = row.isDeploy === 1 ? '已部署' : row.isDeploy === 0 ? '未部署': '未知'
-              return h(
-                'Tag',
-                {
-                  props: {
-                      color: color
-                  }
-                },
-                text
-              )
-            }
 },
 {
-title: '部署时间',
-key: 'deployTime',
+title: '状态更新时间',
+key: 'jobStatusTime',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '自动启动',
+key: 'autoStart',
 minWidth: 120,
 sortable: true,
 },
@@ -115,7 +116,7 @@ renderHeader: (h, params) => {
                 h('span', '版本号'),
                 h('Tooltip', {
                   props: {
-                    content: '流程版本号',
+                    content: '作业版本号',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -143,7 +144,7 @@ renderHeader: (h, params) => {
                 h('span', '创建时间'),
                 h('Tooltip', {
                   props: {
-                    content: '流程上传时间',
+                    content: '作业创建时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -171,7 +172,7 @@ renderHeader: (h, params) => {
                 h('span', '更新时间'),
                 h('Tooltip', {
                   props: {
-                    content: '流程更新时间',
+                    content: '作业更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -199,7 +200,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '流程是否激活',
+                    content: '作业是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -224,27 +225,7 @@ renderHeader: (h, params) => {
                             minWidth: 100,
                             align: 'center',
                             render: (h, params) => {
-                                return h('i-switch', {
-                                    props: {
-                                        size: 'large',
-                                        value: params.row.isActive === 0
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        'on-change': (status) => {
-                                            this.active(params.row)
-                                        }
-                                    }
-                                }, [
-                                    h('span', {
-                                        slot: 'open'
-                                    }, '激活'),
-                                    h('span', {
-                                        slot: 'close'
-                                    }, '冻结')
-                                ])
+                                return h('span', params.row.isActive === 0 ? '激活': '冻结')
                             }
                         },
                         {
@@ -294,56 +275,10 @@ renderHeader: (h, params) => {
                                                     "DropdownItem",
                                                     {
                                                         props: {
-                                                            name: "showEdit"
-                                                        }
-                                                    },
-                                                    "编辑"
-                                                ),
-                                                h(
-                                                    "DropdownItem",
-                                                    {
-                                                        props: {
                                                             name: "showDetail"
                                                         }
                                                     },
                                                     "详情"
-                                                ),
-                                                h(
-                                                    "DropdownItem",
-                                                    {
-                                                        props: {
-                                                            name: "remove"
-                                                        }
-                                                    },
-                                                    [
-                                                        h(
-                                                            "span",
-                                                            {
-                                                                style: {
-                                                                    color: "red"
-                                                                }
-                                                            },
-                                                            "删除"
-                                                        )
-                                                    ]
-                                                ),
-                                                h(
-                                                    'DropdownItem',
-                                                    {
-                                                    props: {
-                                                        name: 'showUploadModal'
-                                                    }
-                                                    },
-                                                    '上传流程ZIP'
-                                                ),
-                                                h(
-                                                    'DropdownItem',
-                                                    {
-                                                    props: {
-                                                        name: 'deploy'
-                                                    }
-                                                    },
-                                                    '部署流程'
                                                 )
                                             ]
                                         )
@@ -366,20 +301,9 @@ renderHeader: (h, params) => {
                 this.$emit('searchTable')
             },
             userOpt(itemName, row) {
-                if (itemName === "showEdit") {
-                    this.$emit('showEditModal', JSON.parse(JSON.stringify(row)))
-                } else if (itemName === "showDetail") {
+                if (itemName === "showDetail") {
                     this.$emit('showDetailModal', row)
-                } else if (itemName === "remove") {
-                    utils.remove(this, row);
-                } else if (itemName === 'showUploadModal') {
-                    this.$emit('showUploadModal', row.id)
-                } else if (itemName === 'deploy') {
-                    this.deploy(row)
                 }
-            },
-            active(row) {
-                utils.active(this, row)
             },
             changeSelection(selections) {
                 utils.changeSelections(this, selections)
@@ -392,45 +316,7 @@ renderHeader: (h, params) => {
             },
             changePageSize(pageSize) {
                 utils.changePageSize(this, pageSize)
-            },
-            deploy(process) {
-                if (process.isDeploy === 1) {
-                    this.$Modal.confirm({
-                    title: '确认部署吗？',
-                    content: '此流程已经部署，是否再次部署？',
-                    onOk: () => {
-                        this.doDeploy(process)
-                    },
-                    onCancel: () => {}
-                    })
-                } else {
-                    this.doDeploy(process)
-                }
-            },
-            doDeploy(row) {
-            this.$Notice.info({
-                title: '流程部署',
-                desc: '正在部署流程：' + row.processName
-            })
-            let self = this
-            process.deploy(row).then(response => {
-                if (response.data.code !== ResponseStatus.OK) {
-                    this.$Notice.error({
-                    title: '流程部署',
-                    desc: response.data.message
-                    })
-                } else {
-                    this.$Notice.success({
-                    title: '流程部署',
-                    desc: response.data.message
-                    })
-                    self.search(self)
-                }
-                }).catch(error => {
-                    console.log(error)
-                    self.$Message.error('流程部署失败，稍候再试')
-                })
-            },
+            }
         }
     }
 </script>
