@@ -316,7 +316,7 @@ export default [
           title: '流程文件管理',
           icon: 'md-swap'
         },
-        component: () => import('@/view/process/Process.vue')
+        component: () => import('@/view/process/ProcessMain.vue')
       },
       {
         path: 'ProcessDeployment',
