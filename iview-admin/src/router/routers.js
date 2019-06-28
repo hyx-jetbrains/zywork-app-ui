@@ -231,7 +231,7 @@ export default [
           title: '提现管理',
           icon: 'md-checkmark-circle'
         },
-        component: () => import('@/view/funds-withdraw/FundsWithdraw.vue')
+        component: () => import('@/view/funds-withdraw/FundsWithdrawMain.vue')
       },
       {
         path: 'FundsWithdrawCheck',
