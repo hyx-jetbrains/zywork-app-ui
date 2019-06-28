@@ -186,7 +186,7 @@ export default [
           title: '钱包管理',
           icon: 'md-cash'
         },
-        component: () => import('@/view/user-wallet/UserWallet.vue')
+        component: () => import('@/view/user-wallet/UserWalletMain.vue')
       },
       {
         path: 'UserBankcard',
