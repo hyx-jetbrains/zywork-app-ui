@@ -258,7 +258,7 @@ export default [
           title: '提现审核查询',
           icon: 'ios-pint'
         },
-        component: () => import('@/view/funds-withdraw-check-query/UserWithdrawCheck.vue')
+        component: () => import('@/view/user-withdraw-check/UserWithdrawCheckMain.vue')
       }
     ]
   },
