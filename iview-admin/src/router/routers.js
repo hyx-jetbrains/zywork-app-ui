@@ -240,7 +240,7 @@ export default [
           title: '提现审核管理',
           icon: 'md-open'
         },
-        component: () => import('@/view/funds-withdraw-check/FundsWithdrawCheck.vue')
+        component: () => import('@/view/funds-withdraw-check/FundsWithdrawCheckMain.vue')
       },
       {
         path: 'UserWithdrawCheck',
