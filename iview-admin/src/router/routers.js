@@ -195,7 +195,7 @@ export default [
           title: '银行卡管理',
           icon: 'ios-card'
         },
-        component: () => import('@/view/user-bankcard/UserBankcard.vue')
+        component: () => import('@/view/user-bankcard/UserBankcardMain.vue')
       },
       {
         path: 'FundsRecharge',
