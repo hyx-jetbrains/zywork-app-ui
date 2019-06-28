@@ -204,7 +204,7 @@ export default [
           title: '充值管理',
           icon: 'md-add-circle'
         },
-        component: () => import('@/view/funds-recharge/FundsRecharge.vue')
+        component: () => import('@/view/funds-recharge/FundsRechargeMain.vue')
       },
       {
         path: 'FundsTransfer',
