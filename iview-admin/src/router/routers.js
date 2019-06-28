@@ -198,6 +198,15 @@ export default [
         component: () => import('@/view/user-bankcard/UserBankcardMain.vue')
       },
       {
+        path: 'AccountDetail',
+        name: 'user_account_manage',
+        meta: {
+          title: '账目管理',
+          icon: 'md-list-box'
+        },
+        component: () => import('@/view/account-detail/AccountDetailMain.vue')
+      },
+      {
         path: 'FundsRecharge',
         name: 'funds_recharge',
         meta: {
@@ -250,15 +259,6 @@ export default [
           icon: 'ios-pint'
         },
         component: () => import('@/view/funds-withdraw-check-query/UserWithdrawCheck.vue')
-      },
-      {
-        path: 'AccountDetail',
-        name: 'user_account_manage',
-        meta: {
-          title: '账目管理',
-          icon: 'md-list-box'
-        },
-        component: () => import('@/view/account-detail/AccountDetail.vue')
       }
     ]
   },
