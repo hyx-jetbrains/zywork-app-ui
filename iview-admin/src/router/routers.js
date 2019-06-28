@@ -222,7 +222,7 @@ export default [
           title: '冻结管理',
           icon: 'md-snow'
         },
-        component: () => import('@/view/funds-frezee/FundsFrezee.vue')
+        component: () => import('@/view/funds-frezee/FundsFrezeeMain.vue')
       },
       {
         path: 'FundsWithdraw',
