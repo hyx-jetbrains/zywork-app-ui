@@ -213,7 +213,7 @@ export default [
           title: '转账管理',
           icon: 'md-swap'
         },
-        component: () => import('@/view/funds-transfer/FundsTransfer.vue')
+        component: () => import('@/view/funds-transfer/FundsTransferMain.vue')
       },
       {
         path: 'FundsFrezee',
