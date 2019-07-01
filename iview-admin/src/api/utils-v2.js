@@ -1,6 +1,67 @@
 import axios from '@/libs/api.request'
-import fileDownload from 'js-file-download'
+import Qs from 'qs'
+import { getLocalStorageToken } from '@/libs/util'
 import * as ResponseStatus from '@/api/response-status'
+import fileDownload from 'js-file-download'
+
+/**
+ * post请求，application/json
+ * @param {*} url 请求url
+ * @param {*} data json对象
+ * @param {*} headers 如headers: {
+                          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                          'Authorization': 'Bearer ' + getLocalStorageToken()
+                        }
+                      如果不需要传递headers，则直接使用{}
+ */
+export const doPostJson = (url, data, headers) => {
+  headers['Authorization'] = 'Bearer ' + getLocalStorageToken()
+  return axios.request({
+    url: url,
+    method: 'POST',
+    data: data,
+    headers: headers
+  })
+}
+
+/**
+ * post请求，application/x-www-form-urlencoded
+ * @param {*} url 请求url
+ * @param {*} data json对象
+ * @param {*} headers 如headers: {
+                          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                          'Authorization': 'Bearer ' + getLocalStorageToken()
+                        }
+                      如果不需要传递headers，则直接使用{}
+ */
+export const doPostQs = (url, data, headers) => {
+  headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+  headers['Authorization'] = 'Bearer ' + getLocalStorageToken()
+  return axios.request({
+    url: url,
+    method: 'POST',
+    data: Qs.stringify(data),
+    headers: headers
+  })
+}
+
+/**
+ * get请求
+ * @param {*} url 请求url，包含请求参数
+ * @param {*} headers 如headers: {
+                          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                          'Authorization': 'Bearer ' + getLocalStorageToken()
+                        }
+                      如果不需要传递headers，则直接使用{}
+ */
+export const doGet = (url, headers) => {
+  headers['Authorization'] = 'Bearer ' + getLocalStorageToken()
+  return axios.request({
+    url: url,
+    method: 'GET',
+    headers: headers
+  })
+}
 
 /**
  * 根据form数据对象添加数据
@@ -13,11 +74,7 @@ export const add = (self) => {
     addForm.validate(valid => {
       if (valid) {
         addEditComponent.loading.add = true
-        axios.request({
-          url: addEditComponent.urls.addUrl,
-          method: 'POST',
-          data: addEditComponent.form
-        }).then(response => {
+        doPostJson(addEditComponent.urls.addUrl, addEditComponent.form, {}).then(response => {
           addEditComponent.loading.add = false
           if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
@@ -51,11 +108,7 @@ export const edit = (self) => {
     editForm.validate(valid => {
       if (valid) {
         addEditComponent.loading.edit = true
-        axios.request({
-          url: addEditComponent.urls.editUrl,
-          method: 'POST',
-          data: addEditComponent.form
-        }).then(response => {
+        doPostJson(addEditComponent.urls.editUrl, addEditComponent.form, {}).then(response => {
           addEditComponent.loading.edit = false
           if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
@@ -89,10 +142,7 @@ export const remove = (tableComponent, row) => {
       title: '确认删除吗？',
       content: '确认删除选择的数据吗？',
       onOk: () => {
-        axios.request({
-          url: tableComponent.urls.removeUrl + row.id,
-          method: 'GET'
-        }).then(response => {
+        doGet(tableComponent.urls.removeUrl + row.id, {}).then(response => {
           if (response.data.code !== ResponseStatus.OK) {
             tableComponent.$Message.error(response.data.message)
           } else {
@@ -130,11 +180,7 @@ export const batchRemove = (self) => {
           tableComponent.table.selections.forEach((row, index) => {
             ids.push(row.id)
           })
-          axios.request({
-            url: self.urls.batchRemoveUrl,
-            method: 'POST',
-            data: ids
-          }).then(response => {
+          doPostJson(self.urls.batchRemoveUrl, ids, {}).then(response => {
             if (response.data.code !== ResponseStatus.OK) {
               self.$Message.error(response.data.message)
             } else {
@@ -165,14 +211,11 @@ export const batchRemove = (self) => {
 export const active = (tableComponent, row) => {
   return new Promise((resolve, reject) => {
     let isActive = row.isActive === 0 ? 1 : 0
-    axios.request({
-      url: tableComponent.urls.activeUrl,
-      method: 'POST',
-      data: {
-        id: row.id,
-        isActive: isActive
-      }
-    }).then(response => {
+    let data = {
+      id: row.id,
+      isActive: isActive
+    } 
+    doPostJson(tableComponent.urls.activeUrl, data, {}).then(response => {
       if (response.data.code !== ResponseStatus.OK) {
         tableComponent.$Message.error(response.data.message)
       } else {
@@ -209,11 +252,7 @@ export const batchActive = (self, isActive) => {
         }
       })
       if (rowArray.length > 0) {
-        axios.request({
-          url: self.urls.batchActiveUrl,
-          method: 'POST',
-          data: rowArray
-        }).then(response => {
+        doPostJson(self.urls.batchActiveUrl, rowArray, {}).then(response => {
           if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
@@ -248,11 +287,7 @@ export const search = (self) => {
     searchComponent.searchForm.sortOrder = tableComponent.searchOpts.sortOrder
     searchComponent.loading.search = true
     tableComponent.table.loading = true
-    axios.request({
-      url: tableComponent.urls.searchUrl,
-      method: 'POST',
-      data: searchComponent.searchForm
-    }).then(response => {
+    doPostJson(tableComponent.urls.searchUrl, searchComponent.searchForm, {}).then(response => {
       if (response.data.code !== ResponseStatus.OK) {
         tableComponent.$Message.error(response.data.message)
       } else {
@@ -341,11 +376,7 @@ export const initSelectTableData = (self) => {
     searchComponent.searchForm.sortOrder = tableComponent.searchOpts.sortOrder
     searchComponent.loading.search = true
     tableComponent.table.loading = true
-    axios.request({
-      url: tableComponent.urls.searchUrl,
-      method: 'POST',
-      data: searchComponent.searchForm
-    }).then(response => {
+    doPostJson(tableComponent.urls.searchUrl, searchComponent.searchForm, {}).then(response => {
       if (response.data.code !== ResponseStatus.OK) {
         self.$Message.error(response.data.message)
       } else {
