@@ -72,6 +72,7 @@
                 let addEditModal = this.$refs.addEditModal
                 addEditModal.modal.edit = true
                 addEditModal.form = row
+                addEditModal.$refs.editorEdit.setHtml(row.content)
             },
             edit() {
                 utils.edit(this)
