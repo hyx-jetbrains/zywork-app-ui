@@ -770,7 +770,7 @@ export default [
           title: '消息管理',
           icon: 'ios-information-circle'
         },
-        component: () => import('@/view/message/Message.vue')
+        component: () => import('@/view/message/MessageMain.vue')
       },
       {
         path: 'UserMessage',
