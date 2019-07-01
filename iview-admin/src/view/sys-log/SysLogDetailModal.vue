@@ -24,7 +24,7 @@
 	<i-col span="11"><span class="detail-title">开始执行时间：</span><span v-text="form.executeTime"></span></i-col><i-col span="2"></i-col><i-col span="11"><span class="detail-title">执行耗时(ms)：</span><span v-text="form.executeCostTime"></span></i-col>
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">是否异常：</span><span v-text="form.hasException"></span></i-col><i-col span="2"></i-col><i-col span="11"><span class="detail-title">异常消息：</span><span v-text="form.exceptionMsg"></span></i-col>
+	<i-col span="11"><span class="detail-title">是否异常：</span><span v-text="form.hasException"></span></i-col><i-col span="2"></i-col><i-col span="11"><span class="detail-title">异常消息：</span><span v-text="form.exceptionMsg !== null ? '请在表格中点击查看' : ''"></span></i-col>
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">IP地址：</span><span v-text="form.executeIp"></span></i-col><i-col span="2"></i-col><i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.version"></span></i-col>

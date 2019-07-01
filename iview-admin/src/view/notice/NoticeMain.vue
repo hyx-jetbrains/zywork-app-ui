@@ -27,7 +27,7 @@
         <NoticeAddEditModal ref="addEditModal" v-on:add="add" v-on:edit="edit"/>
         <NoticeSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
         <NoticeDetailModal ref="detailModal"/>
-        <ContentModal ref="contentModal" :title="公告内容"/>
+        <ContentModal ref="contentModal"/>
     </div>
 </template>
 

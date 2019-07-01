@@ -19,13 +19,15 @@
                     <Tooltip content="刷新" placement="right">
                         <Button icon="md-refresh" type="success" shape="circle" @click="searchTable"></Button>
                     </Tooltip>
-                    <SysLogTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" v-on:showDetailModal="showDetailModal"/>
+                    <SysLogTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" v-on:showDetailModal="showDetailModal"
+                    v-on:showContentModal="showContentModal"/>
                 </Card>
             </i-col>
         </Row>
         <SysLogAddEditModal ref="addEditModal" v-on:add="add" v-on:edit="edit"/>
         <SysLogSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
         <SysLogDetailModal ref="detailModal"/>
+        <ContentModal ref="contentModal"/>
     </div>
 </template>
 
@@ -35,13 +37,15 @@
     import SysLogAddEditModal from './SysLogAddEditModal.vue'
     import SysLogSearchModal from './SysLogSearchModal.vue'
     import SysLogDetailModal from './SysLogDetailModal.vue'
+    import ContentModal from '_c/content-modal'
     export default {
         name: 'SysLogMain',
         components: {
             SysLogTableMain,
             SysLogAddEditModal,
             SysLogSearchModal,
-            SysLogDetailModal
+            SysLogDetailModal,
+            ContentModal
         },
         data() {
             return {
@@ -89,6 +93,12 @@
                 } else if (itemName === 'batchRemove') {
                     utils.batchRemove(this)
                 }
+            },
+            showContentModal(exceptionMsg) {
+                let contentModal = this.$refs.contentModal
+                contentModal.title = '异常消息'
+                contentModal.content = exceptionMsg
+                contentModal.contentModal = true
             }
         }
     }

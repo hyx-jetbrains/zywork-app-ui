@@ -165,7 +165,18 @@ renderHeader: (h, params) => {
 title: '异常消息',
 key: 'exceptionMsg',
 minWidth: 120,
-sortable: true
+sortable: true,
+render: (h, params) => {
+  return params.row.exceptionMsg ?
+          h('a', {
+                  on: {
+                    click: () => {
+                      this.$emit('showContentModal', params.row.exceptionMsg)
+                    }
+                  }
+                },'点击查看') : 
+          h('')
+            }
 },
 {
 title: 'IP地址',
