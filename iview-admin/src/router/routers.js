@@ -761,7 +761,7 @@ export default [
           title: '系统公告管理',
           icon: 'ios-notifications'
         },
-        component: () => import('@/view/notice/Notice.vue')
+        component: () => import('@/view/notice/NoticeMain.vue')
       },
       {
         path: 'Message',
