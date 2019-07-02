@@ -667,7 +667,7 @@ export default [
           title: 'DAU统计管理',
           icon: 'ios-walk'
         },
-        component: () => import('@/view/statistics-dau/StatisticsDau.vue')
+        component: () => import('@/view/statistics-dau/StatisticsDauMain.vue')
       },
       {
         path: 'DauReport',
