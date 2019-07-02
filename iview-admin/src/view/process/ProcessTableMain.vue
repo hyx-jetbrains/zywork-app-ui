@@ -13,6 +13,8 @@
 
 <script>
     import * as utils from '@/api/utils-v2'
+    import * as process from '@/api/process'
+    import * as ResponseStatus from '@/api/response-status'
 
     export default {
         name: 'ProcessTableMain',

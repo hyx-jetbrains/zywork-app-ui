@@ -77,11 +77,11 @@ export default {
     },
     // 删除指定流程所有的流程部署
     removeAll() {
-      if (this.table.selections.length !== 1) {
+      if (this.$refs.table.table.selections.length !== 1) {
         this.$Message.error('请选择一条记录')
         return
       }
-      const row = this.table.selections[0]
+      const row = this.$refs.table.table.selections[0]
       process.removeAll(this, row)
     },
     showDetailModal(row) {
@@ -99,15 +99,8 @@ export default {
     // 确定选择的流程
     selectProcess(processRow) {
       this.processName = processRow.processName
-      process.searchTableData(this)
-        .then(res => {
-          if (res.data.code === ResponseStatus.OK) {
-            this.modal.process = false
-          }
-        })
-        .catch(err => {
-          this.$Message.error(err)
-        })
+      this.searchTable()
+      this.modal.process = false
       
     }
   }

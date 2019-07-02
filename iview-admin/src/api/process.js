@@ -89,6 +89,7 @@ export const removeOld = (self, row) => {
           if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
+            self.$Message.success(response.data.message)
             searchTableData(self)
           }
           resolve(response)
@@ -126,6 +127,7 @@ export const removeAll = (self, row) => {
           if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
+            self.$Message.success(response.data.message)
             searchTableData(self)
           }
           resolve(response)

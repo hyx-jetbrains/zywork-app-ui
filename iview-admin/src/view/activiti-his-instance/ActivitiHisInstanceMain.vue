@@ -85,16 +85,8 @@ export default {
     // 确定选择的流程
     selectProcess(processRow) {
       this.processKey = processRow.processKey
-      console.log(this.processKey)
-      process.searchTableData(this)
-        .then(res => {
-          if (res.data.code === ResponseStatus.OK) {
-            this.modal.process = false
-          }
-        })
-        .catch(err => {
-          this.$Message.error(err)
-        })
+      this.searchTable()
+      this.modal.process = false
       
     }
   }
