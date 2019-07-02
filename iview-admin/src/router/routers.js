@@ -278,7 +278,7 @@ export default [
           title: '文章类别管理',
           icon: 'md-filing'
         },
-        component: () => import('@/view/article-category/ArticleCategory.vue')
+        component: () => import('@/view/article-category/ArticleCategoryMain.vue')
       },
       {
         path: 'Article',
@@ -296,7 +296,7 @@ export default [
           title: '文章评论管理',
           icon: 'ios-text'
         },
-        component: () => import('@/view/article-comment/ArticleComment.vue')
+        component: () => import('@/view/article-comment/ArticleCommentMain.vue')
       }
     ]
   },
