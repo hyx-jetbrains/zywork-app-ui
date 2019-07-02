@@ -334,7 +334,7 @@ export default [
           title: '流程定义管理',
           icon: 'md-switch'
         },
-        component: () => import('@/view/activiti-definition/ActivitiDefinition.vue')
+        component: () => import('@/view/activiti-definition/ActivitiDefinitionMain.vue')
       },
       {
         path: 'ProcessInstance',
@@ -343,7 +343,7 @@ export default [
           title: '流程实例管理',
           icon: 'ios-browsers'
         },
-        component: () => import('@/view/activiti-instance/ActivitiInstance.vue')
+        component: () => import('@/view/activiti-instance/ActivitiInstanceMain.vue')
       },
       {
         path: 'ProcessTask',
@@ -352,7 +352,7 @@ export default [
           title: '流程任务管理',
           icon: 'ios-stopwatch'
         },
-        component: () => import('@/view/activiti-task/ActivitiTask.vue')
+        component: () => import('@/view/activiti-task/ActivitiTaskMain.vue')
       },
       {
         path: 'HistoricProcess',
@@ -361,7 +361,7 @@ export default [
           title: '流程历史管理',
           icon: 'ios-barcode'
         },
-        component: () => import('@/view/activiti-his-instance/ActivitiHisInstance.vue')
+        component: () => import('@/view/activiti-his-instance/ActivitiHisInstanceMain.vue')
       },
       {
         path: 'ProcessDesign',

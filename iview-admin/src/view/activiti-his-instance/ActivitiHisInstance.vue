@@ -78,7 +78,7 @@
         <span v-text="form.businessKey"></span>
       </p>
       <p>顶级流程实例ID:
-        <span v-text="form.顶级流程实例ID"></span>
+        <span v-text="form.superProcessInstanceId"></span>
       </p>
       <p>名称:
         <span v-text="form.name"></span>
