@@ -53,6 +53,11 @@
             },
             confirmSelection() {
                 // 确认选择的逻辑
+                if (!this.$refs.table.table.currentRow.id) {
+                  this.$Message.error("请选择一行数据")
+                  return;
+                }
+                this.$emit('selectProcess', this.$refs.table.table.currentRow)
             }
         }
     }

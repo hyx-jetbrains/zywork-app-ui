@@ -36,30 +36,32 @@ export const deploy = (process) => {
  */
 export const searchTableData = (self) => {
   return new Promise((resolve, reject) => {
-    self.loading.search = true
-    self.table.loading = true
+    let tableComponent = self.$refs.table
+    let searchComponent = self.$refs.searchModal
+    searchComponent.loading.search = true
+    tableComponent.table.loading = true
     axios.request({
-      url: self.urls.searchUrl,
+      url: tableComponent.urls.searchUrl,
       method: 'POST',
-      data: Qs.stringify(self.searchForm)
+      data: Qs.stringify(searchComponent.searchForm)
     }).then(response => {
-      self.loading['search'] = false
-      self.table.loading = false
+      searchComponent.loading.search = false
+      tableComponent.table.loading = false
       if (response.data.code !== ResponseStatus.OK) {
-        self.$Message.error(response.data.message)
+        tableComponent.$Message.error(response.data.message)
       } else {
-        self.page.total = response.data.data.total
+        tableComponent.pager.total = response.data.data.total
         if (response.data.data.total !== 0) {
-          self.table.tableDetails = response.data.data.rows
+          tableComponent.table.tableRows = response.data.data.rows
         } else {
-          self.table.tableDetails = []
+          tableComponent.table.tableRows = []
         }
       }
       resolve(response)
     }).catch(error => {
       console.log(error)
-      self.loading['search'] = false
-      self.table.loading = false
+      searchComponent.loading.search = false
+      tableComponent.table.loading = false
       self.$Message.error('加载数据失败，稍候再试')
       reject(error)
     })

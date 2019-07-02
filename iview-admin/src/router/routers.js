@@ -325,7 +325,7 @@ export default [
           title: '流程部署管理',
           icon: 'md-sync'
         },
-        component: () => import('@/view/activiti-deployment/ActivitiDeployment.vue')
+        component: () => import('@/view/activiti-deployment/ActivitiDeploymentMain.vue')
       },
       {
         path: 'ProcessDefinition',
