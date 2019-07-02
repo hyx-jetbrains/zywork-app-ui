@@ -638,7 +638,7 @@ export default [
           title: '用户路径管理',
           icon: 'md-git-network'
         },
-        component: () => import('@/view/user-path/UserPath.vue')
+        component: () => import('@/view/user-path/UserPathMain.vue')
       },
       {
         path: 'TopDistribution',
