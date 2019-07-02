@@ -752,7 +752,7 @@ export default [
           title: '系统配置管理',
           icon: 'ios-cog'
         },
-        component: () => import('@/view/sys-config/SysConfig.vue')
+        component: () => import('@/view/sys-config/SysConfigMain.vue')
       },
       {
         path: 'Notice',
