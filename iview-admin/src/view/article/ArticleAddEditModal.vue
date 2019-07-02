@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Modal v-model="modal.add" title="添加" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('addForm', $event)" width="760">
+        <Modal v-model="modal.add" title="添加" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('addForm', $event)" width="860">
             <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
 	<i-col span="12">
@@ -38,7 +38,7 @@
                 <Button type="primary" size="large" @click="add" :loading="loading.add">添加</Button>
             </div>
         </Modal>
-        <Modal v-model="modal.edit" title="修改" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('editForm', $event)" width="760">
+        <Modal v-model="modal.edit" title="修改" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('editForm', $event)" width="860">
             <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
 	<i-col span="12">
