@@ -287,7 +287,7 @@ export default [
           title: '文章管理',
           icon: 'ios-paper'
         },
-        component: () => import('@/view/article/Article.vue')
+        component: () => import('@/view/article/ArticleMain.vue')
       },
       {
         path: 'ArticleComment',
