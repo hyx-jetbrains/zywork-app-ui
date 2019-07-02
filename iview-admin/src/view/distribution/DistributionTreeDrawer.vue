@@ -155,7 +155,7 @@ export default {
       })
     },
     aboveUsers(item, callback) {
-      directAboveUsers(item.id).then(response => {
+      directAboveUsers(item.userId).then(response => {
         let children = []
         if (response.data.code === ResponseStatus.OK) {
           if (response.data.data.total > 0) {

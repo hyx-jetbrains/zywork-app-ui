@@ -10,7 +10,9 @@ export const directAboveUsers = (userId) => {
         url: '/distribution/admin/direct-above',
         method: 'POST',
         data: Qs.stringify({
-          userId: userId
+          userId: userId,
+          pageNo: 1,
+          pageSize: 1000
         })
       })
 }
@@ -24,7 +26,9 @@ export const directBelowUsers = (userId) => {
       url: '/distribution/admin/direct-below',
       method: 'POST',
       data: Qs.stringify({
-        userId: userId
+        userId: userId,
+        pageNo: 1,
+        pageSize: 1000
       })
     })
 }

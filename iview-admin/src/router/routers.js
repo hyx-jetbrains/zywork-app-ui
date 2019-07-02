@@ -629,7 +629,7 @@ export default [
           title: '用户层级关系查询',
           icon: 'md-git-branch'
         },
-        component: () => import('@/view/distribution/UserHierarchy.vue')
+        component: () => import('@/view/user-userhierarchy/UserUserHierarchyMain.vue')
       },
       {
         path: 'UserPath',
@@ -647,7 +647,7 @@ export default [
           title: '顶级分销商查询',
           icon: 'ios-thumbs-up'
         },
-        component: () => import('@/view/distribution/TopDistribution.vue')
+        component: () => import('@/view/distribution/TopDistributionMain.vue')
       }
     ]
   },
