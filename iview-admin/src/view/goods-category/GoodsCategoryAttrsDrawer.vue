@@ -1,7 +1,7 @@
 <template>
   <div>
     <Drawer title="选择商品属性" v-model="goodsCategoryAttrsDrawer" width="900" @on-close="closeDrawer">
-      <GoodsAttributeList ref="goodsAttributeList" :selectedData="selectedData" :selectedDataId="selectedDataId" :extraData="extraData" @closeDrawer="closeDrawer"/>
+      <GoodsAttributeMainMultiple ref="goodsAttributeMainMultiple" @closeDrawer="closeDrawer"/>
       <div class="demo-drawer-footer">
         <Button style="margin-right: 8px" @click="closeDrawer">取消</Button>
         <Button type="primary" @click="updateAttrs">确认选择</Button>
@@ -11,22 +11,17 @@
 </template>
 
 <script>
-import GoodsAttributeList from '@/view/goods-attribute/GoodsAttributeList.vue'
+import GoodsAttributeMainMultiple from '@/view/goods-attribute/GoodsAttributeMainMultiple.vue'
 import { getAttrsByCategory } from '@/api/goods_attribute'
 import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'GoodsCategoryAttrsDrawer',
   components: {
-    GoodsAttributeList
+    GoodsAttributeMainMultiple
   },
   data() {
     return {
-      goodsCategoryAttrsDrawer: false,
-      selectedData: null,
-      selectedDataId: 'goodsAttributeId',
-      extraData: {
-        categoryId: ''
-      }
+      goodsCategoryAttrsDrawer: false
     }
   },
   computed: {},
@@ -36,29 +31,29 @@ export default {
       var params = {
         goodsCategoryId: id
       }
-      getAttrsByCategory(params)
-        .then(res => {
+      getAttrsByCategory(params).then(res => {
           const data = res.data
           if (data.code !== ResponseStatus.OK) {
             this.$Message.error(data.message)
             return
           }
+          let goodsAttributeMainMultiple = this.$refs.goodsAttributeMainMultiple
           this.goodsCategoryAttrsDrawer = true
-          this.selectedData = data.data.rows
-          this.extraData.categoryId = id
-          this.$refs.goodsAttributeList.initTableData()
-        })
-        .catch(err => {
+          goodsAttributeMainMultiple.selectedData = data.data.rows
+          goodsAttributeMainMultiple.selectedDataIdProp = 'goodsAttributeId'
+          goodsAttributeMainMultiple.extraData.categoryId = id
+          goodsAttributeMainMultiple.searchTable()
+        }).catch(err => {
           this.$Message.error(err)
         })
     },
     closeDrawer() {
       // 关闭抽屉清空选择项
       this.goodsCategoryAttrsDrawer = false
-      this.$refs.goodsAttributeList.cancelSelect()
+      this.$refs.goodsAttributeMainMultiple.cancelSelect()
     },
     updateAttrs() {
-      this.$refs.goodsAttributeList.confirmSelection()
+      this.$refs.goodsAttributeMainMultiple.confirmSelection()
     }
   }
 }

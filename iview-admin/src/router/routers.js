@@ -408,7 +408,7 @@ export default [
               icon: 'md-funnel',
               title: '商品类目管理'
             },
-            component: () => import('@/view/goods-category/GoodsCategory.vue')
+            component: () => import('@/view/goods-category/GoodsCategoryMain.vue')
           },
           {
             path: 'CategoryAttribute',

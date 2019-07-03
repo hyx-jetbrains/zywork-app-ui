@@ -22,6 +22,8 @@
     import GoodsAttributeTableMultiple from './GoodsAttributeTableMultiple.vue'
     import GoodsAttributeSearchModal from './GoodsAttributeSearchModal.vue'
     import GoodsAttributeDetailModal from './GoodsAttributeDetailModal.vue'
+    import {updateGoodsCategoryAttr} from '@/api/goods_category'
+    import * as ResponseStatus from '@/api/response-status'
     export default {
         name: 'GoodsAttributeMainMultiple',
         components: {
@@ -53,6 +55,37 @@
             },
             confirmSelection() {
                 // 确认选择的逻辑
+                var params = []
+                this.$refs.table.table.selections.forEach(item => {
+                    params.push({
+                        goodsCategoryId: this.extraData.categoryId,
+                        goodsAttributeId: item.id
+                    })
+                })
+                if (this.selectedData !== null && this.selectedData.length > 0) {
+                    // 保留原始属性的排序
+                    params.forEach((param, index) => {
+                        this.selectedData.forEach((data, idx) => {
+                            if (data.goodsAttributeId === param.goodsAttributeId) {
+                                param.goodsCategoryAttributeAttrOrder = data.goodsCategoryAttributeAttrOrder
+                            }
+                        })
+                    })
+                }
+                updateGoodsCategoryAttr(params).then(res => {
+                    const data = res.data
+                    if (data.code === ResponseStatus.OK) {
+                    this.$Message.info("分配属性成功")
+                    this.$emit('closeDrawer')
+                    } else {
+                    this.$Message.error(data.message)
+                    }
+                }).catch(err => {
+                    this.$Message.error(err)
+                })
+            },
+            cancelSelect() {
+                this.$refs.table.$refs.dataTable.selectAll(false)
             }
         }
     }

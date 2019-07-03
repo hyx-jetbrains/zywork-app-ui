@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Modal :transfer="false" v-model="attrsOrderModal" title="设置属性排序" width="60%">
     <Row>
       <i-col span="24">
         <Card>
@@ -17,6 +18,11 @@
         </Card>
       </i-col>
     </Row>
+    <div slot="footer">
+        <Button type="text" size="large" @click="attrsOrderModal = false">取消</Button>
+        <Button type="primary" size="large" @click="confirmSelection">确认排序</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -27,12 +33,13 @@
   import * as ResponseStatus from '@/api/response-status'
 
   export default {
-    name: 'GoodsAttributeOrder',
+    name: 'GoodsAttributeOrderModal',
     components: {
       DragListSingle
     },
     data() {
       return {
+        attrsOrderModal: false,
         categoryId: null,
         attributes: [],
         dropConClass: {
@@ -46,14 +53,6 @@
         },
         loading: {
           search: false
-        },
-        urls: {
-          searchUrl: '/goods-category-attr/admin/pager-cond',
-          allUrl: '/goods-category-attr/admin/all',
-          detailUrl: '/goods-category-attr/admin/one/'
-        },
-        page: {
-          total: 0
         }
       }
     },
@@ -115,7 +114,7 @@
           this.$Spin.hide()
           if (response.data.code === ResponseStatus.OK) {
             this.$Message.success('成功更新商品类目属性排序')
-            this.$emit("hideModal")
+            this.attrsOrderModal = false
           } else {
             this.$Message.error(response.data.message)
           }
