@@ -437,7 +437,7 @@ export default [
               icon: 'ios-grid',
               title: '店铺管理'
             },
-            component: () => import('@/view/goods-shop/GoodsShop.vue')
+            component: () => import('@/view/goods-shop/GoodsShopMain.vue')
           },
           {
             path: 'ShopCertificate',
@@ -446,7 +446,7 @@ export default [
               icon: 'md-checkmark-circle',
               title: '店铺认证'
             },
-            component: () => import('@/view/goods-shop-certification/GoodsShopCertification.vue')
+            component: () => import('@/view/goods-shop-certification/GoodsShopCertificationMain.vue')
           },
           {
             path: 'ShopCheck',
