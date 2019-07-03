@@ -399,7 +399,7 @@ export default [
               icon: 'ios-keypad',
               title: '商品属性管理'
             },
-            component: () => import('@/view/goods-attribute/GoodsAttribute.vue')
+            component: () => import('@/view/goods-attribute/GoodsAttributeMain.vue')
           },
           {
             path: 'GoodsCategory',
@@ -417,7 +417,7 @@ export default [
               icon: 'md-link',
               title: '类目属性查询'
             },
-            component: () => import('@/view/goods-category-attr/GoodsCategoryAttribute.vue')
+            component: () => import('@/view/goods-category-attr/GoodsCategoryAttributeMain.vue')
           }
         ]
       },
