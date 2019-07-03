@@ -504,7 +504,7 @@ export default [
               icon: 'md-cart',
               title: '购物车管理'
             },
-            component: () => import('@/view/goods-cart/GoodsCart.vue')
+            component: () => import('@/view/goods-cart/GoodsCartMain.vue')
           },
           {
             path: 'CartQuery',
@@ -513,7 +513,7 @@ export default [
               icon: 'ios-cart',
               title: '购物车查询'
             },
-            component: () => import('@/view/user-goods-cart/UserGoodsCart.vue')
+            component: () => import('@/view/user-goods-cart/UserGoodsCartMain.vue')
           }
         ]
       },
