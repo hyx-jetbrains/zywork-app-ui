@@ -61,7 +61,7 @@ export default {
   shops_management: 'Shops Management',
   shop_info: 'Shop Info Management',
   shop_certificate: 'Shop Certificate Management',
-  shop_check: 'Shop Check History',
+  shop_check: 'Shop Check History Query',
   goods_management: 'Goods Management',
   goods_info: 'Goods Basic Management',
   goods_detail: 'Goods SKU Attribute Value Query',

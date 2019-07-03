@@ -61,7 +61,7 @@ export default {
   shops_management: '店铺管理',
   shop_info: '店铺信息管理',
   shop_certificate: '店铺认证管理',
-  shop_check: '店铺审核历史',
+  shop_check: '店铺审核历史查询',
   goods_management: '商品管理',
   goods_info: '商品基础信息管理',
   goods_detail: '商品SKU属性查询',

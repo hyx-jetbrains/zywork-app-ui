@@ -444,7 +444,7 @@ export default [
             name: 'shop_certificate',
             meta: {
               icon: 'md-checkmark-circle',
-              title: '店铺认证'
+              title: '店铺认证管理'
             },
             component: () => import('@/view/goods-shop-certification/GoodsShopCertificationMain.vue')
           },
@@ -453,9 +453,9 @@ export default [
             name: 'shop_check',
             meta: {
               icon: 'md-checkbox',
-              title: '店铺审核历史'
+              title: '店铺审核历史查询'
             },
-            component: () => import('@/view/goods-shop-certification-check/GoodsShopCertificationCheck.vue')
+            component: () => import('@/view/shop-certification-check/GoodsShopCertificationCheckMain.vue')
           }
         ]
       },
