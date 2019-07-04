@@ -484,7 +484,7 @@ export default [
               icon: 'ios-grid',
               title: '商品SKU属性查询'
             },
-            component: () => import('@/view/goods-sku-attribute-value/GoodsSkuAttributeValue.vue')
+            component: () => import('@/view/goods-sku-attr-val/GoodsSkuAttributeValueMain.vue')
           }
         ]
       },
