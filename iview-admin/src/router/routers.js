@@ -533,7 +533,7 @@ export default [
               icon: 'md-basket',
               title: '订单管理'
             },
-            component: () => import('@/view/goods-order/GoodsOrder.vue')
+            component: () => import('@/view/goods-order/GoodsOrderMain.vue')
           },
           {
             path: 'GoodsOrderItem',
@@ -542,7 +542,7 @@ export default [
               icon: 'ios-basket',
               title: '订单项管理'
             },
-            component: () => import('@/view/goods-order-item/GoodsOrderItem.vue')
+            component: () => import('@/view/goods-order-item/GoodsOrderItemMain.vue')
           },
           {
             path: 'OrderLogistics',
@@ -551,7 +551,7 @@ export default [
               icon: 'md-bus',
               title: '订单物流管理'
             },
-            component: () => import('@/view/goods-order-logistics/GoodsOrderLogistics.vue')
+            component: () => import('@/view/goods-order-logistics/GoodsOrderLogisticsMain.vue')
           },
           {
             path: 'OrderQuery',
