@@ -48,6 +48,21 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="是否热门"><Row>
+	<i-col span="11">
+	<FormItem prop="isHotMin">
+	<InputNumber v-model="searchForm.isHotMin" placeholder="请输入开始是否热门" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="isHotMax">
+	<InputNumber v-model="searchForm.isHotMax" placeholder="请输入结束是否热门" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="versionMin">
@@ -62,7 +77,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="createTimeMin">
@@ -77,10 +95,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="updateTimeMin">
@@ -95,7 +110,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="isActiveMin">
@@ -150,6 +168,9 @@ parentIdMin: null,
 parentIdMax: null, 
 title: null,
 description: null,
+isHot: null,
+isHotMin: null, 
+isHotMax: null, 
 version: null,
 versionMin: null, 
 versionMax: null, 

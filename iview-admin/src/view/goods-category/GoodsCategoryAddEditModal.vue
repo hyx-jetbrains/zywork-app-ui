@@ -18,6 +18,10 @@
 	<FormItem label="类目描述" prop="description">
 	<Input v-model="form.description" placeholder="请输入类目描述"/>
 </FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="是否热门" prop="isHot">
+	<InputNumber v-model="form.isHot" placeholder="请输入是否热门" style="width: 100%;"/>
+</FormItem>
 	</i-col>
 </Row>
 
@@ -44,6 +48,10 @@
 	<i-col span="12">
 	<FormItem label="类目描述" prop="description">
 	<Input v-model="form.description" placeholder="请输入类目描述"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="是否热门" prop="isHot">
+	<InputNumber v-model="form.isHot" placeholder="请输入是否热门" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
@@ -81,6 +89,7 @@
 parentId: null,
 title: null,
 description: null,
+isHot: null,
 version: null,
 createTime: null,
 updateTime: null,

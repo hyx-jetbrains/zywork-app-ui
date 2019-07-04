@@ -87,6 +87,12 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '是否热门',
+key: 'isHot',
+minWidth: 120,
+sortable: true,
+},
+{
 title: '版本号',
 key: 'version',
 minWidth: 120,
