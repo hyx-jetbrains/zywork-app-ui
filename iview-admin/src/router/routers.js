@@ -560,7 +560,7 @@ export default [
               icon: 'md-bookmarks',
               title: '用户订单查询'
             },
-            component: () => import('@/view/user-goods-order/UserGoodsOrder.vue')
+            component: () => import('@/view/user-goods-order/UserGoodsOrderMain.vue')
           },
           {
             path: 'OrderItemQuery',
@@ -569,7 +569,7 @@ export default [
               icon: 'ios-bookmarks',
               title: '用户订单项查询'
             },
-            component: () => import('@/view/user-goods-order-item/UserGoodsOrderItem.vue')
+            component: () => import('@/view/user-goods-order-item/UserGoodsOrderItemMain.vue')
           },
           {
             path: 'OrderLogisticsQuery',
@@ -578,7 +578,7 @@ export default [
               icon: 'ios-bus',
               title: '用户订单物流查询'
             },
-            component: () => import('@/view/user-goods-order-logistics/UserGoodsOrderLogistics.vue')
+            component: () => import('@/view/user-goods-order-logistics/UserGoodsOrderLogisticsMain.vue')
           }
         ]
       },
