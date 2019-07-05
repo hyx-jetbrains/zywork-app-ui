@@ -302,6 +302,44 @@ export default [
   },
   {
     path: '/admin',
+    name: 'ad_management',
+    meta: {
+      icon: 'md-globe',
+      title: '广告管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'AdvertisementType',
+        name: 'ads_type_management',
+        meta: {
+          title: '广告类别管理',
+          icon: 'md-flask'
+        },
+        component: () => import('@/view/advertisement-type/AdvertisementTypeMain.vue')
+      },
+      {
+        path: 'Advertisement',
+        name: 'ads_management',
+        meta: {
+          title: '广告管理',
+          icon: 'md-image'
+        },
+        component: () => import('@/view/advertisement/AdvertisementMain.vue')
+      },
+      {
+        path: 'AdvertisementQuery',
+        name: 'ads_query',
+        meta: {
+          title: '广告及类别查询',
+          icon: 'ios-paper'
+        },
+        component: () => import('@/view/adtype-ads/AdvertisementTypeAdsMain.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
     name: 'processes_management',
     meta: {
       icon: 'md-repeat',
@@ -481,7 +519,7 @@ export default [
             path: 'GoodsSku',
             name: 'goods_sku',
             meta: {
-              icon: 'md-grid',
+              icon: 'ios-grid-outline',
               title: '商品SKU管理'
             },
             component: () => import('@/view/goods-sku/GoodsSkuMain.vue')

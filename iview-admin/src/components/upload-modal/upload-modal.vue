@@ -49,7 +49,7 @@ export default {
     handleFormatError(file) {
       this.$Notice.warning({
         title: '文件格式不正确',
-        desc: '文件 ' + file.name + ' 格式不正确，请选择json格式的文件' 
+        desc: '文件 ' + file.name + ' 格式不正确，请选择 ' + this.format + ' 格式的图片'
       })
     },
     handleSuccess(response, file) {
