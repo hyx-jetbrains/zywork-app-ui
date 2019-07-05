@@ -475,7 +475,16 @@ export default [
               icon: 'md-grid',
               title: '商品管理'
             },
-            component: () => import('@/view/goods-info/GoodsInfo.vue')
+            component: () => import('@/view/goods-info/GoodsInfoMain.vue')
+          },
+          {
+            path: 'GoodsSku',
+            name: 'goods_sku',
+            meta: {
+              icon: 'md-grid',
+              title: '商品SKU管理'
+            },
+            component: () => import('@/view/goods-sku/GoodsSkuMain.vue')
           },
           {
             path: 'GoodsDetail',

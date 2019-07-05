@@ -106,9 +106,7 @@ export default {
         if (response.data.code === ResponseStatus.OK) {
           this.formElements = response.data.data.rows
           let skuParams = {
-            goodsSkuId: this.chooseSkuId,
-            sortColumn: 'goodsCategoryAttributeAttrOrder',
-            sortOrder: 'asc'
+            goodsSkuId: this.chooseSkuId
           }
           // 获取已经设置值的属性
           skuAttrVals(skuParams).then(response => {
@@ -116,7 +114,7 @@ export default {
               this.formElements.forEach((formItem, index) => {
                 this.$set(this.form, formItem.goodsAttributeId + '_' + formItem.goodsAttributeAttrCode, null)
                 response.data.data.rows.forEach((attrValue, index) => {
-                  if (formItem.goodsAttributeId === attrValue.goodsCategoryAttributeAttrId) {
+                  if (formItem.goodsAttributeId === attrValue.goodsAttributeId) {
                     let theAttributeVal = attrValue.goodsAttributeValueAttrValue
                     if (formItem.goodsAttributeAttrType === 'Integer' || formItem.goodsAttributeAttrType === 'Long') { 
                       theAttributeVal = parseInt(theAttributeVal)

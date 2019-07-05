@@ -64,6 +64,7 @@ export default {
   shop_check: '店鋪審核歷史查詢',
   goods_management: '商品管理',
   goods_info: '商品基礎信息管理',
+  goods_sku: '商品SKU管理',
   goods_detail: '商品SKU屬性查詢',
   coupons_management: '優惠券管理',
   goods_coupon: '商品優惠券管理',

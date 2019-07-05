@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Modal :transfer="false" v-model="modal.picOrder" title="设置属性排序" width="60%">
     <Row>
       <i-col span="24">
         <Card>
@@ -19,17 +20,22 @@
         </Card>
       </i-col>
     </Row>
+    <div slot="footer">
+        <Button type="text" size="large" @click="modal.picOrder = false">取消</Button>
+        <Button type="primary" size="large" @click="confirmSelection">确认排序</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
   import DragListSingle from '_c/drag-list-single'
-  import * as utils from '@/api/utils'
+  import * as utils from '@/api/utils-v2'
   import {allPicByGoods, updateGoodsPic} from '@/api/goods_pic'
   import * as ResponseStatus from '@/api/response-status'
 
   export default {
-    name: 'GoodsPicOrder',
+    name: 'GoodsPicOrderModal',
     components: {
       DragListSingle
     },
@@ -43,20 +49,8 @@
         },
         spinShow: false,
         modal: {
-          search: false,
-          detail: false
+          picOrder: false
         },
-        loading: {
-          search: false
-        },
-        urls: {
-          searchUrl: '/goods-pic/admin/pager-cond',
-          allUrl: '/goods-pic/admin/all',
-          detailUrl: '/goods-pic/admin/one/'
-        },
-        page: {
-          total: 0
-        }
       }
     },
     computed: {},
@@ -116,7 +110,7 @@
           this.$Spin.hide()
           if (response.data.code === ResponseStatus.OK) {
             this.$Message.success('成功更新商品图片排序')
-            this.$emit("hideModal")
+            this.modal.picOrder = false
           } else {
             this.$Message.error(response.data.message)
           }
