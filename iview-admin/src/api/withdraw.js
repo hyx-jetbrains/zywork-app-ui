@@ -1,6 +1,4 @@
-import axios from '@/libs/api.request'
-import Qs from 'qs'
-import { getLocalStorageToken } from '@/libs/util'
+import {doPostJson, doPostQs, doGet} from './utils-v2'
 
 /**
  * 用户提现审核，通过或未通过
@@ -8,18 +6,10 @@ import { getLocalStorageToken } from '@/libs/util'
  * @param {*} withdrawStatus 
  */
 export const check = (transactionNo, withdrawStatus) => {
-  return axios.request({
-    url: '/withdraw/admin/check',
-    method: 'POST',
-    data: Qs.stringify({
-      transactionNo: transactionNo,
-      withdrawStatus: withdrawStatus
-    }),
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      'Authorization': 'Bearer ' + getLocalStorageToken()
-    }
-  })
+  return doPostQs('/withdraw/admin/check', {
+    transactionNo: transactionNo,
+    withdrawStatus: withdrawStatus
+  }, {})
 }
 
 /**
@@ -28,16 +18,8 @@ export const check = (transactionNo, withdrawStatus) => {
  * @param {*} withdrawStatus 
  */
 export const confirm = (transactionNo, withdrawStatus) => {
-  return axios.request({
-    url: '/withdraw/admin/confirm-human',
-    method: 'POST',
-    data: Qs.stringify({
-      transactionNo: transactionNo,
-      withdrawStatus: withdrawStatus
-    }),
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      'Authorization': 'Bearer ' + getLocalStorageToken()
-    }
-  })
+  return doPostQs('/withdraw/admin/confirm-human', {
+    transactionNo: transactionNo,
+    withdrawStatus: withdrawStatus
+  }, {})
 }

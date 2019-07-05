@@ -1,15 +1,11 @@
-import axios from '@/libs/api.request'
+import {doPostJson, doPostQs, doGet} from './utils-v2'
 
 /**
  * 根据商品类目条件查询所有商品属性
  * @param {*}
  */
 export const getAttrsByCategory = (params) => {
-    return axios.request({
-        url: '/goods-category-attr/admin/all-cond',
-        method: 'POST',
-        data: params
-      })
+  return doPostJson('/goods-category-attr/admin/all-cond', params, {})
 }
 
 /**
@@ -17,11 +13,7 @@ export const getAttrsByCategory = (params) => {
  * @param {*} params 
  */
 export const updateGoodsCategoryAttr = (params) => {
-    return axios.request({
-        url: '/goods-category-attr/admin/batch-update',
-        method: 'POST',
-        data: params
-      })
+  return doPostJson('/goods-category-attr/admin/batch-update', params, {})
 }
 
 /**
@@ -29,9 +21,5 @@ export const updateGoodsCategoryAttr = (params) => {
  * @param {*} params 
  */
 export const skuAttrVals = (params) => {
-  return axios.request({
-    url: '/goods-sku-attr-val/admin/all-cond',
-    method: 'POST',
-    data: params
-  }) 
+  return doPostJson('/goods-sku-attr-val/admin/all-cond', params, {})
 }

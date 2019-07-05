@@ -1,5 +1,4 @@
-import { getLocalStorageToken } from '@/libs/util'
-import {parseJson, arrayBufferToReader, arrayBufferToImage} from "@/api/utils"
+import {parseJson, arrayBufferToReader, arrayBufferToImage, doPostJson, doPostQs, doGet} from "@/api/utils-v2"
 import axios from '@/libs/api.request'
 import Qs from 'qs'
 import * as ResponseStatus from '@/api/response-status'
@@ -10,20 +9,12 @@ import * as ResponseStatus from '@/api/response-status'
  */
 export const deploy = (process) => {
   return new Promise((resolve, reject) => {
-    axios.request({
-      url: '/process-activiti/admin/do/deploy',
-      method: 'POST',
-      data: Qs.stringify({
-        id: process.id,
-        processName: process.processName,
-        processKey: process.processKey,
-        processPath: process.filePath
-      }),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'Authorization': 'Bearer ' + getLocalStorageToken()
-      }
-    }).then(response => {
+    doPostQs('/process-activiti/admin/do/deploy', {
+      id: process.id,
+      processName: process.processName,
+      processKey: process.processKey,
+      processPath: process.filePath
+    }, {}).then(response => {
       resolve(response)
     }).catch(error => {
       reject(error)
@@ -40,11 +31,7 @@ export const searchTableData = (self) => {
     let searchComponent = self.$refs.searchModal
     searchComponent.loading.search = true
     tableComponent.table.loading = true
-    axios.request({
-      url: tableComponent.urls.searchUrl,
-      method: 'POST',
-      data: Qs.stringify(searchComponent.searchForm)
-    }).then(response => {
+    doPostQs(tableComponent.urls.searchUrl, searchComponent.searchForm, {}).then(response => {
       searchComponent.loading.search = false
       tableComponent.table.loading = false
       if (response.data.code !== ResponseStatus.OK) {
@@ -79,13 +66,9 @@ export const removeOld = (self, row) => {
       title: '确认删除吗？',
       content: '确认删除旧版本的部署吗？',
       onOk: () => {
-        axios.request({
-          url: self.urls.removeOldUrl,
-          method: 'POST',
-          data: Qs.stringify({
-            processKey: row.key
-          })
-        }).then(response => {
+        doPostQs(self.urls.removeOldUrl, {
+          processKey: row.key
+        }, {}).then(response => {
           if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
@@ -117,13 +100,9 @@ export const removeAll = (self, row) => {
       title: '确认删除吗？',
       content: '确认删除所有版本的部署吗？',
       onOk: () => {
-        axios.request({
-          url: self.urls.removeAllUrl,
-          method: 'POST',
-          data: Qs.stringify({
-            processKey: row.key
-          })
-        }).then(response => {
+        doPostQs(self.urls.removeAllUrl, {
+          processKey: row.key
+        }, {}).then(response => {
           if (response.data.code !== ResponseStatus.OK) {
             self.$Message.error(response.data.message)
           } else {
@@ -149,11 +128,7 @@ export const removeAll = (self, row) => {
  */
 export const searchWaitTask = (self, url) => {
   return new Promise((resolve, reject) => {
-    axios.request({
-      url: url,
-      method: 'POST',
-      data: Qs.stringify(self.taskParamForm)
-    }).then(response => {
+    doPostQs(url, self.taskParamForm, {}).then(response => {
       resolve(response)
     }).catch(error => {
       console.log(error)

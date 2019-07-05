@@ -1,10 +1,8 @@
-import axios from '@/libs/api.request'
+import {doPostJson, doPostQs, doGet} from './utils-v2'
+
 /**
 * 获取文章分类下拉框
 */
 export const getArticleCategorySelect = () => {
-  return axios.request({
-    url: '/article-category/admin/all',
-    method: 'GET'
-  })
+  return doGet('/article-category/admin/all', {})
 }

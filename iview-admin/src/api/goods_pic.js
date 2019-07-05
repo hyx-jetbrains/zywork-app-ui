@@ -1,4 +1,4 @@
-import axios from '@/libs/api.request'
+import {doPostJson, doPostQs, doGet} from './utils-v2'
 
 /**
  * 条件查询商品图片
@@ -6,11 +6,7 @@ import axios from '@/libs/api.request'
  */
 export const allPicByGoods = (params) => {
   return new Promise((resolve, reject) => {
-    axios.request({
-      url: '/goods-pic/admin/all-cond',
-      method: 'POST',
-      data: params
-    }).then(response => {
+    doPostJson('/goods-pic/admin/all-cond', params, {}).then(response => {
       resolve(response)
     }).catch(error => {
       reject(error)
@@ -23,11 +19,7 @@ export const allPicByGoods = (params) => {
  * @param {*} params 
  */
 export const updateGoodsPic = (params) => {
-  return axios.request({
-    url: '/goods-pic/admin/batch-update',
-    method: 'POST',
-    data: params
-  })
+  return doPostJson('/goods-pic/admin/batch-update', params, {})
 }
 
 /**
@@ -35,9 +27,5 @@ export const updateGoodsPic = (params) => {
  * @param {*} id 
  */
 export const getPicById = (id) => {
-  return axios.request({
-    url: '/goods-pic/admin/one/' + id,
-    method: 'GET',
-    data: null
-  })
+  return doGet('/goods-pic/admin/one/' + id, {})
 }

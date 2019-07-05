@@ -1,5 +1,8 @@
 import axios from '@/libs/api.request'
 import Qs from 'qs'
+import {doPostJson, doPostQs, doGet} from './utils-v2'
+import { updateGoodsCategoryAttr } from './goods_attribute';
+
 /**
  * 登入
  */
@@ -18,22 +21,14 @@ export const login = (loginView) => {
 * 获取用户信息
 */
 export const getUserInfo = () => {
-  return axios.request({
-    url: '/user-userdetail/user/get',
-    method: 'GET',
-    data: ''
-  })
+  return doGet('/user-userdetail/user/get', {})
 }
 
 /**
 * 退出登入
 */
 export const logout = () => {
-  return axios.request({
-    url: '/auth/logout',
-    method: 'GET',
-    data: ''
-  })
+  return doGet('/auth/logout', {})
 }
 
 /**
@@ -41,52 +36,32 @@ export const logout = () => {
  * @param {*} id 用户id
  */
 export const getUserDetail = (id) => {
-  return axios.request({
-    url: '/user-userdetail/admin/multi/' + id,
-    method: 'GET',
-    data: ''
-  })
+  return doGet('/user-userdetail/admin/multi/' + id, {})
 }
 
 /**
  * 修改用户登入密码
  */
 export const updateLoaginPassword = (params) => {
-  return axios.request({
-    url: '/pwd/update-login',
-    method: 'POST',
-    data: Qs.stringify(params)
-  })
+  return doPostQs('/pwd/update-login', params, {})
 }
 
 /**
  * 分配用户角色
  */
 export const saveUserRole = (params) => {
-  return axios.request({
-    url: '/user-role/admin/batch-save',
-    method: 'POST',
-    data: params
-  })
+  return doPostJson('/user-role/admin/batch-save', params, {})
 }
 
 /**
  * 获取登录用户的所有角色 
  */
 export const getUserRoles = () => {
-  return axios.request({
-    url: '/user-role/user/list', 
-    method: 'GET',
-    data: ''
-  })
+  return doGet('/user-role/user/list', {})
 }
 
 export const updateUserInfo = (params) => {
-  return axios.request({
-    url: 'user-detail/user/update',
-    method: 'POST',
-    data: params
-  })
+  return doPostJson('user-detail/user/update', params, {})
 }
 
 export const getUnreadCount = () => {

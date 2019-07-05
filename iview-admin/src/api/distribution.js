@@ -1,20 +1,15 @@
-import axios from '@/libs/api.request'
-import Qs from 'qs'
+import {doPostJson, doPostQs, doGet} from './utils-v2'
 
 /**
  * 查询指定用户的直接上级用户
  * @param {*} userId 
  */
 export const directAboveUsers = (userId) => {
-    return axios.request({
-        url: '/distribution/admin/direct-above',
-        method: 'POST',
-        data: Qs.stringify({
-          userId: userId,
-          pageNo: 1,
-          pageSize: 1000
-        })
-      })
+  return doPostQs('/distribution/admin/direct-above', {
+    userId: userId,
+    pageNo: 1,
+    pageSize: 1000
+  }, {})
 }
 
 /**
@@ -22,13 +17,9 @@ export const directAboveUsers = (userId) => {
  * @param {*} userId 
  */
 export const directBelowUsers = (userId) => {
-  return axios.request({
-      url: '/distribution/admin/direct-below',
-      method: 'POST',
-      data: Qs.stringify({
-        userId: userId,
-        pageNo: 1,
-        pageSize: 1000
-      })
-    })
+  return doPostQs('/distribution/admin/direct-below', {
+    userId: userId,
+    pageNo: 1,
+    pageSize: 1000
+  }, {})
 }

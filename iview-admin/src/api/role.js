@@ -1,24 +1,16 @@
-import axios from '@/libs/api.request'
+import {doPostJson, doPostQs, doGet} from './utils-v2'
 
 /**
  * 获取指定角色权限
  */
 export const getMultiPermission = (params) => {
-  return axios.request({
-    url: '/role-permission/admin/multi/' + params,
-    method: 'GET',
-    data: ''
-  })
+  return doGet('/role-permission/admin/multi/' + params, {})
 }
 /**
  * 获取当前登入用户的所有权限
  */
 export const getUserPermission = () => {
-  return axios.request({
-    url: '/module-permission/user/all',
-    method: 'GET',
-    data: ''
-  })
+  return doGet('/module-permission/user/all', {})
 }
 
 /**
@@ -26,20 +18,12 @@ export const getUserPermission = () => {
  * @param {} params 参数
  */
 export const batchSavePermission = (params) => {
-  return axios.request({
-    url: '/role-permission/admin/batch-save',
-    method: 'POST',
-    data: params
-  })
+  return doPostJson('/role-permission/admin/batch-save', params, {})
 }
 
 /**
  * 根据用户id查询用户角色
  */
 export const getUserRoleByUserId = (id) => {
-  return axios.request({
-    url: '/user-role/admin/multi/' + id,
-    method: 'GET',
-    data: ''
-  })
+  return doGet('/user-role/admin/multi/' + id, {})
 }
