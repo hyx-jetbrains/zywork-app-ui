@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Modal :transfer="false" v-model="modal.picOrder" title="设置属性排序" width="60%">
+    <Modal :transfer="false" v-model="modal.picOrder" title="设置图片排序" width="60%">
     <Row>
       <i-col span="24">
         <Card>
@@ -11,7 +11,7 @@
           <div class="drag-box-card">
             <Spin size="large" fix v-if="spinShow"></Spin>
             <drag-list-single :list.sync="pics" :dropConClass="dropConClass" @on-change="handleChange">
-              <h4 slot="title">鼠标拖动以修改属性顺序</h4>
+              <h4 slot="title">鼠标拖动以修改图片顺序</h4>
               <div class="drag-item" slot="content" slot-scope="content" style="text-align: center;">
                 <img :src="content.item.name" style="width: 120px; height: 120px;">
               </div>

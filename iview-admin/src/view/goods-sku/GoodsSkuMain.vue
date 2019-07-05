@@ -110,15 +110,20 @@
                 let skuDetailModal = this.$refs.skuDetailModal
                 skuDetailModal.modal.skuDetailModal = true
                 utils.doGet('/goods-info/admin/one/' + row.goodsId, {}).then(response => {
-                    skuDetailModal.categoryId = response.data.data.categoryId
+                    if (response.data.data) {
+                        skuDetailModal.categoryId = response.data.data.categoryId
+                        skuDetailModal.skuId = row.id
+                        skuDetailModal.chooseSkuId = row.id
+                        skuDetailModal.goodsId = row.goodsId
+                        skuDetailModal.loadSkusByGoodsId()
+                        skuDetailModal.loadAllAttrVals()
+                    } else {
+                        this.$Message.error('未查询到商品对应的类目')
+                    }
                 }).catch(error => {
                     console.log(error)
                 })
-                skuDetailModal.skuId = row.id
-                skuDetailModal.chooseSkuId = row.id
-                skuDetailModal.goodsId = row.goodsId
-                skuDetailModal.loadSkusByGoodsId()
-                skuDetailModal.loadAllAttrVals()
+                
             }
         }
     }
