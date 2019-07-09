@@ -120,7 +120,6 @@ title: [
 {type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
 ],
 picUrl: [
-{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
 {type: 'string', min: 1, max: 500, message: '必须1-500个字符', trigger: 'blur'}
 ],
 description: [
