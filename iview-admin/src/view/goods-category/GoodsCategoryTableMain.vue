@@ -338,7 +338,15 @@ renderHeader: (h, params) => {
                                                   props:{
                                                     name: 'orderAttrs'
                                                   }
-                                                }, '属性排序')
+                                                }, '属性排序'),
+                                                h(
+                                                    'DropdownItem',
+                                                    {
+                                                    props: {
+                                                        name: 'showUploadModal'
+                                                    }
+                                                    },
+                                                    '上传封面图片'),
                                             ]
                                         )
                                     ]
@@ -370,6 +378,8 @@ renderHeader: (h, params) => {
                   this.$emit('showGoodsCategoryAttrDrawer', row.id)
                 } else if (itemName === 'orderAttrs') {
                   this.$emit('showGoodsAttrOrderModal', row.id)
+                } else if (itemName === 'showUploadModal') {
+                    this.$emit('showUploadModal', row.id)
                 }
             },
             active(row) {

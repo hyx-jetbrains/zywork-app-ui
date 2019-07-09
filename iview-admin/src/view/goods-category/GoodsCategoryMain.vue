@@ -21,7 +21,7 @@
                     </Tooltip>
                     <GoodsCategoryTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" 
                     v-on:showDetailModal="showDetailModal" v-on:showGoodsAttrOrderModal="showGoodsAttrOrderModal"
-                    v-on:showGoodsCategoryAttrDrawer="showGoodsCategoryAttrDrawer"/>
+                    v-on:showGoodsCategoryAttrDrawer="showGoodsCategoryAttrDrawer" v-on:showUploadModal="showUploadModal"/>
                 </Card>
             </i-col>
         </Row>
@@ -30,6 +30,7 @@
         <GoodsCategoryDetailModal ref="detailModal"/>
         <GoodsAttributeOrderModal ref="goodsAttributeOrderModal"/>
         <GoodsCategoryAttrsDrawer ref="goodsCategoryAttrsDrawer" />
+        <UploadModal ref="uploadModal" @search="searchTable" :title="uploadModal.title" :format="uploadModal.format"/>
     </div>
 </template>
 
@@ -41,6 +42,7 @@
     import GoodsCategoryDetailModal from './GoodsCategoryDetailModal.vue'
     import GoodsAttributeOrderModal from '../goods-attribute/GoodsAttributeOrderModal.vue'
     import GoodsCategoryAttrsDrawer from './GoodsCategoryAttrsDrawer.vue'
+    import UploadModal from '_c/upload-modal'
     export default {
         name: 'GoodsCategoryMain',
         components: {
@@ -49,13 +51,19 @@
             GoodsCategorySearchModal,
             GoodsCategoryDetailModal,
             GoodsAttributeOrderModal,
-            GoodsCategoryAttrsDrawer
+            GoodsCategoryAttrsDrawer,
+            UploadModal
         },
         data() {
             return {
                 urls: {
                     batchRemoveUrl: '/goods-category/admin/batch-remove',
                     batchActiveUrl: '/goods-category/admin/batch-active'
+                },
+                uploadModal: {
+                    title: '上传封面图片',
+                    format: ['jpg', 'jpeg', 'png', 'bmp'],
+                    uploadUrl: '/goods-category/admin/upload/'
                 },
             }
         },
@@ -104,6 +112,10 @@
             },
             showGoodsCategoryAttrDrawer(categoryId) {
                 this.$refs.goodsCategoryAttrsDrawer.initData(categoryId)
+            },
+            showUploadModal(categoryId) {
+                this.$refs.uploadModal.uploadUrl = this.uploadModal.uploadUrl + categoryId
+                this.$refs.uploadModal.uploadModal = true
             }
         }
     }
