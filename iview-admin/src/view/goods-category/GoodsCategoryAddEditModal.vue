@@ -15,10 +15,17 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="类目封面图" prop="picUrl">
+	<Input v-model="form.picUrl" placeholder="请输入类目封面图"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="类目描述" prop="description">
 	<Input v-model="form.description" placeholder="请输入类目描述"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否热门" prop="isHot">
 	<InputNumber v-model="form.isHot" placeholder="请输入是否热门" style="width: 100%;"/>
 </FormItem>
@@ -46,10 +53,17 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="类目封面图" prop="picUrl">
+	<Input v-model="form.picUrl" placeholder="请输入类目封面图"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="类目描述" prop="description">
 	<Input v-model="form.description" placeholder="请输入类目描述"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否热门" prop="isHot">
 	<InputNumber v-model="form.isHot" placeholder="请输入是否热门" style="width: 100%;"/>
 </FormItem>
@@ -88,6 +102,7 @@
                     id: null,
 parentId: null,
 title: null,
+picUrl: null,
 description: null,
 isHot: null,
 version: null,
@@ -103,6 +118,10 @@ isActive: null,
 title: [
 {type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
 {type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
+],
+picUrl: [
+{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
+{type: 'string', min: 1, max: 500, message: '必须1-500个字符', trigger: 'blur'}
 ],
 description: [
 {type: 'string', min: 1, max: 255, message: '必须1-255个字符', trigger: 'blur'}

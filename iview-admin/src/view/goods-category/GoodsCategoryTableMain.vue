@@ -90,6 +90,12 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '类目封面图',
+key: 'picUrl',
+minWidth: 120,
+sortable: true,
+},
+{
 title: '类目描述',
 key: 'description',
 minWidth: 120,
