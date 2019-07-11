@@ -1,7 +1,6 @@
 import axios from '@/libs/api.request'
 import Qs from 'qs'
 import {doPostJson, doPostQs, doGet} from './utils-v2'
-import { updateGoodsCategoryAttr } from './goods_attribute';
 
 /**
  * 登入

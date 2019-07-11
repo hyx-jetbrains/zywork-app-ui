@@ -21,7 +21,8 @@
                     </Tooltip>
                     <GoodsCategoryTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" 
                     v-on:showDetailModal="showDetailModal" v-on:showGoodsAttrOrderModal="showGoodsAttrOrderModal"
-                    v-on:showGoodsCategoryAttrDrawer="showGoodsCategoryAttrDrawer" v-on:showUploadModal="showUploadModal"/>
+                    v-on:showGoodsCategoryAttrDrawer="showGoodsCategoryAttrDrawer" v-on:showUploadModal="showUploadModal"
+                    v-on:showGoodsCategoryAttributeMainModal="showGoodsCategoryAttributeMainModal"/>
                 </Card>
             </i-col>
         </Row>
@@ -31,6 +32,7 @@
         <GoodsAttributeOrderModal ref="goodsAttributeOrderModal"/>
         <GoodsCategoryAttrsDrawer ref="goodsCategoryAttrsDrawer" />
         <UploadModal ref="uploadModal" @search="searchTable" :title="uploadModal.title" :format="uploadModal.format"/>
+        <GoodsCategoryAttributeMainModal ref="goodsCategoryAttributeMainModal"/>
     </div>
 </template>
 
@@ -43,6 +45,8 @@
     import GoodsAttributeOrderModal from '../goods-attribute/GoodsAttributeOrderModal.vue'
     import GoodsCategoryAttrsDrawer from './GoodsCategoryAttrsDrawer.vue'
     import UploadModal from '_c/upload-modal'
+    import GoodsCategoryAttributeMainModal from '../goods-category-attr/GoodsCategoryAttributeMainModal.vue'
+    import * as ResponseStatus from '@/api/response-status'
     export default {
         name: 'GoodsCategoryMain',
         components: {
@@ -52,7 +56,8 @@
             GoodsCategoryDetailModal,
             GoodsAttributeOrderModal,
             GoodsCategoryAttrsDrawer,
-            UploadModal
+            UploadModal,
+            GoodsCategoryAttributeMainModal
         },
         data() {
             return {
@@ -116,6 +121,30 @@
             showUploadModal(categoryId) {
                 this.$refs.uploadModal.uploadUrl = this.uploadModal.uploadUrl + categoryId
                 this.$refs.uploadModal.uploadModal = true
+            },
+            showGoodsCategoryAttributeMainModal(categoryId) {
+                utils.doPostJson('/goods-category-attr/admin/all-cond', {
+                    goodsCategoryId: categoryId,
+                    goodsCategoryAttributeIsAttrGroup: 1
+                }, {}).then(response => {
+                    if (response.data.code === ResponseStatus.OK) {
+                        let goodsCategoryAttributeMainModal = this.$refs.goodsCategoryAttributeMainModal
+                        goodsCategoryAttributeMainModal.categoryAttributeModal = true
+                        let goodsCategoryAttributeMain = goodsCategoryAttributeMainModal.$refs.goodsCategoryAttributeMain
+                        goodsCategoryAttributeMain.selectedData = response.data.data.rows
+                        goodsCategoryAttributeMain.selectedDataIdProp = 'goodsAttributeId'
+                        goodsCategoryAttributeMain.extraData.categoryId = categoryId
+                        let goodsCategoryAttrSearchModal = goodsCategoryAttributeMain.$refs.searchModal
+                        goodsCategoryAttrSearchModal.searchForm.goodsCategoryId = categoryId
+                        goodsCategoryAttrSearchModal.searchForm.goodsCategoryIdMin = categoryId
+                        goodsCategoryAttrSearchModal.searchForm.goodsCategoryIdMax = categoryId
+                        goodsCategoryAttributeMain.searchTable()
+                    } else {
+                        this.$Message.error(response.data.message)
+                    }
+                }).catch(error => {
+                    console.log(error)
+                })
             }
         }
     }

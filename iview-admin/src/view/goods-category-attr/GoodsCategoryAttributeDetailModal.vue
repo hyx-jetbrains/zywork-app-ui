@@ -28,14 +28,18 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.goodsCategoryAttributeVersion"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsCategoryAttributeCreateTime"></span></i-col>
+	<i-col span="11"><span class="detail-title">是否属性组合：</span><span v-text="form.goodsCategoryAttributeIsAttrGroup"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.goodsCategoryAttributeVersion"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.goodsCategoryAttributeUpdateTime"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.goodsCategoryAttributeIsActive"></span></i-col>
+	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsCategoryAttributeCreateTime"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.goodsCategoryAttributeUpdateTime"></span></i-col>
 
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.goodsCategoryAttributeIsActive"></span></i-col>
+<i-col span="2"></i-col>
 </Row>
 
             </div>
@@ -62,6 +66,7 @@ goodsAttributeAttrLength: null,
 goodsAttributeAttrRequired: null,
 goodsAttributeAttrDisplay: null,
 goodsCategoryAttributeAttrOrder: null,
+goodsCategoryAttributeIsAttrGroup: null,
 goodsCategoryAttributeVersion: null,
 goodsCategoryAttributeCreateTime: null,
 goodsCategoryAttributeUpdateTime: null,

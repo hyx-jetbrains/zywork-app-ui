@@ -125,6 +125,21 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="是否属性组合"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsCategoryAttributeIsAttrGroupMin">
+	<InputNumber v-model="searchForm.goodsCategoryAttributeIsAttrGroupMin" placeholder="请输入开始是否属性组合" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsCategoryAttributeIsAttrGroupMax">
+	<InputNumber v-model="searchForm.goodsCategoryAttributeIsAttrGroupMax" placeholder="请输入结束是否属性组合" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsCategoryAttributeVersionMin">
@@ -139,7 +154,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsCategoryAttributeCreateTimeMin">
@@ -154,10 +172,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsCategoryAttributeUpdateTimeMin">
@@ -172,7 +187,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsCategoryAttributeIsActiveMin">
@@ -241,6 +259,9 @@ goodsAttributeAttrDisplayMax: null,
 goodsCategoryAttributeAttrOrder: null,
 goodsCategoryAttributeAttrOrderMin: null, 
 goodsCategoryAttributeAttrOrderMax: null, 
+goodsCategoryAttributeIsAttrGroup: null,
+goodsCategoryAttributeIsAttrGroupMin: null, 
+goodsCategoryAttributeIsAttrGroupMax: null, 
 goodsCategoryAttributeVersion: null,
 goodsCategoryAttributeVersionMin: null, 
 goodsCategoryAttributeVersionMax: null, 

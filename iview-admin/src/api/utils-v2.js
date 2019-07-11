@@ -365,8 +365,9 @@ export const changePageSize = (tableComponent, pageSize) => {
 /**
  * 带有选中数据表格的搜索，需要把已经选中的数据勾选上
  * @param {*} self this
+ * @param {*} dataIdProp
  */
-export const initSelectTableData = (self) => {
+export const initSelectTableData = (self, dataIdProp) => {
   return new Promise((resolve, reject) => {
     let tableComponent = self.$refs.table
     let searchComponent = self.$refs.searchModal
@@ -383,7 +384,7 @@ export const initSelectTableData = (self) => {
         if (self.selectedData != null && self.selectedDataIdProp != null) {
           response.data.data.rows.forEach((dataItem, index) => {
             self.selectedData.forEach(selectedDataRow => {
-              if (dataItem.id === selectedDataRow[self.selectedDataIdProp]) {
+              if (dataItem[dataIdProp || 'id'] === selectedDataRow[self.selectedDataIdProp]) {
                 response.data.data.rows[index]._checked = true
                 tableComponent.table.selections.push(response.data.data.rows[index])
               }
