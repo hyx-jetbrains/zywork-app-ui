@@ -59,6 +59,76 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="图文详情" prop="goodsInfoIntro">
+	<Input v-model="searchForm.goodsInfoIntro" placeholder="请输入图文详情"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="上架状态"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsInfoShelfStatusMin">
+	<InputNumber v-model="searchForm.goodsInfoShelfStatusMin" placeholder="请输入开始上架状态" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsInfoShelfStatusMax">
+	<InputNumber v-model="searchForm.goodsInfoShelfStatusMax" placeholder="请输入结束上架状态" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="是否热门"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsInfoIsHotMin">
+	<InputNumber v-model="searchForm.goodsInfoIsHotMin" placeholder="请输入开始是否热门" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsInfoIsHotMax">
+	<InputNumber v-model="searchForm.goodsInfoIsHotMax" placeholder="请输入结束是否热门" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="点击数"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsInfoClickCountMin">
+	<InputNumber v-model="searchForm.goodsInfoClickCountMin" placeholder="请输入开始点击数" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsInfoClickCountMax">
+	<InputNumber v-model="searchForm.goodsInfoClickCountMax" placeholder="请输入结束点击数" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="创建时间"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsInfoCreateTimeMin">
+	<DatePicker @on-change="searchForm.goodsInfoCreateTimeMin=$event" :value="searchForm.goodsInfoCreateTimeMin" placeholder="请输入开始创建时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsInfoCreateTimeMax">
+	<DatePicker @on-change="searchForm.goodsInfoCreateTimeMax=$event" :value="searchForm.goodsInfoCreateTimeMax" placeholder="请输入结束创建时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="SKU编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsSkuIdMin">
@@ -73,7 +143,65 @@
 </i-col>
 </Row>
 </FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="创建时间"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsSkuCreateTimeMin">
+	<DatePicker @on-change="searchForm.goodsSkuCreateTimeMin=$event" :value="searchForm.goodsSkuCreateTimeMin" placeholder="请输入开始创建时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsSkuCreateTimeMax">
+	<DatePicker @on-change="searchForm.goodsSkuCreateTimeMax=$event" :value="searchForm.goodsSkuCreateTimeMax" placeholder="请输入结束创建时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
 </i-col><i-col span="12">
+	<FormItem label="商品图片编号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsPicIdMin">
+	<InputNumber v-model="searchForm.goodsPicIdMin" placeholder="请输入开始商品图片编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsPicIdMax">
+	<InputNumber v-model="searchForm.goodsPicIdMax" placeholder="请输入结束商品图片编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="图片URL" prop="goodsPicPicUrl">
+	<Input v-model="searchForm.goodsPicPicUrl" placeholder="请输入图片URL"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="图片顺序"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsPicPicOrderMin">
+	<InputNumber v-model="searchForm.goodsPicPicOrderMin" placeholder="请输入开始图片顺序" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsPicPicOrderMax">
+	<InputNumber v-model="searchForm.goodsPicPicOrderMax" placeholder="请输入结束图片顺序" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="商品属性编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsAttributeIdMin">
@@ -88,25 +216,25 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="属性名称" prop="goodsAttributeAttrName">
 	<Input v-model="searchForm.goodsAttributeAttrName" placeholder="请输入属性名称"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="属性代码" prop="goodsAttributeAttrCode">
 	<Input v-model="searchForm.goodsAttributeAttrCode" placeholder="请输入属性代码"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="数据类型" prop="goodsAttributeAttrType">
+	<Input v-model="searchForm.goodsAttributeAttrType" placeholder="请输入数据类型"/>
 </FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="数据类型" prop="goodsAttributeAttrType">
-	<Input v-model="searchForm.goodsAttributeAttrType" placeholder="请输入数据类型"/>
-</FormItem>
-</i-col><i-col span="12">
 	<FormItem label="数据长度"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsAttributeAttrLengthMin">
@@ -121,12 +249,27 @@
 </i-col>
 </Row>
 </FormItem>
+</i-col><i-col span="12">
+	<FormItem label="属性值" prop="goodsAttributeValueAttrValue">
+	<Input v-model="searchForm.goodsAttributeValueAttrValue" placeholder="请输入属性值"/>
+</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="属性值" prop="goodsAttributeValueAttrValue">
-	<Input v-model="searchForm.goodsAttributeValueAttrValue" placeholder="请输入属性值"/>
+	<FormItem label="创建时间"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsAttributeValueCreateTimeMin">
+	<DatePicker @on-change="searchForm.goodsAttributeValueCreateTimeMin=$event" :value="searchForm.goodsAttributeValueCreateTimeMin" placeholder="请输入开始创建时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsAttributeValueCreateTimeMax">
+	<DatePicker @on-change="searchForm.goodsAttributeValueCreateTimeMax=$event" :value="searchForm.goodsAttributeValueCreateTimeMax" placeholder="请输入结束创建时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+</Row>
 </FormItem>
 </i-col>
 </Row>
@@ -170,9 +313,32 @@ goodsInfoCategoryId: null,
 goodsInfoCategoryIdMin: null, 
 goodsInfoCategoryIdMax: null, 
 goodsInfoTitle: null,
+goodsInfoIntro: null,
+goodsInfoShelfStatus: null,
+goodsInfoShelfStatusMin: null, 
+goodsInfoShelfStatusMax: null, 
+goodsInfoIsHot: null,
+goodsInfoIsHotMin: null, 
+goodsInfoIsHotMax: null, 
+goodsInfoClickCount: null,
+goodsInfoClickCountMin: null, 
+goodsInfoClickCountMax: null, 
+goodsInfoCreateTime: null,
+goodsInfoCreateTimeMin: null, 
+goodsInfoCreateTimeMax: null, 
 goodsSkuId: null,
 goodsSkuIdMin: null, 
 goodsSkuIdMax: null, 
+goodsSkuCreateTime: null,
+goodsSkuCreateTimeMin: null, 
+goodsSkuCreateTimeMax: null, 
+goodsPicId: null,
+goodsPicIdMin: null, 
+goodsPicIdMax: null, 
+goodsPicPicUrl: null,
+goodsPicPicOrder: null,
+goodsPicPicOrderMin: null, 
+goodsPicPicOrderMax: null, 
 goodsAttributeId: null,
 goodsAttributeIdMin: null, 
 goodsAttributeIdMax: null, 
@@ -183,6 +349,9 @@ goodsAttributeAttrLength: null,
 goodsAttributeAttrLengthMin: null, 
 goodsAttributeAttrLengthMax: null, 
 goodsAttributeValueAttrValue: null,
+goodsAttributeValueCreateTime: null,
+goodsAttributeValueCreateTimeMin: null, 
+goodsAttributeValueCreateTimeMax: null, 
 
                 }
             }

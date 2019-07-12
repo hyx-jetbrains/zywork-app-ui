@@ -94,8 +94,106 @@ renderHeader: (h, params) => {
             }
 },
 {
+title: '图文详情',
+key: 'goodsInfoIntro',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '上架状态',
+key: 'goodsInfoShelfStatus',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '是否热门',
+key: 'goodsInfoIsHot',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '点击数',
+key: 'goodsInfoClickCount',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '创建时间',
+key: 'goodsInfoCreateTime',
+minWidth: 120,
+sortable: true,
+renderHeader: (h, params) => {
+              return h('span', [
+                h('span', '创建时间'),
+                h('Tooltip', {
+                  props: {
+                    content: '商品创建时间',
+                    placement: 'top',
+                    transfer: true,
+                    maxWidth: 500
+                  }
+                }, [
+                  h('Icon', {
+                    props: {
+                      type: 'ios-help-circle'
+                    },
+                    style: {
+                      marginLeft: '3px'
+                    }
+                  })
+                ])
+              ])
+            }
+},
+{
 title: 'SKU编号',
 key: 'goodsSkuId',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '创建时间',
+key: 'goodsSkuCreateTime',
+minWidth: 120,
+sortable: true,
+renderHeader: (h, params) => {
+              return h('span', [
+                h('span', '创建时间'),
+                h('Tooltip', {
+                  props: {
+                    content: 'SKU创建时间',
+                    placement: 'top',
+                    transfer: true,
+                    maxWidth: 500
+                  }
+                }, [
+                  h('Icon', {
+                    props: {
+                      type: 'ios-help-circle'
+                    },
+                    style: {
+                      marginLeft: '3px'
+                    }
+                  })
+                ])
+              ])
+            }
+},
+{
+title: '商品图片编号',
+key: 'goodsPicId',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '图片URL',
+key: 'goodsPicPicUrl',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '图片顺序',
+key: 'goodsPicPicOrder',
 minWidth: 120,
 sortable: true,
 },
@@ -134,6 +232,34 @@ title: '属性值',
 key: 'goodsAttributeValueAttrValue',
 minWidth: 120,
 sortable: true,
+},
+{
+title: '创建时间',
+key: 'goodsAttributeValueCreateTime',
+minWidth: 120,
+sortable: true,
+renderHeader: (h, params) => {
+              return h('span', [
+                h('span', '创建时间'),
+                h('Tooltip', {
+                  props: {
+                    content: '商品属性值创建时间',
+                    placement: 'top',
+                    transfer: true,
+                    maxWidth: 500
+                  }
+                }, [
+                  h('Icon', {
+                    props: {
+                      type: 'ios-help-circle'
+                    },
+                    style: {
+                      marginLeft: '3px'
+                    }
+                  })
+                ])
+              ])
+            }
 },
 
                         {

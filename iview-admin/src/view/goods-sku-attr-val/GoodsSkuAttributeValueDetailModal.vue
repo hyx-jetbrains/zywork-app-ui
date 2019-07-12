@@ -13,22 +13,47 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsSkuId"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">商品属性编号：</span><span v-text="form.goodsAttributeId"></span></i-col>
+	<i-col span="11"><span class="detail-title">图文详情：</span><span v-text="form.goodsInfoIntro"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">上架状态：</span><span v-text="form.goodsInfoShelfStatus"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">属性名称：</span><span v-text="form.goodsAttributeAttrName"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">属性代码：</span><span v-text="form.goodsAttributeAttrCode"></span></i-col>
+	<i-col span="11"><span class="detail-title">是否热门：</span><span v-text="form.goodsInfoIsHot"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">点击数：</span><span v-text="form.goodsInfoClickCount"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">数据类型：</span><span v-text="form.goodsAttributeAttrType"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">数据长度：</span><span v-text="form.goodsAttributeAttrLength"></span></i-col>
+	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsInfoCreateTime"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsSkuId"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">属性值：</span><span v-text="form.goodsAttributeValueAttrValue"></span></i-col>
+	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsSkuCreateTime"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">商品图片编号：</span><span v-text="form.goodsPicId"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">图片URL：</span><span v-text="form.goodsPicPicUrl"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">图片顺序：</span><span v-text="form.goodsPicPicOrder"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">商品属性编号：</span><span v-text="form.goodsAttributeId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">属性名称：</span><span v-text="form.goodsAttributeAttrName"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">属性代码：</span><span v-text="form.goodsAttributeAttrCode"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">数据类型：</span><span v-text="form.goodsAttributeAttrType"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">数据长度：</span><span v-text="form.goodsAttributeAttrLength"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">属性值：</span><span v-text="form.goodsAttributeValueAttrValue"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsAttributeValueCreateTime"></span></i-col>
 <i-col span="2"></i-col>
 </Row>
 
@@ -50,13 +75,23 @@
 goodsInfoShopId: null,
 goodsInfoCategoryId: null,
 goodsInfoTitle: null,
+goodsInfoIntro: null,
+goodsInfoShelfStatus: null,
+goodsInfoIsHot: null,
+goodsInfoClickCount: null,
+goodsInfoCreateTime: null,
 goodsSkuId: null,
+goodsSkuCreateTime: null,
+goodsPicId: null,
+goodsPicPicUrl: null,
+goodsPicPicOrder: null,
 goodsAttributeId: null,
 goodsAttributeAttrName: null,
 goodsAttributeAttrCode: null,
 goodsAttributeAttrType: null,
 goodsAttributeAttrLength: null,
 goodsAttributeValueAttrValue: null,
+goodsAttributeValueCreateTime: null,
 
                 }
             }

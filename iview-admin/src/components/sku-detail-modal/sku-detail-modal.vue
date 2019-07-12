@@ -29,7 +29,7 @@
                 ]">
                 <Input v-model="form[item.goodsAttributeId + '_' + item.goodsAttributeAttrCode]" :placeholder="'请输入' + item.goodsAttributeAttrName" style="width: 100%;"/>
               </FormItem>
-              <FormItem v-else-if="item.goodsAttributeAttrType === 'Double'" :label="item.goodsAttributeAttrName" :prop="item.goodsAttributeId + '_' + item.goodsAttributeAttrCode"
+              <FormItem v-else-if="item.goodsAttributeAttrType === 'Double' || item.goodsAttributeAttrType === 'BigDecimal'" :label="item.goodsAttributeAttrName" :prop="item.goodsAttributeId + '_' + item.goodsAttributeAttrCode"
               :rules="[
                   {type: 'number', required: true, message: '此项为必须项', trigger: 'blur, change'}
                 ]">
@@ -118,7 +118,7 @@ export default {
                     let theAttributeVal = attrValue.goodsAttributeValueAttrValue
                     if (formItem.goodsAttributeAttrType === 'Integer' || formItem.goodsAttributeAttrType === 'Long') { 
                       theAttributeVal = parseInt(theAttributeVal)
-                    } else if (formItem.goodsAttributeAttrType === 'Double') {
+                    } else if (formItem.goodsAttributeAttrType === 'Double' || formItem.goodsAttributeAttrType === 'BigDecimal') {
                       theAttributeVal = parseFloat(theAttributeVal)
                     }
                     this.$set(this.form, formItem.goodsAttributeId + '_' + formItem.goodsAttributeAttrCode, theAttributeVal)
