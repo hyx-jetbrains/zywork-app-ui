@@ -264,44 +264,6 @@ export default [
   },
   {
     path: '/admin',
-    name: 'cms_management',
-    meta: {
-      icon: 'ios-book',
-      title: '内容管理'
-    },
-    component: Main,
-    children: [
-      {
-        path: 'ArticleCategory',
-        name: 'article_category',
-        meta: {
-          title: '文章类别管理',
-          icon: 'md-filing'
-        },
-        component: () => import('@/view/article-category/ArticleCategoryMain.vue')
-      },
-      {
-        path: 'Article',
-        name: 'article_management',
-        meta: {
-          title: '文章管理',
-          icon: 'ios-paper'
-        },
-        component: () => import('@/view/article/ArticleMain.vue')
-      },
-      {
-        path: 'ArticleComment',
-        name: 'article_comment',
-        meta: {
-          title: '文章评论管理',
-          icon: 'ios-text'
-        },
-        component: () => import('@/view/article-comment/ArticleCommentMain.vue')
-      }
-    ]
-  },
-  {
-    path: '/admin',
     name: 'ad_management',
     meta: {
       icon: 'md-globe',
@@ -340,75 +302,39 @@ export default [
   },
   {
     path: '/admin',
-    name: 'processes_management',
+    name: 'cms_management',
     meta: {
-      icon: 'md-repeat',
-      title: '流程管理'
+      icon: 'ios-book',
+      title: '内容管理'
     },
     component: Main,
     children: [
       {
-        path: 'Process',
-        name: 'process_management',
+        path: 'ArticleCategory',
+        name: 'article_category',
         meta: {
-          title: '流程文件管理',
-          icon: 'md-swap'
+          title: '文章类别管理',
+          icon: 'md-filing'
         },
-        component: () => import('@/view/process/ProcessMain.vue')
+        component: () => import('@/view/article-category/ArticleCategoryMain.vue')
       },
       {
-        path: 'ProcessDeployment',
-        name: 'process_deployment_management',
+        path: 'Article',
+        name: 'article_management',
         meta: {
-          title: '流程部署管理',
-          icon: 'md-sync'
+          title: '文章管理',
+          icon: 'ios-paper'
         },
-        component: () => import('@/view/activiti-deployment/ActivitiDeploymentMain.vue')
+        component: () => import('@/view/article/ArticleMain.vue')
       },
       {
-        path: 'ProcessDefinition',
-        name: 'process_definition_management',
+        path: 'ArticleComment',
+        name: 'article_comment',
         meta: {
-          title: '流程定义管理',
-          icon: 'md-switch'
+          title: '文章评论管理',
+          icon: 'ios-text'
         },
-        component: () => import('@/view/activiti-definition/ActivitiDefinitionMain.vue')
-      },
-      {
-        path: 'ProcessInstance',
-        name: 'process_instance_management',
-        meta: {
-          title: '流程实例管理',
-          icon: 'ios-browsers'
-        },
-        component: () => import('@/view/activiti-instance/ActivitiInstanceMain.vue')
-      },
-      {
-        path: 'ProcessTask',
-        name: 'process_task_management',
-        meta: {
-          title: '流程任务管理',
-          icon: 'ios-stopwatch'
-        },
-        component: () => import('@/view/activiti-task/ActivitiTaskMain.vue')
-      },
-      {
-        path: 'HistoricProcess',
-        name: 'historic_process_management',
-        meta: {
-          title: '流程历史管理',
-          icon: 'ios-barcode'
-        },
-        component: () => import('@/view/activiti-his-instance/ActivitiHisInstanceMain.vue')
-      },
-      {
-        path: 'ProcessDesign',
-        name: 'process_design',
-        meta: {
-          title: '流程在线设计',
-          href: baseUrl + ':8080/activiti-app',
-          icon: 'md-pricetag'
-        }
+        component: () => import('@/view/article-comment/ArticleCommentMain.vue')
       }
     ]
   },
@@ -695,6 +621,80 @@ export default [
           icon: 'ios-thumbs-up'
         },
         component: () => import('@/view/distribution/TopDistributionMain.vue')
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    name: 'processes_management',
+    meta: {
+      icon: 'md-repeat',
+      title: '流程管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'Process',
+        name: 'process_management',
+        meta: {
+          title: '流程文件管理',
+          icon: 'md-swap'
+        },
+        component: () => import('@/view/process/ProcessMain.vue')
+      },
+      {
+        path: 'ProcessDeployment',
+        name: 'process_deployment_management',
+        meta: {
+          title: '流程部署管理',
+          icon: 'md-sync'
+        },
+        component: () => import('@/view/activiti-deployment/ActivitiDeploymentMain.vue')
+      },
+      {
+        path: 'ProcessDefinition',
+        name: 'process_definition_management',
+        meta: {
+          title: '流程定义管理',
+          icon: 'md-switch'
+        },
+        component: () => import('@/view/activiti-definition/ActivitiDefinitionMain.vue')
+      },
+      {
+        path: 'ProcessInstance',
+        name: 'process_instance_management',
+        meta: {
+          title: '流程实例管理',
+          icon: 'ios-browsers'
+        },
+        component: () => import('@/view/activiti-instance/ActivitiInstanceMain.vue')
+      },
+      {
+        path: 'ProcessTask',
+        name: 'process_task_management',
+        meta: {
+          title: '流程任务管理',
+          icon: 'ios-stopwatch'
+        },
+        component: () => import('@/view/activiti-task/ActivitiTaskMain.vue')
+      },
+      {
+        path: 'HistoricProcess',
+        name: 'historic_process_management',
+        meta: {
+          title: '流程历史管理',
+          icon: 'ios-barcode'
+        },
+        component: () => import('@/view/activiti-his-instance/ActivitiHisInstanceMain.vue')
+      },
+      {
+        path: 'ProcessDesign',
+        name: 'process_design',
+        meta: {
+          title: '流程在线设计',
+          href: baseUrl + ':8080/activiti-app',
+          icon: 'md-pricetag'
+        }
       }
     ]
   },
