@@ -451,6 +451,15 @@ export default [
             component: () => import('@/view/goods-sku/GoodsSkuMain.vue')
           },
           {
+            path: 'GoodsInfoSkuPic',
+            name: 'goods_info_sku_pic',
+            meta: {
+              icon: 'md-aperture',
+              title: '商品SKU查询'
+            },
+            component: () => import('@/view/goods-info-sku-pic/GoodsInfoSkuPicMain.vue')
+          },
+          {
             path: 'GoodsDetail',
             name: 'goods_detail',
             meta: {
