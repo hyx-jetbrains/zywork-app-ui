@@ -58,7 +58,7 @@ export default {
   process_design: 'Process Online Design',
   activiti_tasks: 'My Process Tasks',
   mall_management: 'Mall Management',
-  goods_basic_management: 'Goods Basic Management',
+  goods_basic_management: 'Goods Basic Info Management',
   goods_category: 'Goods Category Management',
   goods_attribute: 'Goods Attibute Management',
   category_attribute: 'Category Attribute Query',

@@ -58,7 +58,7 @@ export default {
   process_design: '流程在線設計',
   activiti_tasks: '我的流程任務',
   mall_management: '商城管理',
-  goods_basic_management: '商城基礎信息管理',
+  goods_basic_management: '基礎信息管理',
   goods_category: '商品類目管理',
   goods_attribute: '商品屬性管理',
   category_attribute: '類目屬性查詢',

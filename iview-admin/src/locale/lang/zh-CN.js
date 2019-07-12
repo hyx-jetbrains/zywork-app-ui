@@ -58,7 +58,7 @@ export default {
   process_design: '流程在线设计',
   activiti_tasks: '我的流程任务',
   mall_management: '商城管理',
-  goods_basic_management: '商城基础信息管理',
+  goods_basic_management: '基础信息管理',
   goods_category: '商品类目管理',
   goods_attribute: '商品属性管理',
   category_attribute: '类目属性查询',
