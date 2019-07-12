@@ -24,7 +24,12 @@
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsInfoCreateTime"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsSkuId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.goodsInfoIsActive"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsSkuId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">上架状态：</span><span v-text="form.goodsSkuShelfStatus"></span></i-col>
 
 </Row>
 <Row>
@@ -49,6 +54,11 @@
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">数据长度：</span><span v-text="form.goodsAttributeAttrLength"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否必填：</span><span v-text="form.goodsAttributeAttrRequired"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">是否前端显示：</span><span v-text="form.goodsAttributeAttrDisplay"></span></i-col>
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">属性值：</span><span v-text="form.goodsAttributeValueAttrValue"></span></i-col>
 
 </Row>
@@ -80,7 +90,9 @@ goodsInfoShelfStatus: null,
 goodsInfoIsHot: null,
 goodsInfoClickCount: null,
 goodsInfoCreateTime: null,
+goodsInfoIsActive: null,
 goodsSkuId: null,
+goodsSkuShelfStatus: null,
 goodsSkuCreateTime: null,
 goodsPicId: null,
 goodsPicPicUrl: null,
@@ -90,6 +102,8 @@ goodsAttributeAttrName: null,
 goodsAttributeAttrCode: null,
 goodsAttributeAttrType: null,
 goodsAttributeAttrLength: null,
+goodsAttributeAttrRequired: null,
+goodsAttributeAttrDisplay: null,
 goodsAttributeValueAttrValue: null,
 goodsAttributeValueCreateTime: null,
 

@@ -146,8 +146,42 @@ renderHeader: (h, params) => {
             }
 },
 {
+title: '是否激活',
+key: 'goodsInfoIsActive',
+minWidth: 120,
+sortable: true,
+renderHeader: (h, params) => {
+              return h('span', [
+                h('span', '是否激活'),
+                h('Tooltip', {
+                  props: {
+                    content: '商品是否激活',
+                    placement: 'top',
+                    transfer: true,
+                    maxWidth: 500
+                  }
+                }, [
+                  h('Icon', {
+                    props: {
+                      type: 'ios-help-circle'
+                    },
+                    style: {
+                      marginLeft: '3px'
+                    }
+                  })
+                ])
+              ])
+            }
+},
+{
 title: 'SKU编号',
 key: 'goodsSkuId',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '上架状态',
+key: 'goodsSkuShelfStatus',
 minWidth: 120,
 sortable: true,
 },
@@ -224,6 +258,18 @@ sortable: true,
 {
 title: '数据长度',
 key: 'goodsAttributeAttrLength',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '是否必填',
+key: 'goodsAttributeAttrRequired',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '是否前端显示',
+key: 'goodsAttributeAttrDisplay',
 minWidth: 120,
 sortable: true,
 },

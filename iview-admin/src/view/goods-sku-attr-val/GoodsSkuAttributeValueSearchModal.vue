@@ -129,6 +129,24 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="是否激活"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsInfoIsActiveMin">
+	<InputNumber v-model="searchForm.goodsInfoIsActiveMin" placeholder="请输入开始是否激活" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsInfoIsActiveMax">
+	<InputNumber v-model="searchForm.goodsInfoIsActiveMax" placeholder="请输入结束是否激活" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="SKU编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsSkuIdMin">
@@ -139,6 +157,21 @@
 	<i-col span="11">
 	<FormItem prop="goodsSkuIdMax">
 	<InputNumber v-model="searchForm.goodsSkuIdMax" placeholder="请输入结束SKU编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="上架状态"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsSkuShelfStatusMin">
+	<InputNumber v-model="searchForm.goodsSkuShelfStatusMin" placeholder="请输入开始上架状态" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsSkuShelfStatusMax">
+	<InputNumber v-model="searchForm.goodsSkuShelfStatusMax" placeholder="请输入结束上架状态" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -250,6 +283,39 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="是否必填"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsAttributeAttrRequiredMin">
+	<InputNumber v-model="searchForm.goodsAttributeAttrRequiredMin" placeholder="请输入开始是否必填" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsAttributeAttrRequiredMax">
+	<InputNumber v-model="searchForm.goodsAttributeAttrRequiredMax" placeholder="请输入结束是否必填" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="是否前端显示"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsAttributeAttrDisplayMin">
+	<InputNumber v-model="searchForm.goodsAttributeAttrDisplayMin" placeholder="请输入开始是否前端显示" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsAttributeAttrDisplayMax">
+	<InputNumber v-model="searchForm.goodsAttributeAttrDisplayMax" placeholder="请输入结束是否前端显示" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="属性值" prop="goodsAttributeValueAttrValue">
 	<Input v-model="searchForm.goodsAttributeValueAttrValue" placeholder="请输入属性值"/>
 </FormItem>
@@ -326,9 +392,15 @@ goodsInfoClickCountMax: null,
 goodsInfoCreateTime: null,
 goodsInfoCreateTimeMin: null, 
 goodsInfoCreateTimeMax: null, 
+goodsInfoIsActive: null,
+goodsInfoIsActiveMin: null, 
+goodsInfoIsActiveMax: null, 
 goodsSkuId: null,
 goodsSkuIdMin: null, 
 goodsSkuIdMax: null, 
+goodsSkuShelfStatus: null,
+goodsSkuShelfStatusMin: null, 
+goodsSkuShelfStatusMax: null, 
 goodsSkuCreateTime: null,
 goodsSkuCreateTimeMin: null, 
 goodsSkuCreateTimeMax: null, 
@@ -348,6 +420,12 @@ goodsAttributeAttrType: null,
 goodsAttributeAttrLength: null,
 goodsAttributeAttrLengthMin: null, 
 goodsAttributeAttrLengthMax: null, 
+goodsAttributeAttrRequired: null,
+goodsAttributeAttrRequiredMin: null, 
+goodsAttributeAttrRequiredMax: null, 
+goodsAttributeAttrDisplay: null,
+goodsAttributeAttrDisplayMin: null, 
+goodsAttributeAttrDisplayMax: null, 
 goodsAttributeValueAttrValue: null,
 goodsAttributeValueCreateTime: null,
 goodsAttributeValueCreateTimeMin: null, 
