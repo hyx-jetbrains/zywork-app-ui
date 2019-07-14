@@ -18,7 +18,7 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">是否热门：</span><span v-text="form.goodsInfoIsHot"></span></i-col>
+	<i-col span="11"><span class="detail-title">销量：</span><span v-text="form.goodsInfoSaleCount"></span></i-col>
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">点击数：</span><span v-text="form.goodsInfoClickCount"></span></i-col>
 
 </Row>
@@ -62,7 +62,7 @@ goodsInfoCategoryId: null,
 goodsInfoTitle: null,
 goodsInfoIntro: null,
 goodsInfoShelfStatus: null,
-goodsInfoIsHot: null,
+goodsInfoSaleCount: null,
 goodsInfoClickCount: null,
 goodsInfoCreateTime: null,
 goodsSkuId: null,
