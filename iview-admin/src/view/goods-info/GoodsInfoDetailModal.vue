@@ -18,7 +18,7 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">是否热门：</span><span v-text="form.isHot"></span></i-col>
+	<i-col span="11"><span class="detail-title">销量：</span><span v-text="form.saleCount"></span></i-col>
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">点击数：</span><span v-text="form.clickCount"></span></i-col>
 
 </Row>
@@ -53,7 +53,7 @@ categoryId: null,
 title: null,
 intro: null,
 shelfStatus: null,
-isHot: null,
+saleCount: null,
 clickCount: null,
 version: null,
 createTime: null,

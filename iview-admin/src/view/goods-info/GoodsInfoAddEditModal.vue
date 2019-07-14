@@ -30,8 +30,8 @@
 	<InputNumber v-model="form.shelfStatus" placeholder="请输入上架状态" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="是否热门" prop="isHot">
-	<InputNumber v-model="form.isHot" placeholder="请输入是否热门" style="width: 100%;"/>
+	<FormItem label="销量" prop="saleCount">
+	<InputNumber v-model="form.saleCount" placeholder="请输入销量" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
@@ -79,8 +79,8 @@
 	<InputNumber v-model="form.shelfStatus" placeholder="请输入上架状态" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="是否热门" prop="isHot">
-	<InputNumber v-model="form.isHot" placeholder="请输入是否热门" style="width: 100%;"/>
+	<FormItem label="销量" prop="saleCount">
+	<InputNumber v-model="form.saleCount" placeholder="请输入销量" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
@@ -127,7 +127,7 @@ categoryId: null,
 title: null,
 intro: null,
 shelfStatus: null,
-isHot: null,
+saleCount: null,
 clickCount: null,
 version: null,
 createTime: null,

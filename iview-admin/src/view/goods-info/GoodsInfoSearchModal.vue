@@ -81,16 +81,16 @@
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="是否热门"><Row>
+	<FormItem label="销量"><Row>
 	<i-col span="11">
-	<FormItem prop="isHotMin">
-	<InputNumber v-model="searchForm.isHotMin" placeholder="请输入开始是否热门" style="width: 100%;"/>
+	<FormItem prop="saleCountMin">
+	<InputNumber v-model="searchForm.saleCountMin" placeholder="请输入开始销量" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="isHotMax">
-	<InputNumber v-model="searchForm.isHotMax" placeholder="请输入结束是否热门" style="width: 100%;"/>
+	<FormItem prop="saleCountMax">
+	<InputNumber v-model="searchForm.saleCountMax" placeholder="请输入结束销量" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -222,9 +222,9 @@ intro: null,
 shelfStatus: null,
 shelfStatusMin: null, 
 shelfStatusMax: null, 
-isHot: null,
-isHotMin: null, 
-isHotMax: null, 
+saleCount: null,
+saleCountMin: null, 
+saleCountMax: null, 
 clickCount: null,
 clickCountMin: null, 
 clickCountMax: null, 
