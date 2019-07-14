@@ -27,8 +27,8 @@
                     total: 0
                 },
                 searchOpts: {
-                    sortColumn: null,
-                    sortOrder: null,
+                    sortColumn: "goodsCategoryAttributeAttrOrder",
+                    sortOrder: "asc",
                 },
                 table: {
                     loading: false,
