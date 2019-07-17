@@ -232,10 +232,44 @@ minWidth: 120,
 sortable: true,
 },
 {
-title: '商品属性编号',
-key: 'goodsAttributeId',
+title: '属性编号',
+key: 'goodsCategoryAttributeAttrId',
 minWidth: 120,
 sortable: true,
+},
+{
+title: '属性排序',
+key: 'goodsCategoryAttributeAttrOrder',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '是否属性组合',
+key: 'goodsCategoryAttributeIsAttrGroup',
+minWidth: 120,
+sortable: true,
+renderHeader: (h, params) => {
+              return h('span', [
+                h('span', '是否属性组合'),
+                h('Tooltip', {
+                  props: {
+                    content: '如果是属性组合，则在前端商品详情中可根据此属性进行SKU的组合',
+                    placement: 'top',
+                    transfer: true,
+                    maxWidth: 500
+                  }
+                }, [
+                  h('Icon', {
+                    props: {
+                      type: 'ios-help-circle'
+                    },
+                    style: {
+                      marginLeft: '3px'
+                    }
+                  })
+                ])
+              ])
+            }
 },
 {
 title: '属性名称',

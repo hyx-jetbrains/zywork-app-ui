@@ -43,7 +43,12 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">商品属性编号：</span><span v-text="form.goodsAttributeId"></span></i-col>
+	<i-col span="11"><span class="detail-title">属性编号：</span><span v-text="form.goodsCategoryAttributeAttrId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">属性排序：</span><span v-text="form.goodsCategoryAttributeAttrOrder"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">是否属性组合：</span><span v-text="form.goodsCategoryAttributeIsAttrGroup"></span></i-col>
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">属性名称：</span><span v-text="form.goodsAttributeAttrName"></span></i-col>
 
 </Row>
@@ -97,7 +102,9 @@ goodsSkuCreateTime: null,
 goodsPicId: null,
 goodsPicPicUrl: null,
 goodsPicPicOrder: null,
-goodsAttributeId: null,
+goodsCategoryAttributeAttrId: null,
+goodsCategoryAttributeAttrOrder: null,
+goodsCategoryAttributeIsAttrGroup: null,
 goodsAttributeAttrName: null,
 goodsAttributeAttrCode: null,
 goodsAttributeAttrType: null,

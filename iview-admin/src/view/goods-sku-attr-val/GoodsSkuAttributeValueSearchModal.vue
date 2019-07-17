@@ -235,16 +235,49 @@
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="商品属性编号"><Row>
+	<FormItem label="属性编号"><Row>
 	<i-col span="11">
-	<FormItem prop="goodsAttributeIdMin">
-	<InputNumber v-model="searchForm.goodsAttributeIdMin" placeholder="请输入开始商品属性编号" style="width: 100%;"/>
+	<FormItem prop="goodsCategoryAttributeAttrIdMin">
+	<InputNumber v-model="searchForm.goodsCategoryAttributeAttrIdMin" placeholder="请输入开始属性编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="goodsAttributeIdMax">
-	<InputNumber v-model="searchForm.goodsAttributeIdMax" placeholder="请输入结束商品属性编号" style="width: 100%;"/>
+	<FormItem prop="goodsCategoryAttributeAttrIdMax">
+	<InputNumber v-model="searchForm.goodsCategoryAttributeAttrIdMax" placeholder="请输入结束属性编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="属性排序"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsCategoryAttributeAttrOrderMin">
+	<InputNumber v-model="searchForm.goodsCategoryAttributeAttrOrderMin" placeholder="请输入开始属性排序" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsCategoryAttributeAttrOrderMax">
+	<InputNumber v-model="searchForm.goodsCategoryAttributeAttrOrderMax" placeholder="请输入结束属性排序" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="是否属性组合"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsCategoryAttributeIsAttrGroupMin">
+	<InputNumber v-model="searchForm.goodsCategoryAttributeIsAttrGroupMin" placeholder="请输入开始是否属性组合" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsCategoryAttributeIsAttrGroupMax">
+	<InputNumber v-model="searchForm.goodsCategoryAttributeIsAttrGroupMax" placeholder="请输入结束是否属性组合" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -411,9 +444,15 @@ goodsPicPicUrl: null,
 goodsPicPicOrder: null,
 goodsPicPicOrderMin: null, 
 goodsPicPicOrderMax: null, 
-goodsAttributeId: null,
-goodsAttributeIdMin: null, 
-goodsAttributeIdMax: null, 
+goodsCategoryAttributeAttrId: null,
+goodsCategoryAttributeAttrIdMin: null, 
+goodsCategoryAttributeAttrIdMax: null, 
+goodsCategoryAttributeAttrOrder: null,
+goodsCategoryAttributeAttrOrderMin: null, 
+goodsCategoryAttributeAttrOrderMax: null, 
+goodsCategoryAttributeIsAttrGroup: null,
+goodsCategoryAttributeIsAttrGroupMin: null, 
+goodsCategoryAttributeIsAttrGroupMax: null, 
 goodsAttributeAttrName: null,
 goodsAttributeAttrCode: null,
 goodsAttributeAttrType: null,
