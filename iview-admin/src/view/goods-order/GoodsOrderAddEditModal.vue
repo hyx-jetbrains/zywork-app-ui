@@ -79,6 +79,13 @@
 </FormItem>
 	</i-col>
 </Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="订单备注" prop="remark">
+	<Input v-model="form.remark" placeholder="请输入订单备注"/>
+</FormItem>
+	</i-col>
+</Row>
 
             </Form>
             <div slot="footer">
@@ -165,6 +172,13 @@
 </FormItem>
 	</i-col>
 </Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="订单备注" prop="remark">
+	<Input v-model="form.remark" placeholder="请输入订单备注"/>
+</FormItem>
+	</i-col>
+</Row>
 
             </Form>
             <div slot="footer">
@@ -210,6 +224,7 @@ transactionNo: null,
 paySuccess: null,
 deliverTime: null,
 dealTime: null,
+remark: null,
 version: null,
 createTime: null,
 updateTime: null,
@@ -241,6 +256,9 @@ orderStatus: [
 ],
 transactionNo: [
 {type: 'string', min: 1, max: 50, message: '必须1-50个字符', trigger: 'blur'}
+],
+remark: [
+{type: 'string', min: 1, max: 255, message: '必须1-255个字符', trigger: 'blur'}
 ],
 
                 }

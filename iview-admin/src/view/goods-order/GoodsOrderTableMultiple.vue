@@ -138,6 +138,12 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '订单备注',
+key: 'remark',
+minWidth: 120,
+sortable: true,
+},
+{
 title: '版本号',
 key: 'version',
 minWidth: 120,

@@ -18,7 +18,7 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">SKU属性JSON：</span><span v-text="form.skuInfo"></span></i-col>
+	<i-col span="11"><span class="detail-title">SKU规格信息：</span><span v-text="form.skuInfo"></span></i-col>
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">购买数量：</span><span v-text="form.quantity"></span></i-col>
 
 </Row>

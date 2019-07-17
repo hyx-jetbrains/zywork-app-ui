@@ -59,7 +59,7 @@
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">售卖标题：</span><span v-text="form.goodsOrderItemSkuTitle"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU属性JSON：</span><span v-text="form.goodsOrderItemSkuInfo"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU规格信息：</span><span v-text="form.goodsOrderItemSkuInfo"></span></i-col>
 
 </Row>
 <Row>

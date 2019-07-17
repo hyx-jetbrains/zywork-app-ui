@@ -84,7 +84,7 @@ minWidth: 120,
 sortable: true,
 },
 {
-title: 'SKU属性JSON',
+title: 'SKU规格信息',
 key: 'skuInfo',
 minWidth: 120,
 sortable: true,

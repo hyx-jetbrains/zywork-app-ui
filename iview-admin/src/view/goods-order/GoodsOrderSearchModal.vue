@@ -228,6 +228,13 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="订单备注" prop="remark">
+	<Input v-model="searchForm.remark" placeholder="请输入订单备注"/>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="versionMin">
@@ -242,10 +249,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="createTimeMin">
@@ -260,7 +264,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="updateTimeMin">
@@ -275,10 +282,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="isActiveMin">
@@ -366,6 +370,7 @@ deliverTimeMax: null,
 dealTime: null,
 dealTimeMin: null, 
 dealTimeMax: null, 
+remark: null,
 version: null,
 versionMin: null, 
 versionMax: null, 

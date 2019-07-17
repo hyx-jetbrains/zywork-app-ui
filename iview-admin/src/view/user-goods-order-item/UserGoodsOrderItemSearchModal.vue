@@ -305,8 +305,8 @@
 	<Input v-model="searchForm.goodsOrderItemSkuTitle" placeholder="请输入售卖标题"/>
 </FormItem>
 </i-col><i-col span="12">
-	<FormItem label="SKU属性JSON" prop="goodsOrderItemSkuInfo">
-	<Input v-model="searchForm.goodsOrderItemSkuInfo" placeholder="请输入SKU属性JSON"/>
+	<FormItem label="SKU规格信息" prop="goodsOrderItemSkuInfo">
+	<Input v-model="searchForm.goodsOrderItemSkuInfo" placeholder="请输入SKU规格信息"/>
 </FormItem>
 </i-col>
 </Row>

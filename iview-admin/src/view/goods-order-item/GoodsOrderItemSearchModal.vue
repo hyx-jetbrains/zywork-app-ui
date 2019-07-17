@@ -92,8 +92,8 @@
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="SKU属性JSON" prop="skuInfo">
-	<Input v-model="searchForm.skuInfo" placeholder="请输入SKU属性JSON"/>
+	<FormItem label="SKU规格信息" prop="skuInfo">
+	<Input v-model="searchForm.skuInfo" placeholder="请输入SKU规格信息"/>
 </FormItem>
 </i-col><i-col span="12">
 	<FormItem label="购买数量"><Row>

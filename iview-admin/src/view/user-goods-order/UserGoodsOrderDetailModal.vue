@@ -48,14 +48,18 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.goodsOrderVersion"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsOrderCreateTime"></span></i-col>
+	<i-col span="11"><span class="detail-title">订单备注：</span><span v-text="form.goodsOrderRemark"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.goodsOrderVersion"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.goodsOrderUpdateTime"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.goodsOrderIsActive"></span></i-col>
+	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsOrderCreateTime"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.goodsOrderUpdateTime"></span></i-col>
 
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.goodsOrderIsActive"></span></i-col>
+<i-col span="2"></i-col>
 </Row>
 
             </div>
@@ -90,6 +94,7 @@ goodsOrderTransactionNo: null,
 goodsOrderPaySuccess: null,
 goodsOrderDeliverTime: null,
 goodsOrderDealTime: null,
+goodsOrderRemark: null,
 goodsOrderVersion: null,
 goodsOrderCreateTime: null,
 goodsOrderUpdateTime: null,

@@ -246,6 +246,10 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="订单备注" prop="goodsOrderRemark">
+	<Input v-model="searchForm.goodsOrderRemark" placeholder="请输入订单备注"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderVersionMin">
@@ -260,7 +264,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderCreateTimeMin">
@@ -275,10 +282,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderUpdateTimeMin">
@@ -293,7 +297,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderIsActiveMin">
@@ -384,6 +391,7 @@ goodsOrderDeliverTimeMax: null,
 goodsOrderDealTime: null,
 goodsOrderDealTimeMin: null, 
 goodsOrderDealTimeMax: null, 
+goodsOrderRemark: null,
 goodsOrderVersion: null,
 goodsOrderVersionMin: null, 
 goodsOrderVersionMax: null, 
