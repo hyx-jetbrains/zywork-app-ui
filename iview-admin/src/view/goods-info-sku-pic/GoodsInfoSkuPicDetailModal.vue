@@ -24,16 +24,21 @@
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsInfoCreateTime"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsSkuId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">店铺Logo：</span><span v-text="form.goodsShopLogo"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">上架状态：</span><span v-text="form.goodsSkuShelfStatus"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsSkuCreateTime"></span></i-col>
+	<i-col span="11"><span class="detail-title">店铺标题：</span><span v-text="form.goodsShopTitle"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">店铺等级：</span><span v-text="form.goodsShopLevel"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">商品图片编号：</span><span v-text="form.goodsPicId"></span></i-col>
+	<i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsSkuId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">上架状态：</span><span v-text="form.goodsSkuShelfStatus"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsSkuCreateTime"></span></i-col>
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">图片URL：</span><span v-text="form.goodsPicPicUrl"></span></i-col>
 
 </Row>
@@ -65,10 +70,12 @@ goodsInfoShelfStatus: null,
 goodsInfoSaleCount: null,
 goodsInfoClickCount: null,
 goodsInfoCreateTime: null,
+goodsShopLogo: null,
+goodsShopTitle: null,
+goodsShopLevel: null,
 goodsSkuId: null,
 goodsSkuShelfStatus: null,
 goodsSkuCreateTime: null,
-goodsPicId: null,
 goodsPicPicUrl: null,
 goodsPicPicOrder: null,
 

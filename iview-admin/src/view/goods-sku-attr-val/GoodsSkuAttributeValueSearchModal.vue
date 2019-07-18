@@ -147,6 +147,32 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="店铺Logo" prop="goodsShopLogo">
+	<Input v-model="searchForm.goodsShopLogo" placeholder="请输入店铺Logo"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="店铺标题" prop="goodsShopTitle">
+	<Input v-model="searchForm.goodsShopTitle" placeholder="请输入店铺标题"/>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="店铺等级"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsShopLevelMin">
+	<InputNumber v-model="searchForm.goodsShopLevelMin" placeholder="请输入开始店铺等级" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsShopLevelMax">
+	<InputNumber v-model="searchForm.goodsShopLevelMax" placeholder="请输入结束店铺等级" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="SKU编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsSkuIdMin">
@@ -161,7 +187,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="上架状态"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsSkuShelfStatusMin">
@@ -176,10 +205,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsSkuCreateTimeMin">
@@ -194,7 +220,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="商品图片编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsPicIdMin">
@@ -209,14 +238,14 @@
 </i-col>
 </Row>
 </FormItem>
+</i-col><i-col span="12">
+	<FormItem label="图片URL" prop="goodsPicPicUrl">
+	<Input v-model="searchForm.goodsPicPicUrl" placeholder="请输入图片URL"/>
+</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="图片URL" prop="goodsPicPicUrl">
-	<Input v-model="searchForm.goodsPicPicUrl" placeholder="请输入图片URL"/>
-</FormItem>
-</i-col><i-col span="12">
 	<FormItem label="图片顺序"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsPicPicOrderMin">
@@ -231,10 +260,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="属性编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsCategoryAttributeAttrIdMin">
@@ -249,7 +275,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="属性排序"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsCategoryAttributeAttrOrderMin">
@@ -264,10 +293,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="是否属性组合"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsCategoryAttributeIsAttrGroupMin">
@@ -282,25 +308,25 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="属性名称" prop="goodsAttributeAttrName">
 	<Input v-model="searchForm.goodsAttributeAttrName" placeholder="请输入属性名称"/>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="属性代码" prop="goodsAttributeAttrCode">
 	<Input v-model="searchForm.goodsAttributeAttrCode" placeholder="请输入属性代码"/>
 </FormItem>
-</i-col><i-col span="12">
-	<FormItem label="数据类型" prop="goodsAttributeAttrType">
-	<Input v-model="searchForm.goodsAttributeAttrType" placeholder="请输入数据类型"/>
-</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="数据类型" prop="goodsAttributeAttrType">
+	<Input v-model="searchForm.goodsAttributeAttrType" placeholder="请输入数据类型"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="数据长度"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsAttributeAttrLengthMin">
@@ -315,7 +341,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否必填"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsAttributeAttrRequiredMin">
@@ -330,10 +359,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="是否前端显示"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsAttributeAttrDisplayMin">
@@ -348,14 +374,14 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
-	<FormItem label="属性值" prop="goodsAttributeValueAttrValue">
-	<Input v-model="searchForm.goodsAttributeValueAttrValue" placeholder="请输入属性值"/>
-</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="属性值" prop="goodsAttributeValueAttrValue">
+	<Input v-model="searchForm.goodsAttributeValueAttrValue" placeholder="请输入属性值"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsAttributeValueCreateTimeMin">
@@ -428,6 +454,11 @@ goodsInfoCreateTimeMax: null,
 goodsInfoIsActive: null,
 goodsInfoIsActiveMin: null, 
 goodsInfoIsActiveMax: null, 
+goodsShopLogo: null,
+goodsShopTitle: null,
+goodsShopLevel: null,
+goodsShopLevelMin: null, 
+goodsShopLevelMax: null, 
 goodsSkuId: null,
 goodsSkuIdMin: null, 
 goodsSkuIdMax: null, 

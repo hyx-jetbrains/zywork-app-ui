@@ -129,6 +129,35 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="店铺Logo" prop="goodsShopLogo">
+	<Input v-model="searchForm.goodsShopLogo" placeholder="请输入店铺Logo"/>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="店铺标题" prop="goodsShopTitle">
+	<Input v-model="searchForm.goodsShopTitle" placeholder="请输入店铺标题"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="店铺等级"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsShopLevelMin">
+	<InputNumber v-model="searchForm.goodsShopLevelMin" placeholder="请输入开始店铺等级" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsShopLevelMax">
+	<InputNumber v-model="searchForm.goodsShopLevelMax" placeholder="请输入结束店铺等级" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="SKU编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsSkuIdMin">
@@ -143,10 +172,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="上架状态"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsSkuShelfStatusMin">
@@ -161,7 +187,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsSkuCreateTimeMin">
@@ -172,24 +201,6 @@
 	<i-col span="11">
 	<FormItem prop="goodsSkuCreateTimeMax">
 	<DatePicker @on-change="searchForm.goodsSkuCreateTimeMax=$event" :value="searchForm.goodsSkuCreateTimeMax" placeholder="请输入结束创建时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
-</FormItem>
-</i-col>
-</Row>
-</FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="商品图片编号"><Row>
-	<i-col span="11">
-	<FormItem prop="goodsPicIdMin">
-	<InputNumber v-model="searchForm.goodsPicIdMin" placeholder="请输入开始商品图片编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-	<i-col span="2" style="text-align: center">-</i-col>
-	<i-col span="11">
-	<FormItem prop="goodsPicIdMax">
-	<InputNumber v-model="searchForm.goodsPicIdMax" placeholder="请输入结束商品图片编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -271,6 +282,11 @@ goodsInfoClickCountMax: null,
 goodsInfoCreateTime: null,
 goodsInfoCreateTimeMin: null, 
 goodsInfoCreateTimeMax: null, 
+goodsShopLogo: null,
+goodsShopTitle: null,
+goodsShopLevel: null,
+goodsShopLevelMin: null, 
+goodsShopLevelMax: null, 
 goodsSkuId: null,
 goodsSkuIdMin: null, 
 goodsSkuIdMax: null, 
@@ -280,9 +296,6 @@ goodsSkuShelfStatusMax: null,
 goodsSkuCreateTime: null,
 goodsSkuCreateTimeMin: null, 
 goodsSkuCreateTimeMax: null, 
-goodsPicId: null,
-goodsPicIdMin: null, 
-goodsPicIdMax: null, 
 goodsPicPicUrl: null,
 goodsPicPicOrder: null,
 goodsPicPicOrderMin: null, 

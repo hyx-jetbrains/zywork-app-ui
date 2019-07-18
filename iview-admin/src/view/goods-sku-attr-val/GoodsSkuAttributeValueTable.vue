@@ -174,6 +174,24 @@ renderHeader: (h, params) => {
             }
 },
 {
+title: '店铺Logo',
+key: 'goodsShopLogo',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '店铺标题',
+key: 'goodsShopTitle',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '店铺等级',
+key: 'goodsShopLevel',
+minWidth: 120,
+sortable: true,
+},
+{
 title: 'SKU编号',
 key: 'goodsSkuId',
 minWidth: 120,
