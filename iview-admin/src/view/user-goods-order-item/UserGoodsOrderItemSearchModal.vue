@@ -41,16 +41,16 @@
 	<Input v-model="searchForm.userDetailHeadicon" placeholder="请输入头像地址"/>
 </FormItem>
 </i-col><i-col span="12">
-	<FormItem label="用户编号"><Row>
+	<FormItem label="订单编号"><Row>
 	<i-col span="11">
-	<FormItem prop="goodsOrderUserIdMin">
-	<InputNumber v-model="searchForm.goodsOrderUserIdMin" placeholder="请输入开始用户编号" style="width: 100%;"/>
+	<FormItem prop="goodsOrderIdMin">
+	<InputNumber v-model="searchForm.goodsOrderIdMin" placeholder="请输入开始订单编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="goodsOrderUserIdMax">
-	<InputNumber v-model="searchForm.goodsOrderUserIdMax" placeholder="请输入结束用户编号" style="width: 100%;"/>
+	<FormItem prop="goodsOrderIdMax">
+	<InputNumber v-model="searchForm.goodsOrderIdMax" placeholder="请输入结束订单编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -250,6 +250,46 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="订单备注" prop="goodsOrderRemark">
+	<Input v-model="searchForm.goodsOrderRemark" placeholder="请输入订单备注"/>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="创建时间"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsOrderCreateTimeMin">
+	<DatePicker @on-change="searchForm.goodsOrderCreateTimeMin=$event" :value="searchForm.goodsOrderCreateTimeMin" placeholder="请输入开始创建时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsOrderCreateTimeMax">
+	<DatePicker @on-change="searchForm.goodsOrderCreateTimeMax=$event" :value="searchForm.goodsOrderCreateTimeMax" placeholder="请输入结束创建时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="是否激活"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsOrderIsActiveMin">
+	<InputNumber v-model="searchForm.goodsOrderIsActiveMin" placeholder="请输入开始是否激活" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsOrderIsActiveMax">
+	<InputNumber v-model="searchForm.goodsOrderIsActiveMax" placeholder="请输入结束是否激活" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="商品编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderItemGoodsIdMin">
@@ -264,10 +304,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="SKU编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderItemGoodsSkuIdMin">
@@ -282,7 +319,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="SKU图片编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderItemSkuPicIdMin">
@@ -297,21 +337,18 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="售卖标题" prop="goodsOrderItemSkuTitle">
 	<Input v-model="searchForm.goodsOrderItemSkuTitle" placeholder="请输入售卖标题"/>
 </FormItem>
-</i-col><i-col span="12">
-	<FormItem label="SKU规格信息" prop="goodsOrderItemSkuInfo">
-	<Input v-model="searchForm.goodsOrderItemSkuInfo" placeholder="请输入SKU规格信息"/>
-</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="SKU规格信息" prop="goodsOrderItemSkuInfo">
+	<Input v-model="searchForm.goodsOrderItemSkuInfo" placeholder="请输入SKU规格信息"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="购买数量"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderItemQuantityMin">
@@ -326,7 +363,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="实付金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderItemPayAmountMin">
@@ -341,10 +381,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="优惠金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderItemDiscountAmountMin">
@@ -359,7 +396,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="赠送积分"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderItemIntegralAmountMin">
@@ -374,10 +414,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="图片URL" prop="goodsPicPicUrl">
 	<Input v-model="searchForm.goodsPicPicUrl" placeholder="请输入图片URL"/>
 </FormItem>
@@ -420,9 +457,9 @@ userPhone: null,
 userEmail: null,
 userDetailNickname: null,
 userDetailHeadicon: null,
-goodsOrderUserId: null,
-goodsOrderUserIdMin: null, 
-goodsOrderUserIdMax: null, 
+goodsOrderId: null,
+goodsOrderIdMin: null, 
+goodsOrderIdMax: null, 
 goodsOrderOrderNo: null,
 goodsOrderTotalAmount: null,
 goodsOrderTotalAmountMin: null, 
@@ -458,6 +495,13 @@ goodsOrderDeliverTimeMax: null,
 goodsOrderDealTime: null,
 goodsOrderDealTimeMin: null, 
 goodsOrderDealTimeMax: null, 
+goodsOrderRemark: null,
+goodsOrderCreateTime: null,
+goodsOrderCreateTimeMin: null, 
+goodsOrderCreateTimeMax: null, 
+goodsOrderIsActive: null,
+goodsOrderIsActiveMin: null, 
+goodsOrderIsActiveMax: null, 
 goodsOrderItemGoodsId: null,
 goodsOrderItemGoodsIdMin: null, 
 goodsOrderItemGoodsIdMax: null, 

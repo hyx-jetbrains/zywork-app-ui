@@ -78,8 +78,8 @@ minWidth: 120,
 sortable: true,
 },
 {
-title: '用户编号',
-key: 'goodsOrderUserId',
+title: '订单编号',
+key: 'goodsOrderId',
 minWidth: 120,
 sortable: true,
 },
@@ -160,6 +160,68 @@ title: '成交时间',
 key: 'goodsOrderDealTime',
 minWidth: 120,
 sortable: true,
+},
+{
+title: '订单备注',
+key: 'goodsOrderRemark',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '创建时间',
+key: 'goodsOrderCreateTime',
+minWidth: 120,
+sortable: true,
+renderHeader: (h, params) => {
+              return h('span', [
+                h('span', '创建时间'),
+                h('Tooltip', {
+                  props: {
+                    content: '订单创建时间',
+                    placement: 'top',
+                    transfer: true,
+                    maxWidth: 500
+                  }
+                }, [
+                  h('Icon', {
+                    props: {
+                      type: 'ios-help-circle'
+                    },
+                    style: {
+                      marginLeft: '3px'
+                    }
+                  })
+                ])
+              ])
+            }
+},
+{
+title: '是否激活',
+key: 'goodsOrderIsActive',
+minWidth: 120,
+sortable: true,
+renderHeader: (h, params) => {
+              return h('span', [
+                h('span', '是否激活'),
+                h('Tooltip', {
+                  props: {
+                    content: '订单是否激活',
+                    placement: 'top',
+                    transfer: true,
+                    maxWidth: 500
+                  }
+                }, [
+                  h('Icon', {
+                    props: {
+                      type: 'ios-help-circle'
+                    },
+                    style: {
+                      marginLeft: '3px'
+                    }
+                  })
+                ])
+              ])
+            }
 },
 {
 title: '商品编号',

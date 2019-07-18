@@ -14,7 +14,7 @@
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">头像地址：</span><span v-text="form.userDetailHeadicon"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">用户编号：</span><span v-text="form.goodsOrderUserId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">订单编号：</span><span v-text="form.goodsOrderId"></span></i-col>
 
 </Row>
 <Row>
@@ -49,32 +49,38 @@
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">成交时间：</span><span v-text="form.goodsOrderDealTime"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">商品编号：</span><span v-text="form.goodsOrderItemGoodsId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">订单备注：</span><span v-text="form.goodsOrderRemark"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsOrderItemGoodsSkuId"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU图片编号：</span><span v-text="form.goodsOrderItemSkuPicId"></span></i-col>
+	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsOrderCreateTime"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.goodsOrderIsActive"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">售卖标题：</span><span v-text="form.goodsOrderItemSkuTitle"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU规格信息：</span><span v-text="form.goodsOrderItemSkuInfo"></span></i-col>
+	<i-col span="11"><span class="detail-title">商品编号：</span><span v-text="form.goodsOrderItemGoodsId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsOrderItemGoodsSkuId"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">购买数量：</span><span v-text="form.goodsOrderItemQuantity"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">实付金额（元）：</span><span v-text="form.goodsOrderItemPayAmount"></span></i-col>
+	<i-col span="11"><span class="detail-title">SKU图片编号：</span><span v-text="form.goodsOrderItemSkuPicId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">售卖标题：</span><span v-text="form.goodsOrderItemSkuTitle"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">优惠金额（元）：</span><span v-text="form.goodsOrderItemDiscountAmount"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">赠送积分：</span><span v-text="form.goodsOrderItemIntegralAmount"></span></i-col>
+	<i-col span="11"><span class="detail-title">SKU规格信息：</span><span v-text="form.goodsOrderItemSkuInfo"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">购买数量：</span><span v-text="form.goodsOrderItemQuantity"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">图片URL：</span><span v-text="form.goodsPicPicUrl"></span></i-col>
-<i-col span="2"></i-col>
+	<i-col span="11"><span class="detail-title">实付金额（元）：</span><span v-text="form.goodsOrderItemPayAmount"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">优惠金额（元）：</span><span v-text="form.goodsOrderItemDiscountAmount"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">赠送积分：</span><span v-text="form.goodsOrderItemIntegralAmount"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">图片URL：</span><span v-text="form.goodsPicPicUrl"></span></i-col>
+
 </Row>
 
             </div>
@@ -96,7 +102,7 @@ userPhone: null,
 userEmail: null,
 userDetailNickname: null,
 userDetailHeadicon: null,
-goodsOrderUserId: null,
+goodsOrderId: null,
 goodsOrderOrderNo: null,
 goodsOrderTotalAmount: null,
 goodsOrderPayAmount: null,
@@ -110,6 +116,9 @@ goodsOrderTransactionNo: null,
 goodsOrderPaySuccess: null,
 goodsOrderDeliverTime: null,
 goodsOrderDealTime: null,
+goodsOrderRemark: null,
+goodsOrderCreateTime: null,
+goodsOrderIsActive: null,
 goodsOrderItemGoodsId: null,
 goodsOrderItemGoodsSkuId: null,
 goodsOrderItemSkuPicId: null,
