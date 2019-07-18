@@ -12,12 +12,22 @@
             ref="table"
             v-on:searchTable="searchTable"
             v-on:showDetailModal="showDetailModal"
+            v-on:showAttrDetailModal="showAttrDetailModal"
+            v-on:showSearchTableModal="showSearchTableModal"
           />
         </Card>
       </i-col>
     </Row>
     <GoodsCategoryAttributeSearchModal ref="searchModal" v-on:searchTable="searchTable" />
     <GoodsCategoryAttributeDetailModal ref="detailModal" />
+    <GoodsAttributeDetailModal ref="attrDetailModal" />
+    <Modal v-model="modal.searchTableModal" title="选择商品属性" :mask-closable="false" width="960">
+      <goodsAttributeMainSingle ref="searchTableModal" v-on:confirmChoice="confirmChoice" />
+      <div slot="footer">
+        <Button type="text" size="large" @click="cancelModal('searchTableModal')">取消</Button>
+        <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -26,16 +36,26 @@ import * as utils from '@/api/utils-v2'
 import GoodsCategoryAttributeTable from './GoodsCategoryAttributeTable.vue'
 import GoodsCategoryAttributeSearchModal from './GoodsCategoryAttributeSearchModal.vue'
 import GoodsCategoryAttributeDetailModal from './GoodsCategoryAttributeDetailModal.vue'
+import GoodsAttributeDetailModal from '../goods-attribute/GoodsAttributeDetailModal.vue'
+import goodsAttributeMainSingle from '../goods-attribute/GoodsAttributeMainSingle.vue'
 import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'GoodsCategoryAttributeMain',
   components: {
     GoodsCategoryAttributeTable,
     GoodsCategoryAttributeSearchModal,
-    GoodsCategoryAttributeDetailModal
+    GoodsCategoryAttributeDetailModal,
+    GoodsAttributeDetailModal,
+    goodsAttributeMainSingle
   },
   data() {
     return {
+      modal: {
+        searchTableModal: false
+      },
+      urls: {
+        oneUrl: '/goods-attribute/admin/one/'
+      },
       selectedData: [],
       selectedDataIdProp: '',
       extraData: {}
@@ -85,7 +105,50 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    }
+    },
+    showSearchTableModal() {
+      this.modal['searchTableModal'] = true
+    },
+    /**
+     * 取消模态窗
+     */
+    cancelModal(modal) {
+      this.modal[modal] = false
+    },
+    /**
+     * 显示商品属性的详情
+     */
+    showAttrDetailModal(id) {
+      utils
+        .doGet(this.urls.oneUrl + id, {})
+        .then(res => {
+          if (ResponseStatus.OK === res.data.code) {
+            const row = res.data.data
+            let detailModal = this.$refs.attrDetailModal
+            detailModal.modal.detail = true
+            detailModal.form = row
+          } else {
+            this.$Message.error(res.data.message)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /**
+     * 底部的确认选择属性类目
+     */
+    bottomConfirmChoice() {
+      this.$refs.searchTableModal.confirmSelection()
+    },
+    /**
+     * 确认选择商品属性
+     */
+    confirmChoice(row) {
+      this.modal['searchTableModal'] = false
+      this.$refs.searchModal.searchForm.goodsAttributeIdMin = this.$refs.searchModal.searchForm.goodsAttributeIdMax = row.id
+      this.searchTable()
+    },
   }
 }
 </script>

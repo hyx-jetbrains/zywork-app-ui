@@ -231,6 +231,12 @@ export default {
           })
     },
     /**
+     * 取消模态窗
+     */
+    cancelModal(modal) {
+      this.modal[modal] = false
+    },
+    /**
      * 显示查询的模态窗
      */
     showSearchTableModal() {

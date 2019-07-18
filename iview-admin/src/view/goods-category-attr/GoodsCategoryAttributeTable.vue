@@ -81,7 +81,59 @@ export default {
             title: '商品属性编号',
             key: 'goodsAttributeId',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.goodsAttributeId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'moduleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'showSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
           },
           {
             title: '属性名称',
@@ -329,6 +381,13 @@ export default {
   methods: {
     search() {
       this.$emit('searchTable')
+    },
+    userOpt(itemName, row) {
+      if (itemName === 'moduleDetail') {
+        this.$emit('showAttrDetailModal', row.goodsAttributeId)
+      } else if (itemName === 'showSearch') {
+        this.$emit('showSearchTableModal')
+      }
     },
     showDetail(row) {
       this.$emit('showDetailModal', row)
