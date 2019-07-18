@@ -195,12 +195,6 @@ quantity: [
 payAmount: [
 {type: 'number', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
-discountAmount: [
-{type: 'number', required: true, message: '此项为必须项', trigger: 'blur, change'}
-],
-integralAmount: [
-{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
-],
 
                 }
             }
