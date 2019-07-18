@@ -1,154 +1,258 @@
 <template>
-    <div>
-        <Modal v-model="modal.add" title="添加" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('addForm', $event)" width="760">
-            <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
-                <Row>
-	<i-col span="12">
-	<FormItem label="类目父编号" prop="parentId">
-	<InputNumber v-model="form.parentId" placeholder="请输入类目父编号" style="width: 100%;"/>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="类目名称" prop="title">
-	<Input v-model="form.title" placeholder="请输入类目名称"/>
-</FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="类目封面图" prop="picUrl">
-	<Input v-model="form.picUrl" placeholder="请输入类目封面图"/>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="类目描述" prop="description">
-	<Input v-model="form.description" placeholder="请输入类目描述"/>
-</FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="是否热门" prop="isHot">
-	<InputNumber v-model="form.isHot" placeholder="请输入是否热门" style="width: 100%;"/>
-</FormItem>
-	</i-col>
-</Row>
-
-            </Form>
-            <div slot="footer">
-                <Button type="text" size="large" @click="resetFormCancelModal('addForm', 'add')">取消</Button>
-                <Button type="primary" size="large" @click="add" :loading="loading.add">添加</Button>
-            </div>
-        </Modal>
-        <Modal v-model="modal.edit" title="修改" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('editForm', $event)" width="760">
-            <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
-                <Row>
-	<i-col span="12">
-	<FormItem label="类目父编号" prop="parentId">
-	<InputNumber v-model="form.parentId" placeholder="请输入类目父编号" style="width: 100%;"/>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="类目名称" prop="title">
-	<Input v-model="form.title" placeholder="请输入类目名称"/>
-</FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="类目封面图" prop="picUrl">
-	<Input v-model="form.picUrl" placeholder="请输入类目封面图"/>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="类目描述" prop="description">
-	<Input v-model="form.description" placeholder="请输入类目描述"/>
-</FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="是否热门" prop="isHot">
-	<InputNumber v-model="form.isHot" placeholder="请输入是否热门" style="width: 100%;"/>
-</FormItem>
-	</i-col>
-</Row>
-
-            </Form>
-            <div slot="footer">
-                <Button type="text" size="large" @click="resetFormCancelModal('editForm', 'edit')">取消</Button>
-                <Button type="primary" size="large" @click="edit" :loading="loading.edit">修改</Button>
-            </div>
-        </Modal>
-    </div>
+  <div>
+    <Modal
+      v-model="modal.add"
+      title="添加"
+      :mask-closable="false"
+      @on-visible-change="changeModalVisibleResetForm('addForm', $event)"
+      width="760"
+    >
+      <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
+        <Row>
+          <i-col span="24">
+            <FormItem label="类目父编号" prop="parentId">
+              <span v-text="form.parentId"></span>
+              -
+              <span v-text="form.parentName"></span>
+              &nbsp;
+              <Button @click="showModal('choice')" type="text" style="color: #108EE9;">选择父类目</Button>&nbsp;
+              <Button @click="setTopCategory" type="text" style="color: #fa436a;">设置顶级类目</Button>&nbsp;
+            </FormItem>
+          </i-col>
+        </Row>
+        <Row>
+          <i-col span="12">
+            <FormItem label="类目名称" prop="title">
+              <Input v-model="form.title" placeholder="请输入类目名称" />
+            </FormItem>
+          </i-col>
+          <i-col span="12">
+            <FormItem label="是否热门" prop="isHot">
+              <Select v-model="form.isHot" placeholder="请选择是否热门" filterable>
+                <Option
+                  v-for="(option, index) in isDefaultSelect"
+                  :value="option.value"
+                  :key="index"
+                >{{option.label}}</Option>
+              </Select>
+            </FormItem>
+          </i-col>
+        </Row>
+        <Row>
+          <FormItem label="类目描述" prop="description">
+            <Input
+              type="textarea"
+              :autosize="descriptionAutoSize"
+              v-model="form.description"
+              placeholder="请输入类目描述"
+            />
+          </FormItem>
+        </Row>
+      </Form>
+      <div slot="footer">
+        <Button type="text" size="large" @click="resetFormCancelModal('addForm', 'add')">取消</Button>
+        <Button type="primary" size="large" @click="add" :loading="loading.add">添加</Button>
+      </div>
+    </Modal>
+    <Modal
+      v-model="modal.edit"
+      title="修改"
+      :mask-closable="false"
+      @on-visible-change="changeModalVisibleResetForm('editForm', $event)"
+      width="760"
+    >
+      <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
+        <Row>
+          <i-col span="24">
+            <FormItem label="类目父编号" prop="parentId">
+              <span v-text="form.parentId"></span>
+              -
+              <span v-text="form.parentName"></span>
+              &nbsp;
+              <Button @click="showModal('choice')" type="text" style="color: #108EE9;">选择父类目</Button>&nbsp;
+              <Button @click="setTopCategory" type="text" style="color: #fa436a;">设置顶级类目</Button>&nbsp;
+            </FormItem>
+          </i-col>
+        </Row>
+        <Row>
+          <i-col span="12">
+            <FormItem label="类目名称" prop="title">
+              <Input v-model="form.title" placeholder="请输入类目名称" />
+            </FormItem>
+          </i-col>
+          <i-col span="12">
+            <FormItem label="是否热门" prop="isHot">
+              <Select v-model="form.isHot" placeholder="请选择是否热门" filterable>
+                <Option
+                  v-for="(option, index) in isDefaultSelect"
+                  :value="option.value"
+                  :key="index"
+                >{{option.label}}</Option>
+              </Select>
+            </FormItem>
+          </i-col>
+        </Row>
+        <Row>
+          <FormItem label="类目描述" prop="description">
+            <Input
+              type="textarea"
+              :autosize="descriptionAutoSize"
+              v-model="form.description"
+              placeholder="请输入类目描述"
+            />
+          </FormItem>
+        </Row>
+      </Form>
+      <div slot="footer">
+        <Button type="text" size="large" @click="resetFormCancelModal('editForm', 'edit')">取消</Button>
+        <Button type="primary" size="large" @click="edit" :loading="loading.edit">修改</Button>
+      </div>
+    </Modal>
+    <Modal v-model="modal.choice" title="选择父类目" :mask-closable="false" width="960">
+      <goodsCategoryMainSingle ref="choiceModal" v-on:confirmChoice="confirmChoice" />
+      <div slot="footer">
+        <Button type="text" size="large" @click="cancelModal('choice')">取消</Button>
+        <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
+      </div>
+    </Modal>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'GoodsCategoryAddEdit',
-        data() {
-            return {
-                modal: {
-                    add: false,
-                    edit: false
-                },
-                loading: {
-                    add: false,
-                    edit: false
-                },
-                urls: {
-                    addUrl: '/goods-category/admin/save',
-                    batchAddUrl: '/goods-category/admin/batch-save',
-                    editUrl: '/goods-category/admin/update',
-                    batchEditUrl: '/goods-category/admin/batch-update'
-                },
-                form: {
-                    id: null,
-parentId: null,
-title: null,
-picUrl: null,
-description: null,
-isHot: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
-
-                },
-                validateRules: {
-                    parentId: [
-{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
-],
-title: [
-{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
-{type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
-],
-picUrl: [
-{type: 'string', min: 1, max: 500, message: '必须1-500个字符', trigger: 'blur'}
-],
-description: [
-{type: 'string', min: 1, max: 255, message: '必须1-255个字符', trigger: 'blur'}
-],
-
-                }
-            }
-        },
-        computed: {},
-        mounted() {},
-        methods: {
-            changeModalVisibleResetForm(formRef, visible) {
-                if (!visible) {
-                    this.$refs[formRef].resetFields()
-                }
-            },
-            resetFormCancelModal(formRef, modal) {
-                this.modal[modal] = false
-                this.$refs[formRef].resetFields()
-            },
-            add() {
-                this.$emit('add')
-            },
-            edit() {
-                this.$emit('edit')
-            }
-        }
+import goodsCategoryMainSingle from './GoodsCategoryMainSingle.vue'
+import { isDefaultSelect } from '@/api/select'
+export default {
+  name: 'GoodsCategoryAddEdit',
+  components: {
+    goodsCategoryMainSingle
+  },
+  data() {
+    return {
+      modal: {
+        add: false,
+        edit: false,
+        choice: false
+      },
+      loading: {
+        add: false,
+        edit: false
+      },
+      urls: {
+        addUrl: '/goods-category/admin/save',
+        batchAddUrl: '/goods-category/admin/batch-save',
+        editUrl: '/goods-category/admin/update',
+        batchEditUrl: '/goods-category/admin/batch-update'
+      },
+      form: {
+        id: null,
+        parentId: null,
+        title: null,
+        picUrl: null,
+        description: null,
+        isHot: 0,
+        version: null,
+        createTime: null,
+        updateTime: null,
+        isActive: null,
+        parentName: null
+      },
+      validateRules: {
+        parentId: [
+          {
+            type: 'integer',
+            required: true,
+            message: '此项为必须项',
+            trigger: 'blur, change'
+          }
+        ],
+        title: [
+          {
+            type: 'string',
+            required: true,
+            message: '此项为必须项',
+            trigger: 'blur'
+          },
+          {
+            type: 'string',
+            min: 1,
+            max: 20,
+            message: '必须1-20个字符',
+            trigger: 'blur'
+          }
+        ],
+        picUrl: [
+          {
+            type: 'string',
+            min: 1,
+            max: 500,
+            message: '必须1-500个字符',
+            trigger: 'blur'
+          }
+        ],
+        description: [
+          {
+            type: 'string',
+            min: 1,
+            max: 255,
+            message: '必须1-255个字符',
+            trigger: 'blur'
+          }
+        ]
+      },
+      isDefaultSelect: isDefaultSelect,
+      descriptionAutoSize: {
+        minRows: 3,
+        maxRows: 5
+      }
     }
+  },
+  computed: {},
+  mounted() {},
+  methods: {
+    changeModalVisibleResetForm(formRef, visible) {
+      if (!visible) {
+        this.$refs[formRef].resetFields()
+      }
+    },
+    showModal(modal) {
+      this.modal[modal] = true
+    },
+    resetFormCancelModal(formRef, modal) {
+      this.cancelModal(modal)
+      this.$refs[formRef].resetFields()
+    },
+    cancelModal(modal) {
+      this.modal[modal] = false
+    },
+    add() {
+      this.$emit('add')
+    },
+    edit() {
+      this.$emit('edit')
+    },
+    /**
+     * 底部的确认选择父级类目
+     */
+    bottomConfirmChoice() {
+      this.$refs.choiceModal.confirmSelection()
+    },
+    /**
+     * 确认选择父级类目
+     */
+    confirmChoice(row) {
+      this.cancelModal('choice')
+      this.form.parentId = row.id
+      this.form.parentName = row.title
+    },
+    /**
+     * 设置为顶级类目
+     */
+    setTopCategory() {
+      this.form.parentId = 0
+      this.form.parentName = '顶级类目'
+    }
+  }
+}
 </script>
 
 <style>
