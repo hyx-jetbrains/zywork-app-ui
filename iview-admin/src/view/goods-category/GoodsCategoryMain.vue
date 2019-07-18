@@ -32,6 +32,8 @@
             v-on:showGoodsCategoryAttrDrawer="showGoodsCategoryAttrDrawer"
             v-on:showUploadModal="showUploadModal"
             v-on:showGoodsCategoryAttributeMainModal="showGoodsCategoryAttributeMainModal"
+            v-on:showParentDetailModal="showParentDetailModal"
+            v-on:showSearchTableModal="showSearchTableModal"
           />
         </Card>
       </i-col>
@@ -48,6 +50,13 @@
       :format="uploadModal.format"
     />
     <GoodsCategoryAttributeMainModal ref="goodsCategoryAttributeMainModal" />
+    <Modal v-model="modal.searchTableModal" title="选择父类目" :mask-closable="false" width="960">
+      <goodsCategoryMainSingle ref="searchTableModal" v-on:confirmChoice="confirmChoice" />
+      <div slot="footer">
+        <Button type="text" size="large" @click="cancelModal('searchTableModal')">取消</Button>
+        <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -59,6 +68,7 @@ import GoodsCategorySearchModal from './GoodsCategorySearchModal.vue'
 import GoodsCategoryDetailModal from './GoodsCategoryDetailModal.vue'
 import GoodsAttributeOrderModal from '../goods-attribute/GoodsAttributeOrderModal.vue'
 import GoodsCategoryAttrsDrawer from './GoodsCategoryAttrsDrawer.vue'
+import goodsCategoryMainSingle from './GoodsCategoryMainSingle.vue'
 import UploadModal from '_c/upload-modal'
 import GoodsCategoryAttributeMainModal from '../goods-category-attr/GoodsCategoryAttributeMainModal.vue'
 import * as ResponseStatus from '@/api/response-status'
@@ -72,10 +82,14 @@ export default {
     GoodsAttributeOrderModal,
     GoodsCategoryAttrsDrawer,
     UploadModal,
-    GoodsCategoryAttributeMainModal
+    GoodsCategoryAttributeMainModal,
+    goodsCategoryMainSingle
   },
   data() {
     return {
+      modal: {
+        searchTableModal: false
+      },
       urls: {
         batchRemoveUrl: '/goods-category/admin/batch-remove',
         batchActiveUrl: '/goods-category/admin/batch-active',
@@ -194,7 +208,48 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    }
+    },
+    /**
+     * 显示父级的详情
+     */
+    showParentDetailModal(id) {
+      if (id === 0) {
+        this.$Message.warning('该类目是顶级类目')
+        return
+      }
+      utils
+          .doGet(this.urls.oneUrl + id, {})
+          .then(res => {
+            if (ResponseStatus.OK === res.data.code) {
+              this.showDetailModal(res.data.data)
+            } else {
+              this.$Message.error(res.data.message)
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+    },
+    /**
+     * 显示查询的模态窗
+     */
+    showSearchTableModal() {
+      this.modal['searchTableModal'] = true
+    },
+    /**
+     * 底部的确认选择父级类目
+     */
+    bottomConfirmChoice() {
+      this.$refs.searchTableModal.confirmSelection()
+    },
+    /**
+     * 确认选择父级类目
+     */
+    confirmChoice(row) {
+      this.modal['searchTableModal'] = false
+      this.$refs.searchModal.searchForm.parentIdMin = this.$refs.searchModal.searchForm.parentIdMax = row.id
+      this.searchTable()
+    },
   }
 }
 </script>
