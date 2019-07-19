@@ -114,7 +114,7 @@ export default {
               this.formElements.forEach((formItem, index) => {
                 this.$set(this.form, formItem.goodsAttributeId + '_' + formItem.goodsAttributeAttrCode, null)
                 response.data.data.rows.forEach((attrValue, index) => {
-                  if (formItem.goodsAttributeId === attrValue.goodsAttributeId) {
+                  if (formItem.goodsAttributeId === attrValue.goodsCategoryAttributeAttrId) {
                     let theAttributeVal = attrValue.goodsAttributeValueAttrValue
                     if (formItem.goodsAttributeAttrType === 'Integer' || formItem.goodsAttributeAttrType === 'Long') { 
                       theAttributeVal = parseInt(theAttributeVal)
