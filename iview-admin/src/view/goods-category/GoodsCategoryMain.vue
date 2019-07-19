@@ -253,7 +253,8 @@ export default {
      */
     confirmChoice(row) {
       this.modal['searchTableModal'] = false
-      this.$refs.searchModal.searchForm.parentIdMin = this.$refs.searchModal.searchForm.parentIdMax = row.id
+      let searchModal = this.$refs.searchModal
+      searchModal.searchForm.parentIdMin = searchModal.searchForm.parentIdMax = row.id
       this.searchTable()
     },
   }

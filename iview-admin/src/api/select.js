@@ -13,12 +13,25 @@ export const isActiveSelect = [
  */
 export const isDefaultSelect = [
   {
-    value: 1,
+    value: 0,
     label: '是'
   },
   {
-    value: 0,
+    value: 1,
     label: '否'
+  }
+]
+/**
+ * @description 商品上下架状态下拉框
+ */
+export const shelfStatusSelect = [
+  {
+    value: 0,
+    label: '上架'
+  },
+  {
+    value: 1,
+    label: '下架'
   }
 ]
 /**
