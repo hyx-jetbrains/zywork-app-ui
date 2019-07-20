@@ -201,7 +201,7 @@ export default [
         path: 'AccountDetail',
         name: 'user_account_manage',
         meta: {
-          title: '账目管理',
+          title: '账目详情管理',
           icon: 'md-list-box'
         },
         component: () => import('@/view/account-detail/AccountDetailMain.vue')
@@ -260,6 +260,35 @@ export default [
         },
         component: () => import('@/view/user-withdraw-check/UserWithdrawCheckMain.vue')
       }
+    ]
+  },
+  {
+    path: '/admin',
+    name: 'platform_account',
+    meta: {
+      icon: 'logo-yen',
+      title: '平台资金管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'PlatformAccountDetail',
+        name: 'platform_account_detail',
+        meta: {
+          title: '平台账目详情管理',
+          icon: 'md-flask'
+        },
+        component: () => import('@/view/platform-account-detail/PlatformAccountDetailMain.vue')
+      },
+      {
+        path: 'UserAccountDetail',
+        name: 'user_account_manage1',
+        meta: {
+          title: '用户账目详情管理',
+          icon: 'md-list-box'
+        },
+        component: () => import('@/view/account-detail/AccountDetailMain.vue')
+      },
     ]
   },
   {

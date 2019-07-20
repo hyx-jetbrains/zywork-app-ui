@@ -13,28 +13,24 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">积分：</span><span v-text="form.integral"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">收入或支出：</span><span v-text="form.type"></span></i-col>
+	<i-col span="11"><span class="detail-title">收入或支出：</span><span v-text="form.type"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">收支类型：</span><span v-text="form.subType"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">收支类型：</span><span v-text="form.subType"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">支付方式：</span><span v-text="form.payType"></span></i-col>
+	<i-col span="11"><span class="detail-title">支付方式：</span><span v-text="form.payType"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">账目备注：</span><span v-text="form.remark"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">账目备注：</span><span v-text="form.remark"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.version"></span></i-col>
+	<i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.version"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.createTime"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.createTime"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.updateTime"></span></i-col>
+	<i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.updateTime"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.isActive"></span></i-col>
 
-</Row>
-<Row>
-	<i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.isActive"></span></i-col>
-<i-col span="2"></i-col>
 </Row>
 
             </div>
@@ -44,7 +40,7 @@
 
 <script>
     export default {
-        name: 'AccountDetailDetail',
+        name: 'PlatformAccountDetailDetail',
         data() {
             return {
                 modal: {
@@ -55,7 +51,6 @@
 transactionNo: null,
 userId: null,
 amount: null,
-integral: null,
 type: null,
 subType: null,
 payType: null,

@@ -15,11 +15,11 @@
     import * as utils from '@/api/utils-v2'
 
     export default {
-        name: 'AccountDetailTableSingle',
+        name: 'PlatformAccountDetailTableSingle',
         data() {
             return {
                 urls: {
-                    searchUrl: '/account-detail/admin/pager-cond'
+                    searchUrl: '/platform-account-detail/admin/pager-cond'
                 },
                 pager: {
                     pageNo: 1,
@@ -65,12 +65,6 @@ minWidth: 120,
 sortable: true,
 },
 {
-title: '积分',
-key: 'integral',
-minWidth: 120,
-sortable: true,
-},
-{
 title: '收入或支出',
 key: 'type',
 minWidth: 120,
@@ -104,7 +98,7 @@ renderHeader: (h, params) => {
                 h('span', '版本号'),
                 h('Tooltip', {
                   props: {
-                    content: '账目版本号',
+                    content: '平台账目版本号',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -132,7 +126,7 @@ renderHeader: (h, params) => {
                 h('span', '创建时间'),
                 h('Tooltip', {
                   props: {
-                    content: '账目创建时间',
+                    content: '平台账目创建时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -160,7 +154,7 @@ renderHeader: (h, params) => {
                 h('span', '更新时间'),
                 h('Tooltip', {
                   props: {
-                    content: '账目更新时间',
+                    content: '平台账目更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -188,7 +182,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '账目是否激活',
+                    content: '平台账目是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500

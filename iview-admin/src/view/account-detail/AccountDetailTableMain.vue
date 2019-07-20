@@ -98,6 +98,12 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '账目备注',
+key: 'remark',
+minWidth: 120,
+sortable: true,
+},
+{
 title: '版本号',
 key: 'version',
 minWidth: 120,
@@ -191,7 +197,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '账上是否激活',
+                    content: '账目是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
