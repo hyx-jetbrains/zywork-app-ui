@@ -22,19 +22,19 @@
         ></Page>
       </div>
     </div>
-    <goodsInfoAttrDetailModal ref="attrDetailModal" />
+    <GoodsInfoAttrDetailModal ref="attrDetailModal" />
   </div>
 </template>
 
 <script>
-import goodsInfoAttrDetailModal from './GoodsInfoAttrDetailModal.vue'
+import GoodsInfoAttrDetailModal from './GoodsInfoAttrDetailModal.vue'
 import * as utils from '@/api/utils-v2'
 import * as ResponseStatus from '@/api/response-status'
 
 export default {
   name: 'GoodsInfoTableMain',
   components: {
-    goodsInfoAttrDetailModal
+    GoodsInfoAttrDetailModal
   },
   data() {
     return {
