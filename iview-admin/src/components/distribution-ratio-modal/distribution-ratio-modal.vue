@@ -1,13 +1,17 @@
 <template>
-  <Modal v-model="setModal" :title="title" :mask-closable="false" width="560">
+  <Modal v-model="setModal" :title="title" :mask-closable="false" width="860">
     <div class="zy-box">
       <div class="zy-box-row">
-        <div class="zy-text-bold">角色/等级</div>
+        <div class="zy-text-bold" style="width: 400px;">角色/等级</div>
         <div class="zy-text-bold" v-for="(item, index) in levelArr" :key="index">{{item}}级</div>
         <p style="clear:both"></p>
       </div>
       <div class="zy-box-row" v-for="(item, index) in ratioData" :key="index">
-        <div class="zy-text-bold">{{rolesArr[index].title}}</div>
+        <div class="zy-text-bold" style="width: 400px;">
+          <p>
+            {{rolesArr[index].title}} - {{rolesArr[index].description}}
+          </p>
+        </div>
         <div v-for="(tempItem, index_1) in levelArr" :key="index_1">
           <Input class="zy-input" placeholder="输入分销比例" v-model="ratioData[index][index_1]" />
         </div>
@@ -217,7 +221,7 @@ export default {
 .zy-box-row div {
   border-right: 1px solid #ccc;
   float: left;
-  width: 168px;
+  width: 170px;
   padding: 0px 20px 0px 5px;
 }
 .zy-box-row div:last-child {
