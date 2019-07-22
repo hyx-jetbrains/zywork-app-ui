@@ -13,7 +13,7 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">配置注释：</span><span><pre>{{form.value}}</pre></span></i-col>
+	<i-col span="11"><span class="detail-title">配置注释：</span><span><pre>{{form.comment}}</pre></span></i-col>
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.version"></span></i-col>
 
 </Row>
