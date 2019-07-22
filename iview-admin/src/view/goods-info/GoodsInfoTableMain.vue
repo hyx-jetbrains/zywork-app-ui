@@ -576,6 +576,15 @@ export default {
                           }
                         },
                         '商品SKU管理'
+                      ),
+                      h(
+                        'DropdownItem',
+                        {
+                          props: {
+                            name: 'distributionRatio'
+                          }
+                        },
+                        '商品分销比例'
                       )
                     ]
                   )
@@ -618,6 +627,8 @@ export default {
         this.$emit('showAttrDetailModal', row.categoryId, 1)
       } else if (itemName === 'showCategorySearch') {
         this.$emit('showSearchTableModal', 1)
+      } else if (itemName === 'distributionRatio') {
+        this.$emit('showDistributionRatio', row)
       }
     },
     active(row) {

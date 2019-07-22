@@ -33,6 +33,7 @@
             v-on:showGoodsSkuMain="showGoodsSkuMain"
             v-on:showAttrDetailModal="showAttrDetailModal"
             v-on:showSearchTableModal="showSearchTableModal"
+            v-on:showDistributionRatio="showDistributionRatio"
           />
         </Card>
       </i-col>
@@ -77,6 +78,7 @@
         <Button type="primary" size="large" @click="bottomConfirmChoiceCategory">确认选择</Button>
       </div>
     </Modal>
+    <DistributionRatioModal ref="distributionRatioModal" v-on:setDistributionRatio="setDistributionRatio" />
   </div>
 </template>
 
@@ -92,6 +94,7 @@ import GoodsShopDetailModal from '../goods-shop/GoodsShopDetailModal.vue'
 import GoodsShopMainSingle from '../goods-shop/GoodsShopMainSingle.vue'
 import GoodsCategoryDetailModal from '../goods-category/GoodsCategoryDetailModal.vue'
 import GoodsCategoryMainSingle from '../goods-category/GoodsCategoryMainSingle.vue'
+import DistributionRatioModal from '_c/distribution-ratio-modal'
 import { allPicByGoods } from '@/api/goods_pic'
 import * as ResponseStatus from '@/api/response-status'
 import GoodsSkuMain from '../goods-sku/GoodsSkuMain.vue'
@@ -108,7 +111,8 @@ export default {
     GoodsShopDetailModal,
     GoodsShopMainSingle,
     GoodsCategoryDetailModal,
-    GoodsCategoryMainSingle
+    GoodsCategoryMainSingle,
+    DistributionRatioModal
   },
   data() {
     return {
@@ -116,7 +120,11 @@ export default {
         batchRemoveUrl: '/goods-info/admin/batch-remove',
         batchActiveUrl: '/goods-info/admin/batch-active',
         oneShopUrl: '/goods-shop/admin/one/',
-        oneCategoryUrl: '/goods-category/admin/one/'
+        oneCategoryUrl: '/goods-category/admin/one/',
+        batchSaveUrl: '/goods-commission/admin/batch-save',
+        listCommissionUrl: '/goods-commission/admin/all-cond',
+        listRoleUrl: '/role/admin/list-distribution-roles',
+        distributionLevelUrl: '/distribution/admin/distribution-level'
       },
       uploadModal: {
         title: '商品图片管理',
@@ -128,7 +136,7 @@ export default {
         skuModal: false,
         searchTableCategoryModal: false,
         searchTableShopModal: false
-      }
+      },
     }
   },
   computed: {},
@@ -339,7 +347,108 @@ export default {
       searchModal.searchForm.categoryIdMin = searchModal.searchForm.categoryIdMax =
         row.id
       this.searchTable()
-    }
+    },
+    /**
+     * 显示分销比例配置弹窗
+     */
+    showDistributionRatio(row) {
+      const goodsId = row.id
+      let distributionRatioModal = this.$refs.distributionRatioModal
+      distributionRatioModal.setModal = true
+      distributionRatioModal.goodsId = goodsId
+      distributionRatioModal.title = '配置 《'+row.title+'》 的分销佣金比例'
+      const params = {
+        goodsId: goodsId,
+        isActive: 0
+      }
+      this.loadData(params, distributionRatioModal)
+    },
+    /**
+     * 请求后台接口，获取数据
+     */
+    loadData(param, distributionRatioModal) {
+      // 先请求分销比例表
+      utils
+        .doPostJson(this.urls.listCommissionUrl, param, {})
+        .then(res => {
+          if (ResponseStatus.OK === res.data.code) {
+            // 成功获取分销比例列表，继续获取角色
+            let commissionList = res.data.data.rows
+            utils
+              .doGet(this.urls.listRoleUrl, {})
+              .then(res1 => {
+                if (ResponseStatus.OK === res1.data.code) {
+                  // 成功获取角色列表，继续获取分销等级
+                  let roleList = res1.data.data.rows
+                  utils
+                    .doGet(this.urls.distributionLevelUrl, {})
+                    .then(res2 => {
+                      if (ResponseStatus.OK === res2.data.code) {
+                        // 成功获取分销等级，开始处理数据
+                        let level = res2.data.data - 1
+                        let levelArr = []
+                        for (var i = 0; i < level; i++) {
+                          levelArr.push(1+i)
+                        }
+                        let rolesArr = []
+                        let data = []
+                        const commissionLen = commissionList.length
+                        const roleLen = roleList.length
+                        for (var i = 0; i < roleLen; i++) {
+                          let roleItem = roleList[i]
+                          let itemData = []
+                          for (var j = 0; j < commissionLen; j++) {
+                            let commissionItem = commissionList[j]
+                            if (roleItem.id === commissionItem.roleId) {
+                              itemData.push(commissionItem.commissionPercent)
+                            }
+                          }
+                          rolesArr.push(roleItem)
+                          data.push(itemData)
+                        }
+                        distributionRatioModal.rolesArr = rolesArr
+                        distributionRatioModal.levelArr = levelArr
+                        distributionRatioModal.ratioData = data
+                      } else {
+                        this.$Message.error(res2.data.message)
+                      }
+                    })
+                    .catch(err2 => {
+                      console.log(err2)
+                    })
+                } else {
+                  this.$Message.error(res1.data.message)
+                }
+              })
+              .catch(err1 => {
+                console.log(err1)
+              })
+          } else {
+            this.$Message.error(res.data.message)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /**
+     * 设置分销比例
+     */
+    setDistributionRatio(listData) {
+      let distributionRatioModal = this.$refs.distributionRatioModal
+      distributionRatioModal.setLoading = true
+      utils.doPostJson(this.urls.batchSaveUrl, listData, {}).then(res => {
+        distributionRatioModal.setLoading = false
+        if (ResponseStatus.OK === res.data.code) {
+          distributionRatioModal.setModal = false
+          this.$Message.success('分配成功')
+        } else {
+          this.$Message.error(res.data.message)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
   }
 }
 </script>
