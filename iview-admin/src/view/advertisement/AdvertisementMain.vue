@@ -33,6 +33,7 @@
 
 <script>
     import * as utils from '@/api/utils-v2'
+    import * as ResponseStatus from '@/api/response-status'
     import AdvertisementTableMain from './AdvertisementTableMain.vue'
     import AdvertisementAddEditModal from './AdvertisementAddEditModal.vue'
     import AdvertisementSearchModal from './AdvertisementSearchModal.vue'
@@ -51,7 +52,8 @@
             return {
                 urls: {
                     batchRemoveUrl: '/advertisement/admin/batch-remove',
-                    batchActiveUrl: '/advertisement/admin/batch-active'
+                    batchActiveUrl: '/advertisement/admin/batch-active',
+                    oneUrl: '/advertisement-type/admin/one/'
                 },
                 uploadModal: {
                     title: '上传广告图片',
@@ -75,8 +77,24 @@
             },
             showEditModal(row) {
                 let addEditModal = this.$refs.addEditModal
-                addEditModal.modal.edit = true
-                addEditModal.form = row
+                utils
+                  .doGet(this.urls.oneUrl + row.adTypeId, {})
+                  .then(res => {
+                    if (ResponseStatus.OK === res.data.code) {
+                      const title = res.data.data.title
+                      if (title) {
+                        row.adTypeName = title
+                      }
+
+                      addEditModal.modal.edit = true
+                      addEditModal.form = row
+                    } else {
+                      this.$Message.error(res.data.message)
+                    }
+                  })
+                  .catch(err => {
+                    console.log(err)
+                  })
             },
             edit() {
                 utils.edit(this)

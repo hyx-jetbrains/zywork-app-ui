@@ -53,6 +53,12 @@
             },
             confirmSelection() {
                 // 确认选择的逻辑
+                const row = this.$refs.table.table.currentRow
+                if (!row.id) {
+                  this.$Message.error('请选择一行数据')
+                  return
+                }
+                this.$emit('confirmChoice', row)
             }
         }
     }
