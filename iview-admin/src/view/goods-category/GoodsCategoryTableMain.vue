@@ -231,7 +231,7 @@ export default {
                 {
                   props: {
                     size: 'default',
-                    value: params.row.isHot === 0
+                    value: params.row.isHot === 1
                   },
                   style: {
                     marginRight: '5px'
