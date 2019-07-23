@@ -228,7 +228,7 @@ export default {
         ],
         attrRequired: [
           {
-            type: 'string',
+            type: 'integer',
             required: true,
             message: '此项为必须项',
             trigger: 'blur, change'
@@ -236,7 +236,7 @@ export default {
         ],
         attrDisplay: [
           {
-            type: 'string',
+            type: 'integer',
             required: true,
             message: '此项为必须项',
             trigger: 'blur, change'
