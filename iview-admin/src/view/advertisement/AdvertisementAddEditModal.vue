@@ -10,6 +10,8 @@
       <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
         <Row>
           <i-col span="12">
+            <FormItem label="广告类型名称" prop="adTypeName" style="display: none;">
+            </FormItem>
             <FormItem label="广告类型编号" prop="adTypeId">
               <span v-text="form.adTypeId"></span>
               -
@@ -145,6 +147,7 @@ export default {
       form: {
         id: null,
         adTypeId: null,
+        adTypeName: null,
         title: null,
         picUrl: null,
         adOrder: null,
