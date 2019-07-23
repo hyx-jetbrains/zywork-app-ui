@@ -112,6 +112,7 @@ export default {
     showAddModal() {
       let addEditModal = this.$refs.addEditModal
       addEditModal.modal.add = true
+      addEditModal.parentName = '顶级类目'
     },
     add() {
       utils.add(this)
