@@ -27,6 +27,7 @@
 
 <script>
 import * as utils from '@/api/utils-v2'
+import * as ResponseStatus from '@/api/response-status'
 
 export default {
   name: 'GoodsCategoryTableMain',
@@ -35,7 +36,8 @@ export default {
       urls: {
         searchUrl: '/goods-category/admin/pager-cond',
         activeUrl: '/goods-category/admin/active',
-        removeUrl: '/goods-category/admin/remove/'
+        removeUrl: '/goods-category/admin/remove/',
+        updateStatusUrl: '/goods-category/admin/update-status'
       },
       pager: {
         pageNo: 1,
@@ -179,7 +181,42 @@ export default {
             title: '是否热门',
             key: 'isHot',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(
+                'i-switch',
+                {
+                  props: {
+                    size: 'default',
+                    value: params.row.isHot === 0
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    'on-change': status => {
+                      this.updateStatus(params.row)
+                    }
+                  }
+                },
+                [
+                  h(
+                    'span',
+                    {
+                      slot: 'open'
+                    },
+                    '是'
+                  ),
+                  h(
+                    'span',
+                    {
+                      slot: 'close'
+                    },
+                    '否'
+                  )
+                ]
+              )
+            }
           },
           {
             title: '版本号',
@@ -522,6 +559,27 @@ export default {
     },
     changePageSize(pageSize) {
       utils.changePageSize(this, pageSize)
+    },
+    /**
+     * 更新是否热门
+     */
+    updateStatus(row) {
+      // 默认是是否必填
+      let status = row.isHot
+      status = status === 0 ? 1 : 0
+      let param = {
+        id: row.id,
+        isHot: status
+      }
+      utils.doPostJson(this.urls.updateStatusUrl, param, {}).then(res => {
+        if (ResponseStatus.OK === res.data.code) {
+          this.$Message.success(res.data.message)
+        } else {
+          this.$Message.error(res.data.message)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }
