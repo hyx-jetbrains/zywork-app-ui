@@ -206,7 +206,13 @@ export default {
       if (modal === 'choice') {
         this.$refs.choiceModal.searchTable()
       } else if (modal === 'choicePic') {
-        this.$refs.choicePicModal.searchTable()
+        if (!this.form.goodsId) {
+          this.$Message.warning('请先选择商品')
+          return
+        }
+        let choicePicModal = this.$refs.choicePicModal
+        choicePicModal.setSearchModalData({goodsId:this.form.goodsId})
+        choicePicModal.searchTable()
       }
       this.modal[modal] = true
     },

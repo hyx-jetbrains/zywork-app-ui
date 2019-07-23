@@ -22,15 +22,24 @@
         ></Page>
       </div>
     </div>
+    <ImgModal ref="imgModal" />
   </div>
 </template>
 
 <script>
 import * as utils from '@/api/utils-v2'
 import * as ResponseStatus from '@/api/response-status'
+import ImgModal from '_c/img-modal'
+
+import config from '@/config'
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+const cdnUrl = config.baseUrl.cdnUrl
 
 export default {
   name: 'GoodsCategoryTableMain',
+  components: {
+    ImgModal
+  },
   data() {
     return {
       urls: {
@@ -170,6 +179,40 @@ export default {
             key: 'picUrl',
             minWidth: 120,
             sortable: true
+          },
+          {
+            title: '类目封面图',
+            key: 'picUrl',
+            minWidth: 120,
+            sortable: true,
+            render: (h, params) => {
+              let imgSrc = params.row.picUrl
+              if (!imgSrc) {
+                return h('span',{},'暂无图片')
+              }
+              if (imgSrc.indexOf('http') < 0) {
+                imgSrc = cdnUrl + '/' + imgSrc
+              }
+              return h(
+                'img',
+                {
+                  attrs: {
+                    src: imgSrc
+                  },
+                  style: {
+                    width: '60px',
+                    height: '60px',
+                    cursor: 'pointer'
+                  },
+                  on: {
+                    click: () => {
+                      this.showImgModal(imgSrc)
+                    }
+                  }
+                },
+                ''
+              )
+            }
           },
           {
             title: '类目描述',
@@ -503,6 +546,15 @@ export default {
                           }
                         },
                         '上传封面图片'
+                      ),
+                      h(
+                        'DropdownItem',
+                        {
+                          props: {
+                            name: 'addChildrenCategory'
+                          }
+                        },
+                        '添加子类目'
                       )
                     ]
                   )
@@ -540,9 +592,14 @@ export default {
       } else if (itemName === 'showGoodsCategoryAttributeMainModal') {
         this.$emit('showGoodsCategoryAttributeMainModal', row.id)
       } else if (itemName === 'moduleDetail') {
+        // 显示详情的弹窗
         this.$emit('showParentDetailModal', row.parentId)
       } else if (itemName === 'showSearch') {
+        // 显示搜索的弹窗
         this.$emit('showSearchTableModal')
+      } else if (itemName === 'addChildrenCategory') {
+        // 添加子类目
+        this.$emit('addChildrenCategory', row)
       }
     },
     active(row) {
@@ -580,6 +637,14 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    /**
+     * 显示图片预览的弹窗
+     */
+    showImgModal(src) {
+      let imgModal = this.$refs.imgModal
+      imgModal.modal.img = true
+      imgModal.imgSrc = src
     }
   }
 }

@@ -51,6 +51,15 @@
                 let searchModal = this.$refs.searchModal
                 searchModal.modal.search = true
             },
+            /**
+             * 设置查询属性，用于过滤不必要的数据
+             */
+            setSearchModalData(row) {
+              let searchModal = this.$refs.searchModal
+              if (row.goodsId) {
+                searchModal.searchForm.goodsIdMin = searchModal.searchForm.goodsIdMax = row.goodsId
+              }
+            },
             confirmSelection() {
                 // 确认选择的逻辑
                 const row = this.$refs.table.table.currentRow

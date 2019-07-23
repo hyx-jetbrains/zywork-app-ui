@@ -121,6 +121,8 @@ export default {
     showAddModal() {
       let addEditModal = this.$refs.addEditModal
       addEditModal.modal.add = true
+      addEditModal.goodsName = null,
+      addEditModal.picName = null
     },
     add() {
       utils.add(this)

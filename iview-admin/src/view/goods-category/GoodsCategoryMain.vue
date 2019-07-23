@@ -34,6 +34,7 @@
             v-on:showGoodsCategoryAttributeMainModal="showGoodsCategoryAttributeMainModal"
             v-on:showParentDetailModal="showParentDetailModal"
             v-on:showSearchTableModal="showSearchTableModal"
+            v-on:addChildrenCategory="addChildrenCategory"
           />
         </Card>
       </i-col>
@@ -111,7 +112,6 @@ export default {
     showAddModal() {
       let addEditModal = this.$refs.addEditModal
       addEditModal.modal.add = true
-      addEditModal.form.parentName = null
     },
     add() {
       utils.add(this)
@@ -257,6 +257,15 @@ export default {
       searchModal.searchForm.parentIdMin = searchModal.searchForm.parentIdMax = row.id
       this.searchTable()
     },
+    /**
+     * 添加子类目
+     */
+    addChildrenCategory(row) {
+      let addEditModal = this.$refs.addEditModal
+      addEditModal.modal.add = true
+      addEditModal.parentName = row.title
+      addEditModal.form.parentId = row.id
+    }
   }
 }
 </script>
