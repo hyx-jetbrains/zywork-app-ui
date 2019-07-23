@@ -9,14 +9,19 @@
     >
       <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
         <Row>
-          <i-col span="24">
-            <FormItem label="类目父编号" prop="parentId">
+          <i-col span="12">
+            <FormItem label="父类目" prop="parentId">
               <span v-text="form.parentId"></span>
               -
-              <span v-text="form.parentName"></span>
+              <span v-text="parentName"></span>
               &nbsp;
               <Button @click="showModal('choice')" type="text" style="color: #108EE9;">选择父类目</Button>&nbsp;
               <Button @click="setTopCategory" type="text" style="color: #fa436a;">设置顶级类目</Button>&nbsp;
+            </FormItem>
+          </i-col>
+          <i-col span="12">
+            <FormItem label="图片路径" prop="picUrl">
+              <Input v-model="form.picUrl" placeholder="请输入图片路径" />
             </FormItem>
           </i-col>
         </Row>
@@ -30,7 +35,7 @@
             <FormItem label="是否热门" prop="isHot">
               <Select v-model="form.isHot" placeholder="请选择是否热门" filterable>
                 <Option
-                  v-for="(option, index) in isDefaultSelect"
+                  v-for="(option, index) in isHostSelect"
                   :value="option.value"
                   :key="index"
                 >{{option.label}}</Option>
@@ -63,14 +68,19 @@
     >
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
         <Row>
-          <i-col span="24">
-            <FormItem label="类目父编号" prop="parentId">
+          <i-col span="12">
+            <FormItem label="父类目" prop="parentId">
               <span v-text="form.parentId"></span>
               -
-              <span v-text="form.parentName"></span>
+              <span v-text="parentName"></span>
               &nbsp;
               <Button @click="showModal('choice')" type="text" style="color: #108EE9;">选择父类目</Button>&nbsp;
               <Button @click="setTopCategory" type="text" style="color: #fa436a;">设置顶级类目</Button>&nbsp;
+            </FormItem>
+          </i-col>
+          <i-col span="12">
+            <FormItem label="图片路径" prop="picUrl">
+              <Input v-model="form.picUrl" placeholder="请输入图片路径" />
             </FormItem>
           </i-col>
         </Row>
@@ -84,7 +94,7 @@
             <FormItem label="是否热门" prop="isHot">
               <Select v-model="form.isHot" placeholder="请选择是否热门" filterable>
                 <Option
-                  v-for="(option, index) in isDefaultSelect"
+                  v-for="(option, index) in isHostSelect"
                   :value="option.value"
                   :key="index"
                 >{{option.label}}</Option>
@@ -120,7 +130,7 @@
 
 <script>
 import goodsCategoryMainSingle from './GoodsCategoryMainSingle.vue'
-import { isDefaultSelect } from '@/api/select'
+import { isHostSelect } from '@/api/select'
 export default {
   name: 'GoodsCategoryAddEdit',
   components: {
@@ -143,9 +153,10 @@ export default {
         editUrl: '/goods-category/admin/update',
         batchEditUrl: '/goods-category/admin/batch-update'
       },
+      parentName: '顶级类目',
       form: {
         id: null,
-        parentId: null,
+        parentId: 0,
         title: null,
         picUrl: null,
         description: null,
@@ -153,8 +164,7 @@ export default {
         version: null,
         createTime: null,
         updateTime: null,
-        isActive: null,
-        parentName: null
+        isActive: null
       },
       validateRules: {
         parentId: [
@@ -199,7 +209,7 @@ export default {
           }
         ]
       },
-      isDefaultSelect: isDefaultSelect,
+      isHostSelect: isHostSelect,
       descriptionAutoSize: {
         minRows: 3,
         maxRows: 5
@@ -215,6 +225,9 @@ export default {
       }
     },
     showModal(modal) {
+      if (modal === 'choice') {
+        this.$refs.choiceModal.searchTable()
+      }
       this.modal[modal] = true
     },
     resetFormCancelModal(formRef, modal) {
@@ -242,14 +255,14 @@ export default {
     confirmChoice(row) {
       this.cancelModal('choice')
       this.form.parentId = row.id
-      this.form.parentName = row.title
+      this.parentName = row.title
     },
     /**
      * 设置为顶级类目
      */
     setTopCategory() {
       this.form.parentId = 0
-      this.form.parentName = '顶级类目'
+      this.parentName = '顶级类目'
     }
   }
 }

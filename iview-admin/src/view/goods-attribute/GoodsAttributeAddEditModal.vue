@@ -23,7 +23,13 @@
         <Row>
           <i-col span="12">
             <FormItem label="数据类型" prop="attrType">
-              <Input v-model="form.attrType" placeholder="请输入数据类型" />
+              <Select v-model="form.attrType" placeholder="请选择数据类型" filterable>
+                <Option
+                  v-for="(option, index) in dataTypeSelect"
+                  :value="option.value"
+                  :key="index"
+                >{{option.label}}</Option>
+              </Select>
             </FormItem>
           </i-col>
           <i-col span="12">
@@ -85,7 +91,13 @@
         <Row>
           <i-col span="12">
             <FormItem label="数据类型" prop="attrType">
-              <Input v-model="form.attrType" placeholder="请输入数据类型" />
+              <Select v-model="form.attrType" placeholder="请选择数据类型" filterable>
+                <Option
+                  v-for="(option, index) in dataTypeSelect"
+                  :value="option.value"
+                  :key="index"
+                >{{option.label}}</Option>
+              </Select>
             </FormItem>
           </i-col>
           <i-col span="12">
@@ -128,7 +140,7 @@
 </template>
 
 <script>
-import { isDefaultSelect } from '@/api/select'
+import { isDefaultSelect, dataTypeSelect } from '@/api/select'
 export default {
   name: 'GoodsAttributeAddEdit',
   data() {
@@ -151,7 +163,7 @@ export default {
         id: null,
         attrName: null,
         attrCode: null,
-        attrType: null,
+        attrType: 'String',
         attrLength: null,
         attrRequired: 0,
         attrDisplay: 0,
@@ -231,7 +243,8 @@ export default {
           }
         ]
       },
-      isDefaultSelect: isDefaultSelect
+      isDefaultSelect: isDefaultSelect,
+      dataTypeSelect: dataTypeSelect
     }
   },
   computed: {},

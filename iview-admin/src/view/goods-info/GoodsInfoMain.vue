@@ -59,7 +59,7 @@
       <GoodsShopMainSingle ref="searchTableShopModal" v-on:confirmChoice="confirmChoiceShop" />
       <div slot="footer">
         <Button type="text" size="large" @click="cancelModal('searchTableShopModal')">取消</Button>
-        <Button type="primary" size="large" @click="bottomConfirmChoiceShop">确认选择</Button>
+        <Button type="primary" size="large" @click="bottomConfirmChoiceShop">查询</Button>
       </div>
     </Modal>
     <GoodsCategoryDetailModal ref="categoryDetailModal" />

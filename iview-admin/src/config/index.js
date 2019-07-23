@@ -18,9 +18,9 @@ export default {
    */
   baseUrl: {
     dev: 'http://localhost:8088',
-    pro: 'http://39.108.116.103:8088',
+    pro: 'https://gnmymall.com/api',
     devServer: 'http://localhost',
-    proServer: 'http://39.108.116.103',
+    proServer: 'https://gnmymall.com/api',
     cdnUrl: '' // 如果是本地存储，不需要填写，为空；如果使用云存储，则配置cdn url，如http://cdn.zywork.top
   },
   /**
@@ -41,5 +41,5 @@ export default {
     }
   },
   showDemoAccount: true, // 是否在登录页面显示体验账号
-  hasAccessPermissionRoles: ['super_sys_admin', 'sys_admin', 'sys_dev', 'sys_user_demo'] // 可访问后台系统的角色
+  hasAccessPermissionRoles: ['super_sys_admin', 'sys_admin', 'sys_dev'] // 可访问后台系统的角色
 }

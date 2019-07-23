@@ -27,6 +27,7 @@
 
 <script>
 import * as utils from '@/api/utils-v2'
+import * as ResponseStatus from '@/api/response-status'
 
 export default {
   name: 'GoodsSkuTableMain',
@@ -35,7 +36,8 @@ export default {
       urls: {
         searchUrl: '/goods-sku/admin/pager-cond',
         activeUrl: '/goods-sku/admin/active',
-        removeUrl: '/goods-sku/admin/remove/'
+        removeUrl: '/goods-sku/admin/remove/',
+        updateStatusUrl: '/goods-sku/admin/update-status'
       },
       pager: {
         pageNo: 1,
@@ -77,19 +79,165 @@ export default {
             title: '商品编号',
             key: 'goodsId',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.goodsId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'goodsModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'showGoodsSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
           },
           {
             title: '商品图片编号',
             key: 'picId',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              if (!params.row.picId) {
+                return h(
+                  '',
+                  {},
+                  ''
+                )
+              }
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.picId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'picModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'showPicSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
           },
           {
             title: '上架状态',
             key: 'shelfStatus',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(
+                'i-switch',
+                {
+                  props: {
+                    size: 'large',
+                    value: params.row.shelfStatus === 0
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    'on-change': status => {
+                      this.updateShelfStatus(params.row)
+                    }
+                  }
+                },
+                [
+                  h(
+                    'span',
+                    {
+                      slot: 'open'
+                    },
+                    '上架'
+                  ),
+                  h(
+                    'span',
+                    {
+                      slot: 'close'
+                    },
+                    '下架'
+                  )
+                ]
+              )
+            }
           },
           {
             title: '版本号',
@@ -366,7 +514,7 @@ export default {
                             name: 'distributionRatio'
                           }
                         },
-                        '商品分销比例'
+                        '分销比例'
                       )
                     ]
                   )
@@ -401,7 +549,15 @@ export default {
         this.$emit('showSkuDetailModal', row)
       } else if (itemName === 'distributionRatio') {
         this.$emit('showDistributionRatio', row)
-      }
+      } else if (itemName === 'goodsModuleDetail') {
+        this.$emit('showAttrDetailModal', row.goodsId, 0)
+      } else if (itemName === 'showGoodsSearch') {
+        this.$emit('showSearchTableModal', 0)
+      } else if (itemName === 'picModuleDetail') {
+        this.$emit('showAttrDetailModal', row.picId, 1)
+      } else if (itemName === 'showPicSearch') {
+        this.$emit('showSearchTableModal', 1)
+      } 
     },
     active(row) {
       utils.active(this, row)
@@ -417,6 +573,27 @@ export default {
     },
     changePageSize(pageSize) {
       utils.changePageSize(this, pageSize)
+    },
+    /**
+     * 更新上下架状态
+     */
+    updateShelfStatus(row) {
+      let shelfStatus = row.shelfStatus === 0 ? 1 : 0
+      let data = {
+        id: row.id,
+        shelfStatus: shelfStatus
+      }
+      let tip = shelfStatus === 0 ? '上架成功' : '下架成功'
+      utils.doPostJson(this.urls.updateStatusUrl, data, {}).then(res => {
+        if (res.data.code === ResponseStatus.OK) {
+          this.$Message.success(tip)
+          this.search()
+        } else {
+          this.$Message.error(res.data.message)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }

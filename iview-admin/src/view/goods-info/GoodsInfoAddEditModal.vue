@@ -261,6 +261,13 @@ export default {
       this.form.intro = html
     },
     showModal(modal) {
+      if (modal === 'choiceCategory') {
+        // 选择类目
+        this.$refs.choiceCategoryModal.searchTable()
+      } else if (modal === 'choiceShop') {
+        // 选择商品
+        this.$refs.choiceShopModal.searchTable()
+      }
       this.modal[modal] = true
     },
     cancelModal(modal) {

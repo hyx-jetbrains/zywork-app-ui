@@ -100,10 +100,11 @@ export default {
             render: (h, params) => {
               let imgSrc = params.row.userDetailHeadicon
               if (!imgSrc) {
-                return h('span',{},'暂无图片')
-              }
-              if (imgSrc.indexOf('http') < 0) {
-                imgSrc = cdnUrl + '/' + imgSrc
+                imgSrc = headImg
+              } else {
+                if (imgSrc.indexOf('http') < 0) {
+                  imgSrc = cdnUrl + '/' + imgSrc
+                }
               }
               return h(
                 'img',

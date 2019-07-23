@@ -41,7 +41,8 @@ export default {
     }
   },
   computed: {},
-  mounted() {},
+  mounted() {
+  },
   methods: {
     searchTable() {
       utils.initSelectTableData(this)

@@ -119,7 +119,7 @@ export default {
     showEditModal(row) {
       let addEditModal = this.$refs.addEditModal
       if (row.parentId === 0) {
-        row.parentName = '顶级类目'
+        addEditModal.parentName = '顶级类目'
         addEditModal.modal.edit = true
         addEditModal.form = row
       } else {
@@ -129,7 +129,7 @@ export default {
             if (ResponseStatus.OK === res.data.code) {
               const title = res.data.data.title
               if (title) {
-                row.parentName = title
+                addEditModal.parentName = title
               }
 
               addEditModal.modal.edit = true

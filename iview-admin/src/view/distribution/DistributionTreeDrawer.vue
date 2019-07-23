@@ -17,6 +17,9 @@
 import {directBelowUsers, directAboveUsers} from '@/api/distribution'
 import headImg from '@/assets/images/head.png'
 import * as ResponseStatus from '@/api/response-status'
+import config from '@/config'
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+const cdnUrl = config.baseUrl.cdnUrl
 export default {
   name: 'DistributionTreeDrawer',
   props: {},
@@ -111,7 +114,15 @@ export default {
       this.distributionData[0].id = userId
       this.distributionData[0].nickname = nickname
       this.distributionData[0].phone = phone
-      this.distributionData[0].headicon = headicon == null ? headImg : '/' + headicon
+      let tempHeadicon = headImg
+      if (headicon) {
+        if (headicon.indexOf('http') < 0) {
+          tempHeadicon = cdnUrl + '/' + headicon
+        } else {
+          tempHeadicon = headicon
+        }
+      }
+      this.distributionData[0].headicon = tempHeadicon
       this.direction = direction
       this.spinShow = false
     },
@@ -128,12 +139,21 @@ export default {
         if (response.data.code === ResponseStatus.OK) {
           if (response.data.data.total > 0) {
             item.total = response.data.data.total
+            let headicon = row.headicon
+            let tempHeadicon = headImg
+            if (headicon) {
+              if (headicon.indexOf('http') < 0) {
+                tempHeadicon = cdnUrl + '/' + headicon
+              } else {
+                tempHeadicon = headicon
+              }
+            }
             response.data.data.rows.forEach((row, index) => {
               children.push({
                 id: row.userId,
                 nickname: row.nickname,
                 phone: row.phone,
-                headicon: row.headicon == null ? headImg : '/' + row.headicon,
+                headicon: tempHeadicon,
                 total: 0,
                 loading: false,
                 children: []
@@ -161,11 +181,20 @@ export default {
           if (response.data.data.total > 0) {
             item.total = response.data.data.total
             response.data.data.rows.forEach((row, index) => {
+              let headicon = row.headicon
+              let tempHeadicon = headImg
+              if (headicon) {
+                if (headicon.indexOf('http') < 0) {
+                  tempHeadicon = cdnUrl + '/' + headicon
+                } else {
+                  tempHeadicon = headicon
+                }
+              }
               children.push({
                 id: row.userId,
                 nickname: row.nickname,
                 phone: row.phone,
-                headicon: row.headicon == null ? headImg : '/' + row.headicon,
+                headicon: tempHeadicon,
                 total: 0,
                 loading: false,
                 children: []

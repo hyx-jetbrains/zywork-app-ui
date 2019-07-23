@@ -22,6 +22,19 @@ export const isDefaultSelect = [
   }
 ]
 /**
+ * @description 是否热门下拉框
+ */
+export const isHostSelect = [
+  {
+    value: 0,
+    label: '否'
+  },
+  {
+    value: 1,
+    label: '是'
+  }
+]
+/**
  * @description 商品上下架状态下拉框
  */
 export const shelfStatusSelect = [
@@ -57,5 +70,30 @@ export const jobStatusSelect = [
   {
     value: 4,
     label: '已删除'
+  }
+]
+/**
+ * 数据类型下拉框
+ */
+export const dataTypeSelect = [
+  {
+    value: 'String',
+    label: 'String'
+  },
+  {
+    value: 'Integer',
+    label: 'Integer'
+  },
+  {
+    value: 'Long',
+    label: 'Long'
+  },
+  {
+    value: 'Double',
+    label: 'Double'
+  },
+  {
+    value: 'BigDecimal',
+    label: 'BigDecimal'
   }
 ]

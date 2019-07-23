@@ -31,6 +31,8 @@
             v-on:showGoodsSkuPicModal="showGoodsSkuPicModal"
             v-on:showSkuDetailModal="showSkuDetailModal"
             v-on:showDistributionRatio="showDistributionRatio"
+            v-on:showAttrDetailModal="showAttrDetailModal"
+            v-on:showSearchTableModal="showSearchTableModal"
           />
         </Card>
       </i-col>
@@ -41,6 +43,29 @@
     <GoodsSkuPicModal ref="goodsSkuPicModal" v-on:searchTable="searchTable" />
     <SkuDetailModal ref="skuDetailModal" />
     <DistributionRatioModal ref="distributionRatioModal" />
+    <GoodsInfoDetailModal v-if="type === 0" ref="attrDetailModal" />
+    <GoodsPicDetailModal v-if="type === 1" ref="attrDetailModal" />
+    <Modal
+      v-model="modal.searchTableModal"
+      title="选择属性查询"
+      :mask-closable="false"
+      width="960"
+    >
+      <GoodsInfoMainSingle
+        v-if="type === 0"
+        ref="searchTableModal"
+        v-on:confirmChoice="confirmChoice"
+      />
+      <GoodsPicMainSingle
+        v-if="type === 1"
+        ref="searchTableModal"
+        v-on:confirmChoice="confirmChoice"
+      />
+      <div slot="footer">
+        <Button type="text" size="large" @click="cancelModal('searchTableModal')">取消</Button>
+        <Button type="primary" size="large" @click="bottomConfirmChoice">查询</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -54,6 +79,10 @@ import GoodsSkuDetailModal from './GoodsSkuDetailModal.vue'
 import GoodsSkuPicModal from './GoodsSkuPicModal.vue'
 import DistributionRatioModal from '_c/distribution-ratio-modal'
 import SkuDetailModal from '_c/sku-detail-modal'
+import GoodsInfoDetailModal from '../goods-info/GoodsInfoDetailModal.vue'
+import GoodsInfoMainSingle from '../goods-info/GoodsInfoMainSingle.vue'
+import GoodsPicDetailModal from '../goods-pic/GoodsPicDetailModal.vue'
+import GoodsPicMainSingle from '../goods-pic/GoodsPicMainSingle.vue'
 export default {
   name: 'GoodsSkuMain',
   components: {
@@ -63,13 +92,23 @@ export default {
     GoodsSkuDetailModal,
     GoodsSkuPicModal,
     SkuDetailModal,
-    DistributionRatioModal
+    DistributionRatioModal,
+    GoodsInfoDetailModal,
+    GoodsInfoMainSingle,
+    GoodsPicDetailModal,
+    GoodsPicMainSingle
   },
   data() {
     return {
       urls: {
         batchRemoveUrl: '/goods-sku/admin/batch-remove',
-        batchActiveUrl: '/goods-sku/admin/batch-active'
+        batchActiveUrl: '/goods-sku/admin/batch-active',
+        goodsOneUrl: '/goods-info/admin/one/',
+        picOneUrl: '/goods-pic/admin/one/'
+      },
+      type: null,
+      modal: {
+        searchTableModal: false
       }
     }
   },
@@ -88,8 +127,24 @@ export default {
     },
     showEditModal(row) {
       let addEditModal = this.$refs.addEditModal
-      addEditModal.modal.edit = true
-      addEditModal.form = row
+      utils
+        .doGet(this.urls.goodsOneUrl + row.goodsId, {})
+        .then(res => {
+          if (ResponseStatus.OK === res.data.code) {
+            const title = res.data.data.title
+            if (title) {
+              addEditModal.goodsName = title
+            }
+
+            addEditModal.modal.edit = true
+            addEditModal.form = row
+          } else {
+            this.$Message.error(res.data.message)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     edit() {
       utils.edit(this)
@@ -141,6 +196,9 @@ export default {
           console.log(error)
         })
     },
+    cancelModal(modal) {
+      this.modal[modal] = false
+    },
     /**
      * 显示分销比例配置弹窗
      */
@@ -153,6 +211,57 @@ export default {
         isActive: 0
       }
       distributionRatioModal.loadData(params, 'goodsSku', row.id)
+    },
+    /**
+     * 显示详情弹窗
+     */
+    showAttrDetailModal(id, type) {
+      this.type = type
+      let url = this.urls.goodsOneUrl
+      if (type === 1) {
+        url = this.urls.picOneUrl
+      }
+      utils
+        .doGet(url + id, {})
+        .then(res => {
+          if (ResponseStatus.OK === res.data.code) {
+            const row = res.data.data
+            let detailModal = this.$refs.attrDetailModal
+            detailModal.modal.detail = true
+            detailModal.form = row
+          } else {
+            this.$Message.error(res.data.message)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    /**
+     * 显示搜索弹窗
+     */
+    showSearchTableModal(type) {
+      this.type = type
+      this.modal['searchTableModal'] = true
+    },
+    /**
+     * 搜索弹窗确认查询
+     */
+    confirmChoice(row) {
+      this.cancelModal('searchTableModal')
+      let searchModal = this.$refs.searchModal
+      if (this.type === 0) {
+        searchModal.searchForm.goodsIdMin = searchModal.searchForm.goodsIdMax = row.id
+      } else if (this.type === 1) {
+        searchModal.searchForm.picIdMin = searchModal.searchForm.picIdMax = row.id
+      }
+      this.searchTable()
+    },
+    /**
+     * 底部搜索弹窗确认查询
+     */
+    bottomConfirmChoice() {
+      this.$refs.searchTableModal.confirmSelection()
     }
   }
 }
