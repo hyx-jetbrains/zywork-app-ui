@@ -500,6 +500,53 @@ export default [
         ]
       },
       {
+        path: 'goods_activity',
+        name: 'goods_activity_management',
+        meta: {
+          icon: 'logo-euro',
+          title: '商品活动管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'GoodsHot',
+            name: 'goods_hot',
+            meta: {
+              icon: 'md-flame',
+              title: '热门商品管理'
+            },
+            component: () => import('@/view/goods-hot/GoodsHotMain.vue')
+          },
+          {
+            path: 'GoodsAgent',
+            name: 'goods_agent',
+            meta: {
+              icon: 'ios-ribbon',
+              title: '代理商商品管理'
+            },
+            component: () => import('@/view/goods-agent/GoodsAgentMain.vue')
+          },
+          {
+            path: 'GoodsGroupon',
+            name: 'goods_groupon',
+            meta: {
+              icon: 'ios-people',
+              title: '拼团商品管理'
+            },
+            component: () => import('@/view/goods-groupon/GoodsGrouponMain.vue')
+          },
+          {
+            path: 'GoodsSeckill',
+            name: 'goods_seckill',
+            meta: {
+              icon: 'md-stopwatch',
+              title: '秒杀商品管理'
+            },
+            component: () => import('@/view/goods-seckill/GoodsSeckillMain.vue')
+          }
+        ]
+      },
+      {
         path: 'cart',
         name: 'carts_management',
         meta: {

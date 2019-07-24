@@ -1,0 +1,184 @@
+<template>
+    <div>
+        <Modal v-model="modal.add" title="添加" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('addForm', $event)" width="760">
+            <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
+                <Row>
+	<i-col span="12">
+	<FormItem label="商品编号" prop="goodsId">
+	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="商品SKU编号" prop="goodsSkuId">
+	<InputNumber v-model="form.goodsSkuId" placeholder="请输入商品SKU编号" style="width: 100%;"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="秒杀价格" prop="seckillPrice">
+	<InputNumber v-model="form.seckillPrice" placeholder="请输入秒杀价格" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="秒杀总数量" prop="seckillTotal">
+	<InputNumber v-model="form.seckillTotal" placeholder="请输入秒杀总数量" style="width: 100%;"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="开始时间" prop="beginTime">
+	<DatePicker @on-change="form.beginTime=$event" :value="form.beginTime" placeholder="请输入开始时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="结束时间" prop="endTime">
+	<DatePicker @on-change="form.endTime=$event" :value="form.endTime" placeholder="请输入结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="秒杀结束时间" prop="seckillEndTime">
+	<DatePicker @on-change="form.seckillEndTime=$event" :value="form.seckillEndTime" placeholder="请输入秒杀结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+	</i-col>
+</Row>
+
+            </Form>
+            <div slot="footer">
+                <Button type="text" size="large" @click="resetFormCancelModal('addForm', 'add')">取消</Button>
+                <Button type="primary" size="large" @click="add" :loading="loading.add">添加</Button>
+            </div>
+        </Modal>
+        <Modal v-model="modal.edit" title="修改" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('editForm', $event)" width="760">
+            <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
+                <Row>
+	<i-col span="12">
+	<FormItem label="商品编号" prop="goodsId">
+	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="商品SKU编号" prop="goodsSkuId">
+	<InputNumber v-model="form.goodsSkuId" placeholder="请输入商品SKU编号" style="width: 100%;"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="秒杀价格" prop="seckillPrice">
+	<InputNumber v-model="form.seckillPrice" placeholder="请输入秒杀价格" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="秒杀总数量" prop="seckillTotal">
+	<InputNumber v-model="form.seckillTotal" placeholder="请输入秒杀总数量" style="width: 100%;"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="开始时间" prop="beginTime">
+	<DatePicker @on-change="form.beginTime=$event" :value="form.beginTime" placeholder="请输入开始时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="结束时间" prop="endTime">
+	<DatePicker @on-change="form.endTime=$event" :value="form.endTime" placeholder="请输入结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="秒杀结束时间" prop="seckillEndTime">
+	<DatePicker @on-change="form.seckillEndTime=$event" :value="form.seckillEndTime" placeholder="请输入秒杀结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+	</i-col>
+</Row>
+
+            </Form>
+            <div slot="footer">
+                <Button type="text" size="large" @click="resetFormCancelModal('editForm', 'edit')">取消</Button>
+                <Button type="primary" size="large" @click="edit" :loading="loading.edit">修改</Button>
+            </div>
+        </Modal>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'GoodsSeckillAddEdit',
+        data() {
+            return {
+                modal: {
+                    add: false,
+                    edit: false
+                },
+                loading: {
+                    add: false,
+                    edit: false
+                },
+                urls: {
+                    addUrl: '/goods-seckill/admin/save',
+                    batchAddUrl: '/goods-seckill/admin/batch-save',
+                    editUrl: '/goods-seckill/admin/update',
+                    batchEditUrl: '/goods-seckill/admin/batch-update'
+                },
+                form: {
+                    id: null,
+goodsId: null,
+goodsSkuId: null,
+seckillPrice: null,
+seckillTotal: null,
+beginTime: null,
+endTime: null,
+seckillEndTime: null,
+version: null,
+createTime: null,
+updateTime: null,
+isActive: null,
+
+                },
+                validateRules: {
+                    goodsId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+goodsSkuId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+seckillPrice: [
+{type: 'number', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+seckillTotal: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+beginTime: [
+{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'}
+],
+endTime: [
+{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'}
+],
+
+                }
+            }
+        },
+        computed: {},
+        mounted() {},
+        methods: {
+            changeModalVisibleResetForm(formRef, visible) {
+                if (!visible) {
+                    this.$refs[formRef].resetFields()
+                }
+            },
+            resetFormCancelModal(formRef, modal) {
+                this.modal[modal] = false
+                this.$refs[formRef].resetFields()
+            },
+            add() {
+                this.$emit('add')
+            },
+            edit() {
+                this.$emit('edit')
+            }
+        }
+    }
+</script>
+
+<style>
+</style>
