@@ -23,6 +23,7 @@
       </div>
     </div>
     <GoodsInfoAttrDetailModal ref="attrDetailModal" />
+    <ImgModal ref="imgModal" />
   </div>
 </template>
 
@@ -30,17 +31,25 @@
 import * as utils from '@/api/utils-v2'
 import * as ResponseStatus from '@/api/response-status'
 import GoodsInfoAttrDetailModal from '../goods-info/GoodsInfoAttrDetailModal.vue'
+import ImgModal from '_c/img-modal'
+
+import config from '@/config'
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+const cdnUrl = config.baseUrl.cdnUrl
 
 export default {
   name: 'GoodsInfoSkuPicTable',
   components: {
-    GoodsInfoAttrDetailModal
+    GoodsInfoAttrDetailModal,
+    ImgModal
   },
   data() {
     return {
       urls: {
         searchUrl: '/goods-info-sku-pic/admin/pager-cond',
-        goodsOneUrl: '/goods-info/admin/one/'
+        goodsOneUrl: '/goods-info/admin/one/',
+        updateShelfStatusUrl: '/goods-info/admin/update-shelf-status',
+        updateSkuShelfStatusUrl: '/goods-sku/admin/update-status'
       },
       pager: {
         pageNo: 1,
@@ -82,13 +91,117 @@ export default {
             title: '店铺编号',
             key: 'goodsInfoShopId',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.goodsInfoShopId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'shopModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'showShopSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
           },
           {
             title: '类目编号',
             key: 'goodsInfoCategoryId',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.goodsInfoCategoryId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'categoryModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'showCategorySearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
           },
           {
             title: '商品标题',
@@ -142,10 +255,45 @@ export default {
             }
           },
           {
-            title: '上架状态',
+            title: '商品上架状态',
             key: 'goodsInfoShelfStatus',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(
+                'i-switch',
+                {
+                  props: {
+                    size: 'large',
+                    value: params.row.goodsInfoShelfStatus === 0
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    'on-change': status => {
+                      this.updateShelfStatus(params.row, 0)
+                    }
+                  }
+                },
+                [
+                  h(
+                    'span',
+                    {
+                      slot: 'open'
+                    },
+                    '上架'
+                  ),
+                  h(
+                    'span',
+                    {
+                      slot: 'close'
+                    },
+                    '下架'
+                  )
+                ]
+              )
+            }
           },
           {
             title: '销量',
@@ -216,10 +364,45 @@ export default {
             sortable: true
           },
           {
-            title: '上架状态',
+            title: 'SKU上架状态',
             key: 'goodsSkuShelfStatus',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              return h(
+                'i-switch',
+                {
+                  props: {
+                    size: 'large',
+                    value: params.row.goodsSkuShelfStatus === 0
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    'on-change': status => {
+                      this.updateShelfStatus(params.row, 1)
+                    }
+                  }
+                },
+                [
+                  h(
+                    'span',
+                    {
+                      slot: 'open'
+                    },
+                    '上架'
+                  ),
+                  h(
+                    'span',
+                    {
+                      slot: 'close'
+                    },
+                    '下架'
+                  )
+                ]
+              )
+            }
           },
           {
             title: '创建时间',
@@ -258,6 +441,40 @@ export default {
             key: 'goodsPicPicUrl',
             minWidth: 120,
             sortable: true
+          },
+          {
+            title: '图片',
+            key: 'goodsPicPicUrl',
+            minWidth: 120,
+            sortable: true,
+            render: (h, params) => {
+              let imgSrc = params.row.goodsPicPicUrl
+              if (!imgSrc) {
+                return h('span',{},'暂无图片')
+              }
+              if (imgSrc.indexOf('http') < 0) {
+                imgSrc = cdnUrl + '/' + imgSrc
+              }
+              return h(
+                'img',
+                {
+                  attrs: {
+                    src: imgSrc
+                  },
+                  style: {
+                    width: '60px',
+                    height: '60px',
+                    cursor: 'pointer'
+                  },
+                  on: {
+                    click: () => {
+                      this.showImgModal(imgSrc)
+                    }
+                  }
+                },
+                ''
+              )
+            }
           },
           {
             title: '图片顺序',
@@ -324,6 +541,17 @@ export default {
     changePageSize(pageSize) {
       utils.changePageSize(this, pageSize)
     },
+    userOpt(itemName, row) {
+      if (itemName === 'shopModuleDetail') {
+        this.$emit('showAttrDetailModal', row.goodsInfoShopId, 0)
+      } else if (itemName === 'showShopSearch') {
+        this.$emit('showSearchTableModal', 0)
+      } else if (itemName === 'categoryModuleDetail') {
+        this.$emit('showAttrDetailModal', row.goodsInfoCategoryId, 1)
+      } else if (itemName === 'showCategorySearch') {
+        this.$emit('showSearchTableModal', 1)
+      }
+    },
     /**
      * 显示商品图文详情
      */
@@ -340,6 +568,45 @@ export default {
         console.log(err)
       })
     },
+    /**
+     * 更新上下架状态
+     */
+    updateShelfStatus(row, type) {
+      let url = this.urls.updateShelfStatusUrl
+      let status = row.goodsInfoShelfStatus
+      let id = row.goodsInfoId
+      if (type === 1) {
+        url = this.urls.updateSkuShelfStatusUrl
+        status = row.goodsSkuShelfStatus
+        id = row.goodsSkuId
+      }
+      
+
+      let shelfStatus = status === 0 ? 1 : 0
+      let data = {
+        id: id,
+        shelfStatus: shelfStatus
+      }
+      let tip = shelfStatus === 0 ? '上架成功' : '下架成功'
+      utils.doPostJson(url, data, {}).then(res => {
+        if (res.data.code === ResponseStatus.OK) {
+          this.$Message.success(tip)
+          this.search()
+        } else {
+          this.$Message.error(res.data.message)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    /**
+     * 显示图片预览的弹窗
+     */
+    showImgModal(src) {
+      let imgModal = this.$refs.imgModal
+      imgModal.modal.img = true
+      imgModal.imgSrc = src
+    }
   }
 }
 </script>
