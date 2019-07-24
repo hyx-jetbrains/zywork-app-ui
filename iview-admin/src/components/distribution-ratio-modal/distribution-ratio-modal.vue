@@ -1,5 +1,6 @@
 <template>
   <Modal v-model="setModal" :title="title" :mask-closable="false" width="860">
+    <div style="color: #ff0000; margin-bottom: 10px;">注意：直接输入整数，如5%，输入5即可。一级分销商返佣比例<span style="font-weight: bold;"> 小于 </span>二级分销商返佣比例</div>
     <div class="zy-box">
       <div class="zy-box-row">
         <div class="zy-text-bold" style="width: 400px;">角色/等级</div>
