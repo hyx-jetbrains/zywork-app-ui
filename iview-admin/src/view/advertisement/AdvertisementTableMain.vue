@@ -86,7 +86,59 @@ export default {
             title: '广告类型编号',
             key: 'adTypeId',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.adTypeId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'moduleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'moduleSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
           },
           {
             title: '广告标题',
@@ -524,6 +576,10 @@ export default {
         utils.remove(this, row)
       } else if (itemName === 'showUploadModal') {
         this.$emit('showUploadModal', row.id)
+      } else if (itemName === 'moduleDetail') {
+        this.$emit('showModuleDetail', row.adTypeId)
+      } else if (itemName === 'moduleSearch') {
+        this.$emit('showModuleSearch')
       }
     },
     active(row) {

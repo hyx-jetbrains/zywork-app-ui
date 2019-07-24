@@ -10,6 +10,8 @@
       <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
         <Row>
           <i-col span="12">
+            <FormItem label="店铺名称" prop="shopName">
+            </FormItem>
             <FormItem label="店铺编号" prop="shopId">
               <span v-text="form.shopId"></span>
               -
@@ -19,6 +21,8 @@
             </FormItem>
           </i-col>
           <i-col span="12">
+            <FormItem label="店铺名称" prop="categoryName">
+            </FormItem>
             <FormItem label="类目编号" prop="categoryId">
               <span v-text="form.categoryId"></span>
               -
