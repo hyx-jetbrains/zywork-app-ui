@@ -594,6 +594,35 @@ export default [
         ]
       },
       {
+        path: 'goods_collection',
+        name: 'goods_collection',
+        meta: {
+          icon: 'md-heart',
+          title: '收藏管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'GoodsCollection',
+            name: 'goods_collection_management',
+            meta: {
+              icon: 'md-heart-outline',
+              title: '商品收藏管理'
+            },
+            component: () => import('@/view/goods-collection/GoodsCollectionMain.vue')
+          },
+          {
+            path: 'UserGoodsCollection',
+            name: 'goods_collection_query',
+            meta: {
+              icon: 'md-done-all',
+              title: '用户商品收藏查询'
+            },
+            component: () => import('@/view/user-goods-collection/UserGoodsCollectionMain.vue')
+          }
+        ]
+      },
+      {
         path: 'coupons',
         name: 'coupons_management',
         meta: {
