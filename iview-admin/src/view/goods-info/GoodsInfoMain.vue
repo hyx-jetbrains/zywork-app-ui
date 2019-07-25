@@ -34,6 +34,7 @@
             v-on:showAttrDetailModal="showAttrDetailModal"
             v-on:showSearchTableModal="showSearchTableModal"
             v-on:showDistributionRatio="showDistributionRatio"
+            v-on:showGoodsHotSetModal="showGoodsHotSetModal"
           />
         </Card>
       </i-col>
@@ -79,6 +80,7 @@
       </div>
     </Modal>
     <DistributionRatioModal ref="distributionRatioModal" />
+    <GoodsHotSetModal ref="goodsHotSetModal" v-on:searchTable="searchTable"/>
   </div>
 </template>
 
@@ -98,6 +100,7 @@ import DistributionRatioModal from '_c/distribution-ratio-modal'
 import { allPicByGoods } from '@/api/goods_pic'
 import * as ResponseStatus from '@/api/response-status'
 import GoodsSkuMain from '../goods-sku/GoodsSkuMain.vue'
+import GoodsHotSetModal from './GoodsHotSetModal.vue'
 export default {
   name: 'GoodsInfoMain',
   components: {
@@ -112,7 +115,8 @@ export default {
     GoodsShopMainSingle,
     GoodsCategoryDetailModal,
     GoodsCategoryMainSingle,
-    DistributionRatioModal
+    DistributionRatioModal,
+    GoodsHotSetModal
   },
   data() {
     return {
@@ -356,7 +360,12 @@ export default {
       }
       distributionRatioModal.loadData(params, 'goods', row.id)
     },
-    
+    showGoodsHotSetModal(goodsId) {
+      let goodsHotSetModal = this.$refs.goodsHotSetModal
+      goodsHotSetModal.modal.hot = true
+      goodsHotSetModal.form.goodsId = goodsId
+      goodsHotSetModal.loadHotData()
+    }
   }
 }
 </script>

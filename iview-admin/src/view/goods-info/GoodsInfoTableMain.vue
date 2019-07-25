@@ -585,7 +585,26 @@ export default {
                           }
                         },
                         '商品分销比例'
-                      )
+                      ),
+                      h(
+                        'DropdownItem',
+                        {
+                          props: {
+                            name: 'setHot'
+                          }
+                        },
+                        '设为热门'
+                      ),
+                      h(
+                        'DropdownItem',
+                        {
+                          props: {
+                            name: 'cancelHot',
+                            disabled: params.row.hotId ? false : true
+                          }
+                        },
+                        '取消热门'
+                      ),
                     ]
                   )
                 ]
@@ -629,6 +648,10 @@ export default {
         this.$emit('showSearchTableModal', 1)
       } else if (itemName === 'distributionRatio') {
         this.$emit('showDistributionRatio', row)
+      } else if (itemName === 'cancelHot') {
+        this.cancelHot(row.hotId)
+      } else if (itemName === 'setHot') {
+        this.$emit('showGoodsHotSetModal', row.id)
       }
     },
     active(row) {
@@ -674,6 +697,30 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    cancelHot(hotId) {
+      this.$Modal.confirm({
+      title: '确认取消热门吗？',
+      content: '确认取消热门商品吗？',
+      onOk: () => {
+        utils.doPostJson('/goods-hot/admin/active', {
+              id: hotId,
+              isActive: 1
+            }, {}).then(response => {
+              if (response.data.code === ResponseStatus.OK) {
+                this.$Message.success('已取消热门商品')
+                this.search()
+              } else {
+                this.$Message.error(response.data.message)
+              }
+            }).catch(error => {
+              console.log(error)
+            })
+      },
+      onCancel: () => {
+
+      }
+    })
     }
   }
 }
