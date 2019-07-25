@@ -186,10 +186,7 @@ wechatQrcode: null,
 alipay: null,
 alipayQrcode: null,
 shareCode: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

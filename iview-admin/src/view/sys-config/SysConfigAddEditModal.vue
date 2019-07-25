@@ -94,10 +94,7 @@ name: null,
 value: null,
 description: null,
 comment: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

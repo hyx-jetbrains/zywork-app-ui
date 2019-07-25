@@ -162,10 +162,7 @@ isDeliver: null,
 logisticsCompany: null,
 logisticsCode: null,
 logisticsNo: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

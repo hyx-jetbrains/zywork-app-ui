@@ -66,10 +66,7 @@
                     id: null,
 shopId: null,
 detail: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

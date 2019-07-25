@@ -90,10 +90,7 @@ articleId: null,
 userId: null,
 title: null,
 content: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

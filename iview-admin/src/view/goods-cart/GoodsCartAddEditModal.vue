@@ -90,10 +90,7 @@ userId: null,
 goodsId: null,
 goodsSkuId: null,
 quantity: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

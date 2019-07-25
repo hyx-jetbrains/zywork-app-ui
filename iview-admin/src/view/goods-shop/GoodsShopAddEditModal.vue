@@ -177,10 +177,7 @@ checkStatus: null,
 checkDescription: null,
 checkedUserId: null,
 checkedTime: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

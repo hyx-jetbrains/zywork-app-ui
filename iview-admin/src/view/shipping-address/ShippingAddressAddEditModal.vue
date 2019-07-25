@@ -162,10 +162,7 @@ addressAlias: null,
 address: null,
 area: null,
 isDefault: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

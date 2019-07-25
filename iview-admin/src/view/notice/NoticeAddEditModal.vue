@@ -111,10 +111,7 @@ summary: null,
 content: null,
 endTime: null,
 stickStatus: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

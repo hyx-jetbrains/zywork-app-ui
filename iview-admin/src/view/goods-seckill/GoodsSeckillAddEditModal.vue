@@ -129,10 +129,7 @@ seckillTotal: null,
 beginTime: null,
 endTime: null,
 seckillEndTime: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

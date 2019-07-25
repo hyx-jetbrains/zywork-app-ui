@@ -105,10 +105,7 @@ transactionNo: null,
 withdrawStatus: null,
 withdrawDescription: null,
 checkedUserId: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

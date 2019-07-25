@@ -90,10 +90,7 @@ phone: null,
 email: null,
 password: null,
 salt: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

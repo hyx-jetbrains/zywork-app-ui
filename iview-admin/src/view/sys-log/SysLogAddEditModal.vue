@@ -234,10 +234,7 @@ executeCostTime: null,
 hasException: null,
 exceptionMsg: null,
 executeIp: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

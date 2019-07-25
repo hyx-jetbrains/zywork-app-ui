@@ -81,10 +81,7 @@
 goodsSkuId: null,
 attrId: null,
 attrValue: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

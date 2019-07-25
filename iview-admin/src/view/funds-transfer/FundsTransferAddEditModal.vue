@@ -129,10 +129,7 @@ fromUserId: null,
 toUserId: null,
 transferType: null,
 transferDescription: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

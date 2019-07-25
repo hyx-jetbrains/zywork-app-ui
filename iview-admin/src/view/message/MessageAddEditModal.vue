@@ -114,10 +114,7 @@ content: null,
 messageType: null,
 linkPageUrl: null,
 linkId: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

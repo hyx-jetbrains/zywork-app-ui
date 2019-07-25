@@ -81,10 +81,7 @@
 title: null,
 description: null,
 isDefault: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

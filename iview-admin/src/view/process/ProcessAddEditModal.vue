@@ -114,10 +114,7 @@ filePath: null,
 description: null,
 isDeploy: null,
 deployTime: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

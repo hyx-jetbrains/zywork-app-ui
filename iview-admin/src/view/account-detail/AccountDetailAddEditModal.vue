@@ -138,10 +138,7 @@ type: null,
 subType: null,
 payType: null,
 remark: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

@@ -81,10 +81,7 @@
 goodsId: null,
 picUrl: null,
 picOrder: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

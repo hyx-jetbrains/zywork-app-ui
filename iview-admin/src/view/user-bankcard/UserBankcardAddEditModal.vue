@@ -105,10 +105,7 @@ accountName: null,
 bankCode: null,
 bankName: null,
 bankcardNo: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

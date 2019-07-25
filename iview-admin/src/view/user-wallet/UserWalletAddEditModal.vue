@@ -129,10 +129,7 @@ frozenRmbBalance: null,
 integral: null,
 usableIntegral: null,
 frozenIntegral: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

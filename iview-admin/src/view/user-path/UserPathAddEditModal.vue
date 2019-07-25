@@ -57,10 +57,7 @@
                 form: {
                     id: null,
 userPath: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

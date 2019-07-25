@@ -129,10 +129,7 @@ rechargeType: null,
 isSuccess: null,
 outTradeNo: null,
 tradeNo: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

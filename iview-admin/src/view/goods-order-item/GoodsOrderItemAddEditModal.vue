@@ -162,10 +162,7 @@ quantity: null,
 payAmount: null,
 discountAmount: null,
 integralAmount: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

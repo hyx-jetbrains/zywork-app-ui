@@ -225,10 +225,7 @@ paySuccess: null,
 deliverTime: null,
 dealTime: null,
 remark: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

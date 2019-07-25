@@ -66,10 +66,7 @@
                     id: null,
 title: null,
 description: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

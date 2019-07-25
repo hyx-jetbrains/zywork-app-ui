@@ -183,10 +183,7 @@ description: null,
 jobStatus: null,
 jobStatusTime: null,
 autoStart: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

@@ -105,10 +105,7 @@ goodsId: null,
 goodsSkuId: null,
 distributionLevel: null,
 commissionPercent: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {

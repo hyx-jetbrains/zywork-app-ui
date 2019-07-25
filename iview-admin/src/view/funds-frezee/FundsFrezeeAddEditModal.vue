@@ -105,10 +105,7 @@ userId: null,
 amount: null,
 frezeeType: null,
 frezeeDescription: null,
-version: null,
-createTime: null,
-updateTime: null,
-isActive: null,
+
 
                 },
                 validateRules: {
