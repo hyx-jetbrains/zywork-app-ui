@@ -8,13 +8,17 @@
 	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="商品编号" prop="goodsId">
-	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="商品编号" prop="goodsId">
+	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="商品SKU编号" prop="goodsSkuId">
 	<InputNumber v-model="form.goodsSkuId" placeholder="请输入商品SKU编号" style="width: 100%;"/>
 </FormItem>
@@ -35,13 +39,17 @@
 	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="商品编号" prop="goodsId">
-	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="商品编号" prop="goodsId">
+	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="商品SKU编号" prop="goodsSkuId">
 	<InputNumber v-model="form.goodsSkuId" placeholder="请输入商品SKU编号" style="width: 100%;"/>
 </FormItem>
@@ -77,15 +85,17 @@
                     batchEditUrl: '/goods-collection/admin/batch-update'
                 },
                 form: {
-                    id: null,
-userId: null,
+                    userId: null,
+shopId: null,
 goodsId: null,
 goodsSkuId: null,
-
 
                 },
                 validateRules: {
                     userId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+shopId: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
 goodsId: [

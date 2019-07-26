@@ -94,6 +94,7 @@ export default {
   goods_collection_query: '用户商品收藏查询',
   goods_activity_management: '商品活动管理',
   goods_hot: '热门商品管理',
+  goods_promotion: '促销商品管理',
   goods_agent: '代理商商品管理',
   goods_groupon: '拼团商品管理',
   goods_seckill: '秒杀商品管理',

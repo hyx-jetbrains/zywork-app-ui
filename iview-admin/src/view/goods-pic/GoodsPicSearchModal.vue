@@ -19,6 +19,24 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="店铺编号"><Row>
+	<i-col span="11">
+	<FormItem prop="shopIdMin">
+	<InputNumber v-model="searchForm.shopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="shopIdMax">
+	<InputNumber v-model="searchForm.shopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="商品编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsIdMin">
@@ -33,14 +51,14 @@
 </i-col>
 </Row>
 </FormItem>
+</i-col><i-col span="12">
+	<FormItem label="图片URL" prop="picUrl">
+	<Input v-model="searchForm.picUrl" placeholder="请输入图片URL"/>
+</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="图片URL" prop="picUrl">
-	<Input v-model="searchForm.picUrl" placeholder="请输入图片URL"/>
-</FormItem>
-</i-col><i-col span="12">
 	<FormItem label="图片顺序"><Row>
 	<i-col span="11">
 	<FormItem prop="picOrderMin">
@@ -55,10 +73,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="versionMin">
@@ -73,7 +88,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="createTimeMin">
@@ -88,10 +106,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="updateTimeMin">
@@ -106,7 +121,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="isActiveMin">
@@ -156,6 +174,9 @@
                     id: null,
 idMin: null, 
 idMax: null, 
+shopId: null,
+shopIdMin: null, 
+shopIdMax: null, 
 goodsId: null,
 goodsIdMin: null, 
 goodsIdMax: null, 

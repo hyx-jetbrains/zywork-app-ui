@@ -92,6 +92,7 @@ export default {
   goods_collection_query: 'Uesr Goods Collection Query',
   goods_activity_management: 'Goods Activity Management',
   goods_hot: 'Hot Goods Management',
+  goods_promotion: 'Promotion Goods Management',
   goods_agent: 'Agent Goods Management',
   goods_groupon: 'Groupon Goods Management',
   goods_seckill: 'Seckill Goods Management',

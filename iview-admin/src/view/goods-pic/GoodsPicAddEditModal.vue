@@ -4,17 +4,21 @@
             <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
 	<i-col span="12">
-	<FormItem label="商品编号" prop="goodsId">
-	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="图片URL" prop="picUrl">
-	<Input v-model="form.picUrl" placeholder="请输入图片URL"/>
+	<FormItem label="商品编号" prop="goodsId">
+	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="图片URL" prop="picUrl">
+	<Input v-model="form.picUrl" placeholder="请输入图片URL"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="图片顺序" prop="picOrder">
 	<InputNumber v-model="form.picOrder" placeholder="请输入图片顺序" style="width: 100%;"/>
 </FormItem>
@@ -31,17 +35,21 @@
             <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
 	<i-col span="12">
-	<FormItem label="商品编号" prop="goodsId">
-	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="图片URL" prop="picUrl">
-	<Input v-model="form.picUrl" placeholder="请输入图片URL"/>
+	<FormItem label="商品编号" prop="goodsId">
+	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="图片URL" prop="picUrl">
+	<Input v-model="form.picUrl" placeholder="请输入图片URL"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="图片顺序" prop="picOrder">
 	<InputNumber v-model="form.picOrder" placeholder="请输入图片顺序" style="width: 100%;"/>
 </FormItem>
@@ -77,15 +85,17 @@
                     batchEditUrl: '/goods-pic/admin/batch-update'
                 },
                 form: {
-                    id: null,
+                    shopId: null,
 goodsId: null,
 picUrl: null,
 picOrder: null,
 
-
                 },
                 validateRules: {
-                    goodsId: [
+                    shopId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+goodsId: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
 picUrl: [

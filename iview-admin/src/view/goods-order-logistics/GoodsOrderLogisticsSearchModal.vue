@@ -19,39 +19,57 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="店铺编号"><Row>
+	<i-col span="11">
+	<FormItem prop="shopIdMin">
+	<InputNumber v-model="searchForm.shopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="shopIdMax">
+	<InputNumber v-model="searchForm.shopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="收货人" prop="realName">
 	<Input v-model="searchForm.realName" placeholder="请输入收货人"/>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="手机号" prop="phone">
 	<Input v-model="searchForm.phone" placeholder="请输入手机号"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="省" prop="province">
 	<Input v-model="searchForm.province" placeholder="请输入省"/>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="市" prop="city">
 	<Input v-model="searchForm.city" placeholder="请输入市"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="区/县" prop="district">
 	<Input v-model="searchForm.district" placeholder="请输入区/县"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="详细地址" prop="address">
+	<Input v-model="searchForm.address" placeholder="请输入详细地址"/>
 </FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="详细地址" prop="address">
-	<Input v-model="searchForm.address" placeholder="请输入详细地址"/>
-</FormItem>
-</i-col><i-col span="12">
 	<FormItem label="是否已发货"><Row>
 	<i-col span="11">
 	<FormItem prop="isDeliverMin">
@@ -66,25 +84,25 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="物流公司名称" prop="logisticsCompany">
 	<Input v-model="searchForm.logisticsCompany" placeholder="请输入物流公司名称"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="物流公司编码" prop="logisticsCode">
 	<Input v-model="searchForm.logisticsCode" placeholder="请输入物流公司编码"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="物流单号" prop="logisticsNo">
+	<Input v-model="searchForm.logisticsNo" placeholder="请输入物流单号"/>
 </FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="物流单号" prop="logisticsNo">
-	<Input v-model="searchForm.logisticsNo" placeholder="请输入物流单号"/>
-</FormItem>
-</i-col><i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="versionMin">
@@ -99,10 +117,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="createTimeMin">
@@ -117,7 +132,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="updateTimeMin">
@@ -132,10 +150,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="isActiveMin">
@@ -185,6 +200,9 @@
                     id: null,
 idMin: null, 
 idMax: null, 
+shopId: null,
+shopIdMin: null, 
+shopIdMax: null, 
 realName: null,
 phone: null,
 province: null,

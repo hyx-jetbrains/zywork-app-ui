@@ -15,13 +15,13 @@
     import * as utils from '@/api/utils-v2'
 
     export default {
-        name: 'GoodsAgentTableMain',
+        name: 'GoodsPromotionTableMain',
         data() {
             return {
                 urls: {
-                    searchUrl: '/goods-agent/admin/pager-cond',
-                    activeUrl: '/goods-agent/admin/active',
-                    removeUrl: '/goods-agent/admin/remove/'
+                    searchUrl: '/goods-promotion/admin/pager-cond',
+                    activeUrl: '/goods-promotion/admin/active',
+                    removeUrl: '/goods-promotion/admin/remove/'
                 },
                 pager: {
                     pageNo: 1,
@@ -50,7 +50,7 @@
                             }
                         },
                         {
-title: '代理商品编号',
+title: '促销编号',
 key: 'id',
 minWidth: 120,
 sortable: true,
@@ -74,6 +74,12 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '促销价格',
+key: 'promotionPrice',
+minWidth: 120,
+sortable: true,
+},
+{
 title: '开始时间',
 key: 'beginTime',
 minWidth: 120,
@@ -83,7 +89,7 @@ renderHeader: (h, params) => {
                 h('span', '开始时间'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品开始时间',
+                    content: '促销开始时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -111,7 +117,7 @@ renderHeader: (h, params) => {
                 h('span', '结束时间'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品结束时间',
+                    content: '促销结束时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -139,7 +145,7 @@ renderHeader: (h, params) => {
                 h('span', '版本号'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品版本号',
+                    content: '促销版本号',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -167,7 +173,7 @@ renderHeader: (h, params) => {
                 h('span', '创建时间'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品创建时间',
+                    content: '促销创建时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -195,7 +201,7 @@ renderHeader: (h, params) => {
                 h('span', '更新时间'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品更新时间',
+                    content: '促销更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -223,7 +229,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品是否激活',
+                    content: '促销是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500

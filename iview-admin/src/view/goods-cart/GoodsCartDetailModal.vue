@@ -8,23 +8,24 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">商品编号：</span><span v-text="form.goodsId"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsSkuId"></span></i-col>
+	<i-col span="11"><span class="detail-title">店铺编号：</span><span v-text="form.shopId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">商品编号：</span><span v-text="form.goodsId"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">购买数量：</span><span v-text="form.quantity"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.version"></span></i-col>
+	<i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsSkuId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">购买数量：</span><span v-text="form.quantity"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.createTime"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.updateTime"></span></i-col>
+	<i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.version"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.createTime"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.isActive"></span></i-col>
-<i-col span="2"></i-col>
+	<i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.updateTime"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.isActive"></span></i-col>
+
 </Row>
 
             </div>
@@ -43,6 +44,7 @@
                 form: {
                     id: null,
 userId: null,
+shopId: null,
 goodsId: null,
 goodsSkuId: null,
 quantity: null,

@@ -4,39 +4,21 @@
             <Form ref="searchForm" :model="searchForm" :label-width="80">
                 <Row>
 	<i-col span="12">
-	<FormItem label="商品收藏编号"><Row>
+	<FormItem label="促销编号"><Row>
 	<i-col span="11">
 	<FormItem prop="idMin">
-	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始商品收藏编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始促销编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
 	<FormItem prop="idMax">
-	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束商品收藏编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束促销编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
 </i-col><i-col span="12">
-	<FormItem label="用户编号"><Row>
-	<i-col span="11">
-	<FormItem prop="userIdMin">
-	<InputNumber v-model="searchForm.userIdMin" placeholder="请输入开始用户编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-	<i-col span="2" style="text-align: center">-</i-col>
-	<i-col span="11">
-	<FormItem prop="userIdMax">
-	<InputNumber v-model="searchForm.userIdMax" placeholder="请输入结束用户编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-</Row>
-</FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
 	<FormItem label="店铺编号"><Row>
 	<i-col span="11">
 	<FormItem prop="shopIdMin">
@@ -51,7 +33,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="商品编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsIdMin">
@@ -66,10 +51,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="商品SKU编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsSkuIdMin">
@@ -80,6 +62,57 @@
 	<i-col span="11">
 	<FormItem prop="goodsSkuIdMax">
 	<InputNumber v-model="searchForm.goodsSkuIdMax" placeholder="请输入结束商品SKU编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="促销价格"><Row>
+	<i-col span="11">
+	<FormItem prop="promotionPriceMin">
+	<InputNumber v-model="searchForm.promotionPriceMin" placeholder="请输入开始促销价格" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="promotionPriceMax">
+	<InputNumber v-model="searchForm.promotionPriceMax" placeholder="请输入结束促销价格" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="开始时间"><Row>
+	<i-col span="11">
+	<FormItem prop="beginTimeMin">
+	<DatePicker @on-change="searchForm.beginTimeMin=$event" :value="searchForm.beginTimeMin" placeholder="请输入开始开始时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="beginTimeMax">
+	<DatePicker @on-change="searchForm.beginTimeMax=$event" :value="searchForm.beginTimeMax" placeholder="请输入结束开始时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="结束时间"><Row>
+	<i-col span="11">
+	<FormItem prop="endTimeMin">
+	<DatePicker @on-change="searchForm.endTimeMin=$event" :value="searchForm.endTimeMin" placeholder="请输入开始结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="endTimeMax">
+	<DatePicker @on-change="searchForm.endTimeMax=$event" :value="searchForm.endTimeMax" placeholder="请输入结束结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
 </i-col>
 </Row>
@@ -165,7 +198,7 @@
 
 <script>
     export default {
-        name: 'GoodsCollectionSearch',
+        name: 'GoodsPromotionSearch',
         data() {
             return {
                 modal: {
@@ -175,7 +208,7 @@
                     search: false
                 },
                 urls: {
-                    searchUrl: '/goods-collection/admin/pager-cond'
+                    searchUrl: '/goods-promotion/admin/pager-cond'
                 },
                 searchForm: {
                     pageNo: 1,
@@ -185,9 +218,6 @@
                     id: null,
 idMin: null, 
 idMax: null, 
-userId: null,
-userIdMin: null, 
-userIdMax: null, 
 shopId: null,
 shopIdMin: null, 
 shopIdMax: null, 
@@ -197,6 +227,15 @@ goodsIdMax: null,
 goodsSkuId: null,
 goodsSkuIdMin: null, 
 goodsSkuIdMax: null, 
+promotionPrice: null,
+promotionPriceMin: null, 
+promotionPriceMax: null, 
+beginTime: null,
+beginTimeMin: null, 
+beginTimeMax: null, 
+endTime: null,
+endTimeMin: null, 
+endTimeMax: null, 
 version: null,
 versionMin: null, 
 versionMax: null, 

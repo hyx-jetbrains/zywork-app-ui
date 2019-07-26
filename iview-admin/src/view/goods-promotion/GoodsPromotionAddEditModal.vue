@@ -19,30 +19,19 @@
 	<InputNumber v-model="form.goodsSkuId" placeholder="请输入商品SKU编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="秒杀价格" prop="seckillPrice">
-	<InputNumber v-model="form.seckillPrice" placeholder="请输入秒杀价格" style="width: 100%;"/>
+	<FormItem label="促销价格" prop="promotionPrice">
+	<InputNumber v-model="form.promotionPrice" placeholder="请输入促销价格" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="秒杀总数量" prop="seckillTotal">
-	<InputNumber v-model="form.seckillTotal" placeholder="请输入秒杀总数量" style="width: 100%;"/>
-</FormItem>
-	</i-col><i-col span="12">
 	<FormItem label="开始时间" prop="beginTime">
 	<DatePicker @on-change="form.beginTime=$event" :value="form.beginTime" placeholder="请输入开始时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="结束时间" prop="endTime">
 	<DatePicker @on-change="form.endTime=$event" :value="form.endTime" placeholder="请输入结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="秒杀结束时间" prop="seckillEndTime">
-	<DatePicker @on-change="form.seckillEndTime=$event" :value="form.seckillEndTime" placeholder="请输入秒杀结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
 	</i-col>
 </Row>
@@ -72,30 +61,19 @@
 	<InputNumber v-model="form.goodsSkuId" placeholder="请输入商品SKU编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="秒杀价格" prop="seckillPrice">
-	<InputNumber v-model="form.seckillPrice" placeholder="请输入秒杀价格" style="width: 100%;"/>
+	<FormItem label="促销价格" prop="promotionPrice">
+	<InputNumber v-model="form.promotionPrice" placeholder="请输入促销价格" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="秒杀总数量" prop="seckillTotal">
-	<InputNumber v-model="form.seckillTotal" placeholder="请输入秒杀总数量" style="width: 100%;"/>
-</FormItem>
-	</i-col><i-col span="12">
 	<FormItem label="开始时间" prop="beginTime">
 	<DatePicker @on-change="form.beginTime=$event" :value="form.beginTime" placeholder="请输入开始时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="结束时间" prop="endTime">
 	<DatePicker @on-change="form.endTime=$event" :value="form.endTime" placeholder="请输入结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="秒杀结束时间" prop="seckillEndTime">
-	<DatePicker @on-change="form.seckillEndTime=$event" :value="form.seckillEndTime" placeholder="请输入秒杀结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
 	</i-col>
 </Row>
@@ -111,7 +89,7 @@
 
 <script>
     export default {
-        name: 'GoodsSeckillAddEdit',
+        name: 'GoodsPromotionAddEdit',
         data() {
             return {
                 modal: {
@@ -123,20 +101,18 @@
                     edit: false
                 },
                 urls: {
-                    addUrl: '/goods-seckill/admin/save',
-                    batchAddUrl: '/goods-seckill/admin/batch-save',
-                    editUrl: '/goods-seckill/admin/update',
-                    batchEditUrl: '/goods-seckill/admin/batch-update'
+                    addUrl: '/goods-promotion/admin/save',
+                    batchAddUrl: '/goods-promotion/admin/batch-save',
+                    editUrl: '/goods-promotion/admin/update',
+                    batchEditUrl: '/goods-promotion/admin/batch-update'
                 },
                 form: {
                     shopId: null,
 goodsId: null,
 goodsSkuId: null,
-seckillPrice: null,
-seckillTotal: null,
+promotionPrice: null,
 beginTime: null,
 endTime: null,
-seckillEndTime: null,
 
                 },
                 validateRules: {
@@ -149,11 +125,8 @@ goodsId: [
 goodsSkuId: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
-seckillPrice: [
+promotionPrice: [
 {type: 'number', required: true, message: '此项为必须项', trigger: 'blur, change'}
-],
-seckillTotal: [
-{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
 beginTime: [
 {type: 'string', required: true, message: '此项为必须项', trigger: 'blur'}

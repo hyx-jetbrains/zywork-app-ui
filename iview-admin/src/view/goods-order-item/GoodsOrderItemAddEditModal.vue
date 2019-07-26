@@ -8,50 +8,57 @@
 	<InputNumber v-model="form.orderId" placeholder="请输入订单编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="商品编号" prop="goodsId">
 	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="SKU编号" prop="goodsSkuId">
 	<InputNumber v-model="form.goodsSkuId" placeholder="请输入SKU编号" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="SKU图片编号" prop="skuPicId">
 	<InputNumber v-model="form.skuPicId" placeholder="请输入SKU图片编号" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="售卖标题" prop="skuTitle">
 	<Input v-model="form.skuTitle" placeholder="请输入售卖标题"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="SKU规格信息" prop="skuInfo">
 	<Input v-model="form.skuInfo" placeholder="请输入SKU规格信息"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="购买数量" prop="quantity">
 	<InputNumber v-model="form.quantity" placeholder="请输入购买数量" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="实付金额（元）" prop="payAmount">
 	<InputNumber v-model="form.payAmount" placeholder="请输入实付金额（元）" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="优惠金额（元）" prop="discountAmount">
+	<InputNumber v-model="form.discountAmount" placeholder="请输入优惠金额（元）" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="优惠金额（元）" prop="discountAmount">
-	<InputNumber v-model="form.discountAmount" placeholder="请输入优惠金额（元）" style="width: 100%;"/>
-</FormItem>
-	</i-col><i-col span="12">
 	<FormItem label="赠送积分" prop="integralAmount">
 	<InputNumber v-model="form.integralAmount" placeholder="请输入赠送积分" style="width: 100%;"/>
 </FormItem>
@@ -72,50 +79,57 @@
 	<InputNumber v-model="form.orderId" placeholder="请输入订单编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="商品编号" prop="goodsId">
 	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="SKU编号" prop="goodsSkuId">
 	<InputNumber v-model="form.goodsSkuId" placeholder="请输入SKU编号" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="SKU图片编号" prop="skuPicId">
 	<InputNumber v-model="form.skuPicId" placeholder="请输入SKU图片编号" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="售卖标题" prop="skuTitle">
 	<Input v-model="form.skuTitle" placeholder="请输入售卖标题"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="SKU规格信息" prop="skuInfo">
 	<Input v-model="form.skuInfo" placeholder="请输入SKU规格信息"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="购买数量" prop="quantity">
 	<InputNumber v-model="form.quantity" placeholder="请输入购买数量" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="实付金额（元）" prop="payAmount">
 	<InputNumber v-model="form.payAmount" placeholder="请输入实付金额（元）" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="优惠金额（元）" prop="discountAmount">
+	<InputNumber v-model="form.discountAmount" placeholder="请输入优惠金额（元）" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="优惠金额（元）" prop="discountAmount">
-	<InputNumber v-model="form.discountAmount" placeholder="请输入优惠金额（元）" style="width: 100%;"/>
-</FormItem>
-	</i-col><i-col span="12">
 	<FormItem label="赠送积分" prop="integralAmount">
 	<InputNumber v-model="form.integralAmount" placeholder="请输入赠送积分" style="width: 100%;"/>
 </FormItem>
@@ -151,8 +165,8 @@
                     batchEditUrl: '/goods-order-item/admin/batch-update'
                 },
                 form: {
-                    id: null,
-orderId: null,
+                    orderId: null,
+shopId: null,
 goodsId: null,
 goodsSkuId: null,
 skuPicId: null,
@@ -163,10 +177,12 @@ payAmount: null,
 discountAmount: null,
 integralAmount: null,
 
-
                 },
                 validateRules: {
                     orderId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+shopId: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
 goodsId: [

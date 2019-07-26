@@ -132,6 +132,12 @@ export default {
 						}
           },
           {
+title: '店铺编号',
+key: 'shopId',
+minWidth: 120,
+sortable: true,
+},
+          {
             title: '商品编号',
             key: 'goodsId',
             minWidth: 120,

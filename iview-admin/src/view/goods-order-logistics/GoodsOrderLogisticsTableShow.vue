@@ -47,6 +47,12 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '店铺编号',
+key: 'shopId',
+minWidth: 120,
+sortable: true,
+},
+{
 title: '收货人',
 key: 'realName',
 minWidth: 120,

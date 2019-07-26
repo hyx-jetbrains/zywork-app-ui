@@ -4,32 +4,39 @@
             <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
 	<i-col span="12">
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="商品编号" prop="goodsId">
 	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="商品SKU编号" prop="goodsSkuId">
 	<InputNumber v-model="form.goodsSkuId" placeholder="请输入商品SKU编号" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="拼团价格" prop="grouponPrice">
 	<InputNumber v-model="form.grouponPrice" placeholder="请输入拼团价格" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="成团人数" prop="grouponPersonCount">
 	<InputNumber v-model="form.grouponPersonCount" placeholder="请输入成团人数" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="开始时间" prop="beginTime">
+	<DatePicker @on-change="form.beginTime=$event" :value="form.beginTime" placeholder="请输入开始时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="开始时间" prop="beginTime">
-	<DatePicker @on-change="form.beginTime=$event" :value="form.beginTime" placeholder="请输入开始时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
-</FormItem>
-	</i-col><i-col span="12">
 	<FormItem label="结束时间" prop="endTime">
 	<DatePicker @on-change="form.endTime=$event" :value="form.endTime" placeholder="请输入结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
@@ -46,32 +53,39 @@
             <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
 	<i-col span="12">
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="商品编号" prop="goodsId">
 	<InputNumber v-model="form.goodsId" placeholder="请输入商品编号" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="商品SKU编号" prop="goodsSkuId">
 	<InputNumber v-model="form.goodsSkuId" placeholder="请输入商品SKU编号" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="拼团价格" prop="grouponPrice">
 	<InputNumber v-model="form.grouponPrice" placeholder="请输入拼团价格" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="成团人数" prop="grouponPersonCount">
 	<InputNumber v-model="form.grouponPersonCount" placeholder="请输入成团人数" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="开始时间" prop="beginTime">
+	<DatePicker @on-change="form.beginTime=$event" :value="form.beginTime" placeholder="请输入开始时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="开始时间" prop="beginTime">
-	<DatePicker @on-change="form.beginTime=$event" :value="form.beginTime" placeholder="请输入开始时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
-</FormItem>
-	</i-col><i-col span="12">
 	<FormItem label="结束时间" prop="endTime">
 	<DatePicker @on-change="form.endTime=$event" :value="form.endTime" placeholder="请输入结束时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
@@ -107,7 +121,7 @@
                     batchEditUrl: '/goods-groupon/admin/batch-update'
                 },
                 form: {
-                    id: null,
+                    shopId: null,
 goodsId: null,
 goodsSkuId: null,
 grouponPrice: null,
@@ -115,10 +129,12 @@ grouponPersonCount: null,
 beginTime: null,
 endTime: null,
 
-
                 },
                 validateRules: {
-                    goodsId: [
+                    shopId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+goodsId: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
 goodsSkuId: [

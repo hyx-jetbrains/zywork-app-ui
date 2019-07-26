@@ -518,6 +518,15 @@ export default [
             component: () => import('@/view/goods-hot/GoodsHotMain.vue')
           },
           {
+            path: 'GoodsPromotion',
+            name: 'goods_promotion',
+            meta: {
+              icon: 'md-arrow-down',
+              title: '促销商品管理'
+            },
+            component: () => import('@/view/goods-promotion/GoodsPromotionMain.vue')
+          },
+          {
             path: 'GoodsAgent',
             name: 'goods_agent',
             meta: {

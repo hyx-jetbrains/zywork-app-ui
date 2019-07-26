@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Table ref="dataTable" stripe :loading="table.loading" :columns="table.tableColumns" :data="table.tableRows"
+        <Table ref="dataTable" highlight-row stripe :loading="table.loading" :columns="table.tableColumns" :data="table.tableRows"
                style="margin-top:20px;" @on-selection-change="changeSelection" @on-sort-change="changeSort"></Table>
         <div style="margin: 20px; overflow: hidden">
             <div style="float: right;">
@@ -15,13 +15,11 @@
     import * as utils from '@/api/utils-v2'
 
     export default {
-        name: 'GoodsAgentTableMain',
+        name: 'GoodsPromotionTableShow',
         data() {
             return {
                 urls: {
-                    searchUrl: '/goods-agent/admin/pager-cond',
-                    activeUrl: '/goods-agent/admin/active',
-                    removeUrl: '/goods-agent/admin/remove/'
+                    searchUrl: '/goods-promotion/admin/pager-cond'
                 },
                 pager: {
                     pageNo: 1,
@@ -35,22 +33,15 @@
                 table: {
                     loading: false,
                     tableColumns: [{
-                        type: 'selection',
-                        width: 45,
-                        key: 'id',
+                        width: 60,
                         align: 'center',
-                        fixed: 'left'
+                        fixed: 'left',
+                        render: (h, params) => {
+                            return h('span', params.index + (this.pager.pageNo - 1) * this.pager.pageSize + 1)
+                        }
                     },
                         {
-                            width: 60,
-                            align: 'center',
-                            fixed: 'left',
-                            render: (h, params) => {
-                                return h('span', params.index + (this.pager.pageNo - 1) * this.pager.pageSize + 1)
-                            }
-                        },
-                        {
-title: '代理商品编号',
+title: '促销编号',
 key: 'id',
 minWidth: 120,
 sortable: true,
@@ -74,6 +65,12 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '促销价格',
+key: 'promotionPrice',
+minWidth: 120,
+sortable: true,
+},
+{
 title: '开始时间',
 key: 'beginTime',
 minWidth: 120,
@@ -83,7 +80,7 @@ renderHeader: (h, params) => {
                 h('span', '开始时间'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品开始时间',
+                    content: '促销开始时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -111,7 +108,7 @@ renderHeader: (h, params) => {
                 h('span', '结束时间'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品结束时间',
+                    content: '促销结束时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -139,7 +136,7 @@ renderHeader: (h, params) => {
                 h('span', '版本号'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品版本号',
+                    content: '促销版本号',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -167,7 +164,7 @@ renderHeader: (h, params) => {
                 h('span', '创建时间'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品创建时间',
+                    content: '促销创建时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -195,7 +192,7 @@ renderHeader: (h, params) => {
                 h('span', '更新时间'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品更新时间',
+                    content: '促销更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -223,7 +220,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '代理商品是否激活',
+                    content: '促销是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -248,27 +245,7 @@ renderHeader: (h, params) => {
                             minWidth: 100,
                             align: 'center',
                             render: (h, params) => {
-                                return h('i-switch', {
-                                    props: {
-                                        size: 'large',
-                                        value: params.row.isActive === 0
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        'on-change': (status) => {
-                                            this.active(params.row)
-                                        }
-                                    }
-                                }, [
-                                    h('span', {
-                                        slot: 'open'
-                                    }, '激活'),
-                                    h('span', {
-                                        slot: 'close'
-                                    }, '冻结')
-                                ])
+                                return h('span', params.row.isActive === 0 ? '激活': '冻结')
                             }
                         },
                         {
@@ -318,39 +295,11 @@ renderHeader: (h, params) => {
                                                     "DropdownItem",
                                                     {
                                                         props: {
-                                                            name: "showEdit"
-                                                        }
-                                                    },
-                                                    "编辑"
-                                                ),
-                                                h(
-                                                    "DropdownItem",
-                                                    {
-                                                        props: {
                                                             name: "showDetail"
                                                         }
                                                     },
                                                     "详情"
-                                                ),
-                                                h(
-                                                    "DropdownItem",
-                                                    {
-                                                        props: {
-                                                            name: "remove"
-                                                        }
-                                                    },
-                                                    [
-                                                        h(
-                                                            "span",
-                                                            {
-                                                                style: {
-                                                                    color: "red"
-                                                                }
-                                                            },
-                                                            "删除"
-                                                        )
-                                                    ]
-                                                ),
+                                                )
                                             ]
                                         )
                                     ]
@@ -372,16 +321,9 @@ renderHeader: (h, params) => {
                 this.$emit('searchTable')
             },
             userOpt(itemName, row) {
-                if (itemName === "showEdit") {
-                    this.$emit('showEditModal', JSON.parse(JSON.stringify(row)))
-                } else if (itemName === "showDetail") {
+                if (itemName === "showDetail") {
                     this.$emit('showDetailModal', row)
-                } else if (itemName === "remove") {
-                    utils.remove(this, row);
                 }
-            },
-            active(row) {
-                utils.active(this, row)
             },
             changeSelection(selections) {
                 utils.changeSelections(this, selections)
