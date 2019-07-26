@@ -627,7 +627,7 @@ renderHeader: (h, params) => {
         if (row.categoryLevel === 2) {
           return
         }
-        this.$emit('showUploadModal', row)
+        this.$emit('showUploadModal', row.id)
       } else if (itemName === 'showGoodsCategoryAttributeMainModal') {
         this.$emit('showGoodsCategoryAttributeMainModal', row.id)
       } else if (itemName === 'moduleDetail') {
