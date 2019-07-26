@@ -259,6 +259,14 @@ export default {
                 } 
                 tagColor = 'green'
               }
+              if (params.row.promotionCount > 0) {
+                if (tagText === '热') {
+                  tagText += ' 促'
+                } else {
+                  tagText = '促'
+                } 
+                tagColor = 'cyan'
+              }
               return h('span',
                 [
                   h('tag', {
