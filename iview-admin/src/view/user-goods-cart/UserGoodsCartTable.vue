@@ -8,14 +8,24 @@
                       showSizer showTotal></Page>
             </div>
         </div>
+        <ImgModal ref="imgModal" />
     </div>
 </template>
 
 <script>
     import * as utils from '@/api/utils-v2'
+    import headImg from '@/assets/images/head.png'
+    import ImgModal from '_c/img-modal'
+
+import config from '@/config'
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+const cdnUrl = config.baseUrl.cdnUrl
 
     export default {
         name: 'UserGoodsCartTable',
+        components: {
+          ImgModal
+        },
         data() {
             return {
                 urls: {
@@ -76,6 +86,30 @@ title: '头像地址',
 key: 'userDetailHeadicon',
 minWidth: 120,
 sortable: true,
+render: (h, params) => {
+              let imgSrc = params.row.userDetailHeadicon
+              if (!imgSrc) {
+                imgSrc = headImg
+              } else {
+                if (imgSrc.indexOf('http') < 0) {
+                  imgSrc = cdnUrl + '/' + imgSrc
+                }
+              }
+              return h(
+                'img',
+                {
+                  attrs: {
+                    src: imgSrc
+                  },
+                  style: {
+                    width: '60px',
+                    height: '60px',
+                    borderRadius: '50%'
+                  }
+                },
+                ''
+              )
+            }
 },
 {
 title: '购物编号',
@@ -187,6 +221,40 @@ key: 'goodsPicPicUrl',
 minWidth: 120,
 sortable: true,
 },
+          {
+            title: '图片',
+            key: 'goodsPicPicUrl',
+            minWidth: 120,
+            sortable: true,
+            render: (h, params) => {
+              let imgSrc = params.row.goodsPicPicUrl
+              if (!imgSrc) {
+                return h('span',{},'暂无图片')
+              }
+              if (imgSrc.indexOf('http') < 0) {
+                imgSrc = cdnUrl + '/' + imgSrc
+              }
+              return h(
+                'img',
+                {
+                  attrs: {
+                    src: imgSrc
+                  },
+                  style: {
+                    width: '60px',
+                    height: '60px',
+                    cursor: 'pointer'
+                  },
+                  on: {
+                    click: () => {
+                      this.showImgModal(imgSrc)
+                    }
+                  }
+                },
+                ''
+              )
+            }
+          },
 
                         {
                             title: '操作',
@@ -241,6 +309,14 @@ sortable: true,
             },
             changePageSize(pageSize) {
                 utils.changePageSize(this, pageSize)
+            },
+            /**
+             * 显示图片预览的弹窗
+             */
+            showImgModal(src) {
+              let imgModal = this.$refs.imgModal
+              imgModal.modal.img = true
+              imgModal.imgSrc = src
             }
         }
     }

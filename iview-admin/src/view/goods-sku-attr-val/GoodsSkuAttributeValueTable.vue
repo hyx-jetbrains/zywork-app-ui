@@ -23,6 +23,7 @@
       </div>
     </div>
     <GoodsInfoAttrDetailModal ref="attrDetailModal" />
+    <ImgModal ref="imgModal" />
   </div>
 </template>
 
@@ -30,11 +31,17 @@
 import * as utils from '@/api/utils-v2'
 import * as ResponseStatus from '@/api/response-status'
 import GoodsInfoAttrDetailModal from '../goods-info/GoodsInfoAttrDetailModal.vue'
+import ImgModal from '_c/img-modal'
+
+import config from '@/config'
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+const cdnUrl = config.baseUrl.cdnUrl
 
 export default {
   name: 'GoodsSkuAttributeValueTable',
   components: {
-    GoodsInfoAttrDetailModal
+    GoodsInfoAttrDetailModal,
+    ImgModal
   },
   data() {
     return {
@@ -298,6 +305,40 @@ export default {
             sortable: true
           },
           {
+            title: '图片',
+            key: 'goodsPicPicUrl',
+            minWidth: 120,
+            sortable: true,
+            render: (h, params) => {
+              let imgSrc = params.row.goodsPicPicUrl
+              if (!imgSrc) {
+                return h('span',{},'暂无图片')
+              }
+              if (imgSrc.indexOf('http') < 0) {
+                imgSrc = cdnUrl + '/' + imgSrc
+              }
+              return h(
+                'img',
+                {
+                  attrs: {
+                    src: imgSrc
+                  },
+                  style: {
+                    width: '60px',
+                    height: '60px',
+                    cursor: 'pointer'
+                  },
+                  on: {
+                    click: () => {
+                      this.showImgModal(imgSrc)
+                    }
+                  }
+                },
+                ''
+              )
+            }
+          },
+          {
             title: '图片顺序',
             key: 'goodsPicPicOrder',
             minWidth: 120,
@@ -497,6 +538,14 @@ export default {
         console.log(err)
       })
     },
+    /**
+     * 显示图片预览的弹窗
+     */
+    showImgModal(src) {
+      let imgModal = this.$refs.imgModal
+      imgModal.modal.img = true
+      imgModal.imgSrc = src
+    }
   }
 }
 </script>
