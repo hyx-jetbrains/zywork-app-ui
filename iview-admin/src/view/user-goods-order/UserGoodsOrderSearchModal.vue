@@ -26,12 +26,45 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="用户邮箱" prop="userEmail">
+	<Input v-model="searchForm.userEmail" placeholder="请输入用户邮箱"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="昵称" prop="userDetailNickname">
 	<Input v-model="searchForm.userDetailNickname" placeholder="请输入昵称"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="头像地址" prop="userDetailHeadicon">
 	<Input v-model="searchForm.userDetailHeadicon" placeholder="请输入头像地址"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="店铺编号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsShopIdMin">
+	<InputNumber v-model="searchForm.goodsShopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsShopIdMax">
+	<InputNumber v-model="searchForm.goodsShopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="店铺Logo" prop="goodsShopLogo">
+	<Input v-model="searchForm.goodsShopLogo" placeholder="请输入店铺Logo"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="店铺标题" prop="goodsShopTitle">
+	<Input v-model="searchForm.goodsShopTitle" placeholder="请输入店铺标题"/>
 </FormItem>
 </i-col>
 </Row>
@@ -47,6 +80,39 @@
 	<i-col span="11">
 	<FormItem prop="goodsOrderIdMax">
 	<InputNumber v-model="searchForm.goodsOrderIdMax" placeholder="请输入结束订单编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="用户编号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsOrderUserIdMin">
+	<InputNumber v-model="searchForm.goodsOrderUserIdMin" placeholder="请输入开始用户编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsOrderUserIdMax">
+	<InputNumber v-model="searchForm.goodsOrderUserIdMax" placeholder="请输入结束用户编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="店铺编号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsOrderShopIdMin">
+	<InputNumber v-model="searchForm.goodsOrderShopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsOrderShopIdMax">
+	<InputNumber v-model="searchForm.goodsOrderShopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -340,7 +406,7 @@
                     search: false
                 },
                 urls: {
-                    searchUrl: '/user-goods-order/admin/pager-cond'
+                    searchUrl: '//user-goods-order/admin/pager-cond'
                 },
                 searchForm: {
                     pageNo: 1,
@@ -351,11 +417,23 @@
 userIdMin: null, 
 userIdMax: null, 
 userPhone: null,
+userEmail: null,
 userDetailNickname: null,
 userDetailHeadicon: null,
+goodsShopId: null,
+goodsShopIdMin: null, 
+goodsShopIdMax: null, 
+goodsShopLogo: null,
+goodsShopTitle: null,
 goodsOrderId: null,
 goodsOrderIdMin: null, 
 goodsOrderIdMax: null, 
+goodsOrderUserId: null,
+goodsOrderUserIdMin: null, 
+goodsOrderUserIdMax: null, 
+goodsOrderShopId: null,
+goodsOrderShopIdMin: null, 
+goodsOrderShopIdMax: null, 
 goodsOrderOrderNo: null,
 goodsOrderTotalAmount: null,
 goodsOrderTotalAmountMin: null, 

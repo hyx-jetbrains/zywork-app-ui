@@ -8,12 +8,27 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">昵称：</span><span v-text="form.userDetailNickname"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">头像地址：</span><span v-text="form.userDetailHeadicon"></span></i-col>
+	<i-col span="11"><span class="detail-title">用户邮箱：</span><span v-text="form.userEmail"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">昵称：</span><span v-text="form.userDetailNickname"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">头像地址：</span><span v-text="form.userDetailHeadicon"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">店铺编号：</span><span v-text="form.goodsShopId"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">店铺Logo：</span><span v-text="form.goodsShopLogo"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">店铺标题：</span><span v-text="form.goodsShopTitle"></span></i-col>
 
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">订单编号：</span><span v-text="form.goodsOrderId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">用户编号：</span><span v-text="form.goodsOrderUserId"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">店铺编号：</span><span v-text="form.goodsOrderShopId"></span></i-col>
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">订单号：</span><span v-text="form.goodsOrderOrderNo"></span></i-col>
 
 </Row>
@@ -78,9 +93,15 @@
                 form: {
                     userId: null,
 userPhone: null,
+userEmail: null,
 userDetailNickname: null,
 userDetailHeadicon: null,
+goodsShopId: null,
+goodsShopLogo: null,
+goodsShopTitle: null,
 goodsOrderId: null,
+goodsOrderUserId: null,
+goodsOrderShopId: null,
 goodsOrderOrderNo: null,
 goodsOrderTotalAmount: null,
 goodsOrderPayAmount: null,
