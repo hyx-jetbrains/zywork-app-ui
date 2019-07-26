@@ -85,39 +85,6 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
-	<FormItem label="用户编号"><Row>
-	<i-col span="11">
-	<FormItem prop="goodsOrderUserIdMin">
-	<InputNumber v-model="searchForm.goodsOrderUserIdMin" placeholder="请输入开始用户编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-	<i-col span="2" style="text-align: center">-</i-col>
-	<i-col span="11">
-	<FormItem prop="goodsOrderUserIdMax">
-	<InputNumber v-model="searchForm.goodsOrderUserIdMax" placeholder="请输入结束用户编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-</Row>
-</FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="店铺编号"><Row>
-	<i-col span="11">
-	<FormItem prop="goodsOrderShopIdMin">
-	<InputNumber v-model="searchForm.goodsOrderShopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-	<i-col span="2" style="text-align: center">-</i-col>
-	<i-col span="11">
-	<FormItem prop="goodsOrderShopIdMax">
-	<InputNumber v-model="searchForm.goodsOrderShopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-</Row>
-</FormItem>
-</i-col><i-col span="12">
 	<FormItem label="订单号" prop="goodsOrderOrderNo">
 	<Input v-model="searchForm.goodsOrderOrderNo" placeholder="请输入订单号"/>
 </FormItem>

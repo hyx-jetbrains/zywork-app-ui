@@ -102,18 +102,6 @@ minWidth: 120,
 sortable: true,
 },
 {
-title: '用户编号',
-key: 'goodsOrderUserId',
-minWidth: 120,
-sortable: true,
-},
-{
-title: '店铺编号',
-key: 'goodsOrderShopId',
-minWidth: 120,
-sortable: true,
-},
-{
 title: '订单号',
 key: 'goodsOrderOrderNo',
 minWidth: 120,
