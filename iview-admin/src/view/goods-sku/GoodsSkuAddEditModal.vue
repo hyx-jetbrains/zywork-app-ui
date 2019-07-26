@@ -160,6 +160,7 @@ export default {
       picName: null,
       form: {
         id: null,
+        shopId: null,
         goodsId: null,
         picId: null,
         shelfStatus: 0,
@@ -169,6 +170,9 @@ export default {
         isActive: null
       },
       validateRules: {
+                            shopId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
         goodsId: [
           {
             type: 'integer',
@@ -233,6 +237,7 @@ export default {
      */
     confirmChoice(row) {
       this.cancelModal('choice')
+      this.form.shopId = row.shopId
       this.form.goodsId = row.id
       this.goodsName = row.title
     },

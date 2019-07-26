@@ -8,79 +8,83 @@
 	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="订单号" prop="orderNo">
 	<Input v-model="form.orderNo" placeholder="请输入订单号"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="订单金额（元）" prop="totalAmount">
 	<InputNumber v-model="form.totalAmount" placeholder="请输入订单金额（元）" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="实付金额（元）" prop="payAmount">
 	<InputNumber v-model="form.payAmount" placeholder="请输入实付金额（元）" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="优惠金额（元）" prop="discountAmount">
 	<InputNumber v-model="form.discountAmount" placeholder="请输入优惠金额（元）" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="赠送积分" prop="integralAmount">
 	<InputNumber v-model="form.integralAmount" placeholder="请输入赠送积分" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="运费（元）" prop="expressFee">
 	<InputNumber v-model="form.expressFee" placeholder="请输入运费（元）" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="订单状态" prop="orderStatus">
 	<InputNumber v-model="form.orderStatus" placeholder="请输入订单状态" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="支付时间" prop="payTime">
 	<DatePicker @on-change="form.payTime=$event" :value="form.payTime" placeholder="请输入支付时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="支付方式" prop="payType">
 	<InputNumber v-model="form.payType" placeholder="请输入支付方式" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="支付订单号" prop="transactionNo">
 	<Input v-model="form.transactionNo" placeholder="请输入支付订单号"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否支付成功" prop="paySuccess">
 	<InputNumber v-model="form.paySuccess" placeholder="请输入是否支付成功" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="发货时间" prop="deliverTime">
 	<DatePicker @on-change="form.deliverTime=$event" :value="form.deliverTime" placeholder="请输入发货时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="成交时间" prop="dealTime">
-	<DatePicker @on-change="form.dealTime=$event" :value="form.dealTime" placeholder="请输入成交时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
-</FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="成交时间" prop="dealTime">
+	<DatePicker @on-change="form.dealTime=$event" :value="form.dealTime" placeholder="请输入成交时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="订单备注" prop="remark">
 	<Input v-model="form.remark" placeholder="请输入订单备注"/>
 </FormItem>
@@ -101,79 +105,83 @@
 	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="订单号" prop="orderNo">
 	<Input v-model="form.orderNo" placeholder="请输入订单号"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="订单金额（元）" prop="totalAmount">
 	<InputNumber v-model="form.totalAmount" placeholder="请输入订单金额（元）" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="实付金额（元）" prop="payAmount">
 	<InputNumber v-model="form.payAmount" placeholder="请输入实付金额（元）" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="优惠金额（元）" prop="discountAmount">
 	<InputNumber v-model="form.discountAmount" placeholder="请输入优惠金额（元）" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="赠送积分" prop="integralAmount">
 	<InputNumber v-model="form.integralAmount" placeholder="请输入赠送积分" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="运费（元）" prop="expressFee">
 	<InputNumber v-model="form.expressFee" placeholder="请输入运费（元）" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="订单状态" prop="orderStatus">
 	<InputNumber v-model="form.orderStatus" placeholder="请输入订单状态" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="支付时间" prop="payTime">
 	<DatePicker @on-change="form.payTime=$event" :value="form.payTime" placeholder="请输入支付时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="支付方式" prop="payType">
 	<InputNumber v-model="form.payType" placeholder="请输入支付方式" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="支付订单号" prop="transactionNo">
 	<Input v-model="form.transactionNo" placeholder="请输入支付订单号"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否支付成功" prop="paySuccess">
 	<InputNumber v-model="form.paySuccess" placeholder="请输入是否支付成功" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="发货时间" prop="deliverTime">
 	<DatePicker @on-change="form.deliverTime=$event" :value="form.deliverTime" placeholder="请输入发货时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
 </FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="成交时间" prop="dealTime">
-	<DatePicker @on-change="form.dealTime=$event" :value="form.dealTime" placeholder="请输入成交时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
-</FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="成交时间" prop="dealTime">
+	<DatePicker @on-change="form.dealTime=$event" :value="form.dealTime" placeholder="请输入成交时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="订单备注" prop="remark">
 	<Input v-model="form.remark" placeholder="请输入订单备注"/>
 </FormItem>
@@ -209,8 +217,8 @@
                     batchEditUrl: '/goods-order/admin/batch-update'
                 },
                 form: {
-                    id: null,
-userId: null,
+                    userId: null,
+shopId: null,
 orderNo: null,
 totalAmount: null,
 payAmount: null,
@@ -226,10 +234,12 @@ deliverTime: null,
 dealTime: null,
 remark: null,
 
-
                 },
                 validateRules: {
                     userId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+shopId: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
 orderNo: [

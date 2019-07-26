@@ -37,10 +37,28 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="店铺编号"><Row>
+	<i-col span="11">
+	<FormItem prop="shopIdMin">
+	<InputNumber v-model="searchForm.shopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="shopIdMax">
+	<InputNumber v-model="searchForm.shopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="订单号" prop="orderNo">
 	<Input v-model="searchForm.orderNo" placeholder="请输入订单号"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="订单金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="totalAmountMin">
@@ -55,10 +73,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="实付金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="payAmountMin">
@@ -73,7 +88,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="优惠金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="discountAmountMin">
@@ -88,10 +106,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="赠送积分"><Row>
 	<i-col span="11">
 	<FormItem prop="integralAmountMin">
@@ -106,7 +121,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="运费（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="expressFeeMin">
@@ -121,10 +139,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="订单状态"><Row>
 	<i-col span="11">
 	<FormItem prop="orderStatusMin">
@@ -139,7 +154,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="支付时间"><Row>
 	<i-col span="11">
 	<FormItem prop="payTimeMin">
@@ -154,10 +172,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="支付方式"><Row>
 	<i-col span="11">
 	<FormItem prop="payTypeMin">
@@ -172,14 +187,14 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
-	<FormItem label="支付订单号" prop="transactionNo">
-	<Input v-model="searchForm.transactionNo" placeholder="请输入支付订单号"/>
-</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="支付订单号" prop="transactionNo">
+	<Input v-model="searchForm.transactionNo" placeholder="请输入支付订单号"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="是否支付成功"><Row>
 	<i-col span="11">
 	<FormItem prop="paySuccessMin">
@@ -194,7 +209,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="发货时间"><Row>
 	<i-col span="11">
 	<FormItem prop="deliverTimeMin">
@@ -209,10 +227,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="成交时间"><Row>
 	<i-col span="11">
 	<FormItem prop="dealTimeMin">
@@ -227,14 +242,14 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
-	<FormItem label="订单备注" prop="remark">
-	<Input v-model="searchForm.remark" placeholder="请输入订单备注"/>
-</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="订单备注" prop="remark">
+	<Input v-model="searchForm.remark" placeholder="请输入订单备注"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="versionMin">
@@ -249,7 +264,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="createTimeMin">
@@ -264,10 +282,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="updateTimeMin">
@@ -282,7 +297,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="isActiveMin">
@@ -335,6 +353,9 @@ idMax: null,
 userId: null,
 userIdMin: null, 
 userIdMax: null, 
+shopId: null,
+shopIdMin: null, 
+shopIdMax: null, 
 orderNo: null,
 totalAmount: null,
 totalAmountMin: null, 
