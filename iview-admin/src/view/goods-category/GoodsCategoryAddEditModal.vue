@@ -35,7 +35,7 @@
         <Row>
               <i-col span="12">
     <FormItem label="类目级别" prop="categoryLevel">
-    <InputNumber v-model="form.categoryLevel" placeholder="请输入类目级别" style="width: 100%;" disabled="true"/>
+    <InputNumber v-model="form.categoryLevel" placeholder="请输入类目级别" style="width: 100%;" :disabled="true"/>
 </FormItem>
     </i-col>
           <i-col span="12">
@@ -108,7 +108,7 @@
         <Row>
               <i-col span="12">
     <FormItem label="类目级别" prop="categoryLevel">
-    <InputNumber v-model="form.categoryLevel" placeholder="请输入类目级别" style="width: 100%;" disabled="true"/>
+    <InputNumber v-model="form.categoryLevel" placeholder="请输入类目级别" style="width: 100%;" :disabled="true"/>
 </FormItem>
     </i-col>
           <i-col span="12">
