@@ -41,6 +41,35 @@
 	<Input v-model="searchForm.userDetailHeadicon" placeholder="请输入头像地址"/>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="店铺编号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsShopIdMin">
+	<InputNumber v-model="searchForm.goodsShopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsShopIdMax">
+	<InputNumber v-model="searchForm.goodsShopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="店铺Logo" prop="goodsShopLogo">
+	<Input v-model="searchForm.goodsShopLogo" placeholder="请输入店铺Logo"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="店铺标题" prop="goodsShopTitle">
+	<Input v-model="searchForm.goodsShopTitle" placeholder="请输入店铺标题"/>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="订单编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderIdMin">
@@ -55,14 +84,14 @@
 </i-col>
 </Row>
 </FormItem>
+</i-col><i-col span="12">
+	<FormItem label="订单号" prop="goodsOrderOrderNo">
+	<Input v-model="searchForm.goodsOrderOrderNo" placeholder="请输入订单号"/>
+</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="订单号" prop="goodsOrderOrderNo">
-	<Input v-model="searchForm.goodsOrderOrderNo" placeholder="请输入订单号"/>
-</FormItem>
-</i-col><i-col span="12">
 	<FormItem label="订单金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderTotalAmountMin">
@@ -77,10 +106,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="实付金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderPayAmountMin">
@@ -95,7 +121,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="优惠金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderDiscountAmountMin">
@@ -110,10 +139,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="赠送积分"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderIntegralAmountMin">
@@ -128,7 +154,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="运费（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderExpressFeeMin">
@@ -143,10 +172,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="订单状态"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderOrderStatusMin">
@@ -161,7 +187,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="支付时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderPayTimeMin">
@@ -176,10 +205,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="支付方式"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderPayTypeMin">
@@ -194,14 +220,14 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
-	<FormItem label="支付订单号" prop="goodsOrderTransactionNo">
-	<Input v-model="searchForm.goodsOrderTransactionNo" placeholder="请输入支付订单号"/>
-</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="支付订单号" prop="goodsOrderTransactionNo">
+	<Input v-model="searchForm.goodsOrderTransactionNo" placeholder="请输入支付订单号"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="是否支付成功"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderPaySuccessMin">
@@ -216,7 +242,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="发货时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderDeliverTimeMin">
@@ -231,10 +260,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="成交时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderDealTimeMin">
@@ -249,40 +275,65 @@
 </i-col>
 </Row>
 </FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="订单备注" prop="goodsOrderRemark">
+	<Input v-model="searchForm.goodsOrderRemark" placeholder="请输入订单备注"/>
+</FormItem>
 </i-col><i-col span="12">
+	<FormItem label="订单编号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsOrderLogisticsIdMin">
+	<InputNumber v-model="searchForm.goodsOrderLogisticsIdMin" placeholder="请输入开始订单编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsOrderLogisticsIdMax">
+	<InputNumber v-model="searchForm.goodsOrderLogisticsIdMax" placeholder="请输入结束订单编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="收货人" prop="goodsOrderLogisticsRealName">
 	<Input v-model="searchForm.goodsOrderLogisticsRealName" placeholder="请输入收货人"/>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="手机号" prop="goodsOrderLogisticsPhone">
 	<Input v-model="searchForm.goodsOrderLogisticsPhone" placeholder="请输入手机号"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="省" prop="goodsOrderLogisticsProvince">
 	<Input v-model="searchForm.goodsOrderLogisticsProvince" placeholder="请输入省"/>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="市" prop="goodsOrderLogisticsCity">
 	<Input v-model="searchForm.goodsOrderLogisticsCity" placeholder="请输入市"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="区/县" prop="goodsOrderLogisticsDistrict">
 	<Input v-model="searchForm.goodsOrderLogisticsDistrict" placeholder="请输入区/县"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="详细地址" prop="goodsOrderLogisticsAddress">
+	<Input v-model="searchForm.goodsOrderLogisticsAddress" placeholder="请输入详细地址"/>
 </FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="详细地址" prop="goodsOrderLogisticsAddress">
-	<Input v-model="searchForm.goodsOrderLogisticsAddress" placeholder="请输入详细地址"/>
-</FormItem>
-</i-col><i-col span="12">
 	<FormItem label="是否已发货"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderLogisticsIsDeliverMin">
@@ -297,25 +348,25 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="物流公司名称" prop="goodsOrderLogisticsLogisticsCompany">
 	<Input v-model="searchForm.goodsOrderLogisticsLogisticsCompany" placeholder="请输入物流公司名称"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="物流公司编码" prop="goodsOrderLogisticsLogisticsCode">
 	<Input v-model="searchForm.goodsOrderLogisticsLogisticsCode" placeholder="请输入物流公司编码"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="物流单号" prop="goodsOrderLogisticsLogisticsNo">
+	<Input v-model="searchForm.goodsOrderLogisticsLogisticsNo" placeholder="请输入物流单号"/>
 </FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="物流单号" prop="goodsOrderLogisticsLogisticsNo">
-	<Input v-model="searchForm.goodsOrderLogisticsLogisticsNo" placeholder="请输入物流单号"/>
-</FormItem>
-</i-col><i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderLogisticsVersionMin">
@@ -330,10 +381,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderLogisticsCreateTimeMin">
@@ -348,7 +396,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderLogisticsUpdateTimeMin">
@@ -363,10 +414,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderLogisticsIsActiveMin">
@@ -420,6 +468,11 @@ userPhone: null,
 userEmail: null,
 userDetailNickname: null,
 userDetailHeadicon: null,
+goodsShopId: null,
+goodsShopIdMin: null, 
+goodsShopIdMax: null, 
+goodsShopLogo: null,
+goodsShopTitle: null,
 goodsOrderId: null,
 goodsOrderIdMin: null, 
 goodsOrderIdMax: null, 
@@ -458,6 +511,10 @@ goodsOrderDeliverTimeMax: null,
 goodsOrderDealTime: null,
 goodsOrderDealTimeMin: null, 
 goodsOrderDealTimeMax: null, 
+goodsOrderRemark: null,
+goodsOrderLogisticsId: null,
+goodsOrderLogisticsIdMin: null, 
+goodsOrderLogisticsIdMax: null, 
 goodsOrderLogisticsRealName: null,
 goodsOrderLogisticsPhone: null,
 goodsOrderLogisticsProvince: null,
