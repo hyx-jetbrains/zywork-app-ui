@@ -226,6 +226,49 @@ export default {
                   ]
                 )
               ])
+            },
+            render: (h, params) => {
+              let tagText = '普'
+              let tagColor = 'blue'
+              if (params.row.hotId) {
+                tagText = '热'
+                tagColor = 'red'
+              }
+              if (params.row.agentCount > 0) {
+                if (tagText === '热') {
+                  tagText += ' 代'
+                } else {
+                  tagText = '代'
+                } 
+                tagColor = 'magenta'
+              }
+              if (params.row.grouponCount > 0) {
+                if (tagText === '热') {
+                  tagText += ' 拼'
+                } else {
+                  tagText = '拼'
+                } 
+                tagText = '拼'
+                tagColor = 'orange'
+              }
+              if (params.row.seckillCount > 0) {
+                if (tagText === '热') {
+                  tagText += ' 秒'
+                } else {
+                  tagText = '秒'
+                } 
+                tagColor = 'green'
+              }
+              return h('span',
+                [
+                  h('tag', {
+                    props: {
+                      color: tagColor
+                    }
+                  }, tagText),
+                  h('span', params.row.title)
+                ]
+              )    
             }
           },
           {
@@ -699,6 +742,9 @@ export default {
       })
     },
     cancelHot(hotId) {
+      if (!hotId) {
+        return
+      }
       this.$Modal.confirm({
       title: '确认取消热门吗？',
       content: '确认取消热门商品吗？',

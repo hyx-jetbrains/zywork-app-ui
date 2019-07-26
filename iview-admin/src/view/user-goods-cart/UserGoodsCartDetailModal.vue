@@ -23,7 +23,17 @@
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">商品编号：</span><span v-text="form.goodsInfoId"></span></i-col>
+	<i-col span="11"><span class="detail-title">店铺编号：</span><span v-text="form.goodsShopId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">店铺Logo：</span><span v-text="form.goodsShopLogo"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">店铺标题：</span><span v-text="form.goodsShopTitle"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">商品编号：</span><span v-text="form.goodsInfoId"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">商品标题：</span><span v-text="form.goodsInfoTitle"></span></i-col>
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsSkuId"></span></i-col>
 
 </Row>
@@ -55,7 +65,11 @@ userDetailHeadicon: null,
 goodsCartId: null,
 goodsCartQuantity: null,
 goodsCartCreateTime: null,
+goodsShopId: null,
+goodsShopLogo: null,
+goodsShopTitle: null,
 goodsInfoId: null,
+goodsInfoTitle: null,
 goodsSkuId: null,
 goodsPicId: null,
 goodsPicPicUrl: null,

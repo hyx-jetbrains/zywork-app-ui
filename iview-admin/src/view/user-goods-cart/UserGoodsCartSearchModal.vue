@@ -92,6 +92,32 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="店铺编号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsShopIdMin">
+	<InputNumber v-model="searchForm.goodsShopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsShopIdMax">
+	<InputNumber v-model="searchForm.goodsShopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="店铺Logo" prop="goodsShopLogo">
+	<Input v-model="searchForm.goodsShopLogo" placeholder="请输入店铺Logo"/>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="店铺标题" prop="goodsShopTitle">
+	<Input v-model="searchForm.goodsShopTitle" placeholder="请输入店铺标题"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="商品编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsInfoIdMin">
@@ -105,6 +131,13 @@
 </FormItem>
 </i-col>
 </Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="商品标题" prop="goodsInfoTitle">
+	<Input v-model="searchForm.goodsInfoTitle" placeholder="请输入商品标题"/>
 </FormItem>
 </i-col><i-col span="12">
 	<FormItem label="SKU编号"><Row>
@@ -191,9 +224,15 @@ goodsCartQuantityMax: null,
 goodsCartCreateTime: null,
 goodsCartCreateTimeMin: null, 
 goodsCartCreateTimeMax: null, 
+goodsShopId: null,
+goodsShopIdMin: null, 
+goodsShopIdMax: null, 
+goodsShopLogo: null,
+goodsShopTitle: null,
 goodsInfoId: null,
 goodsInfoIdMin: null, 
 goodsInfoIdMax: null, 
+goodsInfoTitle: null,
 goodsSkuId: null,
 goodsSkuIdMin: null, 
 goodsSkuIdMax: null, 
