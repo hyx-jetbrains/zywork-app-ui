@@ -233,7 +233,7 @@ export default {
         .catch(error => {
           console.log(error)
         })
-      this.$refs.uploadModal.uploadUrl = this.uploadModal.uploadUrl + row.id
+      this.$refs.uploadModal.uploadUrl = this.uploadModal.uploadUrl + row.shopId + '/' + row.id
       this.$refs.uploadModal.removeUrl = this.uploadModal.removeUrl
       this.$refs.uploadModal.uploadModal = true
     },
