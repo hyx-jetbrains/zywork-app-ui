@@ -41,6 +41,35 @@
 	<Input v-model="searchForm.userDetailHeadicon" placeholder="请输入头像地址"/>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="店铺编号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsShopIdMin">
+	<InputNumber v-model="searchForm.goodsShopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsShopIdMax">
+	<InputNumber v-model="searchForm.goodsShopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="店铺Logo" prop="goodsShopLogo">
+	<Input v-model="searchForm.goodsShopLogo" placeholder="请输入店铺Logo"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="店铺标题" prop="goodsShopTitle">
+	<Input v-model="searchForm.goodsShopTitle" placeholder="请输入店铺标题"/>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="订单编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderIdMin">
@@ -55,14 +84,14 @@
 </i-col>
 </Row>
 </FormItem>
+</i-col><i-col span="12">
+	<FormItem label="订单号" prop="goodsOrderOrderNo">
+	<Input v-model="searchForm.goodsOrderOrderNo" placeholder="请输入订单号"/>
+</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="订单号" prop="goodsOrderOrderNo">
-	<Input v-model="searchForm.goodsOrderOrderNo" placeholder="请输入订单号"/>
-</FormItem>
-</i-col><i-col span="12">
 	<FormItem label="订单金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderTotalAmountMin">
@@ -77,10 +106,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="实付金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderPayAmountMin">
@@ -95,7 +121,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="优惠金额（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderDiscountAmountMin">
@@ -110,10 +139,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="赠送积分"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderIntegralAmountMin">
@@ -128,7 +154,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="运费（元）"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderExpressFeeMin">
@@ -143,10 +172,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="订单状态"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderOrderStatusMin">
@@ -161,7 +187,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="支付时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderPayTimeMin">
@@ -176,10 +205,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="支付方式"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderPayTypeMin">
@@ -194,14 +220,14 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
-	<FormItem label="支付订单号" prop="goodsOrderTransactionNo">
-	<Input v-model="searchForm.goodsOrderTransactionNo" placeholder="请输入支付订单号"/>
-</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="支付订单号" prop="goodsOrderTransactionNo">
+	<Input v-model="searchForm.goodsOrderTransactionNo" placeholder="请输入支付订单号"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="是否支付成功"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderPaySuccessMin">
@@ -216,7 +242,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="发货时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderDeliverTimeMin">
@@ -231,10 +260,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="成交时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderDealTimeMin">
@@ -249,9 +275,27 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="订单备注" prop="goodsOrderRemark">
 	<Input v-model="searchForm.goodsOrderRemark" placeholder="请输入订单备注"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="版本号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsOrderVersionMin">
+	<InputNumber v-model="searchForm.goodsOrderVersionMin" placeholder="请输入开始版本号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsOrderVersionMax">
+	<InputNumber v-model="searchForm.goodsOrderVersionMax" placeholder="请输入结束版本号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
 </FormItem>
 </i-col>
 </Row>
@@ -272,6 +316,24 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="更新时间"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsOrderUpdateTimeMin">
+	<DatePicker @on-change="searchForm.goodsOrderUpdateTimeMin=$event" :value="searchForm.goodsOrderUpdateTimeMin" placeholder="请输入开始更新时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsOrderUpdateTimeMax">
+	<DatePicker @on-change="searchForm.goodsOrderUpdateTimeMax=$event" :value="searchForm.goodsOrderUpdateTimeMax" placeholder="请输入结束更新时间" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"></DatePicker>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderIsActiveMin">
@@ -286,10 +348,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="商品编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderItemGoodsIdMin">
@@ -304,7 +363,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="SKU编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderItemGoodsSkuIdMin">
@@ -315,24 +377,6 @@
 	<i-col span="11">
 	<FormItem prop="goodsOrderItemGoodsSkuIdMax">
 	<InputNumber v-model="searchForm.goodsOrderItemGoodsSkuIdMax" placeholder="请输入结束SKU编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-</Row>
-</FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="SKU图片编号"><Row>
-	<i-col span="11">
-	<FormItem prop="goodsOrderItemSkuPicIdMin">
-	<InputNumber v-model="searchForm.goodsOrderItemSkuPicIdMin" placeholder="请输入开始SKU图片编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-	<i-col span="2" style="text-align: center">-</i-col>
-	<i-col span="11">
-	<FormItem prop="goodsOrderItemSkuPicIdMax">
-	<InputNumber v-model="searchForm.goodsOrderItemSkuPicIdMax" placeholder="请输入结束SKU图片编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -415,6 +459,24 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="商品图片编号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsPicIdMin">
+	<InputNumber v-model="searchForm.goodsPicIdMin" placeholder="请输入开始商品图片编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsPicIdMax">
+	<InputNumber v-model="searchForm.goodsPicIdMax" placeholder="请输入结束商品图片编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="图片URL" prop="goodsPicPicUrl">
 	<Input v-model="searchForm.goodsPicPicUrl" placeholder="请输入图片URL"/>
 </FormItem>
@@ -457,6 +519,11 @@ userPhone: null,
 userEmail: null,
 userDetailNickname: null,
 userDetailHeadicon: null,
+goodsShopId: null,
+goodsShopIdMin: null, 
+goodsShopIdMax: null, 
+goodsShopLogo: null,
+goodsShopTitle: null,
 goodsOrderId: null,
 goodsOrderIdMin: null, 
 goodsOrderIdMax: null, 
@@ -496,9 +563,15 @@ goodsOrderDealTime: null,
 goodsOrderDealTimeMin: null, 
 goodsOrderDealTimeMax: null, 
 goodsOrderRemark: null,
+goodsOrderVersion: null,
+goodsOrderVersionMin: null, 
+goodsOrderVersionMax: null, 
 goodsOrderCreateTime: null,
 goodsOrderCreateTimeMin: null, 
 goodsOrderCreateTimeMax: null, 
+goodsOrderUpdateTime: null,
+goodsOrderUpdateTimeMin: null, 
+goodsOrderUpdateTimeMax: null, 
 goodsOrderIsActive: null,
 goodsOrderIsActiveMin: null, 
 goodsOrderIsActiveMax: null, 
@@ -508,9 +581,6 @@ goodsOrderItemGoodsIdMax: null,
 goodsOrderItemGoodsSkuId: null,
 goodsOrderItemGoodsSkuIdMin: null, 
 goodsOrderItemGoodsSkuIdMax: null, 
-goodsOrderItemSkuPicId: null,
-goodsOrderItemSkuPicIdMin: null, 
-goodsOrderItemSkuPicIdMax: null, 
 goodsOrderItemSkuTitle: null,
 goodsOrderItemSkuInfo: null,
 goodsOrderItemQuantity: null,
@@ -525,6 +595,9 @@ goodsOrderItemDiscountAmountMax: null,
 goodsOrderItemIntegralAmount: null,
 goodsOrderItemIntegralAmountMin: null, 
 goodsOrderItemIntegralAmountMax: null, 
+goodsPicId: null,
+goodsPicIdMin: null, 
+goodsPicIdMax: null, 
 goodsPicPicUrl: null,
 
                 }

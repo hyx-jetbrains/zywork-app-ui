@@ -78,6 +78,24 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '店铺编号',
+key: 'goodsShopId',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '店铺Logo',
+key: 'goodsShopLogo',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '店铺标题',
+key: 'goodsShopTitle',
+minWidth: 120,
+sortable: true,
+},
+{
 title: '订单编号',
 key: 'goodsOrderId',
 minWidth: 120,
@@ -168,6 +186,34 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '版本号',
+key: 'goodsOrderVersion',
+minWidth: 120,
+sortable: true,
+renderHeader: (h, params) => {
+              return h('span', [
+                h('span', '版本号'),
+                h('Tooltip', {
+                  props: {
+                    content: '订单版本号',
+                    placement: 'top',
+                    transfer: true,
+                    maxWidth: 500
+                  }
+                }, [
+                  h('Icon', {
+                    props: {
+                      type: 'ios-help-circle'
+                    },
+                    style: {
+                      marginLeft: '3px'
+                    }
+                  })
+                ])
+              ])
+            }
+},
+{
 title: '创建时间',
 key: 'goodsOrderCreateTime',
 minWidth: 120,
@@ -178,6 +224,34 @@ renderHeader: (h, params) => {
                 h('Tooltip', {
                   props: {
                     content: '订单创建时间',
+                    placement: 'top',
+                    transfer: true,
+                    maxWidth: 500
+                  }
+                }, [
+                  h('Icon', {
+                    props: {
+                      type: 'ios-help-circle'
+                    },
+                    style: {
+                      marginLeft: '3px'
+                    }
+                  })
+                ])
+              ])
+            }
+},
+{
+title: '更新时间',
+key: 'goodsOrderUpdateTime',
+minWidth: 120,
+sortable: true,
+renderHeader: (h, params) => {
+              return h('span', [
+                h('span', '更新时间'),
+                h('Tooltip', {
+                  props: {
+                    content: '订单更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -236,12 +310,6 @@ minWidth: 120,
 sortable: true,
 },
 {
-title: 'SKU图片编号',
-key: 'goodsOrderItemSkuPicId',
-minWidth: 120,
-sortable: true,
-},
-{
 title: '售卖标题',
 key: 'goodsOrderItemSkuTitle',
 minWidth: 120,
@@ -274,6 +342,12 @@ sortable: true,
 {
 title: '赠送积分',
 key: 'goodsOrderItemIntegralAmount',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '商品图片编号',
+key: 'goodsPicId',
 minWidth: 120,
 sortable: true,
 },
