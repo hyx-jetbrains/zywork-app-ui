@@ -116,6 +116,12 @@ export default {
             sortable: true
           },
           {
+title: '类目级别',
+key: 'categoryLevel',
+minWidth: 120,
+sortable: true,
+},
+          {
             title: '是否热门',
             key: 'isHot',
             minWidth: 120,

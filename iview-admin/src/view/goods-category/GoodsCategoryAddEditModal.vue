@@ -9,7 +9,7 @@
     >
       <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
         <Row>
-          <i-col span="12">
+          <i-col span="24">
             <FormItem label="父类目" prop="parentId">
               <span v-text="form.parentId"></span>
               -
@@ -19,11 +19,6 @@
               <Button @click="setTopCategory" type="text" style="color: #fa436a;">设置顶级类目</Button>&nbsp;
             </FormItem>
           </i-col>
-          <i-col span="12">
-            <FormItem label="图片路径" prop="picUrl">
-              <Input v-model="form.picUrl" placeholder="请输入图片路径" />
-            </FormItem>
-          </i-col>
         </Row>
         <Row>
           <i-col span="12">
@@ -31,6 +26,18 @@
               <Input v-model="form.title" placeholder="请输入类目名称" />
             </FormItem>
           </i-col>
+          <i-col span="12">
+            <FormItem label="图片路径" prop="picUrl">
+              <Input v-model="form.picUrl" placeholder="请输入图片路径" />
+            </FormItem>
+          </i-col>
+        </Row>
+        <Row>
+              <i-col span="12">
+    <FormItem label="类目级别" prop="categoryLevel">
+    <InputNumber v-model="form.categoryLevel" placeholder="请输入类目级别" style="width: 100%;" disabled="true"/>
+</FormItem>
+    </i-col>
           <i-col span="12">
             <FormItem label="是否热门" prop="isHot">
               <Select v-model="form.isHot" placeholder="请选择是否热门" filterable>
@@ -68,7 +75,7 @@
     >
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
         <Row>
-          <i-col span="12">
+          <i-col span="24">
             <FormItem label="父类目" prop="parentId">
               <span v-text="form.parentId"></span>
               -
@@ -78,11 +85,6 @@
               <Button @click="setTopCategory" type="text" style="color: #fa436a;">设置顶级类目</Button>&nbsp;
             </FormItem>
           </i-col>
-          <i-col span="12">
-            <FormItem label="图片路径" prop="picUrl">
-              <Input v-model="form.picUrl" placeholder="请输入图片路径" />
-            </FormItem>
-          </i-col>
         </Row>
         <Row>
           <i-col span="12">
@@ -90,6 +92,18 @@
               <Input v-model="form.title" placeholder="请输入类目名称" />
             </FormItem>
           </i-col>
+          <i-col span="12">
+            <FormItem label="图片路径" prop="picUrl">
+              <Input v-model="form.picUrl" placeholder="请输入图片路径" />
+            </FormItem>
+          </i-col>
+        </Row>
+        <Row>
+              <i-col span="12">
+    <FormItem label="类目级别" prop="categoryLevel">
+    <InputNumber v-model="form.categoryLevel" placeholder="请输入类目级别" style="width: 100%;" disabled="true"/>
+</FormItem>
+    </i-col>
           <i-col span="12">
             <FormItem label="是否热门" prop="isHot">
               <Select v-model="form.isHot" placeholder="请选择是否热门" filterable>
@@ -160,6 +174,7 @@ export default {
         title: null,
         picUrl: null,
         description: null,
+        categoryLevel: 1,
         isHot: 0,
         version: null,
         createTime: null,
@@ -253,9 +268,14 @@ export default {
      * 确认选择父级类目
      */
     confirmChoice(row) {
+      if (row.categoryLevel === 3) {
+        this.$Message.warning('不能给三级类目添加子类目')
+        return
+      }
       this.cancelModal('choice')
       this.form.parentId = row.id
       this.parentName = row.title
+      this.form.categoryLevel = row.categoryLevel + 1
     },
     /**
      * 设置为顶级类目
@@ -263,6 +283,7 @@ export default {
     setTopCategory() {
       this.form.parentId = 0
       this.parentName = '顶级类目'
+      this.form.categoryLevel = 1
     }
   }
 }

@@ -14,18 +14,22 @@
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">类目描述：</span><span v-text="form.description"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否热门：</span><span v-text="form.isHot"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">类目级别：</span><span v-text="form.categoryLevel"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.version"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.createTime"></span></i-col>
+	<i-col span="11"><span class="detail-title">是否热门：</span><span v-text="form.isHot"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.version"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.updateTime"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.isActive"></span></i-col>
+	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.createTime"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.updateTime"></span></i-col>
 
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.isActive"></span></i-col>
+<i-col span="2"></i-col>
 </Row>
 
             </div>
@@ -47,6 +51,7 @@ parentId: null,
 title: null,
 picUrl: null,
 description: null,
+categoryLevel: null,
 isHot: null,
 version: null,
 createTime: null,

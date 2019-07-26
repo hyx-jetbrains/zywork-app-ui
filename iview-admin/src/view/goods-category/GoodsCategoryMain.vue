@@ -266,6 +266,7 @@ export default {
       addEditModal.modal.add = true
       addEditModal.parentName = row.title
       addEditModal.form.parentId = row.id
+      addEditModal.form.categoryLevel = row.categoryLevel + 1
     }
   }
 }

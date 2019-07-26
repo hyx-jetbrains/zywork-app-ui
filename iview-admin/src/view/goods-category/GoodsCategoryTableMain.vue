@@ -221,6 +221,12 @@ export default {
             sortable: true
           },
           {
+title: '类目级别',
+key: 'categoryLevel',
+minWidth: 120,
+sortable: true,
+},
+          {
             title: '是否热门',
             key: 'isHot',
             minWidth: 120,
@@ -542,7 +548,8 @@ export default {
                         'DropdownItem',
                         {
                           props: {
-                            name: 'showUploadModal'
+                            name: 'showUploadModal',
+                            disabled: params.row.categoryLevel == 2 ? true : false
                           }
                         },
                         '上传封面图片'
@@ -551,7 +558,8 @@ export default {
                         'DropdownItem',
                         {
                           props: {
-                            name: 'addChildrenCategory'
+                            name: 'addChildrenCategory',
+                            disabled: params.row.categoryLevel == 3 ? true : false
                           }
                         },
                         '添加子类目'
@@ -588,7 +596,10 @@ export default {
       } else if (itemName === 'orderAttrs') {
         this.$emit('showGoodsAttrOrderModal', row.id)
       } else if (itemName === 'showUploadModal') {
-        this.$emit('showUploadModal', row.id)
+        if (row.categoryLevel === 2) {
+          return
+        }
+        this.$emit('showUploadModal', row)
       } else if (itemName === 'showGoodsCategoryAttributeMainModal') {
         this.$emit('showGoodsCategoryAttributeMainModal', row.id)
       } else if (itemName === 'moduleDetail') {
@@ -599,6 +610,9 @@ export default {
         this.$emit('showSearchTableModal')
       } else if (itemName === 'addChildrenCategory') {
         // 添加子类目
+        if (row.categoryLevel === 3) {
+          return
+        }
         this.$emit('addChildrenCategory', row)
       }
     },
