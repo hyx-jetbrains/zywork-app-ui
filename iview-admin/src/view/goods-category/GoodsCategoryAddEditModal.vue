@@ -51,6 +51,12 @@
           </i-col>
         </Row>
         <Row>
+         <i-col span="12">
+                <FormItem label="类目排序" prop="categoryOrder">
+    <InputNumber v-model="form.categoryOrder" placeholder="请输入类目排序" style="width: 100%;"/>
+</FormItem>
+          </i-col>
+          <i-col span="12">
           <FormItem label="类目描述" prop="description">
             <Input
               type="textarea"
@@ -59,6 +65,7 @@
               placeholder="请输入类目描述"
             />
           </FormItem>
+          </i-col>
         </Row>
       </Form>
       <div slot="footer">
@@ -117,6 +124,12 @@
           </i-col>
         </Row>
         <Row>
+          <i-col span="12">
+                <FormItem label="类目排序" prop="categoryOrder">
+    <InputNumber v-model="form.categoryOrder" placeholder="请输入类目排序" style="width: 100%;"/>
+</FormItem>
+          </i-col>
+          <i-col span="12">
           <FormItem label="类目描述" prop="description">
             <Input
               type="textarea"
@@ -125,6 +138,7 @@
               placeholder="请输入类目描述"
             />
           </FormItem>
+          </i-col>
         </Row>
       </Form>
       <div slot="footer">
@@ -175,6 +189,7 @@ export default {
         picUrl: null,
         description: null,
         categoryLevel: 1,
+        categoryOrder: 1,
         isHot: 0,
         version: null,
         createTime: null,

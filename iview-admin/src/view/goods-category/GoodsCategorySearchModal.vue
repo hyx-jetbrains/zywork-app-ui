@@ -70,6 +70,21 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="类目排序"><Row>
+	<i-col span="11">
+	<FormItem prop="categoryOrderMin">
+	<InputNumber v-model="searchForm.categoryOrderMin" placeholder="请输入开始类目排序" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="categoryOrderMax">
+	<InputNumber v-model="searchForm.categoryOrderMax" placeholder="请输入结束类目排序" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="是否热门"><Row>
 	<i-col span="11">
 	<FormItem prop="isHotMin">
@@ -84,7 +99,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="versionMin">
@@ -99,10 +117,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="createTimeMin">
@@ -117,7 +132,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="updateTimeMin">
@@ -132,10 +150,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="isActiveMin">
@@ -194,6 +209,9 @@ description: null,
 categoryLevel: null,
 categoryLevelMin: null, 
 categoryLevelMax: null, 
+categoryOrder: null,
+categoryOrderMin: null, 
+categoryOrderMax: null, 
 isHot: null,
 isHotMin: null, 
 isHotMax: null, 

@@ -99,6 +99,34 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '类目排序',
+key: 'categoryOrder',
+minWidth: 120,
+sortable: true,
+renderHeader: (h, params) => {
+              return h('span', [
+                h('span', '类目排序'),
+                h('Tooltip', {
+                  props: {
+                    content: '排序值越小优先显示',
+                    placement: 'top',
+                    transfer: true,
+                    maxWidth: 500
+                  }
+                }, [
+                  h('Icon', {
+                    props: {
+                      type: 'ios-help-circle'
+                    },
+                    style: {
+                      marginLeft: '3px'
+                    }
+                  })
+                ])
+              ])
+            }
+},
+{
 title: '是否热门',
 key: 'isHot',
 minWidth: 120,
