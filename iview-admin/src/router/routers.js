@@ -679,6 +679,35 @@ export default [
         ]
       },
       {
+        path: 'goods_comment',
+        name: 'goods_comment',
+        meta: {
+          icon: 'md-rose',
+          title: '评论管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'GoodsComment',
+            name: 'goods_comment_management',
+            meta: {
+              icon: 'ios-rose-outline',
+              title: '商品评论管理'
+            },
+            component: () => import('@/view/goods-comment/GoodsCommentMain.vue')
+          },
+          {
+            path: 'UserGoodsComment',
+            name: 'goods_comment_query',
+            meta: {
+              icon: 'ios-rose',
+              title: '用户商品评论查询'
+            },
+            component: () => import('@/view/user-goods-comment/UserGoodsCommentMain.vue')
+          }
+        ]
+      },
+      {
         path: 'coupons',
         name: 'coupons_management',
         meta: {
