@@ -19,41 +19,35 @@
                     <Tooltip content="刷新" placement="right">
                         <Button icon="md-refresh" type="success" shape="circle" @click="searchTable"></Button>
                     </Tooltip>
-                    <GoodsCommentTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" v-on:showDetailModal="showDetailModal" 
-                      v-on:showImgModal="showImgModal" v-on:showReplyModal="showReplyModal"/>
+                    <GoodsCommentPicTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" v-on:showDetailModal="showDetailModal"/>
                 </Card>
             </i-col>
         </Row>
-        <GoodsCommentAddEditModal ref="addEditModal" v-on:add="add" v-on:edit="edit" v-on:reply="reply"/>
-        <GoodsCommentSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
-        <GoodsCommentDetailModal ref="detailModal"/>
-        <GoodsCommentPicImgDetailModal ref="imgDetailModal" />
+        <GoodsCommentPicAddEditModal ref="addEditModal" v-on:add="add" v-on:edit="edit"/>
+        <GoodsCommentPicSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
+        <GoodsCommentPicDetailModal ref="detailModal"/>
     </div>
 </template>
 
 <script>
     import * as utils from '@/api/utils-v2'
-    import * as ResponseStatus from '@/api/response-status'
-    import GoodsCommentTableMain from './GoodsCommentTableMain.vue'
-    import GoodsCommentAddEditModal from './GoodsCommentAddEditModal.vue'
-    import GoodsCommentSearchModal from './GoodsCommentSearchModal.vue'
-    import GoodsCommentDetailModal from './GoodsCommentDetailModal.vue'
-    import GoodsCommentPicImgDetailModal from '../goods-comment-pic/GoodsCommentPicImgDetailModal.vue'
+    import GoodsCommentPicTableMain from './GoodsCommentPicTableMain.vue'
+    import GoodsCommentPicAddEditModal from './GoodsCommentPicAddEditModal.vue'
+    import GoodsCommentPicSearchModal from './GoodsCommentPicSearchModal.vue'
+    import GoodsCommentPicDetailModal from './GoodsCommentPicDetailModal.vue'
     export default {
-        name: 'GoodsCommentMain',
+        name: 'GoodsCommentPicMain',
         components: {
-            GoodsCommentTableMain,
-            GoodsCommentAddEditModal,
-            GoodsCommentSearchModal,
-            GoodsCommentDetailModal,
-            GoodsCommentPicImgDetailModal
+            GoodsCommentPicTableMain,
+            GoodsCommentPicAddEditModal,
+            GoodsCommentPicSearchModal,
+            GoodsCommentPicDetailModal
         },
         data() {
             return {
                 urls: {
-                    batchRemoveUrl: '/goods-comment/admin/batch-remove',
-                    batchActiveUrl: '/goods-comment/admin/batch-active',
-                    listPicUrl: '/goods-comment-pic/admin/all-cond'
+                    batchRemoveUrl: '/goods-comment-pic/admin/batch-remove',
+                    batchActiveUrl: '/goods-comment-pic/admin/batch-active'
                 },
             }
         },
@@ -95,43 +89,6 @@
                 } else if (itemName === 'batchRemove') {
                     utils.batchRemove(this)
                 }
-            },
-            /**
-             * 查看图片详情
-             */
-            showImgModal(id) {
-              utils.doPostJson(this.urls.listPicUrl, {commentId: id}, {}).then(res => {
-                if (res.data.code === ResponseStatus.OK) {
-                  if (res.data.data.rows.length > 0) {
-                    let imgDetailModal = this.$refs.imgDetailModal
-                    imgDetailModal.formList = res.data.data.rows
-                    imgDetailModal.modal.detail = true
-                  } else {
-                    this.$Message.warning('暂无图片')
-                  }
-                } else {
-                  this.$Message.error(res.data.message)
-                }
-              }).catch(err => {
-                console.log(err)
-              })
-            },
-            /**
-             * 显示回复的窗口
-             */
-            showReplyModal(row) {
-                let addEditModal = this.$refs.addEditModal
-                addEditModal.modal.reply = true
-                addEditModal.form = row
-            },
-            /**
-             * 回复
-             */
-            reply() {
-              utils.edit(this).then(res => {
-                let addEditModal = this.$refs.addEditModal
-                addEditModal.modal.reply = false
-              })
             }
         }
     }

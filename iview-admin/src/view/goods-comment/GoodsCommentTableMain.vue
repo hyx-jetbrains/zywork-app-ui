@@ -123,13 +123,34 @@ renderHeader: (h, params) => {
                   })
                 ])
               ])
+            },
+            render: (h, params) => {
+              const level = params.row.commentLevel
+              const color = level === 0 ? 'primary' : level === 1 ? 'success' : level === 2 ? 'error' : 'waraning'
+              const txt = level === 0 ? '好评' : level === 1 ? '中评' : level === 2 ? '差评' : '未知'
+              return h('Tag',
+              {
+                props: {
+                  color: color,
+                }
+              },txt)
             }
 },
 {
 title: '评分星级',
 key: 'commentRate',
-minWidth: 120,
+minWidth: 220,
 sortable: true,
+render: (h, params) => {
+  const rate = params.row.commentRate;
+  return h('Rate',
+  {
+    props: {
+      value: rate,
+      disabled: true
+    }
+  },'')
+}
 },
 {
 title: '评论详情',
@@ -377,6 +398,24 @@ renderHeader: (h, params) => {
                                                         )
                                                     ]
                                                 ),
+                                                h(
+                                                    "DropdownItem",
+                                                    {
+                                                        props: {
+                                                            name: "showImgDetail"
+                                                        }
+                                                    },
+                                                    "评论图片"
+                                                ),
+                                                h(
+                                                    "DropdownItem",
+                                                    {
+                                                        props: {
+                                                            name: "showReplyModal"
+                                                        }
+                                                    },
+                                                    "回复"
+                                                ),
                                             ]
                                         )
                                     ]
@@ -404,6 +443,10 @@ renderHeader: (h, params) => {
                     this.$emit('showDetailModal', row)
                 } else if (itemName === "remove") {
                     utils.remove(this, row);
+                } else if (itemName === "showImgDetail") {
+                  this.$emit('showImgModal', row.id)
+                } else if (itemName === "showReplyModal") {
+                  this.$emit('showReplyModal', row)
                 }
             },
             active(row) {

@@ -97,3 +97,16 @@ export const dataTypeSelect = [
     label: 'BigDecimal'
   }
 ]
+/**
+ * @description 是否发货下拉框
+ */
+export const isDeliverySelect = [
+  {
+    value: 0,
+    label: '待发货'
+  },
+  {
+    value: 1,
+    label: '已发货'
+  }
+]

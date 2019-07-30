@@ -169,7 +169,7 @@ export default {
       searchModal.searchForm.userIdMin = searchModal.searchForm.userIdMax =
         row.id
       this.searchTable()
-    }
+    },
   }
 }
 </script>

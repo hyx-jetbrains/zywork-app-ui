@@ -164,6 +164,21 @@
                 <Button type="primary" size="large" @click="edit" :loading="loading.edit">修改</Button>
             </div>
         </Modal>
+
+        <Modal v-model="modal.reply" title="回复" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('replyForm', $event)" width="760">
+            <Form ref="replyForm" :model="form" :label-width="80" :rules="validateRules">
+                <FormItem label="评论详情" prop="comments">
+                  <Input v-model="form.comments" placeholder="请输入评论详情" readonly/>
+                </FormItem>
+                <FormItem label="回复内容" prop="reply">
+                  <Input v-model="form.reply" type="textarea" :autosize="descriptionAutoSize" placeholder="请输入回复内容" />
+                </FormItem>
+            </Form>
+            <div slot="footer">
+                <Button type="text" size="large" @click="resetFormCancelModal('replyForm', 'reply')">取消</Button>
+                <Button type="primary" size="large" @click="reply" :loading="loading.reply">回复</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -174,11 +189,13 @@
             return {
                 modal: {
                     add: false,
-                    edit: false
+                    edit: false,
+                    reply: false
                 },
                 loading: {
                     add: false,
-                    edit: false
+                    edit: false,
+                    reply: false
                 },
                 urls: {
                     addUrl: '/goods-comment/admin/save',
@@ -238,7 +255,11 @@ reply: [
 {type: 'string', min: 1, max: 1000, message: '必须1-1000个字符', trigger: 'blur'}
 ],
 
-                }
+                },
+                descriptionAutoSize: {
+                  minRows: 3,
+                  maxRows: 5
+                },
             }
         },
         computed: {},
@@ -258,7 +279,11 @@ reply: [
             },
             edit() {
                 this.$emit('edit')
+            },
+            reply() {
+              this.$emit('reply')
             }
+
         }
     }
 </script>

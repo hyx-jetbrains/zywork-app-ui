@@ -54,12 +54,116 @@ title: '订单编号',
 key: 'id',
 minWidth: 120,
 sortable: true,
+            render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.id,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'orderModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'showOrderSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
 },
 {
 title: '店铺编号',
 key: 'shopId',
 minWidth: 120,
 sortable: true,
+            render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.shopId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'shopModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'showShopSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
 },
 {
 title: '收货人',
@@ -102,6 +206,16 @@ title: '是否已发货',
 key: 'isDeliver',
 minWidth: 120,
 sortable: true,
+            render: (h, params) => {
+              const isDeliver = params.row.isDeliver
+              let color = isDeliver === 0 ? 'default' : isDeliver === 1 ? 'primary' : 'error'
+              let txt = isDeliver === 0 ? '待发货' : isDeliver === 1 ? '已发货' : '未知'
+              return h('Tag', {
+                props: {
+                  color: color
+                }
+              }, txt)
+            }
 },
 {
 title: '物流公司名称',
@@ -343,6 +457,15 @@ renderHeader: (h, params) => {
                                                         )
                                                     ]
                                                 ),
+                                                h(
+                                                    "DropdownItem",
+                                                    {
+                                                        props: {
+                                                            name: "delivery"
+                                                        }
+                                                    },
+                                                    "确认发货"
+                                                ),
                                             ]
                                         )
                                     ]
@@ -370,6 +493,16 @@ renderHeader: (h, params) => {
                     this.$emit('showDetailModal', row)
                 } else if (itemName === "remove") {
                     utils.remove(this, row);
+                } else if (itemName === "orderModuleDetail") {
+                  this.$emit('moduleDetail', row, 0)
+                } else if (itemName === "showOrderSearch") {
+                  this.$emit('showSearch', 0)
+                } else if (itemName === "shopModuleDetail") {
+                  this.$emit('moduleDetail', row, 1)
+                } else if (itemName === "showShopSearch") {
+                  this.$emit('showSearch', 1)
+                } else if (itemName === "delivery") {
+                  this.$emit('showDelivery', row, row.isDeliver)
                 }
             },
             active(row) {

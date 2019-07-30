@@ -42,21 +42,35 @@
 </FormItem>
 	</i-col><i-col span="12">
 	<FormItem label="是否已发货" prop="isDeliver">
-	<InputNumber v-model="form.isDeliver" placeholder="请输入是否已发货" style="width: 100%;"/>
+	<!-- <InputNumber v-model="form.isDeliver" placeholder="请输入是否已发货" style="width: 100%;"/> -->
+  <Select v-model="form.isDeliver" placeholder="请选择是否已发货">
+                  <i-option
+                    v-for="item in isDeliverySelect"
+                    :value="item.value"
+                    :key="item.value"
+                  >{{item.label}}</i-option>
+                </Select>
 </FormItem>
 	</i-col>
 </Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="物流公司名称" prop="logisticsCompany">
-	<Input v-model="form.logisticsCompany" placeholder="请输入物流公司名称"/>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="物流公司编码" prop="logisticsCode">
-	<Input v-model="form.logisticsCode" placeholder="请输入物流公司编码"/>
-</FormItem>
-	</i-col>
-</Row>
+ <Row>
+                <i-col span="12">
+                <FormItem label="物流公司名称" prop="logisticsCompany">
+                <!-- <Input v-model="form.logisticsCompany" placeholder="请输入物流公司名称"/> -->
+                <Select v-model="form.logisticsCode" placeholder="请选择物流公司名称" :label-in-value="true" @on-change="changeLogistics">
+                  <i-option
+                    v-for="item in logisticsData"
+                    :value="item.code"
+                    :key="item.code"
+                  >{{item.companyname}}</i-option>
+                </Select>
+              </FormItem>
+                </i-col><i-col span="12">
+                <FormItem label="物流公司编码" prop="logisticsCode">
+                <Input v-model="form.logisticsCode" placeholder="请输入物流公司编码"/>
+              </FormItem>
+                </i-col>
+              </Row>
 <Row>
 	<i-col span="12">
 	<FormItem label="物流单号" prop="logisticsNo">
@@ -113,21 +127,35 @@
 </FormItem>
 	</i-col><i-col span="12">
 	<FormItem label="是否已发货" prop="isDeliver">
-	<InputNumber v-model="form.isDeliver" placeholder="请输入是否已发货" style="width: 100%;"/>
+	<!-- <InputNumber v-model="form.isDeliver" placeholder="请输入是否已发货" style="width: 100%;"/> -->
+                <Select v-model="form.isDeliver" placeholder="请选择是否已发货">
+                  <i-option
+                    v-for="item in isDeliverySelect"
+                    :value="item.value"
+                    :key="item.value"
+                  >{{item.label}}</i-option>
+                </Select>
 </FormItem>
 	</i-col>
 </Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="物流公司名称" prop="logisticsCompany">
-	<Input v-model="form.logisticsCompany" placeholder="请输入物流公司名称"/>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="物流公司编码" prop="logisticsCode">
-	<Input v-model="form.logisticsCode" placeholder="请输入物流公司编码"/>
-</FormItem>
-	</i-col>
-</Row>
+ <Row>
+                <i-col span="12">
+                <FormItem label="物流公司名称" prop="logisticsCompany">
+                <!-- <Input v-model="form.logisticsCompany" placeholder="请输入物流公司名称"/> -->
+                <Select v-model="form.logisticsCode" placeholder="请选择物流公司名称" :label-in-value="true" @on-change="changeLogistics">
+                  <i-option
+                    v-for="item in logisticsData"
+                    :value="item.code"
+                    :key="item.code"
+                  >{{item.companyname}}</i-option>
+                </Select>
+              </FormItem>
+                </i-col><i-col span="12">
+                <FormItem label="物流公司编码" prop="logisticsCode">
+                <Input v-model="form.logisticsCode" placeholder="请输入物流公司编码"/>
+              </FormItem>
+                </i-col>
+              </Row>
 <Row>
 	<i-col span="12">
 	<FormItem label="物流单号" prop="logisticsNo">
@@ -142,17 +170,58 @@
                 <Button type="primary" size="large" @click="edit" :loading="loading.edit">修改</Button>
             </div>
         </Modal>
+
+        <Modal v-model="modal.delivery" title="确认发货" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('editForm', $event)" width="760">
+            <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
+              <Row>
+                <i-col span="12">
+                <FormItem label="物流公司名称" prop="logisticsCompany">
+                <!-- <Input v-model="form.logisticsCompany" placeholder="请输入物流公司名称"/> -->
+                <Select v-model="form.logisticsCode" placeholder="请选择物流公司名称" :label-in-value="true" @on-change="changeLogistics">
+                  <i-option
+                    v-for="item in logisticsData"
+                    :value="item.code"
+                    :key="item.code"
+                  >{{item.companyname}}</i-option>
+                </Select>
+              </FormItem>
+                </i-col><i-col span="12">
+                <FormItem label="物流公司编码" prop="logisticsCode">
+                <Input v-model="form.logisticsCode" placeholder="请输入物流公司编码"/>
+              </FormItem>
+                </i-col>
+              </Row>
+              <Row>
+                <i-col span="12">
+                <FormItem label="物流单号" prop="logisticsNo">
+                <Input v-model="form.logisticsNo" placeholder="请输入物流单号"/>
+              </FormItem>
+                </i-col>
+              </Row>
+            </Form>
+            <div slot="footer">
+                <Button type="text" size="large" @click="resetFormCancelModal('editForm', 'delivery')">取消</Button>
+                <Button type="primary" size="large" @click="deliveryGoods" :loading="loading.edit">发货</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
 <script>
+    import logistics from '@/api/kuaidi100_companys.json'
+    import {
+      isDeliverySelect
+    } from '@/api/select.js'
     export default {
         name: 'GoodsOrderLogisticsAddEdit',
         data() {
             return {
+                logisticsData: logistics,
+                isDeliverySelect: isDeliverySelect,
                 modal: {
                     add: false,
-                    edit: false
+                    edit: false,
+                    delivery: false
                 },
                 loading: {
                     add: false,
@@ -236,6 +305,21 @@ logisticsNo: [
             },
             edit() {
                 this.$emit('edit')
+            },
+            /**
+             * 发货
+             */
+            deliveryGoods() {
+              this.form.isDeliver = 1
+              this.$emit('deliveryGoods', this.form)
+            },
+            /**
+             * 选择物流公司
+             */
+            changeLogistics(val) {
+              if (val && val.label) {
+                this.form.logisticsCompany = val.label
+              }
             }
         }
     }

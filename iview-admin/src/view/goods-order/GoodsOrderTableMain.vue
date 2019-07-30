@@ -177,7 +177,41 @@ sortable: true,
             title: '订单状态',
             key: 'orderStatus',
             minWidth: 120,
-            sortable: true
+            sortable: true,
+            render: (h, params) => {
+              const status = params.row.orderStatus
+              let color = status == 0 ? 'default' :
+                          status == 1 ? 'success' :
+                          status == 2 ? 'cyan' :
+                          status == 3 ? 'primary' :
+                          status == 4 ? 'warning' :
+                          status == 5 ? 'blue' :
+                          status == 6 ? 'green' :
+                          status == 7 ? 'geekblue' :
+                          status == 8 ? 'yellow' :
+                          status == 9 ? 'pink' :
+                          status == 10 ? 'magenta' :
+                          status == 11 ? 'volcano' :
+                          status == 12 ? 'orange' : 'error'
+              let txt = status == 0 ? '待付款' :
+                          status == 1 ? '已付款' :
+                          status == 2 ? '支付失败' :
+                          status == 3 ? '待发货' :
+                          status == 4 ? '待收货' :
+                          status == 5 ? '已确认收货' :
+                          status == 6 ? '已取消' :
+                          status == 7 ? '已申请退货' :
+                          status == 8 ? '拒绝退货' :
+                          status == 9 ? '退货中' :
+                          status == 10 ? '已退货' :
+                          status == 11 ? '待评价' :
+                          status == 12 ? '已评价' : '未知'
+              return h('Tag', {
+                props: {
+                  color: color
+                }
+              }, txt)
+            }
           },
           {
             title: '支付时间',
@@ -470,7 +504,7 @@ sortable: true,
                             '删除'
                           )
                         ]
-                      )
+                      ),
                     ]
                   )
                 ]
