@@ -8,14 +8,23 @@
                       showSizer showTotal></Page>
             </div>
         </div>
+        <ImgModal ref="imgModal" />
     </div>
 </template>
 
 <script>
     import * as utils from '@/api/utils-v2'
+    import ImgModal from '_c/img-modal'
+
+    import config from '@/config'
+    const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+    const cdnUrl = config.baseUrl.cdnUrl
 
     export default {
         name: 'GoodsShopTableMain',
+        components: {
+          ImgModal
+        },
         data() {
             return {
                 urls: {
@@ -79,6 +88,40 @@ key: 'logo',
 minWidth: 120,
 sortable: true,
 },
+          {
+            title: '店铺Logo',
+            key: 'logo',
+            minWidth: 120,
+            sortable: true,
+            render: (h, params) => {
+              let imgSrc = params.row.logo
+              if (!imgSrc) {
+                return h('span',{},'暂无图片')
+              }
+              if (imgSrc.indexOf('http') < 0) {
+                imgSrc = cdnUrl + '/' + imgSrc
+              }
+              return h(
+                'img',
+                {
+                  attrs: {
+                    src: imgSrc
+                  },
+                  style: {
+                    width: '60px',
+                    height: '60px',
+                    cursor: 'pointer'
+                  },
+                  on: {
+                    click: () => {
+                      this.showImgModal(imgSrc)
+                    }
+                  }
+                },
+                ''
+              )
+            }
+          },
 {
 title: '店铺标题',
 key: 'title',
@@ -343,6 +386,15 @@ renderHeader: (h, params) => {
                                                         )
                                                     ]
                                                 ),
+                                                h(
+                                                  'DropdownItem',
+                                                  {
+                                                    props: {
+                                                      name: 'showUploadModal'
+                                                    }
+                                                  },
+                                                  '上传店铺Logo'
+                                                ),
                                             ]
                                         )
                                     ]
@@ -370,6 +422,8 @@ renderHeader: (h, params) => {
                     this.$emit('showDetailModal', row)
                 } else if (itemName === "remove") {
                     utils.remove(this, row);
+                } else if (itemName === 'showUploadModal') {
+                  this.$emit('showUploadModal', row.id)
                 }
             },
             active(row) {
@@ -386,6 +440,14 @@ renderHeader: (h, params) => {
             },
             changePageSize(pageSize) {
                 utils.changePageSize(this, pageSize)
+            },
+            /**
+             * 显示图片预览的弹窗
+             */
+            showImgModal(src) {
+              let imgModal = this.$refs.imgModal
+              imgModal.modal.img = true
+              imgModal.imgSrc = src
             }
         }
     }
