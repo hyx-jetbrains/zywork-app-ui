@@ -4,50 +4,43 @@
             <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
 	<i-col span="12">
-	<FormItem label="交易编号" prop="transactionNo">
-	<Input v-model="form.transactionNo" placeholder="请输入交易编号"/>
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="用户编号" prop="userId">
-	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
+	<FormItem label="订单编号" prop="orderId">
+	<InputNumber v-model="form.orderId" placeholder="请输入订单编号" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="金额（元）" prop="amount">
-	<InputNumber v-model="form.amount" placeholder="请输入金额（元）" style="width: 100%;"/>
+	<FormItem label="订单账目编号" prop="orderAccountId">
+	<InputNumber v-model="form.orderAccountId" placeholder="请输入订单账目编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="积分" prop="integral">
-	<InputNumber v-model="form.integral" placeholder="请输入积分" style="width: 100%;"/>
+	<FormItem label="优惠/增加金额" prop="accountAmount">
+	<InputNumber v-model="form.accountAmount" placeholder="请输入优惠/增加金额" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="收入或支出" prop="type">
-	<InputNumber v-model="form.type" placeholder="请输入收入或支出" style="width: 100%;"/>
+	<FormItem label="优惠/增加类型" prop="accountType">
+	<Input v-model="form.accountType" placeholder="请输入优惠/增加类型"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="收支类型" prop="subType">
-	<Input v-model="form.subType" placeholder="请输入收支类型"/>
+	<FormItem label="优惠/增加方式" prop="accountSubType">
+	<Input v-model="form.accountSubType" placeholder="请输入优惠/增加方式"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="支付方式" prop="payType">
-	<InputNumber v-model="form.payType" placeholder="请输入支付方式" style="width: 100%;"/>
+	<FormItem label="账目描述" prop="description">
+	<Input v-model="form.description" placeholder="请输入账目描述"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="账目备注" prop="remark">
-	<Input v-model="form.remark" placeholder="请输入账目备注"/>
-</FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
 	<FormItem label="账目状态" prop="accountStatus">
 	<InputNumber v-model="form.accountStatus" placeholder="请输入账目状态" style="width: 100%;"/>
 </FormItem>
@@ -64,50 +57,43 @@
             <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
 	<i-col span="12">
-	<FormItem label="交易编号" prop="transactionNo">
-	<Input v-model="form.transactionNo" placeholder="请输入交易编号"/>
+	<FormItem label="店铺编号" prop="shopId">
+	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="用户编号" prop="userId">
-	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
+	<FormItem label="订单编号" prop="orderId">
+	<InputNumber v-model="form.orderId" placeholder="请输入订单编号" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="金额（元）" prop="amount">
-	<InputNumber v-model="form.amount" placeholder="请输入金额（元）" style="width: 100%;"/>
+	<FormItem label="订单账目编号" prop="orderAccountId">
+	<InputNumber v-model="form.orderAccountId" placeholder="请输入订单账目编号" style="width: 100%;"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="积分" prop="integral">
-	<InputNumber v-model="form.integral" placeholder="请输入积分" style="width: 100%;"/>
+	<FormItem label="优惠/增加金额" prop="accountAmount">
+	<InputNumber v-model="form.accountAmount" placeholder="请输入优惠/增加金额" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="收入或支出" prop="type">
-	<InputNumber v-model="form.type" placeholder="请输入收入或支出" style="width: 100%;"/>
+	<FormItem label="优惠/增加类型" prop="accountType">
+	<Input v-model="form.accountType" placeholder="请输入优惠/增加类型"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="收支类型" prop="subType">
-	<Input v-model="form.subType" placeholder="请输入收支类型"/>
+	<FormItem label="优惠/增加方式" prop="accountSubType">
+	<Input v-model="form.accountSubType" placeholder="请输入优惠/增加方式"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="支付方式" prop="payType">
-	<InputNumber v-model="form.payType" placeholder="请输入支付方式" style="width: 100%;"/>
+	<FormItem label="账目描述" prop="description">
+	<Input v-model="form.description" placeholder="请输入账目描述"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="账目备注" prop="remark">
-	<Input v-model="form.remark" placeholder="请输入账目备注"/>
-</FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
 	<FormItem label="账目状态" prop="accountStatus">
 	<InputNumber v-model="form.accountStatus" placeholder="请输入账目状态" style="width: 100%;"/>
 </FormItem>
@@ -125,7 +111,7 @@
 
 <script>
     export default {
-        name: 'AccountDetailAddEdit',
+        name: 'GoodsOrderAccountDetailAddEdit',
         data() {
             return {
                 modal: {
@@ -137,36 +123,45 @@
                     edit: false
                 },
                 urls: {
-                    addUrl: '/account-detail/admin/save',
-                    batchAddUrl: '/account-detail/admin/batch-save',
-                    editUrl: '/account-detail/admin/update',
-                    batchEditUrl: '/account-detail/admin/batch-update'
+                    addUrl: '/goods-order-account-detail/admin/save',
+                    batchAddUrl: '/goods-order-account-detail/admin/batch-save',
+                    editUrl: '/goods-order-account-detail/admin/update',
+                    batchEditUrl: '/goods-order-account-detail/admin/batch-update'
                 },
                 form: {
-                    transactionNo: null,
-userId: null,
-amount: null,
-integral: null,
-type: null,
-subType: null,
-payType: null,
-remark: null,
+                    shopId: null,
+orderId: null,
+orderAccountId: null,
+accountAmount: null,
+accountType: null,
+accountSubType: null,
+description: null,
 accountStatus: null,
 
                 },
                 validateRules: {
-                    transactionNo: [
-{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
-{type: 'string', min: 1, max: 32, message: '必须1-32个字符', trigger: 'blur'}
-],
-userId: [
+                    shopId: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
-subType: [
+orderId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+orderAccountId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+accountAmount: [
+{type: 'number', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+accountType: [
+{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
 {type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
 ],
-remark: [
-{type: 'string', min: 1, max: 500, message: '必须1-500个字符', trigger: 'blur'}
+accountSubType: [
+{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
+{type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
+],
+description: [
+{type: 'string', min: 1, max: 255, message: '必须1-255个字符', trigger: 'blur'}
 ],
 
                 }

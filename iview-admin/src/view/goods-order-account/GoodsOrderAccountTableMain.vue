@@ -15,13 +15,13 @@
     import * as utils from '@/api/utils-v2'
 
     export default {
-        name: 'PlatformAccountDetailTableMain',
+        name: 'GoodsOrderAccountTableMain',
         data() {
             return {
                 urls: {
-                    searchUrl: '/platform-account-detail/admin/pager-cond',
-                    activeUrl: '/platform-account-detail/admin/active',
-                    removeUrl: '/platform-account-detail/admin/remove/'
+                    searchUrl: '/goods-order-account/admin/pager-cond',
+                    activeUrl: '/goods-order-account/admin/active',
+                    removeUrl: '/goods-order-account/admin/remove/'
                 },
                 pager: {
                     pageNo: 1,
@@ -50,8 +50,20 @@
                             }
                         },
                         {
-title: '账目编号',
+title: '订单账目编号',
 key: 'id',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '店铺编号',
+key: 'shopId',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '订单编号',
+key: 'orderId',
 minWidth: 120,
 sortable: true,
 },
@@ -62,38 +74,38 @@ minWidth: 120,
 sortable: true,
 },
 {
-title: '用户编号',
-key: 'userId',
+title: '总金额',
+key: 'totalAmount',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '金额（元）',
-key: 'amount',
+title: '实付金额',
+key: 'payAmount',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '收入或支出',
-key: 'type',
+title: '总优惠金额',
+key: 'discountAmount',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '收支类型',
-key: 'subType',
+title: '平台优惠金额',
+key: 'platDiscountAmount',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '支付方式',
-key: 'payType',
+title: '店铺优惠金额',
+key: 'shopDiscountAmount',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '账目备注',
-key: 'remark',
+title: '店铺分账金额',
+key: 'shopAmount',
 minWidth: 120,
 sortable: true,
 },
@@ -113,7 +125,7 @@ renderHeader: (h, params) => {
                 h('span', '版本号'),
                 h('Tooltip', {
                   props: {
-                    content: '平台账目版本号',
+                    content: '订单账目版本号',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -141,7 +153,7 @@ renderHeader: (h, params) => {
                 h('span', '创建时间'),
                 h('Tooltip', {
                   props: {
-                    content: '平台账目创建时间',
+                    content: '订单账目创建时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -169,7 +181,7 @@ renderHeader: (h, params) => {
                 h('span', '更新时间'),
                 h('Tooltip', {
                   props: {
-                    content: '平台账目更新时间',
+                    content: '订单账目更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -197,7 +209,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '平台账目是否激活',
+                    content: '订单账目是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500

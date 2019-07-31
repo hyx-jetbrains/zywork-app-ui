@@ -289,6 +289,24 @@ export default [
         },
         component: () => import('@/view/account-detail/AccountDetailMain.vue')
       },
+      {
+        path: 'GoodsOrderAccount',
+        name: 'goods_order_account',
+        meta: {
+          title: '订单账目管理',
+          icon: 'md-calculator'
+        },
+        component: () => import('@/view/goods-order-account/GoodsOrderAccountMain.vue')
+      },
+      {
+        path: 'GoodsOrderAccountDetail',
+        name: 'goods_order_account_detail',
+        meta: {
+          title: '订单账目详情管理',
+          icon: 'md-list'
+        },
+        component: () => import('@/view/goods-order-account-detail/GoodsOrderAccountDetailMain.vue')
+      },
     ]
   },
   {
@@ -647,6 +665,35 @@ export default [
             },
             component: () => import('@/view/user-goods-order-logistics/UserGoodsOrderLogisticsMain.vue')
           }
+        ]
+      },
+      {
+        path: 'mall_goods_order_account',
+        name: 'mall_goods_order',
+        meta: {
+          icon: 'logo-yen',
+          title: '订单账目管理'
+        },
+        component: parentView,
+        children: [
+          {
+            path: 'MallGoodsOrderAccount',
+            name: 'mall_goods_order_account',
+            meta: {
+              title: '订单账目管理',
+              icon: 'md-calculator'
+            },
+            component: () => import('@/view/goods-order-account/GoodsOrderAccountMain.vue')
+          },
+          {
+            path: 'MallGoodsOrderAccountDetail',
+            name: 'mall_goods_order_account_detail',
+            meta: {
+              title: '订单账目详情管理',
+              icon: 'md-list'
+            },
+            component: () => import('@/view/goods-order-account-detail/GoodsOrderAccountDetailMain.vue')
+          },
         ]
       },
       {

@@ -3,23 +3,23 @@
         <Modal v-model="modal.detail" title="详情" width="760">
             <div class="detail-info">
                 <Row>
-	<i-col span="11"><span class="detail-title">账目编号：</span><span v-text="form.id"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">交易编号：</span><span v-text="form.transactionNo"></span></i-col>
+	<i-col span="11"><span class="detail-title">订单账目详情编号：</span><span v-text="form.id"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">店铺编号：</span><span v-text="form.shopId"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">用户编号：</span><span v-text="form.userId"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">金额（元）：</span><span v-text="form.amount"></span></i-col>
+	<i-col span="11"><span class="detail-title">订单编号：</span><span v-text="form.orderId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">订单账目编号：</span><span v-text="form.orderAccountId"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">收入或支出：</span><span v-text="form.type"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">收支类型：</span><span v-text="form.subType"></span></i-col>
+	<i-col span="11"><span class="detail-title">优惠/增加金额：</span><span v-text="form.accountAmount"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">优惠/增加类型：</span><span v-text="form.accountType"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">支付方式：</span><span v-text="form.payType"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">账目备注：</span><span v-text="form.remark"></span></i-col>
+	<i-col span="11"><span class="detail-title">优惠/增加方式：</span><span v-text="form.accountSubType"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">账目描述：</span><span v-text="form.description"></span></i-col>
 
 </Row>
 <Row>
@@ -44,7 +44,7 @@
 
 <script>
     export default {
-        name: 'PlatformAccountDetailDetail',
+        name: 'GoodsOrderAccountDetailDetail',
         data() {
             return {
                 modal: {
@@ -52,13 +52,13 @@
                 },
                 form: {
                     id: null,
-transactionNo: null,
-userId: null,
-amount: null,
-type: null,
-subType: null,
-payType: null,
-remark: null,
+shopId: null,
+orderId: null,
+orderAccountId: null,
+accountAmount: null,
+accountType: null,
+accountSubType: null,
+description: null,
 accountStatus: null,
 version: null,
 createTime: null,

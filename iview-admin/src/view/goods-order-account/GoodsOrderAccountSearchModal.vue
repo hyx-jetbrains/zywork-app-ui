@@ -4,16 +4,49 @@
             <Form ref="searchForm" :model="searchForm" :label-width="80">
                 <Row>
 	<i-col span="12">
-	<FormItem label="账目编号"><Row>
+	<FormItem label="订单账目编号"><Row>
 	<i-col span="11">
 	<FormItem prop="idMin">
-	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始账目编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMin" placeholder="请输入开始订单账目编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
 	<FormItem prop="idMax">
-	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束账目编号" style="width: 100%;"/>
+	<InputNumber v-model="searchForm.idMax" placeholder="请输入结束订单账目编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="店铺编号"><Row>
+	<i-col span="11">
+	<FormItem prop="shopIdMin">
+	<InputNumber v-model="searchForm.shopIdMin" placeholder="请输入开始店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="shopIdMax">
+	<InputNumber v-model="searchForm.shopIdMax" placeholder="请输入结束店铺编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="订单编号"><Row>
+	<i-col span="11">
+	<FormItem prop="orderIdMin">
+	<InputNumber v-model="searchForm.orderIdMin" placeholder="请输入开始订单编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="orderIdMax">
+	<InputNumber v-model="searchForm.orderIdMax" placeholder="请输入结束订单编号" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -26,31 +59,31 @@
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="用户编号"><Row>
+	<FormItem label="总金额"><Row>
 	<i-col span="11">
-	<FormItem prop="userIdMin">
-	<InputNumber v-model="searchForm.userIdMin" placeholder="请输入开始用户编号" style="width: 100%;"/>
+	<FormItem prop="totalAmountMin">
+	<InputNumber v-model="searchForm.totalAmountMin" placeholder="请输入开始总金额" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="userIdMax">
-	<InputNumber v-model="searchForm.userIdMax" placeholder="请输入结束用户编号" style="width: 100%;"/>
+	<FormItem prop="totalAmountMax">
+	<InputNumber v-model="searchForm.totalAmountMax" placeholder="请输入结束总金额" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
 </i-col><i-col span="12">
-	<FormItem label="金额（元）"><Row>
+	<FormItem label="实付金额"><Row>
 	<i-col span="11">
-	<FormItem prop="amountMin">
-	<InputNumber v-model="searchForm.amountMin" placeholder="请输入开始金额（元）" style="width: 100%;"/>
+	<FormItem prop="payAmountMin">
+	<InputNumber v-model="searchForm.payAmountMin" placeholder="请输入开始实付金额" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="amountMax">
-	<InputNumber v-model="searchForm.amountMax" placeholder="请输入结束金额（元）" style="width: 100%;"/>
+	<FormItem prop="payAmountMax">
+	<InputNumber v-model="searchForm.payAmountMax" placeholder="请输入结束实付金额" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
@@ -59,45 +92,67 @@
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="收入或支出"><Row>
+	<FormItem label="总优惠金额"><Row>
 	<i-col span="11">
-	<FormItem prop="typeMin">
-	<InputNumber v-model="searchForm.typeMin" placeholder="请输入开始收入或支出" style="width: 100%;"/>
+	<FormItem prop="discountAmountMin">
+	<InputNumber v-model="searchForm.discountAmountMin" placeholder="请输入开始总优惠金额" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="typeMax">
-	<InputNumber v-model="searchForm.typeMax" placeholder="请输入结束收入或支出" style="width: 100%;"/>
+	<FormItem prop="discountAmountMax">
+	<InputNumber v-model="searchForm.discountAmountMax" placeholder="请输入结束总优惠金额" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
 </i-col><i-col span="12">
-	<FormItem label="收支类型" prop="subType">
-	<Input v-model="searchForm.subType" placeholder="请输入收支类型"/>
+	<FormItem label="平台优惠金额"><Row>
+	<i-col span="11">
+	<FormItem prop="platDiscountAmountMin">
+	<InputNumber v-model="searchForm.platDiscountAmountMin" placeholder="请输入开始平台优惠金额" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="platDiscountAmountMax">
+	<InputNumber v-model="searchForm.platDiscountAmountMax" placeholder="请输入结束平台优惠金额" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
 </FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="支付方式"><Row>
+	<FormItem label="店铺优惠金额"><Row>
 	<i-col span="11">
-	<FormItem prop="payTypeMin">
-	<InputNumber v-model="searchForm.payTypeMin" placeholder="请输入开始支付方式" style="width: 100%;"/>
+	<FormItem prop="shopDiscountAmountMin">
+	<InputNumber v-model="searchForm.shopDiscountAmountMin" placeholder="请输入开始店铺优惠金额" style="width: 100%;"/>
 </FormItem>
 </i-col>
 	<i-col span="2" style="text-align: center">-</i-col>
 	<i-col span="11">
-	<FormItem prop="payTypeMax">
-	<InputNumber v-model="searchForm.payTypeMax" placeholder="请输入结束支付方式" style="width: 100%;"/>
+	<FormItem prop="shopDiscountAmountMax">
+	<InputNumber v-model="searchForm.shopDiscountAmountMax" placeholder="请输入结束店铺优惠金额" style="width: 100%;"/>
 </FormItem>
 </i-col>
 </Row>
 </FormItem>
 </i-col><i-col span="12">
-	<FormItem label="账目备注" prop="remark">
-	<Input v-model="searchForm.remark" placeholder="请输入账目备注"/>
+	<FormItem label="店铺分账金额"><Row>
+	<i-col span="11">
+	<FormItem prop="shopAmountMin">
+	<InputNumber v-model="searchForm.shopAmountMin" placeholder="请输入开始店铺分账金额" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="shopAmountMax">
+	<InputNumber v-model="searchForm.shopAmountMax" placeholder="请输入结束店铺分账金额" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
 </FormItem>
 </i-col>
 </Row>
@@ -198,7 +253,7 @@
 
 <script>
     export default {
-        name: 'PlatformAccountDetailSearch',
+        name: 'GoodsOrderAccountSearch',
         data() {
             return {
                 modal: {
@@ -208,7 +263,7 @@
                     search: false
                 },
                 urls: {
-                    searchUrl: '/platform-account-detail/admin/pager-cond'
+                    searchUrl: '/goods-order-account/admin/pager-cond'
                 },
                 searchForm: {
                     pageNo: 1,
@@ -218,21 +273,31 @@
                     id: null,
 idMin: null, 
 idMax: null, 
+shopId: null,
+shopIdMin: null, 
+shopIdMax: null, 
+orderId: null,
+orderIdMin: null, 
+orderIdMax: null, 
 transactionNo: null,
-userId: null,
-userIdMin: null, 
-userIdMax: null, 
-amount: null,
-amountMin: null, 
-amountMax: null, 
-type: null,
-typeMin: null, 
-typeMax: null, 
-subType: null,
-payType: null,
-payTypeMin: null, 
-payTypeMax: null, 
-remark: null,
+totalAmount: null,
+totalAmountMin: null, 
+totalAmountMax: null, 
+payAmount: null,
+payAmountMin: null, 
+payAmountMax: null, 
+discountAmount: null,
+discountAmountMin: null, 
+discountAmountMax: null, 
+platDiscountAmount: null,
+platDiscountAmountMin: null, 
+platDiscountAmountMax: null, 
+shopDiscountAmount: null,
+shopDiscountAmountMin: null, 
+shopDiscountAmountMax: null, 
+shopAmount: null,
+shopAmountMin: null, 
+shopAmountMax: null, 
 accountStatus: null,
 accountStatusMin: null, 
 accountStatusMax: null, 

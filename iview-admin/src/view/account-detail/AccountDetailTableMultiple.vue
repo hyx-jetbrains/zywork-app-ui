@@ -102,6 +102,12 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '账目状态',
+key: 'accountStatus',
+minWidth: 120,
+sortable: true,
+},
+{
 title: '版本号',
 key: 'version',
 minWidth: 120,

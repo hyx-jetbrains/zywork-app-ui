@@ -40,6 +40,10 @@
 	<FormItem label="账目备注" prop="remark">
 	<Input v-model="form.remark" placeholder="请输入账目备注"/>
 </FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="账目状态" prop="accountStatus">
+	<InputNumber v-model="form.accountStatus" placeholder="请输入账目状态" style="width: 100%;"/>
+</FormItem>
 	</i-col>
 </Row>
 
@@ -89,6 +93,10 @@
 	<FormItem label="账目备注" prop="remark">
 	<Input v-model="form.remark" placeholder="请输入账目备注"/>
 </FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="账目状态" prop="accountStatus">
+	<InputNumber v-model="form.accountStatus" placeholder="请输入账目状态" style="width: 100%;"/>
+</FormItem>
 	</i-col>
 </Row>
 
@@ -121,19 +129,19 @@
                     batchEditUrl: '/platform-account-detail/admin/batch-update'
                 },
                 form: {
-                    id: null,
-transactionNo: null,
+                    transactionNo: null,
 userId: null,
 amount: null,
 type: null,
 subType: null,
 payType: null,
 remark: null,
-
+accountStatus: null,
 
                 },
                 validateRules: {
                     transactionNo: [
+{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
 {type: 'string', min: 1, max: 32, message: '必须1-32个字符', trigger: 'blur'}
 ],
 userId: [

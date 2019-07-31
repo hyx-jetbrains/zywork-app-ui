@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Table ref="dataTable" stripe :loading="table.loading" :columns="table.tableColumns" :data="table.tableRows"
+        <Table ref="dataTable" highlight-row stripe :loading="table.loading" :columns="table.tableColumns" :data="table.tableRows"
                style="margin-top:20px;" @on-selection-change="changeSelection" @on-sort-change="changeSort"></Table>
         <div style="margin: 20px; overflow: hidden">
             <div style="float: right;">
@@ -15,13 +15,11 @@
     import * as utils from '@/api/utils-v2'
 
     export default {
-        name: 'PlatformAccountDetailTableMain',
+        name: 'GoodsOrderAccountTableShow',
         data() {
             return {
                 urls: {
-                    searchUrl: '/platform-account-detail/admin/pager-cond',
-                    activeUrl: '/platform-account-detail/admin/active',
-                    removeUrl: '/platform-account-detail/admin/remove/'
+                    searchUrl: '/goods-order-account/admin/pager-cond'
                 },
                 pager: {
                     pageNo: 1,
@@ -35,23 +33,28 @@
                 table: {
                     loading: false,
                     tableColumns: [{
-                        type: 'selection',
-                        width: 45,
-                        key: 'id',
+                        width: 60,
                         align: 'center',
-                        fixed: 'left'
+                        fixed: 'left',
+                        render: (h, params) => {
+                            return h('span', params.index + (this.pager.pageNo - 1) * this.pager.pageSize + 1)
+                        }
                     },
                         {
-                            width: 60,
-                            align: 'center',
-                            fixed: 'left',
-                            render: (h, params) => {
-                                return h('span', params.index + (this.pager.pageNo - 1) * this.pager.pageSize + 1)
-                            }
-                        },
-                        {
-title: '账目编号',
+title: '订单账目编号',
 key: 'id',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '店铺编号',
+key: 'shopId',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '订单编号',
+key: 'orderId',
 minWidth: 120,
 sortable: true,
 },
@@ -62,38 +65,38 @@ minWidth: 120,
 sortable: true,
 },
 {
-title: '用户编号',
-key: 'userId',
+title: '总金额',
+key: 'totalAmount',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '金额（元）',
-key: 'amount',
+title: '实付金额',
+key: 'payAmount',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '收入或支出',
-key: 'type',
+title: '总优惠金额',
+key: 'discountAmount',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '收支类型',
-key: 'subType',
+title: '平台优惠金额',
+key: 'platDiscountAmount',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '支付方式',
-key: 'payType',
+title: '店铺优惠金额',
+key: 'shopDiscountAmount',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '账目备注',
-key: 'remark',
+title: '店铺分账金额',
+key: 'shopAmount',
 minWidth: 120,
 sortable: true,
 },
@@ -113,7 +116,7 @@ renderHeader: (h, params) => {
                 h('span', '版本号'),
                 h('Tooltip', {
                   props: {
-                    content: '平台账目版本号',
+                    content: '订单账目版本号',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -141,7 +144,7 @@ renderHeader: (h, params) => {
                 h('span', '创建时间'),
                 h('Tooltip', {
                   props: {
-                    content: '平台账目创建时间',
+                    content: '订单账目创建时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -169,7 +172,7 @@ renderHeader: (h, params) => {
                 h('span', '更新时间'),
                 h('Tooltip', {
                   props: {
-                    content: '平台账目更新时间',
+                    content: '订单账目更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -197,7 +200,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '平台账目是否激活',
+                    content: '订单账目是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -222,27 +225,7 @@ renderHeader: (h, params) => {
                             minWidth: 100,
                             align: 'center',
                             render: (h, params) => {
-                                return h('i-switch', {
-                                    props: {
-                                        size: 'large',
-                                        value: params.row.isActive === 0
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        'on-change': (status) => {
-                                            this.active(params.row)
-                                        }
-                                    }
-                                }, [
-                                    h('span', {
-                                        slot: 'open'
-                                    }, '激活'),
-                                    h('span', {
-                                        slot: 'close'
-                                    }, '冻结')
-                                ])
+                                return h('span', params.row.isActive === 0 ? '激活': '冻结')
                             }
                         },
                         {
@@ -292,39 +275,11 @@ renderHeader: (h, params) => {
                                                     "DropdownItem",
                                                     {
                                                         props: {
-                                                            name: "showEdit"
-                                                        }
-                                                    },
-                                                    "编辑"
-                                                ),
-                                                h(
-                                                    "DropdownItem",
-                                                    {
-                                                        props: {
                                                             name: "showDetail"
                                                         }
                                                     },
                                                     "详情"
-                                                ),
-                                                h(
-                                                    "DropdownItem",
-                                                    {
-                                                        props: {
-                                                            name: "remove"
-                                                        }
-                                                    },
-                                                    [
-                                                        h(
-                                                            "span",
-                                                            {
-                                                                style: {
-                                                                    color: "red"
-                                                                }
-                                                            },
-                                                            "删除"
-                                                        )
-                                                    ]
-                                                ),
+                                                )
                                             ]
                                         )
                                     ]
@@ -346,16 +301,9 @@ renderHeader: (h, params) => {
                 this.$emit('searchTable')
             },
             userOpt(itemName, row) {
-                if (itemName === "showEdit") {
-                    this.$emit('showEditModal', JSON.parse(JSON.stringify(row)))
-                } else if (itemName === "showDetail") {
+                if (itemName === "showDetail") {
                     this.$emit('showDetailModal', row)
-                } else if (itemName === "remove") {
-                    utils.remove(this, row);
                 }
-            },
-            active(row) {
-                utils.active(this, row)
             },
             changeSelection(selections) {
                 utils.changeSelections(this, selections)
