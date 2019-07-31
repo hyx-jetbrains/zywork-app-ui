@@ -88,7 +88,7 @@ export const add = (self) => {
           resolve(response)
         }).catch(error => {
           console.log(error)
-          self.loading['add'] = false
+          addEditComponent.loading['add'] = false
           self.$Message.error('添加数据失败，稍候再试')
           reject(error)
         })

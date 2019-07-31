@@ -41,7 +41,7 @@
     <GoodsSkuSearchModal ref="searchModal" v-on:searchTable="searchTable" />
     <GoodsSkuDetailModal ref="detailModal" />
     <GoodsSkuPicModal ref="goodsSkuPicModal" v-on:searchTable="searchTable" />
-    <SkuDetailModal ref="skuDetailModal" />
+    <SkuDetailModal ref="skuDetailModal" v-on:showGoodsModal="showGoodsModal" />
     <DistributionRatioModal ref="distributionRatioModal" />
     <GoodsInfoDetailModal v-if="type === 0" ref="attrDetailModal" />
     <GoodsPicDetailModal v-if="type === 1" ref="attrDetailModal" />
@@ -66,6 +66,10 @@
         <Button type="primary" size="large" @click="bottomConfirmChoice">查询</Button>
       </div>
     </Modal>
+    <GoodsAgentAddEditModal ref="agentModal" v-on:add="addAgent" v-on:edit="editAgent"  />
+    <GoodsPromotionAddEditModal ref="promotionModal" v-on:add="addPromotion" v-on:edit="editPromotion" />
+    <GoodsSeckillAddEditModal ref="seckillModal" v-on:add="addSeckill" v-on:edit="editSeckill" />
+    <GoodsGrouponAddEditModal ref="grouponModal" v-on:add="addGroupon" v-on:edit="editGroupon" />
   </div>
 </template>
 
@@ -83,6 +87,10 @@ import GoodsInfoDetailModal from '../goods-info/GoodsInfoDetailModal.vue'
 import GoodsInfoMainSingle from '../goods-info/GoodsInfoMainSingle.vue'
 import GoodsPicDetailModal from '../goods-pic/GoodsPicDetailModal.vue'
 import GoodsPicMainSingle from '../goods-pic/GoodsPicMainSingle.vue'
+import GoodsAgentAddEditModal from '../goods-agent/GoodsAgentAddEditModal.vue'
+import GoodsPromotionAddEditModal from '../goods-promotion/GoodsPromotionAddEditModal.vue'
+import GoodsSeckillAddEditModal from '../goods-seckill/GoodsSeckillAddEditModal.vue'
+import GoodsGrouponAddEditModal from '../goods-groupon/GoodsGrouponAddEditModal.vue'
 export default {
   name: 'GoodsSkuMain',
   components: {
@@ -96,7 +104,11 @@ export default {
     GoodsInfoDetailModal,
     GoodsInfoMainSingle,
     GoodsPicDetailModal,
-    GoodsPicMainSingle
+    GoodsPicMainSingle,
+    GoodsAgentAddEditModal,
+    GoodsPromotionAddEditModal,
+    GoodsSeckillAddEditModal,
+    GoodsGrouponAddEditModal
   },
   data() {
     return {
@@ -104,7 +116,11 @@ export default {
         batchRemoveUrl: '/goods-sku/admin/batch-remove',
         batchActiveUrl: '/goods-sku/admin/batch-active',
         goodsOneUrl: '/goods-info/admin/one/',
-        picOneUrl: '/goods-pic/admin/one/'
+        picOneUrl: '/goods-pic/admin/one/',
+        agentUrl: '/goods-agent/admin/all-cond',
+        promotionUrl: '/goods-promotion/admin/all-cond',
+        seckillUrl: '/goods-seckill/admin/all-cond',
+        grouponUrl: '/goods-groupon/admin/all-cond'
       },
       type: null,
       modal: {
@@ -188,6 +204,7 @@ export default {
             skuDetailModal.skuId = row.id
             skuDetailModal.chooseSkuId = row.id
             skuDetailModal.goodsId = row.goodsId
+            skuDetailModal.shopId = row.shopId
             skuDetailModal.loadSkusByGoodsId()
             skuDetailModal.loadAllAttrVals()
           } else {
@@ -197,6 +214,9 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    showModal(modal) {
+      this.modal[modal] = true
     },
     cancelModal(modal) {
       this.modal[modal] = false
@@ -264,7 +284,151 @@ export default {
      */
     bottomConfirmChoice() {
       this.$refs.searchTableModal.confirmSelection()
-    }
+    },
+    /**
+     * 显示设置代理、促销、拼团、秒杀商品
+     */
+    showGoodsModal(type, param) {
+      let url = ''
+      let refName = ''
+      if (type === 0) {
+        // 设置代理商品
+        url = this.urls.agentUrl
+        refName = 'agentModal'
+      } else if (type === 1) {
+        // 设置促销商品
+        url = this.urls.promotionUrl
+        refName = 'promotionModal'
+      } else if (type === 2) {
+        // 设置拼团商品
+        url = this.urls.grouponUrl
+        refName = 'grouponModal'
+      } else if (type === 3) {
+        // 设置秒杀商品
+        url = this.urls.seckillUrl
+        refName = 'seckillModal'
+      }
+      utils.doPostJson(url, param, {}).then(res => {
+        if (ResponseStatus.OK === res.data.code) {
+          let agentModal = this.$refs[refName]
+          if (res.data.data.total > 0) {
+            // 有值，更新
+            agentModal.modal.edit = true
+            agentModal.form = res.data.data.rows[0]
+          } else {
+            // 没有值，新增
+            agentModal.modal.add = true
+            agentModal.form.shopId = param.shopId
+            agentModal.form.goodsId = param.goodsId
+            agentModal.form.goodsSkuId = param.goodsSkuId
+          }
+        } else {
+          this.$Message.error(res.data.message)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    /**
+     * 自定义一个添加请求后端接口
+     */
+    addApi(refName) {
+      let addEditComponent = this.$refs[refName]
+      let addForm = addEditComponent.$refs.addForm
+      addForm.validate(valid => {
+        if (valid) {
+          addEditComponent.loading.add = true
+          utils.doPostJson(addEditComponent.urls.addUrl, addEditComponent.form, {}).then(response => {
+            addEditComponent.loading.add = false
+            if (response.data.code !== ResponseStatus.OK) {
+              this.$Message.error(response.data.message)
+            } else {
+              this.$Message.success(response.data.message)
+              addForm.resetFields()
+              addEditComponent.modal.add = false
+            }
+          }).catch(error => {
+            console.log(error)
+            addEditComponent.loading['add'] = false
+            this.$Message.error('添加数据失败，稍候再试')
+          })
+        }
+      })
+    },
+    /**
+     * 自定义一个修改请求后端接口
+     */
+    editApi(refName) {
+      let addEditComponent = this.$refs[refName]
+      let editForm = addEditComponent.$refs.editForm
+      editForm.validate(valid => {
+        if (valid) {
+          addEditComponent.loading.edit = true
+          utils.doPostJson(addEditComponent.urls.editUrl, addEditComponent.form, {}).then(response => {
+            addEditComponent.loading.edit = false
+            if (response.data.code !== ResponseStatus.OK) {
+              this.$Message.error(response.data.message)
+            } else {
+              this.$Message.success(response.data.message)
+              editForm.resetFields()
+              addEditComponent.modal.edit = false
+            }
+          }).catch(error => {
+            addEditComponent.loading.edit = false
+            console.log(error)
+            this.$Message.error('修改数据失败，稍候再试')
+          })
+        }
+      })
+    },
+    /**
+     * 添加代理商品
+     */
+    addAgent() {
+      this.addApi('agentModal')
+    },
+    /**
+     * 修改代理商品
+     */
+    editAgent() {
+      this.editApi('agentModal')
+    },
+    /**
+     * 添加促销商品
+     */
+    addPromotion() {
+      this.addApi('promotionModal')
+    },
+    /**
+     * 修改促销商品
+     */
+    editPromotion() {
+      this.editApi('promotionModal')
+    },
+    /**
+     * 添加秒杀商品
+     */
+    addSeckill() {
+      this.addApi('seckillModal')
+    },
+    /**
+     * 修改秒杀商品
+     */
+    editSeckill() {
+      this.editApi('seckillModal')
+    },
+    /**
+     * 添加拼团商品
+     */
+    addGroupon() {
+      this.addApi('grouponModal')
+    },
+    /**
+     * 修改拼团商品
+     */
+    editGroupon() {
+      this.editApi('grouponModal')
+    },
   }
 }
 </script>

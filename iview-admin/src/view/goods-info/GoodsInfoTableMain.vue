@@ -199,7 +199,7 @@ export default {
           {
             title: '商品标题',
             key: 'title',
-            minWidth: 120,
+            minWidth: 220,
             sortable: true,
             renderHeader: (h, params) => {
               return h('span', [

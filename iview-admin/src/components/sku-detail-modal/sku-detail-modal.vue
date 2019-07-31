@@ -1,5 +1,6 @@
 <template>
   <Modal v-model="modal.skuDetailModal" title="商品SKU详情" :mask-closable="true" width="80%"> 
+    <Spin size="large" fix v-if="spinShow"></Spin>
     <Row>
       <i-col :lg="24">
         <div style="margin-bottom: 10px; color: red;">
@@ -10,6 +11,20 @@
           <RadioGroup v-model="chooseSkuId" type="button" @on-change="changeSkuId">
             <Radio v-for="item in allSkuIds" :key="item" :label="item"></Radio>
           </RadioGroup>
+          <span class="zy-btn">
+            <Tooltip content="把当前的sku设置为代理商品">
+              <Button type="info" @click="showGoodsModal(0)">代理</Button>
+            </Tooltip>
+            <Tooltip content="把当前的sku设置为促销商品">
+              <Button type="primary" @click="showGoodsModal(1)">促销</Button>
+            </Tooltip>
+            <Tooltip content="把当前的sku设置为拼团商品">
+              <Button type="success" @click="showGoodsModal(2)">拼团</Button>
+            </Tooltip>
+            <Tooltip content="把当前的sku设置为秒杀商品">
+              <Button type="error" @click="showGoodsModal(3)">秒杀</Button>
+            </Tooltip>
+          </span>
         </div>
       </i-col>
     </Row>
@@ -68,11 +83,14 @@ export default {
       categoryId: 0,
       skuId: 0,
       goodsId: 0,
+      shopId: 0,
       allSkuIds: [],
       chooseSkuId: 0,
       formElements: [],
       form: {},
-      validateRules: {}
+      validateRules: {},
+      spinShow: false
+
     }
   },
   methods: {
@@ -101,6 +119,7 @@ export default {
     },
     // 加载sku的所有属性和值
     loadAllAttrVals() {
+      this.spinShow = true
       // 获取类目所有属性
       this.loadCategoryAttrs().then(response => {
         if (response.data.code === ResponseStatus.OK) {
@@ -124,6 +143,7 @@ export default {
                     this.$set(this.form, formItem.goodsAttributeId + '_' + formItem.goodsAttributeAttrCode, theAttributeVal)
                   }
                 })
+                this.spinShow = false
               })
             } else {
               this.$Message.error(response.data.message)
@@ -191,6 +211,17 @@ export default {
           }
         }
       })
+    },
+    /**
+     * 设置代理商商品
+     */
+    showGoodsModal(type) {
+      let param = {
+        shopId: this.shopId,
+        goodsId: this.goodsId,
+        goodsSkuId: this.chooseSkuId
+      }
+      this.$emit('showGoodsModal', type, param)
     }
   },
   mounted () {}
@@ -198,4 +229,10 @@ export default {
 </script>
 
 <style lang="less">
+.zy-btn {
+  margin-left: 20px;
+}
+.zy-btn button {
+  margin-right: 10px;
+}
 </style>
