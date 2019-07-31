@@ -35,6 +35,8 @@
             v-on:showParentDetailModal="showParentDetailModal"
             v-on:showSearchTableModal="showSearchTableModal"
             v-on:addChildrenCategory="addChildrenCategory"
+            v-on:seeChildrenCategory="seeChildrenCategory"
+            v-on:seeGoodsInfo="seeGoodsInfo"
           />
         </Card>
       </i-col>
@@ -58,6 +60,18 @@
         <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
       </div>
     </Modal>
+    <Modal v-model="modal.childrenCategory" :title="'查看《' + categoryTitle + '》的子类目'" :mask-closable="false" width="960">
+      <GoodsCategoryMainShow ref="seeChildrenCategory" />
+      <div slot="footer">
+        <Button type="default" size="large" @click="cancelModal('childrenCategory')">关闭</Button>
+      </div>
+    </Modal>
+    <Modal v-model="modal.goodsInfo" :title="'查看《' + categoryTitle + '》的商品信息'" :mask-closable="false" width="960">
+      <GoodsInfoMainShow ref="seeGoodsInfoModal" />
+      <div slot="footer">
+        <Button type="default" size="large" @click="cancelModal('goodsInfo')">关闭</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -70,6 +84,8 @@ import GoodsCategoryDetailModal from './GoodsCategoryDetailModal.vue'
 import GoodsAttributeOrderModal from '../goods-attribute/GoodsAttributeOrderModal.vue'
 import GoodsCategoryAttrsDrawer from './GoodsCategoryAttrsDrawer.vue'
 import goodsCategoryMainSingle from './GoodsCategoryMainSingle.vue'
+import GoodsCategoryMainShow from './GoodsCategoryMainShow.vue'
+import GoodsInfoMainShow from '../goods-info/GoodsInfoMainShow.vue'
 import UploadModal from '_c/upload-modal'
 import GoodsCategoryAttributeMainModal from '../goods-category-attr/GoodsCategoryAttributeMainModal.vue'
 import * as ResponseStatus from '@/api/response-status'
@@ -84,12 +100,17 @@ export default {
     GoodsCategoryAttrsDrawer,
     UploadModal,
     GoodsCategoryAttributeMainModal,
-    goodsCategoryMainSingle
+    goodsCategoryMainSingle,
+    GoodsCategoryMainShow,
+    GoodsInfoMainShow
   },
   data() {
     return {
+      categoryTitle: '',
       modal: {
-        searchTableModal: false
+        searchTableModal: false,
+        childrenCategory: false,
+        goodsInfo: false
       },
       urls: {
         batchRemoveUrl: '/goods-category/admin/batch-remove',
@@ -232,6 +253,12 @@ export default {
           })
     },
     /**
+     * 显示模态窗
+     */
+    showModal(modal) {
+      this.modal[modal] = true
+    },
+    /**
      * 取消模态窗
      */
     cancelModal(modal) {
@@ -267,6 +294,30 @@ export default {
       addEditModal.parentName = row.title
       addEditModal.form.parentId = row.id
       addEditModal.form.categoryLevel = row.categoryLevel + 1
+    },
+    /**
+     * 查看子类目
+     */
+    seeChildrenCategory(row) {
+      this.showModal('childrenCategory')
+      this.categoryTitle = row.title
+      let seeChildrenCategory = this.$refs.seeChildrenCategory
+      let searchModal = seeChildrenCategory.$refs.searchModal
+      searchModal.searchForm.parentIdMin = row.id
+      searchModal.searchForm.parentIdMax = row.id
+      seeChildrenCategory.searchTable()
+    },
+    /**
+     * 查看商品
+     */
+    seeGoodsInfo(row) {
+      this.showModal('goodsInfo')
+      this.categoryTitle = row.title
+      let seeGoodsInfoModal = this.$refs.seeGoodsInfoModal
+      let searchModal = seeGoodsInfoModal.$refs.searchModal
+      searchModal.searchForm.categoryIdMin = row.id
+      searchModal.searchForm.categoryIdMax = row.id
+      seeGoodsInfoModal.searchTable()
     }
   }
 }

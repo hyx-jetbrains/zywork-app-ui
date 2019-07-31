@@ -45,7 +45,7 @@
             showSearchModal() {
                 let searchModal = this.$refs.searchModal
                 searchModal.modal.search = true
-            }
+            },
         }
     }
 </script>

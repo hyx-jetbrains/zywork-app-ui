@@ -591,6 +591,26 @@ renderHeader: (h, params) => {
                           }
                         },
                         '添加子类目'
+                      ),
+                      h(
+                        'DropdownItem',
+                        {
+                          props: {
+                            name: 'seeChildrenCategory',
+                            disabled: params.row.categoryLevel == 3 ? true : false
+                          }
+                        },
+                        '查看子类目'
+                      ),
+                      h(
+                        'DropdownItem',
+                        {
+                          props: {
+                            name: 'seeGoodsInfo',
+                            disabled: params.row.categoryLevel == 3 ? false : true
+                          }
+                        },
+                        '查看商品'
                       )
                     ]
                   )
@@ -642,6 +662,18 @@ renderHeader: (h, params) => {
           return
         }
         this.$emit('addChildrenCategory', row)
+      } else if (itemName === 'seeChildrenCategory') {
+        // 查看子类目
+        if (row.categoryLevel === 3) {
+          return
+        }
+        this.$emit('seeChildrenCategory', row)
+      } else if (itemName === 'seeGoodsInfo') {
+        // 查看商品
+        if (row.categoryLevel !== 3) {
+          return
+        }
+        this.$emit('seeGoodsInfo', row)
       }
     },
     active(row) {
