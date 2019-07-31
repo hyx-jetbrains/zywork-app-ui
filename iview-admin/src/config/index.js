@@ -40,6 +40,6 @@ export default {
       developmentOff: true // 设为true后在开发环境不会收集错误信息，方便开发中排查错误
     }
   },
-  showDemoAccount: true, // 是否在登录页面显示体验账号
+  showDemoAccount: false, // 是否在登录页面显示体验账号
   hasAccessPermissionRoles: ['super_sys_admin', 'sys_admin', 'sys_dev'] // 可访问后台系统的角色
 }

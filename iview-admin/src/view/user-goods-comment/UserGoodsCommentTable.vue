@@ -8,14 +8,23 @@
                       showSizer showTotal></Page>
             </div>
         </div>
+        <ImgModal ref="imgModal" />
     </div>
 </template>
 
 <script>
     import * as utils from '@/api/utils-v2'
+    import ImgModal from '_c/img-modal'
+
+    import config from '@/config'
+    const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+    const cdnUrl = config.baseUrl.cdnUrl
 
     export default {
         name: 'UserGoodsCommentTable',
+        components: {
+          ImgModal
+        },
         data() {
             return {
                 urls: {
@@ -76,6 +85,30 @@ title: '头像地址',
 key: 'userDetailHeadicon',
 minWidth: 120,
 sortable: true,
+            render: (h, params) => {
+              let imgSrc = params.row.userDetailHeadicon
+              if (!imgSrc) {
+                imgSrc = headImg
+              } else {
+                if (imgSrc.indexOf('http') < 0) {
+                  imgSrc = cdnUrl + '/' + imgSrc
+                }
+              }
+              return h(
+                'img',
+                {
+                  attrs: {
+                    src: imgSrc
+                  },
+                  style: {
+                    width: '60px',
+                    height: '60px',
+                    borderRadius: '50%'
+                  }
+                },
+                ''
+              )
+            }
 },
 {
 title: '店铺编号',
@@ -89,6 +122,40 @@ key: 'goodsShopLogo',
 minWidth: 120,
 sortable: true,
 },
+          {
+            title: '店铺Logo',
+            key: 'goodsShopLogo',
+            minWidth: 120,
+            sortable: true,
+            render: (h, params) => {
+              let imgSrc = params.row.goodsShopLogo
+              if (!imgSrc) {
+                return h('span',{},'暂无图片')
+              }
+              if (imgSrc.indexOf('http') < 0) {
+                imgSrc = cdnUrl + '/' + imgSrc
+              }
+              return h(
+                'img',
+                {
+                  attrs: {
+                    src: imgSrc
+                  },
+                  style: {
+                    width: '60px',
+                    height: '60px',
+                    cursor: 'pointer'
+                  },
+                  on: {
+                    click: () => {
+                      this.showImgModal(imgSrc)
+                    }
+                  }
+                },
+                ''
+              )
+            }
+          },
 {
 title: '店铺标题',
 key: 'goodsShopTitle',
@@ -157,13 +224,34 @@ renderHeader: (h, params) => {
                   })
                 ])
               ])
+            },
+            render: (h, params) => {
+              const level = params.row.goodsCommentCommentLevel
+              const color = level === 0 ? 'primary' : level === 1 ? 'success' : level === 2 ? 'error' : 'waraning'
+              const txt = level === 0 ? '好评' : level === 1 ? '中评' : level === 2 ? '差评' : '未知'
+              return h('Tag',
+              {
+                props: {
+                  color: color,
+                }
+              },txt)
             }
 },
 {
 title: '评分星级',
 key: 'goodsCommentCommentRate',
-minWidth: 120,
+minWidth: 220,
 sortable: true,
+render: (h, params) => {
+  const rate = params.row.goodsCommentCommentRate;
+  return h('Rate',
+  {
+    props: {
+      value: rate,
+      disabled: true
+    }
+  },'')
+}
 },
 {
 title: '评论详情',
