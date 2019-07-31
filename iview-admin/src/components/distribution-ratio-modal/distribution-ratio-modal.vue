@@ -2,6 +2,7 @@
   <Modal v-model="setModal" :title="title" :mask-closable="false" width="860">
     <div style="color: #ff0000; margin-bottom: 10px;">注意：直接输入整数，如5%，输入5即可。一级分销商返佣比例<span style="font-weight: bold;"> 小于 </span>二级分销商返佣比例</div>
     <div class="zy-box">
+      <Spin size="large" fix v-if="spinShow"></Spin>
       <div class="zy-box-row">
         <div class="zy-text-bold" style="width: 400px;">角色/等级</div>
         <div class="zy-text-bold" v-for="(item, index) in levelArr" :key="index">{{item}}级</div>
@@ -41,6 +42,7 @@ export default {
         listRoleUrl: '/role/admin/list-distribution-roles',
         distributionLevelUrl: '/distribution/admin/distribution-level'
       },
+      spinShow: false,
       setModal: false,
       setLoading: false,
       rolesArr: [],
@@ -124,6 +126,7 @@ export default {
      * 请求后台接口，获取数据
      */
     loadData(param, type, id) {
+      this.spinShow = true
       if (param.goodsId) {
         this.goodsId = param.goodsId
       }
@@ -175,6 +178,7 @@ export default {
                         this.rolesArr = rolesArr
                         this.levelArr = levelArr
                         this.ratioData = data
+                        this.spinShow = false
                       } else {
                         this.$Message.error(res2.data.message)
                       }
@@ -210,6 +214,7 @@ export default {
   border: 1px solid #ccc;
   text-align: center;
   width: 100%;
+  position: relative;
 }
 
 .zy-box-row {
