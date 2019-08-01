@@ -15,3 +15,11 @@ export const allSkusByGoods = (params) => {
 export const batchSaveGoodsAttrVals = (params) => {
   return doPostJson('/goods-attribute-value/admin/batch-save', params, {})
 }
+
+/**
+ * 根据店铺id，商品id，sku的数组id查询所有的活动信息
+ * @param {*} params 
+ */
+export const listAllActivityBySku = (params) => {
+  return doPostQs('/goods-info/admin/list-sku-count', params, {})
+}

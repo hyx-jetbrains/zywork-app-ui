@@ -5,11 +5,17 @@
       <i-col :lg="24">
         <div style="margin-bottom: 10px; color: red;">
           当前SKU编号：{{skuId}}
+          <span class="zy-all" @click="showAllActivity(-1)">
+            显示所有活动
+          </span>
         </div>
         <div style="margin-bottom: 10px;">
           请选择SKU编号加载SKU详情：
           <RadioGroup v-model="chooseSkuId" type="button" @on-change="changeSkuId">
             <Radio v-for="item in allSkuIds" :key="item" :label="item"></Radio>
+          </RadioGroup>
+          <RadioGroup type="button" style="margin-left: 20px;">
+            <Radio v-for="item in allSkuIdsTemp" :key="item" :label="item"></Radio>
           </RadioGroup>
           <span class="zy-btn">
             <Tooltip content="把当前的sku设置为代理商品">
@@ -69,7 +75,7 @@
 <script>
 import * as utils from '@/api/utils'
 import {getAttrsByCategory, skuAttrVals} from '@/api/goods_attribute'
-import {allSkusByGoods, batchSaveGoodsAttrVals} from '@/api/goods_sku'
+import {allSkusByGoods, batchSaveGoodsAttrVals, listAllActivityBySku} from '@/api/goods_sku'
 import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'SkuDetailModal',
@@ -85,6 +91,7 @@ export default {
       goodsId: 0,
       shopId: 0,
       allSkuIds: [],
+      allSkuIdsTemp: [],
       chooseSkuId: 0,
       formElements: [],
       form: {},
@@ -99,6 +106,8 @@ export default {
       utils.resetForm(this, formRef)
     },
     loadSkusByGoodsId() {
+      // 加载之前先把活动信息清掉
+      this.allSkuIdsTemp = []
       let params = {
         goodsId: this.goodsId,
         sortColumn: 'id',
@@ -216,12 +225,111 @@ export default {
      * 设置代理商商品
      */
     showGoodsModal(type) {
-      let param = {
+      this.showAllActivity(type)
+    },
+    /**
+     * 显示所有活动
+     */
+    showAllActivity(type) {
+      // 标识是否可以设置为活动商品
+      let setFlag = true
+      // 标识是否有活动商品的提示
+      let tipFlag = true
+      let skuStr = this.allSkuIds.join()
+      let params = {
         shopId: this.shopId,
         goodsId: this.goodsId,
-        goodsSkuId: this.chooseSkuId
+        goodsSkuIds: skuStr
       }
-      this.$emit('showGoodsModal', type, param)
+      // 请求后端，获取当前所有sku的活动商品信息
+      listAllActivityBySku(params).then(response => {
+        if (response.data.code === ResponseStatus.OK) {
+          let data = response.data.data
+          let allSku = this.allSkuIds
+          const lenI = allSku.length
+          const lenJ = data.length
+          let tempSkuIds = []
+          for (var i = 0; i < lenI; i++) {
+            for (var j = 0; j < lenJ; j++) {
+              if (allSku[i] === data[j].goodsSkuId) {
+                if (data[j].agentCount > 0) {
+                  // 有代理信息
+                  tempSkuIds.push(allSku[i] + '-代理')
+                  tipFlag = false
+                  continue
+                }
+                if (data[j].grouponCount > 0) {
+                  // 有拼团信息
+                  tempSkuIds.push(allSku[i] + '-拼团')
+                  tipFlag = false
+                  continue
+                }
+                if (data[j].seckillCount > 0) {
+                  // 有秒杀信息
+                  tempSkuIds.push(allSku[i] + '-秒杀')
+                  tipFlag = false
+                  continue
+                }
+                if (data[j].promotionCount > 0) {
+                  // 有促销信息
+                  tempSkuIds.push(allSku[i] + '-促销')
+                  tipFlag = false
+                  continue
+                }
+               }
+            }
+          }
+          if (type === -1 && tipFlag) {
+            this.$Message.warning('没有设置了活动的sku')
+          } else {
+            this.allSkuIdsTemp = tempSkuIds
+          }
+          if (type != -1) {
+            // -1表示是点了“显示所有活动信息”过来的，其他的则表示点的是按钮设置活动商品过来的
+            for (var j = 0; j < lenJ; j++) {
+              if (data[j].goodsSkuId === this.chooseSkuId) {
+                if (data[j].agentCount > 0) {
+                    // 有代理信息
+                    setFlag = false
+                    this.$Message.warning('该sku已是代理商品')
+                    continue
+                  }
+                  if (data[j].grouponCount > 0) {
+                    // 有拼团信息
+                    setFlag = false
+                    this.$Message.warning('该sku已是拼团商品')
+                    continue
+                  }
+                  if (data[j].seckillCount > 0) {
+                    // 有秒杀信息
+                    setFlag = false
+                    this.$Message.warning('该sku已是秒杀商品')
+                    continue
+                  }
+                  if (data[j].promotionCount > 0) {
+                    // 有信息
+                    setFlag = false
+                    this.$Message.warning('该sku已是促销商品')
+                    continue
+                  }
+              }
+            }
+            if (setFlag) {
+              let param = {
+                shopId: this.shopId,
+                goodsId: this.goodsId,
+                goodsSkuId: this.chooseSkuId
+              }
+              this.$emit('showGoodsModal', type, param)
+            }
+          }
+          
+        } else {
+          console.log(response.data.message)
+        }
+      }).catch(error => {
+        console.log(error)
+      })
     }
   },
   mounted () {}
@@ -234,5 +342,10 @@ export default {
 }
 .zy-btn button {
   margin-right: 10px;
+}
+.zy-all {
+  margin-left: 20px;
+  color: #2d8cf0;
+  cursor: pointer;
 }
 </style>
