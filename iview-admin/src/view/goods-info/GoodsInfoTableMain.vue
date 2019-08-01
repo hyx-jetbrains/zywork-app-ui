@@ -235,36 +235,39 @@ export default {
                 tagColor = 'red'
               }
               if (params.row.agentCount > 0) {
-                if (tagText === '热') {
-                  tagText += ' 代'
-                } else {
-                  tagText = '代'
-                } 
+                tagText += ' 代'
+                // if (tagText === '热') {
+                //   tagText += ' 代'
+                // } else {
+                //   tagText = '代'
+                // } 
                 tagColor = 'magenta'
               }
               if (params.row.grouponCount > 0) {
-                if (tagText === '热') {
-                  tagText += ' 拼'
-                } else {
-                  tagText = '拼'
-                } 
-                tagText = '拼'
+                tagText += ' 拼'
+                // if (tagText === '热') {
+                //   tagText += ' 拼'
+                // } else {
+                //   tagText = '拼'
+                // } 
                 tagColor = 'orange'
               }
               if (params.row.seckillCount > 0) {
-                if (tagText === '热') {
-                  tagText += ' 秒'
-                } else {
-                  tagText = '秒'
-                } 
+                tagText += ' 秒'
+                // if (tagText === '热') {
+                //   tagText += ' 秒'
+                // } else {
+                //   tagText = '秒'
+                // } 
                 tagColor = 'green'
               }
               if (params.row.promotionCount > 0) {
-                if (tagText === '热') {
-                  tagText += ' 促'
-                } else {
-                  tagText = '促'
-                } 
+                tagText += ' 促'
+                // if (tagText === '热') {
+                //   tagText += ' 促'
+                // } else {
+                //   tagText = '促'
+                // } 
                 tagColor = 'cyan'
               }
               return h('span',
