@@ -8,15 +8,18 @@
           <span class="zy-all" @click="showAllActivity(-1)">
             显示所有活动
           </span>
+          <span style="color: red; margin-left: 20px;">
+            注:一个sku只能设置为一个活动商品
+          </span>
         </div>
         <div style="margin-bottom: 10px;">
           请选择SKU编号加载SKU详情：
           <RadioGroup v-model="chooseSkuId" type="button" @on-change="changeSkuId">
             <Radio v-for="item in allSkuIds" :key="item" :label="item"></Radio>
           </RadioGroup>
-          <RadioGroup type="button" style="margin-left: 20px;">
-            <Radio v-for="item in allSkuIdsTemp" :key="item" :label="item"></Radio>
-          </RadioGroup>
+          <span style="margin-left: 20px;">
+            <Tag type="border" closable color="default" v-for="item in allSkuIdsTemp" :key="item" :name="item" @on-close="cancelActivity">{{item}}</Tag>
+          </span>
           <span class="zy-btn">
             <Tooltip content="把当前的sku设置为代理商品">
               <Button type="info" @click="showGoodsModal(0)">代理</Button>
@@ -75,7 +78,7 @@
 <script>
 import * as utils from '@/api/utils'
 import {getAttrsByCategory, skuAttrVals} from '@/api/goods_attribute'
-import {allSkusByGoods, batchSaveGoodsAttrVals, listAllActivityBySku} from '@/api/goods_sku'
+import {allSkusByGoods, batchSaveGoodsAttrVals, listAllActivityBySku, cancelActivity} from '@/api/goods_sku'
 import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'SkuDetailModal',
@@ -307,7 +310,7 @@ export default {
                     continue
                   }
                   if (data[j].promotionCount > 0) {
-                    // 有信息
+                    // 有促销信息
                     setFlag = false
                     this.$Message.warning('该sku已是促销商品')
                     continue
@@ -329,6 +332,49 @@ export default {
         }
       }).catch(error => {
         console.log(error)
+      })
+    },
+    /**
+     * 取消活动商品
+     */
+    cancelActivity(e, name) {
+      const nameArr = name.split('-')
+      let skuId = nameArr[0]
+      let activityType = nameArr[1]
+      let url = ''
+      if (activityType === '代理') {
+        url = '/goods-agent'
+      } else if (activityType === '拼团') {
+        url = '/goods-groupon'
+      } else if (activityType === '秒杀') {
+        url = '/goods-seckill'
+      } else if (activityType === '促销') {
+        url = '/goods-promotion'
+      }
+      this.$Modal.confirm({
+        title: '确认取消'+activityType+'吗？',
+        content: '确认取消'+activityType+'商品吗？',
+        onOk: () => {
+          cancelActivity(url + '/admin/update-active', {
+                shopId: this.shopId,
+                goodsId: this.goodsId,
+                goodsSkuId: skuId,
+                isActive: 1
+              }).then(response => {
+                if (response.data.code === ResponseStatus.OK) {
+                  this.$Message.success('已取消'+activityType+'商品')
+                  const index = this.allSkuIdsTemp.indexOf(name);
+                  this.allSkuIdsTemp.splice(index, 1);
+                } else {
+                  this.$Message.error(response.data.message)
+                }
+              }).catch(error => {
+                console.log(error)
+              })
+        },
+        onCancel: () => {
+
+        }
       })
     }
   },

@@ -108,6 +108,8 @@ export const edit = (self) => {
     editForm.validate(valid => {
       if (valid) {
         addEditComponent.loading.edit = true
+        // 编辑之后都变成激活状态
+        addEditComponent.form.isActive = 0
         doPostJson(addEditComponent.urls.editUrl, addEditComponent.form, {}).then(response => {
           addEditComponent.loading.edit = false
           if (response.data.code !== ResponseStatus.OK) {

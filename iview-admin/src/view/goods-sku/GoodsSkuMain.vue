@@ -364,6 +364,7 @@ export default {
       editForm.validate(valid => {
         if (valid) {
           addEditComponent.loading.edit = true
+          addEditComponent.form.isActive = 0
           utils.doPostJson(addEditComponent.urls.editUrl, addEditComponent.form, {}).then(response => {
             addEditComponent.loading.edit = false
             if (response.data.code !== ResponseStatus.OK) {

@@ -23,3 +23,12 @@ export const batchSaveGoodsAttrVals = (params) => {
 export const listAllActivityBySku = (params) => {
   return doPostQs('/goods-info/admin/list-sku-count', params, {})
 }
+
+/**
+ * 取消活动商品
+ * @param {*} url 
+ * @param {*} params 
+ */
+export const cancelActivity = (url, params) => {
+  return doPostQs(url, params, {})
+}
