@@ -4,43 +4,50 @@
             <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
 	<i-col span="12">
+	<FormItem label="用户编号" prop="userId">
+	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="店铺编号" prop="shopId">
 	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="订单编号" prop="orderId">
 	<InputNumber v-model="form.orderId" placeholder="请输入订单编号" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="订单账目编号" prop="orderAccountId">
 	<InputNumber v-model="form.orderAccountId" placeholder="请输入订单账目编号" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="优惠/增加金额" prop="accountAmount">
 	<InputNumber v-model="form.accountAmount" placeholder="请输入优惠/增加金额" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="优惠/增加类型" prop="accountType">
 	<Input v-model="form.accountType" placeholder="请输入优惠/增加类型"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="优惠/增加方式" prop="accountSubType">
 	<Input v-model="form.accountSubType" placeholder="请输入优惠/增加方式"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="账目描述" prop="description">
+	<Input v-model="form.description" placeholder="请输入账目描述"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="账目描述" prop="description">
-	<Input v-model="form.description" placeholder="请输入账目描述"/>
-</FormItem>
-	</i-col><i-col span="12">
 	<FormItem label="账目状态" prop="accountStatus">
 	<InputNumber v-model="form.accountStatus" placeholder="请输入账目状态" style="width: 100%;"/>
 </FormItem>
@@ -57,43 +64,50 @@
             <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
 	<i-col span="12">
+	<FormItem label="用户编号" prop="userId">
+	<InputNumber v-model="form.userId" placeholder="请输入用户编号" style="width: 100%;"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="店铺编号" prop="shopId">
 	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="订单编号" prop="orderId">
 	<InputNumber v-model="form.orderId" placeholder="请输入订单编号" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="订单账目编号" prop="orderAccountId">
 	<InputNumber v-model="form.orderAccountId" placeholder="请输入订单账目编号" style="width: 100%;"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="优惠/增加金额" prop="accountAmount">
 	<InputNumber v-model="form.accountAmount" placeholder="请输入优惠/增加金额" style="width: 100%;"/>
 </FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+	</i-col><i-col span="12">
 	<FormItem label="优惠/增加类型" prop="accountType">
 	<Input v-model="form.accountType" placeholder="请输入优惠/增加类型"/>
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="优惠/增加方式" prop="accountSubType">
 	<Input v-model="form.accountSubType" placeholder="请输入优惠/增加方式"/>
+</FormItem>
+	</i-col><i-col span="12">
+	<FormItem label="账目描述" prop="description">
+	<Input v-model="form.description" placeholder="请输入账目描述"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="账目描述" prop="description">
-	<Input v-model="form.description" placeholder="请输入账目描述"/>
-</FormItem>
-	</i-col><i-col span="12">
 	<FormItem label="账目状态" prop="accountStatus">
 	<InputNumber v-model="form.accountStatus" placeholder="请输入账目状态" style="width: 100%;"/>
 </FormItem>
@@ -129,7 +143,8 @@
                     batchEditUrl: '/goods-order-account-detail/admin/batch-update'
                 },
                 form: {
-                    shopId: null,
+                    userId: null,
+shopId: null,
 orderId: null,
 orderAccountId: null,
 accountAmount: null,
@@ -140,7 +155,10 @@ accountStatus: null,
 
                 },
                 validateRules: {
-                    shopId: [
+                    userId: [
+{type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
+],
+shopId: [
 {type: 'integer', required: true, message: '此项为必须项', trigger: 'blur, change'}
 ],
 orderId: [

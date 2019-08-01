@@ -19,6 +19,24 @@
 </Row>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="用户编号"><Row>
+	<i-col span="11">
+	<FormItem prop="userIdMin">
+	<InputNumber v-model="searchForm.userIdMin" placeholder="请输入开始用户编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="userIdMax">
+	<InputNumber v-model="searchForm.userIdMax" placeholder="请输入结束用户编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="店铺编号"><Row>
 	<i-col span="11">
 	<FormItem prop="shopIdMin">
@@ -33,10 +51,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="订单编号"><Row>
 	<i-col span="11">
 	<FormItem prop="orderIdMin">
@@ -51,14 +66,14 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
-	<FormItem label="交易编号" prop="transactionNo">
-	<Input v-model="searchForm.transactionNo" placeholder="请输入交易编号"/>
-</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="交易编号" prop="transactionNo">
+	<Input v-model="searchForm.transactionNo" placeholder="请输入交易编号"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="总金额"><Row>
 	<i-col span="11">
 	<FormItem prop="totalAmountMin">
@@ -73,7 +88,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="实付金额"><Row>
 	<i-col span="11">
 	<FormItem prop="payAmountMin">
@@ -88,10 +106,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="总优惠金额"><Row>
 	<i-col span="11">
 	<FormItem prop="discountAmountMin">
@@ -106,7 +121,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="平台优惠金额"><Row>
 	<i-col span="11">
 	<FormItem prop="platDiscountAmountMin">
@@ -121,10 +139,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="店铺优惠金额"><Row>
 	<i-col span="11">
 	<FormItem prop="shopDiscountAmountMin">
@@ -139,7 +154,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="店铺分账金额"><Row>
 	<i-col span="11">
 	<FormItem prop="shopAmountMin">
@@ -154,10 +172,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="账目状态"><Row>
 	<i-col span="11">
 	<FormItem prop="accountStatusMin">
@@ -172,7 +187,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="versionMin">
@@ -187,10 +205,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="createTimeMin">
@@ -205,7 +220,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="updateTimeMin">
@@ -220,10 +238,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="isActiveMin">
@@ -273,6 +288,9 @@
                     id: null,
 idMin: null, 
 idMax: null, 
+userId: null,
+userIdMin: null, 
+userIdMax: null, 
 shopId: null,
 shopIdMin: null, 
 shopIdMax: null, 

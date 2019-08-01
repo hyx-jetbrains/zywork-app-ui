@@ -54,6 +54,12 @@ minWidth: 120,
 sortable: true,
 },
 {
+title: '用户编号',
+key: 'userId',
+minWidth: 120,
+sortable: true,
+},
+{
 title: '店铺编号',
 key: 'shopId',
 minWidth: 120,

@@ -4,37 +4,38 @@
             <div class="detail-info">
                 <Row>
 	<i-col span="11"><span class="detail-title">订单账目详情编号：</span><span v-text="form.id"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">店铺编号：</span><span v-text="form.shopId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">用户编号：</span><span v-text="form.userId"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">订单编号：</span><span v-text="form.orderId"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">订单账目编号：</span><span v-text="form.orderAccountId"></span></i-col>
+	<i-col span="11"><span class="detail-title">店铺编号：</span><span v-text="form.shopId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">订单编号：</span><span v-text="form.orderId"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">优惠/增加金额：</span><span v-text="form.accountAmount"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">优惠/增加类型：</span><span v-text="form.accountType"></span></i-col>
+	<i-col span="11"><span class="detail-title">订单账目编号：</span><span v-text="form.orderAccountId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">优惠/增加金额：</span><span v-text="form.accountAmount"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">优惠/增加方式：</span><span v-text="form.accountSubType"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">账目描述：</span><span v-text="form.description"></span></i-col>
+	<i-col span="11"><span class="detail-title">优惠/增加类型：</span><span v-text="form.accountType"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">优惠/增加方式：</span><span v-text="form.accountSubType"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">账目状态：</span><span v-text="form.accountStatus"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.version"></span></i-col>
+	<i-col span="11"><span class="detail-title">账目描述：</span><span v-text="form.description"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">账目状态：</span><span v-text="form.accountStatus"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.createTime"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.updateTime"></span></i-col>
+	<i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.version"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.createTime"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.isActive"></span></i-col>
-<i-col span="2"></i-col>
+	<i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.updateTime"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.isActive"></span></i-col>
+
 </Row>
 
             </div>
@@ -52,6 +53,7 @@
                 },
                 form: {
                     id: null,
+userId: null,
 shopId: null,
 orderId: null,
 orderAccountId: null,
