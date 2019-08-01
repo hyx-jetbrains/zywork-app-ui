@@ -9,7 +9,7 @@
             显示所有活动
           </span>
           <span style="color: red; margin-left: 20px;">
-            注:一个sku只能设置为一个活动商品
+            注:一个sku只能设置为一种活动商品
           </span>
         </div>
         <div style="margin-bottom: 10px;">
