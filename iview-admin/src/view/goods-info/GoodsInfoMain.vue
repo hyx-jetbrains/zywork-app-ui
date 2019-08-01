@@ -360,10 +360,11 @@ export default {
       }
       distributionRatioModal.loadData(params, 'goods', row.id)
     },
-    showGoodsHotSetModal(goodsId) {
+    showGoodsHotSetModal(row) {
       let goodsHotSetModal = this.$refs.goodsHotSetModal
       goodsHotSetModal.modal.hot = true
-      goodsHotSetModal.form.goodsId = goodsId
+      goodsHotSetModal.form.shopId = row.shopId
+      goodsHotSetModal.form.goodsId = row.id
       goodsHotSetModal.loadHotData()
     }
   }

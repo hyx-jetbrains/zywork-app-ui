@@ -46,6 +46,7 @@ export default {
       },
       form: {
         id: null,
+        shopId: null,
         goodsId: null,
         beginTime: null,
         endTime: null
@@ -92,6 +93,7 @@ export default {
        this.$refs.addForm.validate(valid => {
           if (valid) {
             utils.doPostJson('/goods-hot/admin/save', {
+              shopId: this.form.shopId,
               goodsId: this.form.goodsId,
               beginTime: this.form.beginTime,
               endTime: this.form.endTime
@@ -114,6 +116,7 @@ export default {
           if (valid) {
             utils.doPostJson('/goods-hot/admin/update', {
               id: this.form.id,
+              shopId: this.form.shopId,
               goodsId: this.form.goodsId,
               beginTime: this.form.beginTime,
               endTime: this.form.endTime,
@@ -134,6 +137,7 @@ export default {
     },
     loadHotData() {
       utils.doPostJson('/goods-hot/admin/all-cond', {
+        shpoId: this.form.shopId,
         goodsId: this.form.goodsId
       }, {}).then(response => {
         if (response.data.code === ResponseStatus.OK) {

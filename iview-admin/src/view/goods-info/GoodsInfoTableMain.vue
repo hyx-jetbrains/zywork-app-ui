@@ -702,7 +702,7 @@ export default {
       } else if (itemName === 'cancelHot') {
         this.cancelHot(row.hotId)
       } else if (itemName === 'setHot') {
-        this.$emit('showGoodsHotSetModal', row.id)
+        this.$emit('showGoodsHotSetModal', row)
       }
     },
     active(row) {
