@@ -362,7 +362,7 @@ export default {
   },
   computed: {},
   mounted() {
-    this.search()
+    
   },
   methods: {
     search() {
@@ -404,7 +404,7 @@ export default {
       utils.doPostJson(this.urls.updateShelfStatusUrl, data, {}).then(res => {
         if (res.data.code === ResponseStatus.OK) {
           this.$Message.success(tip)
-          this.search()
+          
         } else {
           this.$Message.error(res.data.message)
         }

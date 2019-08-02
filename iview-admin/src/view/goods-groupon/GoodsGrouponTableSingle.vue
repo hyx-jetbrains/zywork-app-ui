@@ -287,7 +287,7 @@ renderHeader: (h, params) => {
         },
         computed: {},
         mounted() {
-            this.search()
+            
         },
         methods: {
             search() {

@@ -309,7 +309,7 @@ sortable: true,
   },
   computed: {},
   mounted() {
-    this.search()
+    
   },
   methods: {
     search() {
