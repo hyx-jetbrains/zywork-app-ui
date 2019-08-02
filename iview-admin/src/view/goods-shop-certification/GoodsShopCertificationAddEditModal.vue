@@ -5,11 +5,18 @@
                 <Row>
 	<i-col span="12">
 	<FormItem label="店铺编号" prop="shopId">
-	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
+	<!-- <InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/> -->
+            <span v-text="form.shopId"></span>
+            -
+            <span v-text="form.shopName"></span>
+            &nbsp;
+            <Button @click="showModal('choice')" type="text" style="color: #108EE9;">选择店铺</Button>&nbsp;
 </FormItem>
+<FormItem prop="shopName"></FormItem>
 	</i-col><i-col span="12">
 	<FormItem label="认证详情JSON" prop="detail">
-	<Input v-model="form.detail" placeholder="请输入认证详情JSON"/>
+	<!-- <Input v-model="form.detail" placeholder="请输入认证详情JSON"/> -->
+   <vue-json-editor v-model="form.detail" :showBtns="false"></vue-json-editor>
 </FormItem>
 	</i-col>
 </Row>
@@ -25,11 +32,17 @@
                 <Row>
 	<i-col span="12">
 	<FormItem label="店铺编号" prop="shopId">
-	<InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/>
+	<!-- <InputNumber v-model="form.shopId" placeholder="请输入店铺编号" style="width: 100%;"/> -->
+            <span v-text="form.shopId"></span>
+            -
+            <span v-text="form.shopName"></span>
+            &nbsp;
+            <Button @click="showModal('choice')" type="text" style="color: #108EE9;">选择店铺</Button>&nbsp;
 </FormItem>
 	</i-col><i-col span="12">
 	<FormItem label="认证详情JSON" prop="detail">
-	<Input v-model="form.detail" placeholder="请输入认证详情JSON"/>
+	<!-- <Input v-model="form.detail" placeholder="请输入认证详情JSON"/> -->
+  <vue-json-editor v-model="form.detail" :showBtns="false"></vue-json-editor>
 </FormItem>
 	</i-col>
 </Row>
@@ -40,17 +53,31 @@
                 <Button type="primary" size="large" @click="edit" :loading="loading.edit">修改</Button>
             </div>
         </Modal>
+        <Modal v-model="modal.choice" title="选择店铺" :mask-closable="false" width="960">
+          <GoodsShopMainSingle ref="choiceModal" v-on:confirmChoice="confirmChoice" />
+          <div slot="footer">
+            <Button type="text" size="large" @click="cancelModal('choice')">取消</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
+          </div>
+        </Modal>
     </div>
 </template>
 
 <script>
+    import vueJsonEditor from 'vue-json-editor'
+    import GoodsShopMainSingle from '../goods-shop/GoodsShopMainSingle.vue'
     export default {
         name: 'GoodsShopCertificationAddEdit',
+        components: {
+            vueJsonEditor,
+            GoodsShopMainSingle
+        },
         data() {
             return {
                 modal: {
                     add: false,
-                    edit: false
+                    edit: false,
+                    choice: false
                 },
                 loading: {
                     add: false,
@@ -65,6 +92,7 @@
                 form: {
                     id: null,
 shopId: null,
+shopName: null,
 detail: null,
 
 
@@ -98,7 +126,30 @@ detail: [
             },
             edit() {
                 this.$emit('edit')
-            }
+            },
+            showModal(modal) {
+              if (modal === 'choice') {
+                this.$refs.choiceModal.searchTable()
+              }
+              this.modal[modal] = true
+            },
+            cancelModal(modal) {
+              this.modal[modal] = false
+            },
+            /**
+            * 底部的确认选择店铺
+            */
+            bottomConfirmChoice() {
+              this.$refs.choiceModal.confirmSelection()
+            },
+            /**
+            * 确认选择店铺
+            */
+            confirmChoice(row) {
+              this.cancelModal('choice')
+              this.form.shopId = row.id
+              this.form.shopName = row.title
+            },
         }
     }
 </script>

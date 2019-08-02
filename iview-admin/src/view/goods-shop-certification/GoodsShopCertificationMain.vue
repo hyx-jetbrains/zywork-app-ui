@@ -31,6 +31,7 @@
 
 <script>
     import * as utils from '@/api/utils-v2'
+    import * as ResponseStatus from '@/api/response-status'
     import GoodsShopCertificationTableMain from './GoodsShopCertificationTableMain.vue'
     import GoodsShopCertificationAddEditModal from './GoodsShopCertificationAddEditModal.vue'
     import GoodsShopCertificationSearchModal from './GoodsShopCertificationSearchModal.vue'
@@ -47,7 +48,8 @@
             return {
                 urls: {
                     batchRemoveUrl: '/goods-shop-certification/admin/batch-remove',
-                    batchActiveUrl: '/goods-shop-certification/admin/batch-active'
+                    batchActiveUrl: '/goods-shop-certification/admin/batch-active',
+                    oneShopUrl: '/goods-shop/admin/one/'
                 },
             }
         },
@@ -65,9 +67,22 @@
                 utils.add(this)
             },
             showEditModal(row) {
-                let addEditModal = this.$refs.addEditModal
-                addEditModal.modal.edit = true
-                addEditModal.form = row
+                utils.doGet(this.urls.oneShopUrl + row.shopId, {}).then(res => {
+                  if (ResponseStatus.OK === res.data.code) {
+                    let addEditModal = this.$refs.addEditModal
+                    let title = res.data.data.title
+                    if (title) {
+                      row.shopName = title
+                    }
+                    addEditModal.modal.edit = true
+                    addEditModal.form = row
+                  } else {
+                    this.$Message.error(res.data.message)
+                  }
+                }).catch(err => {
+                  this.$Message.error(err)
+                })
+                
             },
             edit() {
                 utils.edit(this)
