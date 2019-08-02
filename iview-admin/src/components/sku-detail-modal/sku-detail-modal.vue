@@ -291,30 +291,30 @@ export default {
             // -1表示是点了“显示所有活动信息”过来的，其他的则表示点的是按钮设置活动商品过来的
             for (var j = 0; j < lenJ; j++) {
               if (data[j].goodsSkuId === this.chooseSkuId) {
-                if (data[j].agentCount > 0) {
-                    // 有代理信息
-                    setFlag = false
-                    this.$Message.warning('该sku已是代理商品')
-                    continue
-                  }
-                  if (data[j].grouponCount > 0) {
-                    // 有拼团信息
-                    setFlag = false
-                    this.$Message.warning('该sku已是拼团商品')
-                    continue
-                  }
-                  if (data[j].seckillCount > 0) {
-                    // 有秒杀信息
-                    setFlag = false
-                    this.$Message.warning('该sku已是秒杀商品')
-                    continue
-                  }
-                  if (data[j].promotionCount > 0) {
-                    // 有促销信息
-                    setFlag = false
-                    this.$Message.warning('该sku已是促销商品')
-                    continue
-                  }
+                if (data[j].agentCount > 0 && type != 0) {
+                  // 有代理信息
+                  setFlag = false
+                  this.$Message.warning('该sku已是代理商品')
+                  continue
+                }
+                if (data[j].grouponCount > 0 && type != 2) {
+                  // 有拼团信息
+                  setFlag = false
+                  this.$Message.warning('该sku已是拼团商品')
+                  continue
+                }
+                if (data[j].seckillCount > 0 && type != 3) {
+                  // 有秒杀信息
+                  setFlag = false
+                  this.$Message.warning('该sku已是秒杀商品')
+                  continue
+                }
+                if (data[j].promotionCount > 0 && type != 1) {
+                  // 有促销信息
+                  setFlag = false
+                  this.$Message.warning('该sku已是促销商品')
+                  continue
+                }
               }
             }
             if (setFlag) {
