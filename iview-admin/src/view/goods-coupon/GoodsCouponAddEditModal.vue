@@ -57,7 +57,7 @@
 	</i-col><i-col span="12">
 	<FormItem label="优惠券类型" prop="couponType">
 	<!-- <InputNumber v-model="form.couponType" placeholder="请输入优惠券类型" style="width: 100%;"/> -->
-  <Select v-model="form.couponType" placeholder="请选择优惠券类型" filterable>
+  <Select v-model="form.couponType" placeholder="请选择优惠券类型" filterable @on-change="couponTypeChange">
     <Option v-for="(option, index) in couponTypeSelect" :value="option.value" :key="index">{{option.label}}</Option>
   </Select>
 </FormItem>
@@ -69,31 +69,10 @@
 	<Input v-model="form.title" placeholder="请输入优惠券标题"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="最小消费金额（元）" prop="useMinAmount">
-	<InputNumber v-model="form.useMinAmount" placeholder="请输入最小消费金额（元）" style="width: 100%;"/>
-</FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="满减优惠金额（元）" prop="discountAmount">
-	<InputNumber v-model="form.discountAmount" placeholder="请输入满减优惠金额（元）" style="width: 100%;"/>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="满减折扣" prop="discountPercent">
-	<InputNumber v-model="form.discountPercent" placeholder="请输入满减折扣" style="width: 100%;"/>
-</FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="赠送积分" prop="integralAmount">
-	<InputNumber v-model="form.integralAmount" placeholder="请输入赠送积分" style="width: 100%;"/>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="优惠券总量" prop="totalCount">
+    <FormItem label="优惠券总量" prop="totalCount">
 	<InputNumber v-model="form.totalCount" placeholder="请输入优惠券总量" style="width: 100%;"/>
 </FormItem>
+	
 	</i-col>
 </Row>
 <Row>
@@ -107,6 +86,25 @@
 </FormItem>
 	</i-col>
 </Row>
+<Row>
+	<i-col span="12">
+    <FormItem label="最小消费金额（元）" prop="useMinAmount">
+	<InputNumber v-model="form.useMinAmount" placeholder="请输入最小消费金额（元）" style="width: 100%;"/>
+</FormItem>
+	
+	</i-col><i-col span="12">
+    <FormItem label="满减优惠金额（元）" v-if="form.couponType === 0" prop="discountAmount">
+	<InputNumber v-model="form.discountAmount" placeholder="请输入满减优惠金额（元）" style="width: 100%;"/>
+</FormItem>
+<FormItem label="赠送积分" prop="integralAmount" v-if="form.couponType === 2">
+	<InputNumber v-model="form.integralAmount" placeholder="请输入赠送积分" style="width: 100%;"/>
+</FormItem>
+	<FormItem label="满减折扣" v-if="form.couponType === 1" prop="discountPercent">
+	<InputNumber v-model="form.discountPercent" placeholder="请输入满减折扣" style="width: 100%;"/>
+</FormItem>
+	</i-col>
+</Row>
+
 
             </Form>
             <div slot="footer">
@@ -171,7 +169,7 @@
 	</i-col><i-col span="12">
 	<FormItem label="优惠券类型" prop="couponType">
 	<!-- <InputNumber v-model="form.couponType" placeholder="请输入优惠券类型" style="width: 100%;"/> -->
-  <Select v-model="form.couponType" placeholder="请选择优惠券类型" filterable>
+  <Select v-model="form.couponType" placeholder="请选择优惠券类型" filterable @on-change="couponTypeChange">
     <Option v-for="(option, index) in couponTypeSelect" :value="option.value" :key="index">{{option.label}}</Option>
   </Select>
 </FormItem>
@@ -183,34 +181,12 @@
 	<Input v-model="form.title" placeholder="请输入优惠券标题"/>
 </FormItem>
 	</i-col><i-col span="12">
-	<FormItem label="最小消费金额（元）" prop="useMinAmount">
-	<InputNumber v-model="form.useMinAmount" placeholder="请输入最小消费金额（元）" style="width: 100%;"/>
-</FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="满减优惠金额（元）" prop="discountAmount">
-	<InputNumber v-model="form.discountAmount" placeholder="请输入满减优惠金额（元）" style="width: 100%;"/>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="满减折扣" prop="discountPercent">
-	<InputNumber v-model="form.discountPercent" placeholder="请输入满减折扣" style="width: 100%;"/>
-</FormItem>
-	</i-col>
-</Row>
-<Row>
-	<i-col span="12">
-	<FormItem label="赠送积分" prop="integralAmount">
-	<InputNumber v-model="form.integralAmount" placeholder="请输入赠送积分" style="width: 100%;"/>
-</FormItem>
-	</i-col><i-col span="12">
-	<FormItem label="优惠券总量" prop="totalCount">
+    <FormItem label="优惠券总量" prop="totalCount">
 	<InputNumber v-model="form.totalCount" placeholder="请输入优惠券总量" style="width: 100%;"/>
 </FormItem>
+	
 	</i-col>
 </Row>
-
 <Row>
 	<i-col span="12">
 	<FormItem label="开始时间" prop="startTime">
@@ -219,6 +195,24 @@
 	</i-col><i-col span="12">
     <FormItem label="有效天数" prop="validDays">
 	<InputNumber v-model="form.validDays" placeholder="请输入有效天数" style="width: 100%;"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+    <FormItem label="最小消费金额（元）" prop="useMinAmount">
+	<InputNumber v-model="form.useMinAmount" placeholder="请输入最小消费金额（元）" style="width: 100%;"/>
+</FormItem>
+	
+	</i-col><i-col span="12">
+    <FormItem label="满减优惠金额（元）" v-if="form.couponType === 0" prop="discountAmount">
+	<InputNumber v-model="form.discountAmount" placeholder="请输入满减优惠金额（元）" style="width: 100%;"/>
+</FormItem>
+<FormItem label="赠送积分" prop="integralAmount" v-if="form.couponType === 2">
+	<InputNumber v-model="form.integralAmount" placeholder="请输入赠送积分" style="width: 100%;"/>
+</FormItem>
+	<FormItem label="满减折扣" v-if="form.couponType === 1" prop="discountPercent">
+	<InputNumber v-model="form.discountPercent" placeholder="请输入满减折扣" style="width: 100%;"/>
 </FormItem>
 	</i-col>
 </Row>
@@ -368,6 +362,14 @@ startTime: [
             edit() {
               this.setDueTime()
               this.$emit('edit')
+            },
+            /**
+             * 优惠券类型监听
+             */
+            couponTypeChange(e) {
+              this.form.integralAmount = null
+              this.form.discountAmount = null
+              this.form.discountPercent = null
             },
             /**
              * 显示模态窗
