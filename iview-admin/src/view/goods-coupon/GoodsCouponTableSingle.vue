@@ -13,17 +13,13 @@
 
 <script>
     import * as utils from '@/api/utils-v2'
-    import headImg from '@/assets/images/head.png'
-    import config from '@/config'
-const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
-const cdnUrl = config.baseUrl.cdnUrl
 
     export default {
-        name: 'UserDetailTableSingle',
+        name: 'GoodsCouponTableSingle',
         data() {
             return {
                 urls: {
-                    searchUrl: '/user-detail/admin/pager-cond'
+                    searchUrl: '/goods-coupon/admin/pager-cond'
                 },
                 pager: {
                     pageNo: 1,
@@ -45,128 +41,128 @@ const cdnUrl = config.baseUrl.cdnUrl
                         }
                     },
                         {
-title: '用户编号',
+title: '优惠券编号',
 key: 'id',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '昵称',
-key: 'nickname',
+title: '商品类目编号',
+key: 'categoryId',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '头像地址',
-key: 'headicon',
+title: '店铺编号',
+key: 'shopId',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '商品编号',
+key: 'goodsId',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '商品SKU编号',
+key: 'goodsSkuId',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '优惠券标题',
+key: 'title',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '最小消费金额（元）',
+key: 'useMinAmount',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '满减优惠金额（元）',
+key: 'discountAmount',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '满减折扣',
+key: 'discountPercent',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '赠送积分',
+key: 'integralAmount',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '优惠券总量',
+key: 'totalCount',
+minWidth: 120,
+sortable: true,
+},
+{
+title: '优惠券使用范围',
+key: 'couponUsableRange',
 minWidth: 120,
 sortable: true,
 render: (h, params) => {
-              let imgSrc = params.row.headicon
-              if (!imgSrc) {
-                imgSrc = headImg
-              } else {
-                if (imgSrc.indexOf('http') < 0) {
-                  imgSrc = cdnUrl + '/' + imgSrc
-                }
-              }
-              return h(
-                'img',
-                {
-                  attrs: {
-                    src: imgSrc
-                  },
-                  style: {
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '50%'
-                  }
-                },
-                ''
-              )
-            }
+  const row = params.row
+  let color = row.couponUsableRange === 0 ? 'primary' : 
+              row.couponUsableRange === 1 ? 'warning' : 
+              row.couponUsableRange === 2 ? 'success' : 
+              row.couponUsableRange === 3 ? 'magenta' :
+              row.couponUsableRange === 4 ? 'lime' : 'error'
+  let txt = row.couponUsableRange === 0 ? '平台优惠券' : 
+              row.couponUsableRange === 1 ? '类目优惠券' : 
+              row.couponUsableRange === 2 ? '店铺优惠券' : 
+              row.couponUsableRange === 3 ? '商品优惠券' :
+              row.couponUsableRange === 4 ? '单品优惠券' : '未知'
+  return h('Tag', {
+    props: {
+      color: color
+    }
+  }, txt)
+}
 },
 {
-title: '性别',
-key: 'gender',
+title: '优惠券类型',
+key: 'couponType',
+minWidth: 120,
+sortable: true,
+render: (h, params) => {
+  const row = params.row
+  let color = row.couponType === 0 ? 'primary' : row.couponType === 1 ? 'warning' : row.couponType === 2 ? 'success' : 'error'
+  let txt = row.couponType === 0 ? '现金券' : row.couponType === 1 ? '折扣券' : row.couponType === 2 ? '积分券' : '未知'
+  return h('Tag', {
+    props: {
+      color: color
+    }
+  }, txt)
+}
+},
+{
+title: '开始时间',
+key: 'startTime',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '生日',
-key: 'birthday',
+title: '到期时间',
+key: 'dueTime',
 minWidth: 120,
 sortable: true,
 },
 {
-title: '年龄',
-key: 'age',
+title: '有效时间',
+key: 'validDays',
 minWidth: 120,
 sortable: true,
-},
-{
-title: 'QQ号',
-key: 'qq',
-minWidth: 120,
-sortable: true,
-},
-{
-title: 'QQ二维码',
-key: 'qqQrcode',
-minWidth: 120,
-sortable: true,
-},
-{
-title: '微信号',
-key: 'wechat',
-minWidth: 120,
-sortable: true,
-},
-{
-title: '微信二维码',
-key: 'wechatQrcode',
-minWidth: 120,
-sortable: true,
-},
-{
-title: '支付宝账号',
-key: 'alipay',
-minWidth: 120,
-sortable: true,
-},
-{
-title: '支付宝二维码',
-key: 'alipayQrcode',
-minWidth: 120,
-sortable: true,
-},
-{
-title: '分享码',
-key: 'shareCode',
-minWidth: 120,
-sortable: true,
-renderHeader: (h, params) => {
-              return h('span', [
-                h('span', '分享码'),
-                h('Tooltip', {
-                  props: {
-                    content: '用户邀请分享码，自动生成',
-                    placement: 'top',
-                    transfer: true,
-                    maxWidth: 500
-                  }
-                }, [
-                  h('Icon', {
-                    props: {
-                      type: 'ios-help-circle'
-                    },
-                    style: {
-                      marginLeft: '3px'
-                    }
-                  })
-                ])
-              ])
-            }
 },
 {
 title: '版本号',
@@ -178,7 +174,7 @@ renderHeader: (h, params) => {
                 h('span', '版本号'),
                 h('Tooltip', {
                   props: {
-                    content: '用户详情版本号',
+                    content: '优惠券版本号',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -206,7 +202,7 @@ renderHeader: (h, params) => {
                 h('span', '创建时间'),
                 h('Tooltip', {
                   props: {
-                    content: '用户详情创建时间',
+                    content: '优惠券创建时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -234,7 +230,7 @@ renderHeader: (h, params) => {
                 h('span', '更新时间'),
                 h('Tooltip', {
                   props: {
-                    content: '用户详情更新时间',
+                    content: '优惠券更新时间',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -262,7 +258,7 @@ renderHeader: (h, params) => {
                 h('span', '是否激活'),
                 h('Tooltip', {
                   props: {
-                    content: '用户详情是否激活',
+                    content: '优惠券是否激活',
                     placement: 'top',
                     transfer: true,
                     maxWidth: 500
@@ -323,7 +319,7 @@ renderHeader: (h, params) => {
         },
         computed: {},
         mounted() {
-            
+            this.search()
         },
         methods: {
             search() {

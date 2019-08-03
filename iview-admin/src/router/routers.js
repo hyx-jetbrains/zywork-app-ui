@@ -770,7 +770,7 @@ export default [
               icon: 'md-medal',
               title: '优惠券管理'
             },
-            component: () => import('@/view/demo/ComingSoon.vue')
+            component: () => import('@/view/goods-coupon/GoodsCouponMain.vue')
           },
           {
             path: 'UserCoupon',
@@ -779,7 +779,7 @@ export default [
               icon: 'md-star',
               title: '用户优惠券管理'
             },
-            component: () => import('@/view/demo/ComingSoon.vue')
+            component: () => import('@/view/goods-user-coupon/GoodsUserCouponMain.vue')
           }
         ]
       }

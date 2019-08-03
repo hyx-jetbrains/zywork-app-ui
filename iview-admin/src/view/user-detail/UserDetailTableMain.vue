@@ -13,6 +13,10 @@
 
 <script>
     import * as utils from '@/api/utils-v2'
+    import headImg from '@/assets/images/head.png'
+    import config from '@/config'
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
+const cdnUrl = config.baseUrl.cdnUrl
 
     export default {
         name: 'UserDetailTableMain',
@@ -66,6 +70,30 @@ title: '头像地址',
 key: 'headicon',
 minWidth: 120,
 sortable: true,
+render: (h, params) => {
+              let imgSrc = params.row.headicon
+              if (!imgSrc) {
+                imgSrc = headImg
+              } else {
+                if (imgSrc.indexOf('http') < 0) {
+                  imgSrc = cdnUrl + '/' + imgSrc
+                }
+              }
+              return h(
+                'img',
+                {
+                  attrs: {
+                    src: imgSrc
+                  },
+                  style: {
+                    width: '60px',
+                    height: '60px',
+                    borderRadius: '50%'
+                  }
+                },
+                ''
+              )
+            }
 },
 {
 title: '性别',

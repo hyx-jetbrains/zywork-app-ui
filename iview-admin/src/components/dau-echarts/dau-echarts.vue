@@ -52,12 +52,13 @@ export default {
   },
   methods: {
     initDauData() {
+      var currDate = new Date()
       // 初始化活跃用户数据
       if (this.dauBeginDate === '') {
-        this.dauBeginDate = getDate(-6)
+        this.dauBeginDate = getDate(currDate,-6)
       }
       if (this.dauEndDate === '') {
-        this.dauEndDate = getDate(0)
+        this.dauEndDate = getDate(currDate,0)
       }
       const params = {
         beginDateStr: this.dauBeginDate,
@@ -81,11 +82,12 @@ export default {
     },
     initRegCountData() {
       // 初始化注册统计数据
+      var currDate = new Date()
       if (this.regCountBeginDate === '') {
-        this.regCountBeginDate = getDate(-6)
+        this.regCountBeginDate = getDate(currDate, -6)
       }
       if (this.regCountEndDate === '') {
-        this.regCountEndDate = getDate(0)
+        this.regCountEndDate = getDate(currDate, 0)
       }
       const params = {
         beginDateStr: this.regCountBeginDate,

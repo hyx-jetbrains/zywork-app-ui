@@ -110,3 +110,65 @@ export const isDeliverySelect = [
     label: '已发货'
   }
 ]
+
+/**
+ * @description 优惠券状态下拉框
+ */
+export const couponStatusSelect = [
+  {
+    value: 0,
+    label: '未使用'
+  },
+  {
+    value: 1,
+    label: '已使用'
+  },
+  {
+    value: 2,
+    label: '已过期'
+  }
+]
+
+/**
+ * @description 优惠券使用类型下拉框
+ */
+export const couponTypeSelect = [
+  {
+    value: 0,
+    label: '现金券'
+  },
+  {
+    value: 1,
+    label: '折扣券'
+  },
+  {
+    value: 2,
+    label: '积分券'
+  }
+]
+
+/**
+ * @description 优惠券使用范围下拉框
+ */
+export const couponUsableRangeSelect = [
+  {
+    value: 0,
+    label: '平台优惠券'
+  },
+  {
+    value: 1,
+    label: '类目优惠券'
+  },
+  {
+    value: 2,
+    label: '店铺优惠券'
+  },
+  {
+    value: 3,
+    label: '商品优惠券'
+  },
+  {
+    value: 4,
+    label: '单品优惠券'
+  },
+]

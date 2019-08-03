@@ -447,8 +447,7 @@ export const exportJson = (self) => {
  * getDate(7)：7天后的时间
  * getDate(-7)：7天前的时间
  */
-export const getDate = (days) => {
-  var date1 = new Date()
+export const getDate = (date1, days) => {
   var time1 =
     date1.getFullYear() +
     '-' +

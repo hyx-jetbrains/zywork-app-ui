@@ -170,10 +170,11 @@ export default {
         .catch(err => {
           this.$Message.error(err)
         })
+      var currDate = new Date()
       // 本周开始时间
-      const beginDate = getDate(-6)
+      const beginDate = getDate(currDate, -6)
       // 本周结束时间
-      const endDate = getDate(0)
+      const endDate = getDate(currDate, 0)
       const weekParams = {
         beginDateStr: beginDate,
         endDateStr: endDate
