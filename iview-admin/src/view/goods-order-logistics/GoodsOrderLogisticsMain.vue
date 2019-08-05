@@ -30,19 +30,23 @@
 
         <GoodsOrderDetailModal v-if="type == 0" ref="attrDetailModal" />
         <GoodsShopDetailModal v-if="type == 1" ref="attrDetailModal" />
-        <Modal v-model="modal.searchTableModal" title="属性条件搜索" :mask-closable="true" width="760">
+        <Modal v-model="modal.searchOrderModal" title="属性条件搜索" :mask-closable="true" width="960">
           <GoodsOrderMainSingle
-            v-if="type == 0"
-            ref="searchTableModal"
-            v-on:confirmChoice="confirmChoice"
-          />
-          <GoodsShopMainSingle
-            v-if="type == 1"
-            ref="searchTableModal"
+            ref="searchOrderModal"
             v-on:confirmChoice="confirmChoice"
           />
           <div slot="footer">
-                <Button type="text" size="large" @click="cancelModal('search')">取消</Button>
+                <Button type="text" size="large" @click="cancelModal('searchOrderModal')">取消</Button>
+                <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
+            </div>
+        </Modal>
+        <Modal v-model="modal.searchShopModal" title="属性条件搜索" :mask-closable="true" width="960">
+          <GoodsShopMainSingle
+            ref="searchShopModal"
+            v-on:confirmChoice="confirmChoice"
+          />
+          <div slot="footer">
+                <Button type="text" size="large" @click="cancelModal('searchShopModal')">取消</Button>
                 <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
             </div>
         </Modal>
@@ -76,7 +80,8 @@
             return {
                 type: 0,
                 modal: {
-                  searchTableModal: false
+                  searchOrderModal: false,
+                  searchShopModal: false
                 },
                 urls: {
                     batchRemoveUrl: '/goods-order-logistics/admin/batch-remove',
@@ -164,7 +169,13 @@
              */
             showSearch(type) {
               this.type = type
-              this.showModal('searchTableModal')
+              if (type === 0) {
+                this.showModal('searchOrderModal')
+                this.$refs.searchOrderModal.searchTable()
+              } else if (type === 1) {
+                this.showModal('searchShopModal')
+                this.$refs.searchShopModal.searchTable()
+              }
             },
             /**
              * 底部的确认选择

@@ -37,9 +37,9 @@
     <GoodsOrderAddEditModal ref="addEditModal" v-on:add="add" v-on:edit="edit" />
     <GoodsOrderSearchModal ref="searchModal" v-on:searchTable="searchTable" />
     <GoodsOrderDetailModal ref="detailModal" />
-    <UserDetailModal  ref="attrDetailmodal" />
+    <UserDetailDetailModal  ref="attrDetailmodal" />
     <Modal v-model="modal.searchTableModal" title="选择查询条件" :mask-closable="false" width="960">
-      <UserMainSingle
+      <UserDetailMainSingle
         ref="searchTableModal"
         v-on:confirmChoice="confirmChoice"
       />
@@ -58,8 +58,8 @@ import GoodsOrderTableMain from './GoodsOrderTableMain.vue'
 import GoodsOrderAddEditModal from './GoodsOrderAddEditModal.vue'
 import GoodsOrderSearchModal from './GoodsOrderSearchModal.vue'
 import GoodsOrderDetailModal from './GoodsOrderDetailModal.vue'
-import UserDetailModal from '../user/UserDetailModal.vue'
-import UserMainSingle from '../user/UserMainSingle.vue'
+import UserDetailDetailModal from '../user-detail/UserDetailDetailModal.vue'
+import UserDetailMainSingle from '../user-detail/UserDetailMainSingle.vue'
 export default {
   name: 'GoodsOrderMain',
   components: {
@@ -67,15 +67,15 @@ export default {
     GoodsOrderAddEditModal,
     GoodsOrderSearchModal,
     GoodsOrderDetailModal,
-    UserDetailModal,
-    UserMainSingle
+    UserDetailDetailModal,
+    UserDetailMainSingle
   },
   data() {
     return {
       urls: {
         batchRemoveUrl: '/goods-order/admin/batch-remove',
         batchActiveUrl: '/goods-order/admin/batch-active',
-        oneUserUrl: '/user/admin/one/'
+        oneUserUrl: '/user-detail/admin/one/'
       },
       modal: {
         searchTableModal: false
@@ -153,6 +153,8 @@ export default {
      */
     showSearchTableModal(type) {
       this.showModal('searchTableModal')
+      let searchTableModal = this.$refs.searchTableModal
+      searchTableModal.searchTable()
     },
     /**
      * 底部的确认选择

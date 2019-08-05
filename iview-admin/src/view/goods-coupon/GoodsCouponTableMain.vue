@@ -60,18 +60,174 @@ title: '商品类目编号',
 key: 'categoryId',
 minWidth: 120,
 sortable: true,
+render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.categoryId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'categoryModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'categoryShowSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
 },
 {
 title: '店铺编号',
 key: 'shopId',
 minWidth: 120,
 sortable: true,
+render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.shopId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'shopModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'shopShowSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
 },
 {
 title: '商品编号',
 key: 'goodsId',
 minWidth: 120,
 sortable: true,
+render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.goodsId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'goodsModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'goodsShowSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
 },
 {
 title: '商品SKU编号',
@@ -422,6 +578,24 @@ renderHeader: (h, params) => {
                     this.$emit('showDetailModal', row)
                 } else if (itemName === "remove") {
                     utils.remove(this, row);
+                } else if (itemName === 'categoryModuleDetail') {
+                  // 显示类目详情的弹窗
+                  this.$emit('showAttrDetailModal', row.categoryId, 0)
+                } else if (itemName === 'categoryShowSearch') {
+                  // 显示类目搜索的弹窗
+                  this.$emit('showSearchTableModal', 0)
+                } else if (itemName === 'shopModuleDetail') {
+                  // 显示店铺详情的弹窗
+                  this.$emit('showAttrDetailModal', row.shopId, 1)
+                } else if (itemName === 'shopShowSearch') {
+                  // 显示店铺搜索的弹窗
+                  this.$emit('showSearchTableModal', 1)
+                } else if (itemName === 'goodsModuleDetail') {
+                  // 显示商品详情的弹窗
+                  this.$emit('showAttrDetailModal', row.goodsId, 2)
+                } else if (itemName === 'goodsShowSearch') {
+                  // 显示商品搜索的弹窗
+                  this.$emit('showSearchTableModal', 2)
                 }
             },
             active(row) {

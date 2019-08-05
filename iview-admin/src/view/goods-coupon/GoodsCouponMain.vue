@@ -19,13 +19,38 @@
                     <Tooltip content="刷新" placement="right">
                         <Button icon="md-refresh" type="success" shape="circle" @click="searchTable"></Button>
                     </Tooltip>
-                    <GoodsCouponTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" v-on:showDetailModal="showDetailModal"/>
+                    <GoodsCouponTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" v-on:showDetailModal="showDetailModal"
+                        v-on:showAttrDetailModal="showAttrDetailModal" v-on:showSearchTableModal="showSearchTableModal" />
                 </Card>
             </i-col>
         </Row>
         <GoodsCouponAddEditModal ref="addEditModal" v-on:add="add" v-on:edit="edit"/>
         <GoodsCouponSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
         <GoodsCouponDetailModal ref="detailModal"/>
+        <GoodsCategoryDetailModal ref="categoryDetailModal" />
+        <Modal v-model="modal.searchCategoryModal" title="选择类目查询" :mask-closable="false" width="960">
+          <GoodsCategoryMainSingle ref="searchCategoryModal" v-on:confirmChoice="confirmChoiceShop" />
+          <div slot="footer">
+            <Button type="text" size="large" @click="cancelModal('searchCategoryModal')">取消</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoiceShop">查询</Button>
+          </div>
+        </Modal>
+        <GoodsShopDetailModal ref="shopDetailModal" />
+        <Modal v-model="modal.searchShopModal" title="选择类目查询" :mask-closable="false" width="960">
+          <GoodsShopMainSingle ref="searchShopModal" v-on:confirmChoice="confirmChoiceShop" />
+          <div slot="footer">
+            <Button type="text" size="large" @click="cancelModal('searchShopModal')">取消</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoiceShop">查询</Button>
+          </div>
+        </Modal>
+        <GoodsInfoDetailModal ref="goodsDetailModal" />
+        <Modal v-model="modal.searchGoodsModal" title="选择类目查询" :mask-closable="false" width="960">
+          <GoodsInfoMainSingle ref="searchGoodsModal" v-on:confirmChoice="confirmChoiceShop" />
+          <div slot="footer">
+            <Button type="text" size="large" @click="cancelModal('searchGoodsModal')">取消</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoiceShop">查询</Button>
+          </div>
+        </Modal>
     </div>
 </template>
 
@@ -36,13 +61,25 @@
     import GoodsCouponAddEditModal from './GoodsCouponAddEditModal.vue'
     import GoodsCouponSearchModal from './GoodsCouponSearchModal.vue'
     import GoodsCouponDetailModal from './GoodsCouponDetailModal.vue'
+    import GoodsCategoryDetailModal from '../goods-category/GoodsCategoryDetailModal.vue'
+    import GoodsCategoryMainSingle from '../goods-category/GoodsCategoryMainSingle.vue'
+    import GoodsShopDetailModal from '../goods-shop/GoodsShopDetailModal.vue'
+    import GoodsShopMainSingle from '../goods-shop/GoodsShopMainSingle.vue'
+    import GoodsInfoDetailModal from '../goods-info/GoodsInfoDetailModal.vue'
+    import GoodsInfoMainSingle from '../goods-info/GoodsInfoMainSingle.vue'
     export default {
         name: 'GoodsCouponMain',
         components: {
             GoodsCouponTableMain,
             GoodsCouponAddEditModal,
             GoodsCouponSearchModal,
-            GoodsCouponDetailModal
+            GoodsCouponDetailModal,
+            GoodsCategoryDetailModal,
+            GoodsCategoryMainSingle,
+            GoodsShopDetailModal,
+            GoodsShopMainSingle,
+            GoodsInfoDetailModal,
+            GoodsInfoMainSingle
         },
         data() {
             return {
@@ -53,6 +90,12 @@
                     oneCategoryUrl: '/goods-category/admin/one/',
                     oneGoodsUrl: '/goods-info/admin/one/'
                 },
+                attrType: null,
+                modal: {
+                  searchCategoryModal: false,
+                  searchShopModal: false,
+                  searchGoodsModal: false
+                }
             }
         },
         computed: {},
@@ -130,7 +173,81 @@
                 } else if (itemName === 'batchRemove') {
                     utils.batchRemove(this)
                 }
-            }
+            },
+            showModal(modal) {
+              this.modal[modal] = true
+            },
+            cancelModal(modal) {
+              this.modal[modal] = false
+            },
+            /**
+             * 显示属性详情
+             */
+            showAttrDetailModal(id, type) {
+              this.attrType = type
+              let url = ''
+              if (type === 0) {
+                url = this.urls.oneCategoryUrl
+              } else if (type === 1) {
+                url = this.urls.oneShopUrl
+              } else if (type === 2) {
+                url = this.urls.oneGoodsUrl
+              }
+              utils
+                .doGet(url + id, {})
+                .then(res => {
+                  if (ResponseStatus.OK === res.data.code) {
+                    const row = res.data.data
+                    let detailModal
+                    if (type === 0) {
+                      detailModal = this.$refs.categoryDetailModal
+                    } else if (type === 1) {
+                      detailModal = this.$refs.shopDetailModal
+                    } else if (type === 2) {
+                      detailModal = this.$refs.goodsDetailModal
+                    }
+                    detailModal.modal.detail = true
+                    detailModal.form = row
+                  } else {
+                    this.$Message.error(res.data.message)
+                  }
+                })
+                .catch(err => {
+                  console.log(err)
+                })
+            },
+            /**
+             * 显示搜索模态窗
+             */
+            showSearchTableModal(type) {
+              this.attrType = type
+              if (type === 0) {
+                this.showModal('searchCategoryModal')
+                this.$refs.searchCategoryModal.searchTable()
+              } else if (type === 1) {
+                this.showModal('searchShopModal')
+                this.$refs.searchShopModal.searchTable()
+              } else if (type === 2) {
+                this.showModal('searchGoodsModal')
+                this.$refs.searchGoodsModal.searchTable()
+              }
+            },
+            /**
+             * 底部的确认选择
+             */
+            bottomConfirmChoice() {
+              this.$refs.choiceShopModal.confirmSelection()
+            },
+            /**
+             * 确认选择店铺
+             */
+            confirmChoiceShop(row) {
+              this.cancelModal('searchTableShopModal')
+              let searchModal = this.$refs.searchModal
+              searchModal.searchForm.shopIdMin = searchModal.searchForm.shopIdMax =
+                row.id
+              this.searchTable()
+            },
         }
     }
 </script>

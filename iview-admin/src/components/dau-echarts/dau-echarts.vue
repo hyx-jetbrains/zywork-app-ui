@@ -21,7 +21,7 @@
 
 <script>
 import {allDau, dauByDate, regCountByDate } from '@/api/home'
-import {getDate} from '@/api/utils'
+import {getDate} from '@/api/utils-v2'
 import BasicEcharts from '../charts/BasicEcharts'
 import * as ResponseStatus from '@/api/response-status'
 

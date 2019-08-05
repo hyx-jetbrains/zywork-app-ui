@@ -269,6 +269,7 @@ export default {
      */
     showSearchTableModal() {
       this.modal['searchTableModal'] = true
+      this.$refs.searchTableModal.searchTable()
     },
     /**
      * 底部的确认选择父级类目

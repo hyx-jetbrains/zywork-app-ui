@@ -312,8 +312,10 @@ export default {
     showSearchTableModal(type) {
       if (type === 0) {
         this.modal['searchTableShopModal'] = true
+        this.$refs.searchTableShopModal.searchTable()
       } else if (type === 1) {
         this.modal['searchTableCategoryModal'] = true
+        this.$refs.searchTableCategoryModal.searchTable()
       }
     },
     /**

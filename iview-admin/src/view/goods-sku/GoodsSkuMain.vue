@@ -46,23 +46,32 @@
     <GoodsInfoDetailModal v-if="type === 0" ref="attrDetailModal" />
     <GoodsPicDetailModal v-if="type === 1" ref="attrDetailModal" />
     <Modal
-      v-model="modal.searchTableModal"
+      v-model="modal.searchGoodsModal"
       title="选择属性查询"
       :mask-closable="false"
       width="960"
     >
       <GoodsInfoMainSingle
-        v-if="type === 0"
-        ref="searchTableModal"
-        v-on:confirmChoice="confirmChoice"
-      />
-      <GoodsPicMainSingle
-        v-if="type === 1"
-        ref="searchTableModal"
+        ref="searchGoodsModal"
         v-on:confirmChoice="confirmChoice"
       />
       <div slot="footer">
-        <Button type="text" size="large" @click="cancelModal('searchTableModal')">取消</Button>
+        <Button type="text" size="large" @click="cancelModal('searchGoodsModal')">取消</Button>
+        <Button type="primary" size="large" @click="bottomConfirmChoice">查询</Button>
+      </div>
+    </Modal>
+    <Modal
+      v-model="modal.searchGoodsPicModal"
+      title="选择属性查询"
+      :mask-closable="false"
+      width="960"
+    >
+      <GoodsPicMainSingle
+        ref="searchGoodsPicModal"
+        v-on:confirmChoice="confirmChoice"
+      />
+      <div slot="footer">
+        <Button type="text" size="large" @click="cancelModal('searchGoodsPicModal')">取消</Button>
         <Button type="primary" size="large" @click="bottomConfirmChoice">查询</Button>
       </div>
     </Modal>
@@ -124,7 +133,8 @@ export default {
       },
       type: null,
       modal: {
-        searchTableModal: false
+        searchGoodsModal: false,
+        searchGoodsPicModal: false
       }
     }
   },
@@ -264,7 +274,13 @@ export default {
      */
     showSearchTableModal(type) {
       this.type = type
-      this.modal['searchTableModal'] = true
+      if (type === 0) {
+        this.showModal('searchGoodsModal')
+        this.$refs.searchGoodsModal.searchTable()
+      } else if (type === 1) {
+        this.showModal('searchGoodsPicModal')
+        this.$refs.searchGoodsPicModal.searchTable()
+      }
     },
     /**
      * 搜索弹窗确认查询

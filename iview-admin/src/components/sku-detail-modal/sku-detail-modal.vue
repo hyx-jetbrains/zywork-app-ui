@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import * as utils from '@/api/utils'
+import * as utils from '@/api/utils-v2'
 import {getAttrsByCategory, skuAttrVals} from '@/api/goods_attribute'
 import {allSkusByGoods, batchSaveGoodsAttrVals, listAllActivityBySku, cancelActivity} from '@/api/goods_sku'
 import * as ResponseStatus from '@/api/response-status'

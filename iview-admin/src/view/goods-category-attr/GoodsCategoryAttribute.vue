@@ -154,7 +154,7 @@
 </template>
 
 <script>
-  import * as utils from '@/api/utils'
+  import * as utils from '@/api/utils-v2'
 
   export default {
     name: 'GoodsCategoryAttribute',

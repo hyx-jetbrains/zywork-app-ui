@@ -133,8 +133,10 @@ export default {
     showSearchTableModal(type) {
       if (type === 0) {
         this.showModal('searchTableShopModal')
+        this.$refs.searchTableShopModal.searchTable()
       } else if (type === 1) {
         this.showModal('searchTableCategoryModal')
+        this.$refs.searchTableCategoryModal.searchTable()
       }
     },
     /**

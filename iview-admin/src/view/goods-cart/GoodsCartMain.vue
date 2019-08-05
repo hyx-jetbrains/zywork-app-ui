@@ -32,16 +32,22 @@
         <GoodsCartAddEditModal ref="addEditModal" v-on:add="add" v-on:edit="edit"/>
         <GoodsCartSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
         <GoodsCartDetailModal ref="detailModal"/>
-        <UserDetailModal v-if="modal.type === 0" ref="attrDetailmodal" />
+        <UserDetailDetailModal v-if="modal.type === 0" ref="attrDetailmodal" />
         <GoodsInfoDetailModal v-if="modal.type === 1" ref="attrDetailmodal" />
-        <Modal v-model="modal.searchTableModal" title="选择查询条件" :mask-closable="false" width="960">
-          <UserMainSingle v-if="modal.type === 0" ref="searchTableModal" v-on:confirmChoice="confirmChoice" />
-          <GoodsInfoMainSingle v-if="modal.type === 1" ref="searchTableModal" v-on:confirmChoice="confirmChoice" />
-        <div slot="footer">
-          <Button type="text" size="large" @click="cancelModal('searchTableModal')">取消</Button>
-          <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
-        </div>
-      </Modal>
+        <Modal v-model="modal.searchUserModal" title="选择查询条件" :mask-closable="false" width="960">
+          <UserDetailMainSingle ref="searchUserModal" v-on:confirmChoice="confirmChoice" />
+          <div slot="footer">
+            <Button type="text" size="large" @click="cancelModal('searchUserModal')">取消</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
+          </div>
+        </Modal>
+        <Modal v-model="modal.searchGoodsModal" title="选择查询条件" :mask-closable="false" width="960">
+          <GoodsInfoMainSingle ref="searchGoodsModal" v-on:confirmChoice="confirmChoice" />
+          <div slot="footer">
+            <Button type="text" size="large" @click="cancelModal('searchGoodsModal')">取消</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
+          </div>
+        </Modal>
     </div>
 </template>
 
@@ -52,8 +58,8 @@
     import GoodsCartAddEditModal from './GoodsCartAddEditModal.vue'
     import GoodsCartSearchModal from './GoodsCartSearchModal.vue'
     import GoodsCartDetailModal from './GoodsCartDetailModal.vue'
-    import UserDetailModal from '../user/UserDetailModal.vue'
-    import UserMainSingle from '../user/UserMainSingle.vue'
+    import UserDetailDetailModal from '../user-detail/UserDetailDetailModal.vue'
+    import UserDetailMainSingle from '../user-detail/UserDetailMainSingle.vue'
     import GoodsInfoDetailModal from '../goods-info/GoodsInfoDetailModal.vue'
     import GoodsInfoMainSingle from '../goods-info/GoodsInfoMainSingle.vue'
     export default {
@@ -63,8 +69,8 @@
             GoodsCartAddEditModal,
             GoodsCartSearchModal,
             GoodsCartDetailModal,
-            UserDetailModal,
-            UserMainSingle,
+            UserDetailDetailModal,
+            UserDetailMainSingle,
             GoodsInfoDetailModal,
             GoodsInfoMainSingle
         },
@@ -73,11 +79,12 @@
                 urls: {
                     batchRemoveUrl: '/goods-cart/admin/batch-remove',
                     batchActiveUrl: '/goods-cart/admin/batch-active',
-                    oneUserUrl: '/user/admin/one/',
+                    oneUserUrl: '/user-detail/admin/one/',
                     oneGoodsInfoUrl: '/goods-info/admin/one/'
                 },
                 modal: {
-                  searchTableModal: false,
+                  searchUserModal: false,
+                  searchGoodsModal: false,
                   type: -1
                 }
             }
@@ -159,7 +166,13 @@
              */
             showSearchTableModal(type) {
               this.modal.type = type
-              this.showModal('searchTableModal')
+              if (type === 0) {
+                this.showModal('searchUserModal')
+                this.$refs.searchUserModal.searchTable()
+              } else if (type === 1) {
+                this.showModal('searchGoodsModal')
+                this.$refs.searchGoodsModal.searchTable()
+              }
             },
             /**
              * 底部的确认选择

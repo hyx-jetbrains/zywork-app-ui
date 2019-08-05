@@ -28,7 +28,7 @@
 
 <script>
   import DragListSingle from '_c/drag-list-single'
-  import * as utils from '@/api/utils'
+  import * as utils from '@/api/utils-v2'
   import {getAttrsByCategory, updateGoodsCategoryAttr} from '@/api/goods_attribute'
   import * as ResponseStatus from '@/api/response-status'
 

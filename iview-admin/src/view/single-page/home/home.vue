@@ -7,9 +7,10 @@
         :lg="4"
         v-for="(infor, i) in inforCardData"
         :key="`infor-${i}`"
-        style="height: 120px;padding-bottom: 10px;margin-bottom:10px;">
+        style="height: 120px;padding-bottom: 10px;margin-bottom:10px;"
+      >
         <infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="36">
-          <count-to :end="infor.count" count-class="count-style"/>
+          <count-to :end="infor.count" count-class="count-style" />
           <p>{{ infor.title }}</p>
         </infor-card>
       </i-col>
@@ -18,8 +19,8 @@
       <i-col :xs="24" :md="12" :lg="8">
         <Card>
           <p slot="title">
-              <Icon type="ios-alarm"></Icon>
-                指派人任务&nbsp;&nbsp;-（{{assigneeCount}}）
+            <Icon type="ios-alarm"></Icon>
+            指派人任务&nbsp;&nbsp;-（{{assigneeCount}}）
           </p>
           <a href="javascript:;" slot="extra" @click="showTaskDetail(0)">
             <Tooltip content="更多">
@@ -27,7 +28,7 @@
             </Tooltip>
           </a>
           <p class="not-data" v-if="assigneeDataShow">
-            <Icon type="md-close-circle" /> 暂无任务
+            <Icon type="md-close-circle" />暂无任务
           </p>
           <ul style="list-style-type:none" v-if="!assigneeDataShow">
             <Tooltip content="点击查看详情">
@@ -35,14 +36,14 @@
                 <a href="javascript:;" @click="showTaskDetail(0)">{{ item.name }}</a>
               </li>
             </Tooltip>
-        </ul>
+          </ul>
         </Card>
       </i-col>
       <i-col :xs="24" :md="12" :lg="8">
         <Card>
           <p slot="title">
-              <Icon type="ios-alarm-outline"></Icon>
-                候选人任务&nbsp;&nbsp;-（{{candidateCount}}）
+            <Icon type="ios-alarm-outline"></Icon>
+            候选人任务&nbsp;&nbsp;-（{{candidateCount}}）
           </p>
           <a href="javascript:;" slot="extra" @click="showTaskDetail(1)">
             <Tooltip content="更多">
@@ -50,7 +51,7 @@
             </Tooltip>
           </a>
           <p class="not-data" v-if="candidateDataShow">
-            <Icon type="md-close-circle" /> 暂无任务
+            <Icon type="md-close-circle" />暂无任务
           </p>
           <ul style="list-style-type:none" v-if="!candidateDataShow">
             <Tooltip content="点击查看详情">
@@ -58,14 +59,14 @@
                 <a href="javascript:;" @click="showTaskDetail(1)">{{ item.name }}</a>
               </li>
             </Tooltip>
-        </ul>
+          </ul>
         </Card>
       </i-col>
       <i-col :xs="24" :md="12" :lg="8">
         <Card>
           <p slot="title">
-              <Icon type="md-alarm"></Icon>
-                候选组任务&nbsp;&nbsp;-（{{groupCount}}）
+            <Icon type="md-alarm"></Icon>
+            候选组任务&nbsp;&nbsp;-（{{groupCount}}）
           </p>
           <a href="javascript:;" slot="extra" @click="showTaskDetail(2)">
             <Tooltip content="更多">
@@ -73,7 +74,7 @@
             </Tooltip>
           </a>
           <p class="not-data" v-if="groupDataShow">
-            <Icon type="md-close-circle" /> 暂无任务
+            <Icon type="md-close-circle" />暂无任务
           </p>
           <ul style="list-style-type:none" v-if="!groupDataShow">
             <Tooltip content="点击查看详情">
@@ -81,18 +82,18 @@
                 <a href="javascript:;" @click="showTaskDetail(1)">{{ item.name }}</a>
               </li>
             </Tooltip>
-        </ul>
+          </ul>
         </Card>
       </i-col>
     </Row>
-    <DauEcharts/>
+    <DauEcharts />
   </div>
 </template>
 
 <script>
-import { regCount, regAllCountByDate, allDau} from '@/api/home'
-import {searchWaitTask} from '@/api/process'
-import {getDate} from '@/api/utils'
+import { regCount, regAllCountByDate, allDau } from '@/api/home'
+import { searchWaitTask } from '@/api/process'
+import { getDate } from '@/api/utils-v2'
 import InforCard from '_c/info-card'
 import CountTo from '_c/count-to'
 import DauEcharts from '_c/dau-echarts'
@@ -146,7 +147,7 @@ export default {
       candidateTaskList: [],
       groupDataShow: true,
       groupCount: 0,
-      groupTaskList: [],
+      groupTaskList: []
     }
   },
   mounted() {
