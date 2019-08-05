@@ -29,26 +29,26 @@
         <GoodsCouponDetailModal ref="detailModal"/>
         <GoodsCategoryDetailModal ref="categoryDetailModal" />
         <Modal v-model="modal.searchCategoryModal" title="选择类目查询" :mask-closable="false" width="960">
-          <GoodsCategoryMainSingle ref="searchCategoryModal" v-on:confirmChoice="confirmChoiceShop" />
+          <GoodsCategoryMainSingle ref="searchCategoryModal" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
             <Button type="text" size="large" @click="cancelModal('searchCategoryModal')">取消</Button>
-            <Button type="primary" size="large" @click="bottomConfirmChoiceShop">查询</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoice">查询</Button>
           </div>
         </Modal>
         <GoodsShopDetailModal ref="shopDetailModal" />
         <Modal v-model="modal.searchShopModal" title="选择类目查询" :mask-closable="false" width="960">
-          <GoodsShopMainSingle ref="searchShopModal" v-on:confirmChoice="confirmChoiceShop" />
+          <GoodsShopMainSingle ref="searchShopModal" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
             <Button type="text" size="large" @click="cancelModal('searchShopModal')">取消</Button>
-            <Button type="primary" size="large" @click="bottomConfirmChoiceShop">查询</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoice">查询</Button>
           </div>
         </Modal>
         <GoodsInfoDetailModal ref="goodsDetailModal" />
         <Modal v-model="modal.searchGoodsModal" title="选择类目查询" :mask-closable="false" width="960">
-          <GoodsInfoMainSingle ref="searchGoodsModal" v-on:confirmChoice="confirmChoiceShop" />
+          <GoodsInfoMainSingle ref="searchGoodsModal" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
             <Button type="text" size="large" @click="cancelModal('searchGoodsModal')">取消</Button>
-            <Button type="primary" size="large" @click="bottomConfirmChoiceShop">查询</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoice">查询</Button>
           </div>
         </Modal>
     </div>
@@ -236,16 +236,38 @@
              * 底部的确认选择
              */
             bottomConfirmChoice() {
-              this.$refs.choiceShopModal.confirmSelection()
+              let type = this.attrType
+              let refName = ''
+              if (type === 0) {
+                refName = 'searchCategoryModal'
+              } else if (type === 1) {
+                refName = 'searchShopModal'
+              } else if (type === 2) {
+                refName = 'searchGoodsModal'
+              }
+              this.$refs[refName].confirmSelection()
             },
             /**
-             * 确认选择店铺
+             * 确认选择
              */
-            confirmChoiceShop(row) {
-              this.cancelModal('searchTableShopModal')
+            confirmChoice(row) {
               let searchModal = this.$refs.searchModal
-              searchModal.searchForm.shopIdMin = searchModal.searchForm.shopIdMax =
+              let type = this.attrType
+              let refName = ''
+              if (type === 0) {
+                refName = 'searchCategoryModal'
+                searchModal.searchForm.categoryIdMin = searchModal.searchForm.categoryIdMax =
                 row.id
+              } else if (type === 1) {
+                refName = 'searchShopModal'
+                searchModal.searchForm.shopIdMin = searchModal.searchForm.shopIdMax =
+                row.id
+              } else if (type === 2) {
+                refName = 'searchGoodsModal'
+                searchModal.searchForm.goodsIdMin = searchModal.searchForm.goodsIdMax =
+                row.id
+              }
+              this.cancelModal(refName)
               this.searchTable()
             },
         }

@@ -60,12 +60,118 @@ title: '用户编号',
 key: 'userId',
 minWidth: 120,
 sortable: true,
+render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.userId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'userModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'userShowSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
+
 },
 {
 title: '优惠券编号',
 key: 'couponId',
 minWidth: 120,
 sortable: true,
+render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.couponId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'couponModuleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'couponShowSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
+
 },
 {
 title: '优惠券状态',
@@ -336,6 +442,18 @@ renderHeader: (h, params) => {
                     this.$emit('showDetailModal', row)
                 } else if (itemName === "remove") {
                     utils.remove(this, row);
+                } else if (itemName === 'userModuleDetail') {
+                  // 显示用户详情的弹窗
+                  this.$emit('showAttrDetailModal', row.userId, 0)
+                } else if (itemName === 'userShowSearch') {
+                  // 显示用户搜索的弹窗
+                  this.$emit('showSearchTableModal', 0)
+                } else if (itemName === 'couponModuleDetail') {
+                  // 显示优惠券详情的弹窗
+                  this.$emit('showAttrDetailModal', row.couponId, 1)
+                } else if (itemName === 'couponShowSearch') {
+                  // 显示优惠券搜索的弹窗
+                  this.$emit('showSearchTableModal', 1)
                 }
             },
             active(row) {

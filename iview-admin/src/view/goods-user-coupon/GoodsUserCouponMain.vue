@@ -19,13 +19,31 @@
                     <Tooltip content="刷新" placement="right">
                         <Button icon="md-refresh" type="success" shape="circle" @click="searchTable"></Button>
                     </Tooltip>
-                    <GoodsUserCouponTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" v-on:showDetailModal="showDetailModal"/>
+                    <GoodsUserCouponTableMain ref="table" v-on:searchTable="searchTable" v-on:showEditModal="showEditModal" v-on:showDetailModal="showDetailModal"
+                      v-on:showAttrDetailModal="showAttrDetailModal" v-on:showSearchTableModal="showSearchTableModal" />
                 </Card>
             </i-col>
         </Row>
         <GoodsUserCouponAddEditModal ref="addEditModal" v-on:add="add" v-on:edit="edit"/>
         <GoodsUserCouponSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
         <GoodsUserCouponDetailModal ref="detailModal"/>
+       
+        <UserDetailDetailModal ref="userDetailModal" />
+        <Modal v-model="modal.searchUserModal" title="选择用户查询" :mask-closable="false" width="960">
+          <UserDetailMainSingle ref="searchUserModal" v-on:confirmChoice="confirmChoice" />
+          <div slot="footer">
+            <Button type="text" size="large" @click="cancelModal('searchUserModal')">取消</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoice">查询</Button>
+          </div>
+        </Modal>
+        <GoodsCouponDetailModal ref="couponDetailModal" />
+        <Modal v-model="modal.searchCouponModal" title="选择优惠券查询" :mask-closable="false" width="960">
+          <GoodsCouponMainSingle ref="searchCouponModal" v-on:confirmChoice="confirmChoice" />
+          <div slot="footer">
+            <Button type="text" size="large" @click="cancelModal('searchCouponModal')">取消</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoice">查询</Button>
+          </div>
+        </Modal>
     </div>
 </template>
 
@@ -36,13 +54,21 @@
     import GoodsUserCouponAddEditModal from './GoodsUserCouponAddEditModal.vue'
     import GoodsUserCouponSearchModal from './GoodsUserCouponSearchModal.vue'
     import GoodsUserCouponDetailModal from './GoodsUserCouponDetailModal.vue'
+    import UserDetailDetailModal from '../user-detail/UserDetailDetailModal.vue'
+    import UserDetailMainSingle from '../user-detail/UserDetailMainSingle.vue'
+    import GoodsCouponDetailModal from '../goods-coupon/GoodsCouponDetailModal.vue'
+    import GoodsCouponMainSingle from '../goods-coupon/GoodsCouponMainSingle.vue'
     export default {
         name: 'GoodsUserCouponMain',
         components: {
             GoodsUserCouponTableMain,
             GoodsUserCouponAddEditModal,
             GoodsUserCouponSearchModal,
-            GoodsUserCouponDetailModal
+            GoodsUserCouponDetailModal,
+            UserDetailDetailModal,
+            UserDetailMainSingle,
+            GoodsCouponDetailModal,
+            GoodsCouponMainSingle
         },
         data() {
             return {
@@ -52,6 +78,11 @@
                     oneUserUrl: '/user-detail/admin/one/',
                     oneCouponUrl: '/goods-coupon/admin/one/'
                 },
+                attrType: null,
+                modal: {
+                  searchUserModal: false,
+                  searchCouponModal: false,
+                }
             }
         },
         computed: {},
@@ -116,7 +147,91 @@
                 } else if (itemName === 'batchRemove') {
                     utils.batchRemove(this)
                 }
-            }
+            },
+            showModal(modal) {
+              this.modal[modal] = true
+            },
+            cancelModal(modal) {
+              this.modal[modal] = false
+            },
+            /**
+             * 显示属性详情
+             */
+            showAttrDetailModal(id, type) {
+              this.attrType = type
+              let url = ''
+              if (type === 0) {
+                url = this.urls.oneUserUrl
+              } else if (type === 1) {
+                url = this.urls.oneCouponUrl
+              }
+              utils
+                .doGet(url + id, {})
+                .then(res => {
+                  if (ResponseStatus.OK === res.data.code) {
+                    const row = res.data.data
+                    let detailModal
+                    if (type === 0) {
+                      detailModal = this.$refs.userDetailModal
+                    } else if (type === 1) {
+                      detailModal = this.$refs.couponDetailModal
+                    }
+                    detailModal.modal.detail = true
+                    detailModal.form = row
+                  } else {
+                    this.$Message.error(res.data.message)
+                  }
+                })
+                .catch(err => {
+                  console.log(err)
+                })
+            },
+            /**
+             * 显示搜索模态窗
+             */
+            showSearchTableModal(type) {
+              this.attrType = type
+              let refName = ''
+              if (type === 0) {
+                refName = 'searchUserModal'
+              } else if (type === 1) {
+                refName = 'searchCouponModal'
+              }
+              this.showModal(refName)
+              this.$refs[refName].searchTable()
+            },
+            /**
+             * 底部的确认选择
+             */
+            bottomConfirmChoice() {
+              let type = this.attrType
+              let refName = ''
+              if (type === 0) {
+                refName = 'searchUserModal'
+              } else if (type === 1) {
+                refName = 'searchCouponModal'
+              }
+              this.$refs[refName].confirmSelection()
+            },
+            /**
+             * 确认选择
+             */
+            confirmChoice(row) {
+              let searchModal = this.$refs.searchModal
+              let type = this.attrType
+              let refName = ''
+              if (type === 0) {
+                refName = 'searchUserModal'
+                searchModal.searchForm.userIdMin = searchModal.searchForm.userIdMax =
+                row.id
+              } else if (type === 1) {
+                refName = 'searchCouponModal'
+                searchModal.searchForm.couponIdMin = searchModal.searchForm.couponIdMax =
+                row.id
+              }
+              this.cancelModal(refName)
+              this.searchTable()
+            },
         }
     }
 </script>
