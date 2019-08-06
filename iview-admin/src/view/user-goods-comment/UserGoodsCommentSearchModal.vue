@@ -41,6 +41,24 @@
 	<Input v-model="searchForm.userDetailHeadicon" placeholder="请输入头像地址"/>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="性别"><Row>
+	<i-col span="11">
+	<FormItem prop="userDetailGenderMin">
+	<InputNumber v-model="searchForm.userDetailGenderMin" placeholder="请输入开始性别" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="userDetailGenderMax">
+	<InputNumber v-model="searchForm.userDetailGenderMax" placeholder="请输入结束性别" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="店铺编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsShopIdMin">
@@ -55,21 +73,18 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="店铺Logo" prop="goodsShopLogo">
 	<Input v-model="searchForm.goodsShopLogo" placeholder="请输入店铺Logo"/>
 </FormItem>
-</i-col><i-col span="12">
-	<FormItem label="店铺标题" prop="goodsShopTitle">
-	<Input v-model="searchForm.goodsShopTitle" placeholder="请输入店铺标题"/>
-</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="店铺标题" prop="goodsShopTitle">
+	<Input v-model="searchForm.goodsShopTitle" placeholder="请输入店铺标题"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="商品评论编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsCommentIdMin">
@@ -84,7 +99,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="商品编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsCommentGoodsIdMin">
@@ -99,10 +117,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="SKU编号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsCommentGoodsSkuIdMin">
@@ -117,9 +132,27 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="售卖标题" prop="goodsCommentSkuTitle">
 	<Input v-model="searchForm.goodsCommentSkuTitle" placeholder="请输入售卖标题"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="价格"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsCommentPriceMin">
+	<InputNumber v-model="searchForm.goodsCommentPriceMin" placeholder="请输入开始价格" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsCommentPriceMax">
+	<InputNumber v-model="searchForm.goodsCommentPriceMax" placeholder="请输入结束价格" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
 </FormItem>
 </i-col>
 </Row>
@@ -277,6 +310,28 @@
 </FormItem>
 </i-col>
 </Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="商品图片编号"><Row>
+	<i-col span="11">
+	<FormItem prop="goodsPicIdMin">
+	<InputNumber v-model="searchForm.goodsPicIdMin" placeholder="请输入开始商品图片编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+	<i-col span="2" style="text-align: center">-</i-col>
+	<i-col span="11">
+	<FormItem prop="goodsPicIdMax">
+	<InputNumber v-model="searchForm.goodsPicIdMax" placeholder="请输入结束商品图片编号" style="width: 100%;"/>
+</FormItem>
+</i-col>
+</Row>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="图片URL" prop="goodsPicPicUrl">
+	<Input v-model="searchForm.goodsPicPicUrl" placeholder="请输入图片URL"/>
+</FormItem>
+</i-col>
+</Row>
 
             </Form>
             <div slot="footer">
@@ -314,6 +369,9 @@ userPhone: null,
 userEmail: null,
 userDetailNickname: null,
 userDetailHeadicon: null,
+userDetailGender: null,
+userDetailGenderMin: null, 
+userDetailGenderMax: null, 
 goodsShopId: null,
 goodsShopIdMin: null, 
 goodsShopIdMax: null, 
@@ -329,6 +387,9 @@ goodsCommentGoodsSkuId: null,
 goodsCommentGoodsSkuIdMin: null, 
 goodsCommentGoodsSkuIdMax: null, 
 goodsCommentSkuTitle: null,
+goodsCommentPrice: null,
+goodsCommentPriceMin: null, 
+goodsCommentPriceMax: null, 
 goodsCommentSkuInfo: null,
 goodsCommentQuantity: null,
 goodsCommentQuantityMin: null, 
@@ -357,6 +418,10 @@ goodsCommentUpdateTimeMax: null,
 goodsCommentIsActive: null,
 goodsCommentIsActiveMin: null, 
 goodsCommentIsActiveMax: null, 
+goodsPicId: null,
+goodsPicIdMin: null, 
+goodsPicIdMax: null, 
+goodsPicPicUrl: null,
 
                 }
             }

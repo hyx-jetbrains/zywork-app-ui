@@ -14,22 +14,27 @@
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">头像地址：</span><span v-text="form.userDetailHeadicon"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">店铺编号：</span><span v-text="form.goodsShopId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">性别：</span><span v-text="form.userDetailGender"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">店铺Logo：</span><span v-text="form.goodsShopLogo"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">店铺标题：</span><span v-text="form.goodsShopTitle"></span></i-col>
+	<i-col span="11"><span class="detail-title">店铺编号：</span><span v-text="form.goodsShopId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">店铺Logo：</span><span v-text="form.goodsShopLogo"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">商品评论编号：</span><span v-text="form.goodsCommentId"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">商品编号：</span><span v-text="form.goodsCommentGoodsId"></span></i-col>
+	<i-col span="11"><span class="detail-title">店铺标题：</span><span v-text="form.goodsShopTitle"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">商品评论编号：</span><span v-text="form.goodsCommentId"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsCommentGoodsSkuId"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">售卖标题：</span><span v-text="form.goodsCommentSkuTitle"></span></i-col>
+	<i-col span="11"><span class="detail-title">商品编号：</span><span v-text="form.goodsCommentGoodsId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">SKU编号：</span><span v-text="form.goodsCommentGoodsSkuId"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">售卖标题：</span><span v-text="form.goodsCommentSkuTitle"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">价格：</span><span v-text="form.goodsCommentPrice"></span></i-col>
 
 </Row>
 <Row>
@@ -62,6 +67,11 @@
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.goodsCommentIsActive"></span></i-col>
 
 </Row>
+<Row>
+	<i-col span="11"><span class="detail-title">商品图片编号：</span><span v-text="form.goodsPicId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">图片URL：</span><span v-text="form.goodsPicPicUrl"></span></i-col>
+
+</Row>
 
             </div>
         </Modal>
@@ -82,6 +92,7 @@ userPhone: null,
 userEmail: null,
 userDetailNickname: null,
 userDetailHeadicon: null,
+userDetailGender: null,
 goodsShopId: null,
 goodsShopLogo: null,
 goodsShopTitle: null,
@@ -89,6 +100,7 @@ goodsCommentId: null,
 goodsCommentGoodsId: null,
 goodsCommentGoodsSkuId: null,
 goodsCommentSkuTitle: null,
+goodsCommentPrice: null,
 goodsCommentSkuInfo: null,
 goodsCommentQuantity: null,
 goodsCommentCommentLevel: null,
@@ -101,6 +113,8 @@ goodsCommentVersion: null,
 goodsCommentCreateTime: null,
 goodsCommentUpdateTime: null,
 goodsCommentIsActive: null,
+goodsPicId: null,
+goodsPicPicUrl: null,
 
                 }
             }
