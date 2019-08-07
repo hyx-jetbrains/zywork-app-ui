@@ -139,16 +139,16 @@ export default {
         if (response.data.code === ResponseStatus.OK) {
           if (response.data.data.total > 0) {
             item.total = response.data.data.total
-            let headicon = row.headicon
-            let tempHeadicon = headImg
-            if (headicon) {
-              if (headicon.indexOf('http') < 0) {
-                tempHeadicon = cdnUrl + '/' + headicon
-              } else {
-                tempHeadicon = headicon
-              }
-            }
             response.data.data.rows.forEach((row, index) => {
+              let headicon = row.headicon
+              let tempHeadicon = headImg
+              if (headicon) {
+                if (headicon.indexOf('http') < 0) {
+                  tempHeadicon = cdnUrl + '/' + headicon
+                } else {
+                  tempHeadicon = headicon
+                }
+              }
               children.push({
                 id: row.userId,
                 nickname: row.nickname,
@@ -175,7 +175,7 @@ export default {
       })
     },
     aboveUsers(item, callback) {
-      directAboveUsers(item.userId).then(response => {
+      directAboveUsers(item.id).then(response => {
         let children = []
         if (response.data.code === ResponseStatus.OK) {
           if (response.data.data.total > 0) {
