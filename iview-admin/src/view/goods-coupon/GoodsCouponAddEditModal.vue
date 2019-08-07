@@ -351,15 +351,60 @@ startTime: [
                 this.$refs[formRef].resetFields()
             },
             setDueTime() {
+              if (!this.form.startTime) {
+                this.$Message.warning('请先选择开始时间')
+                return;
+              }
               var time = this.form.startTime.split(' ')[1]
               var date = new Date(this.form.startTime)
               this.form.dueTime = getDate(date, this.form.validDays) + ' ' + time
             },
+            /**
+             * 验证数据
+             */
+            checkData() {
+              const form = this.form
+              const usableRange = form.couponUsableRange
+              if (usableRange) {
+                if (usableRange === 1) {
+                  // 类目优惠券 -> 必须验证选择店铺和选择类目
+                  if (!form.categoryId) {
+                    this.$Message.warning('请先选择类目')
+                    return false
+                  }
+                } else if (usableRange === 2) {
+                  // 店铺优惠券
+                  if (!form.shopId) {
+                    this.$Message.warning('请先选择店铺')
+                    return false
+                  }
+                } else if (usableRange === 3) {
+                  // 商品优惠券
+                  if (!form.goodsId) {
+                    this.$Message.warning('请先选择商品')
+                    return false
+                  }
+                } else if (usableRange === 4) {
+                  // 商品优惠券
+                  if (!form.goodsSkuId) {
+                    this.$Message.warning('请先选择商品Sku')
+                    return false
+                  }
+                }
+              }
+              return true
+            },
             add() {
+              if (!this.checkData()) {
+                return
+              }
               this.setDueTime()
               this.$emit('add')
             },
             edit() {
+              if (!this.checkData()) {
+                return
+              }
               this.setDueTime()
               this.$emit('edit')
             },
@@ -391,6 +436,7 @@ startTime: [
                     return
                   }
                   let searchModal = choiceModal.$refs.searchModal
+                  searchModal.searchForm.shopIdMin = searchModal.searchForm.shopIdMax = this.form.shopId
                   searchModal.searchForm.categoryLevel = 3
                 } else if (type === 2) {
                   // 选择商品
