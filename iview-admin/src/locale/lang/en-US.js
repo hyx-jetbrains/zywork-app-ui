@@ -77,6 +77,7 @@ export default {
   coupons_management: 'Coupons Management',
   goods_coupon: 'Goods Coupons Management',
   user_coupon: 'User Coupons Management',
+  user_coupon_query: 'User Coupons Query',
   orders_management: 'Order Management',
   carts_management: 'Cart Management',
   cart_management: 'Cart Management',

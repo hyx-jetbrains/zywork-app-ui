@@ -780,6 +780,15 @@ export default [
               title: '用户优惠券管理'
             },
             component: () => import('@/view/goods-user-coupon/GoodsUserCouponMain.vue')
+          },
+          {
+            path: 'UserCouponQuery',
+            name: 'user_coupon_query',
+            meta: {
+              icon: 'md-star-outline',
+              title: '用户优惠券查询'
+            },
+            component: () => import('@/view/user-goods-coupon/UserGoodsCouponMain.vue')
           }
         ]
       }

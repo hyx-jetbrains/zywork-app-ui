@@ -77,6 +77,7 @@ export default {
   coupons_management: '優惠券管理',
   goods_coupon: '商品優惠券管理',
   user_coupon: '用戶優惠券管理',
+  user_coupon_query: '用戶優惠券查詢',
   orders_management: '訂單管理',
   carts_management: '購物車管理',
   cart_management: '購物車管理',

@@ -61,6 +61,10 @@ key: 'userId',
 minWidth: 120,
 sortable: true,
 render: (h, params) => {
+              let id = params.row.userId
+              if (!id) {
+                return h('span',{},'暂无编号')
+              }
 						  return h(
 						    'Dropdown',
 						    {
@@ -120,6 +124,10 @@ key: 'couponId',
 minWidth: 120,
 sortable: true,
 render: (h, params) => {
+  let id = params.row.couponId
+              if (!id) {
+                return h('span',{},'暂无编号')
+              }
 						  return h(
 						    'Dropdown',
 						    {

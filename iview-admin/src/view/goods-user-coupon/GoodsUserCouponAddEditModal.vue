@@ -66,14 +66,14 @@
         </Modal>
 
         <Modal v-model="modal.choiceUser" :title="choiceTitle" :mask-closable="false" width="960">
-          <UserDetailMainSingle ref="choiceUserModal" v-on:confirmChoice="confirmChoice" />
+          <UserDetailMainSingle ref="choiceUser" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
                 <Button type="text" size="large" @click="cancelModal('choiceUser')">取消</Button>
                 <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
             </div>
         </Modal>
         <Modal v-model="modal.choiceCoupon" :title="choiceTitle" :mask-closable="false" width="960">
-          <GoodsCouponMainSingle ref="choiceCouponModal" v-on:confirmChoice="confirmChoice" />
+          <GoodsCouponMainSingle ref="choiceCoupon" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
                 <Button type="text" size="large" @click="cancelModal('choiceCoupon')">取消</Button>
                 <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
@@ -116,7 +116,7 @@
                     userName: null,
 couponId: null,
 couponName: null,
-couponStatus: null,
+couponStatus: 0,
 
                 },
                 validateRules: {
@@ -161,11 +161,11 @@ couponStatus: [
                 if (type === 0) {
                   // 选择用户
                   this.choiceTitle = '选择用户'
-                  choiceModal = this.$refs.choiceUserModal
+                  choiceModal = this.$refs.choiceUser
                 } else if (type === 1) {
                   // 选择优惠券
                   this.choiceTitle = '选择优惠券'
-                  choiceModal = this.$refs.choiceCouponModal
+                  choiceModal = this.$refs.choiceCoupon
                 }
                 // 必须要modal框先出来，searchTable()才会生效
                 this.modal[modal] = true
@@ -184,7 +184,16 @@ couponStatus: [
              * 底部的确认选择父级类目
              */
             bottomConfirmChoice() {
-              this.$refs.choiceModal.confirmSelection()
+              let type = this.choiceType
+              let refName = ''
+              if (type == 0) {
+                // 选择用户
+                refName = 'choiceUser'
+              } else if (type == 1) {
+                // 选择优惠券
+                refName = 'choiceCoupon'
+              } 
+              this.$refs[refName].confirmSelection()
             },
             /**
              * 确认选择父级类目

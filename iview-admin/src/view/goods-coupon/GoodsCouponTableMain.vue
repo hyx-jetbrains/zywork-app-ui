@@ -61,6 +61,10 @@ key: 'categoryId',
 minWidth: 120,
 sortable: true,
 render: (h, params) => {
+  let id = params.row.categoryId
+              if (!id) {
+                return h('span',{},0)
+              }
 						  return h(
 						    'Dropdown',
 						    {
@@ -119,6 +123,10 @@ key: 'shopId',
 minWidth: 120,
 sortable: true,
 render: (h, params) => {
+    let id = params.row.shopId
+              if (!id) {
+                return h('span',{},0)
+              }
 						  return h(
 						    'Dropdown',
 						    {
@@ -177,6 +185,10 @@ key: 'goodsId',
 minWidth: 120,
 sortable: true,
 render: (h, params) => {
+    let id = params.row.goodsId
+              if (!id) {
+                return h('span',{},0)
+              }
 						  return h(
 						    'Dropdown',
 						    {
@@ -234,6 +246,13 @@ title: '商品SKU编号',
 key: 'goodsSkuId',
 minWidth: 120,
 sortable: true,
+render: (h, params) => {
+    let id = params.row.goodsSkuId
+              if (!id) {
+                return h('span',{},0)
+              }
+              return h('span',{},id)
+}
 },
 {
 title: '优惠券标题',

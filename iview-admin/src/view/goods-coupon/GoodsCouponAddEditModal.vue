@@ -224,30 +224,30 @@
             </div>
         </Modal>
         <Modal v-model="modal.choiceShop" :title="choiceTitle" :mask-closable="false" width="960">
-          <GoodsShopMainSingle ref="choiceShopModal" v-on:confirmChoice="confirmChoice" />
+          <GoodsShopMainSingle ref="choiceShop" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
                 <Button type="text" size="large" @click="cancelModal('choiceShop')">取消</Button>
                 <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
             </div>
         </Modal>
         <Modal v-model="modal.choiceCategory" :title="choiceTitle" :mask-closable="false" width="960">
-          <GoodsCategoryMainSingle ref="choiceCategoryModal" v-on:confirmChoice="confirmChoice" />
+          <GoodsCategoryMainSingle ref="choiceCategory" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
                 <Button type="text" size="large" @click="cancelModal('choiceCategory')">取消</Button>
                 <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
             </div>
         </Modal>
         <Modal v-model="modal.choiceGoods" :title="choiceTitle" :mask-closable="false" width="960">
-          <GoodsInfoMainSingle ref="choiceGoodsModal" v-on:confirmChoice="confirmChoice" />
+          <GoodsInfoMainSingle ref="choiceGoods" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
-                <Button type="text" size="large" @click="cancelModal('choice')">取消</Button>
+                <Button type="text" size="large" @click="cancelModal('choiceGoods')">取消</Button>
                 <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
             </div>
         </Modal>
         <Modal v-model="modal.choiceGoodsSku" :title="choiceTitle" :mask-closable="false" width="960">
-          <GoodsSkuMainSingle ref="choiceGoodsSkuModal" v-on:confirmChoice="confirmChoice" />
+          <GoodsSkuMainSingle ref="choiceGoodsSku" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
-                <Button type="text" size="large" @click="cancelModal('choice')">取消</Button>
+                <Button type="text" size="large" @click="cancelModal('choiceGoodsSku')">取消</Button>
                 <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
             </div>
         </Modal>
@@ -381,15 +381,21 @@ startTime: [
                 if (type === 0) {
                   // 选择店铺
                   this.choiceTitle = '选择店铺'
-                  choiceModal = this.$refs.choiceShopModal
+                  choiceModal = this.$refs.choiceShop
                 } else if (type === 1) {
                   // 选择类目
                   this.choiceTitle = '选择商品类目'
-                  choiceModal = this.$refs.choiceCategoryModal
+                  choiceModal = this.$refs.choiceCategory
+                  if (!this.form.shopId) {
+                    this.$Message.warning('请先选择店铺')
+                    return
+                  }
+                  let searchModal = choiceModal.$refs.searchModal
+                  searchModal.searchForm.categoryLevel = 3
                 } else if (type === 2) {
                   // 选择商品
                   this.choiceTitle = '选择商品'
-                  choiceModal = this.$refs.choiceGoodsModal
+                  choiceModal = this.$refs.choiceGoods
                   if (!this.form.shopId) {
                     this.$Message.warning('请先选择店铺')
                     return
@@ -404,7 +410,7 @@ startTime: [
                 } else if (type === 3) {
                   // 选择商品sku
                   this.choiceTitle = '选择商品SKU'
-                  choiceModal = this.$refs.choiceGoodsSkuModal
+                  choiceModal = this.$refs.choiceGoodsSku
                   if (!this.form.shopId) {
                     this.$Message.warning('请先选择店铺')
                     return
@@ -434,7 +440,22 @@ startTime: [
              * 底部的确认选择父级类目
              */
             bottomConfirmChoice() {
-              this.$refs.choiceModal.confirmSelection()
+              let type = this.choiceType
+              let refName = ''
+              if (type == 0) {
+                // 选择店铺
+                refName = 'choiceShop'
+              } else if (type == 1) {
+                // 选择类目
+                refName = 'choiceCategory'
+              } else if (type == 2) {
+                // 选择商品
+                refName = 'choiceGoods'
+              } else if (type == 3) {
+                // 选择商品sku
+                refName = 'choiceGoodsSku'
+              }
+              this.$refs[refName].confirmSelection()
             },
             /**
              * 确认选择父级类目
