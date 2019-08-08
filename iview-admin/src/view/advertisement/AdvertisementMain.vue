@@ -162,10 +162,10 @@ export default {
       this.$refs.uploadModal.uploadModal = true
     },
     showModal(modal) {
-      this.modal[modal] = true
+      utils.showModal(this, modal)
     },
     cancelModal(modal) {
-      this.modal[modal] = false
+      utils.cancelModal(this, modal)
     },
     /**
      * 显示模块详情

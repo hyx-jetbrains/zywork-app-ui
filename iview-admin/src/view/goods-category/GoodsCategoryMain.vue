@@ -252,17 +252,11 @@ export default {
             console.log(err)
           })
     },
-    /**
-     * 显示模态窗
-     */
     showModal(modal) {
-      this.modal[modal] = true
+      utils.showModal(this, modal)
     },
-    /**
-     * 取消模态窗
-     */
     cancelModal(modal) {
-      this.modal[modal] = false
+      utils.cancelModal(this, modal)
     },
     /**
      * 显示查询的模态窗

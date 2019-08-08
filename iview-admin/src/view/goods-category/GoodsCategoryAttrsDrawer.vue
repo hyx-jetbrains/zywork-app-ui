@@ -71,17 +71,11 @@ export default {
     updateAttrs() {
       this.$refs.goodsAttributeMainMultiple.confirmSelection()
     },
-    /**
-     * 显示模态窗
-     */
     showModal(modal) {
-      this.modal[modal] = true
+      utils.showModal(this, modal)
     },
-    /**
-     * 关闭模态窗
-     */
     cancelModal(modal) {
-      this.modal[modal] = false
+      utils.cancelModal(this, modal)
     },
     /**
      * 显示选择需要引用类目的属性弹窗

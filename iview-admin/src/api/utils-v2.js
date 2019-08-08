@@ -3,7 +3,32 @@ import Qs from 'qs'
 import { getLocalStorageToken } from '@/libs/util'
 import * as ResponseStatus from '@/api/response-status'
 import fileDownload from 'js-file-download'
+/**
+ * 根据指定的modal名打开模态框
+ * @param self this
+ * @param modal modal名
+ */
+export const showModal = (self, modal) => {
+  self.modal[modal] = true
+}
 
+/**
+ * 根据指定的modal名关闭模态框
+ * @param self this
+ * @param modal modal名
+ */
+export const cancelModal = (self, modal) => {
+  self.modal[modal] = false
+}
+
+/**
+ * 重置表单
+ * @param self this
+ * @param formRef form ref名称
+ */
+export const resetForm = (self, formRef) => {
+  self.$refs[formRef].resetFields()
+}
 /**
  * post请求，application/json
  * @param {*} url 请求url

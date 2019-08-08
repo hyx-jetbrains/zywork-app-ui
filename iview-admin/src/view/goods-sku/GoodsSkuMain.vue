@@ -226,10 +226,10 @@ export default {
         })
     },
     showModal(modal) {
-      this.modal[modal] = true
+      utils.showModal(this, modal)
     },
     cancelModal(modal) {
-      this.modal[modal] = false
+      utils.cancelModal(this, modal)
     },
     /**
      * 显示分销比例配置弹窗

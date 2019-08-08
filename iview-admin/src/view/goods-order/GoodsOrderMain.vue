@@ -122,10 +122,10 @@ export default {
       }
     },
     showModal(modal) {
-      this.modal[modal] = true
+      utils.showModal(this, modal)
     },
     cancelModal(modal) {
-      this.modal[modal] = false
+      utils.cancelModal(this, modal)
     },
     /**
      * 显示详情弹窗

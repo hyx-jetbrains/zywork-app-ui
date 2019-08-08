@@ -121,6 +121,7 @@
 </template>
 
 <script>
+import * as utils from '@/api/utils-v2.js'
 import AdvertisementTypeMainSingle from '../advertisement-type/AdvertisementTypeMainSingle.vue'
 export default {
   name: 'AdvertisementAddEdit',
@@ -232,10 +233,10 @@ export default {
       this.$emit('edit')
     },
     showModal(modal) {
-      this.modal[modal] = true
+      utils.showModal(this, modal)
     },
     cancelModal(modal) {
-      this.modal[modal] = false
+      utils.cancelModal(this, modal)
     },
     /**
      * 底部的确认选择父级类目
