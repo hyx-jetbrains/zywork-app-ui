@@ -549,7 +549,8 @@ renderHeader: (h, params) => {
                         'DropdownItem',
                         {
                           props: {
-                            name: 'showAttrs'
+                            name: 'showAttrs',
+                            disabled: params.row.categoryLevel != 3 ? true : false
                           }
                         },
                         '属性分配'
@@ -558,7 +559,8 @@ renderHeader: (h, params) => {
                         'DropdownItem',
                         {
                           props: {
-                            name: 'orderAttrs'
+                            name: 'orderAttrs',
+                            disabled: params.row.categoryLevel != 3 ? true : false
                           }
                         },
                         '属性排序'
@@ -640,11 +642,20 @@ renderHeader: (h, params) => {
       } else if (itemName === 'remove') {
         utils.remove(this, row)
       } else if (itemName === 'showAttrs') {
+        if (row.categoryLevel !== 3) {
+          this.$Message.warning('只有3级才能分配属性')
+          return
+        }
         this.$emit('showGoodsCategoryAttrDrawer', row.id)
       } else if (itemName === 'orderAttrs') {
+        if (row.categoryLevel !== 3) {
+          this.$Message.warning('只有3级才能分配属性')
+          return
+        }
         this.$emit('showGoodsAttrOrderModal', row.id)
       } else if (itemName === 'showUploadModal') {
         if (row.categoryLevel === 2) {
+          this.$Message.warning('2级类目不能上传图片')
           return
         }
         this.$emit('showUploadModal', row.id)
@@ -659,18 +670,21 @@ renderHeader: (h, params) => {
       } else if (itemName === 'addChildrenCategory') {
         // 添加子类目
         if (row.categoryLevel === 3) {
+          this.$Message.warning('该类目不能添加子类目')
           return
         }
         this.$emit('addChildrenCategory', row)
       } else if (itemName === 'seeChildrenCategory') {
         // 查看子类目
         if (row.categoryLevel === 3) {
+          this.$Message.warning('没有子类目')
           return
         }
         this.$emit('seeChildrenCategory', row)
       } else if (itemName === 'seeGoodsInfo') {
         // 查看商品
         if (row.categoryLevel !== 3) {
+          this.$Message.warning('该类目没有商品')
           return
         }
         this.$emit('seeGoodsInfo', row)

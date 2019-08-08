@@ -5,6 +5,9 @@
                 <Card>
                     <Button @click="confirmSelection" type="primary">确认选择</Button>&nbsp;
                     <Button @click="showSearchModal" type="primary">高级搜索</Button>&nbsp;
+                    <Tooltip content="引用其他类目的属性" type="bottom">
+                      <Button @click="showCategoryModal" type="primary">选择类目</Button>&nbsp;
+                    </Tooltip>
                     <Tooltip content="刷新" placement="right">
                         <Button icon="md-refresh" type="success" shape="circle" @click="searchTable"></Button>
                     </Tooltip>
@@ -14,6 +17,7 @@
         </Row>
         <GoodsAttributeSearchModal ref="searchModal" v-on:searchTable="searchTable"/>
         <GoodsAttributeDetailModal ref="detailModal"/>
+        
     </div>
 </template>
 
@@ -22,6 +26,7 @@
     import GoodsAttributeTableMultiple from './GoodsAttributeTableMultiple.vue'
     import GoodsAttributeSearchModal from './GoodsAttributeSearchModal.vue'
     import GoodsAttributeDetailModal from './GoodsAttributeDetailModal.vue'
+    
     import {updateGoodsCategoryAttr} from '@/api/goods_category'
     import * as ResponseStatus from '@/api/response-status'
     export default {
@@ -29,10 +34,12 @@
         components: {
             GoodsAttributeTableMultiple,
             GoodsAttributeSearchModal,
-            GoodsAttributeDetailModal
+            GoodsAttributeDetailModal,
+            
         },
         data() {
             return {
+              
                 selectedData: [],
                 selectedDataIdProp: '',
                 extraData: {}
@@ -86,6 +93,12 @@
             },
             cancelSelect() {
                 this.$refs.table.$refs.dataTable.selectAll(false)
+            },
+            /**
+             * 显示属性的弹窗
+             */
+            showCategoryModal() {
+              this.$emit('showCategoryModal')
             }
         }
     }
