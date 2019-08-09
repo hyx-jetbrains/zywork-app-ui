@@ -20,6 +20,7 @@
 import GoodsAttributeMainMultiple from '@/view/goods-attribute/GoodsAttributeMainMultiple.vue'
 import GoodsCategoryMainSingle from '../goods-category/GoodsCategoryMainSingle.vue'
 import { getAttrsByCategory } from '@/api/goods_attribute'
+import * as utils from '@/api/utils.js'
 import * as ResponseStatus from '@/api/response-status'
 export default {
   name: 'GoodsCategoryAttrsDrawer',

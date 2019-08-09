@@ -223,28 +223,28 @@
                 <Button type="primary" size="large" @click="edit" :loading="loading.edit">修改</Button>
             </div>
         </Modal>
-        <Modal v-model="modal.choiceShop" :title="choiceTitle" :mask-closable="false" width="960">
+        <Modal v-model="modal.choiceShop" title="选择店铺" :mask-closable="false" width="960">
           <GoodsShopMainSingle ref="choiceShop" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
                 <Button type="text" size="large" @click="cancelModal('choiceShop')">取消</Button>
                 <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
             </div>
         </Modal>
-        <Modal v-model="modal.choiceCategory" :title="choiceTitle" :mask-closable="false" width="960">
+        <Modal v-model="modal.choiceCategory" title="选择商品类目" :mask-closable="false" width="960">
           <GoodsCategoryMainSingle ref="choiceCategory" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
                 <Button type="text" size="large" @click="cancelModal('choiceCategory')">取消</Button>
                 <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
             </div>
         </Modal>
-        <Modal v-model="modal.choiceGoods" :title="choiceTitle" :mask-closable="false" width="960">
+        <Modal v-model="modal.choiceGoods" title="选择商品" :mask-closable="false" width="960">
           <GoodsInfoMainSingle ref="choiceGoods" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
                 <Button type="text" size="large" @click="cancelModal('choiceGoods')">取消</Button>
                 <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
             </div>
         </Modal>
-        <Modal v-model="modal.choiceGoodsSku" :title="choiceTitle" :mask-closable="false" width="960">
+        <Modal v-model="modal.choiceGoodsSku" title="选择商品SKU" :mask-closable="false" width="960">
           <GoodsSkuMainSingle ref="choiceGoodsSku" v-on:confirmChoice="confirmChoice" />
           <div slot="footer">
                 <Button type="text" size="large" @click="cancelModal('choiceGoodsSku')">取消</Button>
@@ -271,7 +271,6 @@
         },
         data() {
             return {
-                choiceTitle: '',
                 choiceType: '',
                 modal: {
                     add: false,
@@ -425,11 +424,9 @@ startTime: [
                 let choiceModal
                 if (type === 0) {
                   // 选择店铺
-                  this.choiceTitle = '选择店铺'
                   choiceModal = this.$refs.choiceShop
                 } else if (type === 1) {
                   // 选择类目
-                  this.choiceTitle = '选择商品类目'
                   choiceModal = this.$refs.choiceCategory
                   if (!this.form.shopId) {
                     this.$Message.warning('请先选择店铺')
@@ -440,7 +437,6 @@ startTime: [
                   searchModal.searchForm.categoryLevel = 3
                 } else if (type === 2) {
                   // 选择商品
-                  this.choiceTitle = '选择商品'
                   choiceModal = this.$refs.choiceGoods
                   if (!this.form.shopId) {
                     this.$Message.warning('请先选择店铺')
@@ -455,7 +451,6 @@ startTime: [
                   searchModal.searchForm.categoryIdMin = searchModal.searchForm.categoryIdMax = this.form.categoryId
                 } else if (type === 3) {
                   // 选择商品sku
-                  this.choiceTitle = '选择商品SKU'
                   choiceModal = this.$refs.choiceGoodsSku
                   if (!this.form.shopId) {
                     this.$Message.warning('请先选择店铺')
