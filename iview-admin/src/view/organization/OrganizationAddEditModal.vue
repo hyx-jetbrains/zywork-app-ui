@@ -3,20 +3,31 @@
         <Modal v-model="modal.add" title="添加" :mask-closable="false" @on-visible-change="changeModalVisibleResetForm('addForm', $event)" width="760">
             <Form ref="addForm" :model="form" :label-width="80" :rules="validateRules">
                 <Row>
-	<i-col span="12">
+	<i-col span="24">
 	<FormItem label="组织父编号" prop="parentId">
-	<InputNumber v-model="form.parentId" placeholder="请输入组织父编号" style="width: 100%;"/>
+	<!-- <InputNumber v-model="form.parentId" placeholder="请输入组织父编号" style="width: 100%;"/> -->
+              <span v-text="form.parentId"></span>
+              -
+              <span v-text="form.parentName"></span>
+              &nbsp;
+              <Button @click="showModal('choice')" type="text" style="color: #108EE9;">选择父组织</Button>&nbsp;
+              <Button @click="setTopCategory" type="text" style="color: #fa436a;">设置顶级组织</Button>&nbsp;
 </FormItem>
-	</i-col><i-col span="12">
+<FormItem prop="parentName"></FormItem>
+	</i-col>
+</Row>
+<Row>
+  <i-col span="24">
 	<FormItem label="组织名称" prop="title">
 	<Input v-model="form.title" placeholder="请输入组织名称"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
-	<i-col span="12">
+	<i-col span="24">
 	<FormItem label="组织描述" prop="description">
-	<Input v-model="form.description" placeholder="请输入组织描述"/>
+	<!-- <Input v-model="form.description" placeholder="请输入组织描述"/> -->
+  <Input  type="textarea" :autosize="descriptionAutoSize" v-model="form.description" laceholder="请输入组织描述"/>
 </FormItem>
 	</i-col>
 </Row>
@@ -32,18 +43,28 @@
                 <Row>
 	<i-col span="12">
 	<FormItem label="组织父编号" prop="parentId">
-	<InputNumber v-model="form.parentId" placeholder="请输入组织父编号" style="width: 100%;"/>
+	<!-- <InputNumber v-model="form.parentId" placeholder="请输入组织父编号" style="width: 100%;"/> -->
+              <span v-text="form.parentId"></span>
+              -
+              <span v-text="form.parentName"></span>
+              &nbsp;
+              <Button @click="showModal('choice')" type="text" style="color: #108EE9;">选择父组织</Button>&nbsp;
+              <Button @click="setTopCategory" type="text" style="color: #fa436a;">设置顶级组织</Button>&nbsp;
 </FormItem>
-	</i-col><i-col span="12">
+	</i-col>
+</Row>
+<Row>
+  <i-col span="24">
 	<FormItem label="组织名称" prop="title">
 	<Input v-model="form.title" placeholder="请输入组织名称"/>
 </FormItem>
 	</i-col>
 </Row>
 <Row>
-	<i-col span="12">
+	<i-col span="24">
 	<FormItem label="组织描述" prop="description">
-	<Input v-model="form.description" placeholder="请输入组织描述"/>
+	<!-- <Input v-model="form.description" placeholder="请输入组织描述"/> -->
+  <Input  type="textarea" :autosize="descriptionAutoSize" v-model="form.description" laceholder="请输入组织描述"/>
 </FormItem>
 	</i-col>
 </Row>
@@ -54,17 +75,30 @@
                 <Button type="primary" size="large" @click="edit" :loading="loading.edit">修改</Button>
             </div>
         </Modal>
+
+        <Modal v-model="modal.choice" title="选择父组织" :mask-closable="false" width="960">
+          <OrganizationMainSingle ref="choiceModal" v-on:confirmChoice="confirmChoice" />
+          <div slot="footer">
+            <Button type="text" size="large" @click="cancelModal('choice')">取消</Button>
+            <Button type="primary" size="large" @click="bottomConfirmChoice">确认选择</Button>
+          </div>
+        </Modal>
     </div>
 </template>
 
 <script>
+    import OrganizationMainSingle from './OrganizationMainSingle.vue'
     export default {
         name: 'OrganizationAddEdit',
+        components: {
+          OrganizationMainSingle
+        },
         data() {
             return {
                 modal: {
                     add: false,
-                    edit: false
+                    edit: false,
+                    choice: false
                 },
                 loading: {
                     add: false,
@@ -76,9 +110,14 @@
                     editUrl: '/organization/admin/update',
                     batchEditUrl: '/organization/admin/batch-update'
                 },
+                descriptionAutoSize: {
+                  minRows: 3,
+                  maxRows: 5
+                },
                 form: {
                     id: null,
 parentId: null,
+parentName: null,
 title: null,
 description: null,
 
@@ -116,6 +155,42 @@ description: [
             },
             edit() {
                 this.$emit('edit')
+            },
+            /**
+             * 显示模态窗
+             */
+            showModal(modal) {
+              if (modal === 'choice') {
+                this.$refs.choiceModal.searchTable()
+              }
+              this.modal[modal] = true
+            },
+            /**
+             * 关闭模态窗
+             */
+            cancelModal(modal) {
+              this.modal[modal] = false
+            },
+            /**
+             * 底部的确认选择父级组织
+             */
+            bottomConfirmChoice() {
+              this.$refs.choiceModal.confirmSelection()
+            },
+            /**
+             * 确认选择父级组织
+             */
+            confirmChoice(row) {
+              this.cancelModal('choice')
+              this.form.parentId = row.id
+              this.form.parentName = row.title
+            },
+            /**
+             * 设置为顶级组织
+             */
+            setTopCategory() {
+              this.form.parentId = 0
+              this.form.parentName = '顶级组织'
             }
         }
     }

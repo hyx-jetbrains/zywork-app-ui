@@ -86,7 +86,7 @@ export default {
         this.showDetailModal(JSON.parse(JSON.stringify(row)))
       } else if (keyStr === '"new"') {
         // 新增子部门
-        this.showAddModal(data.id)
+        this.showAddModal(data.id, data.label)
       } else if (keyStr === '"delete"') {
         // 删除部门
         this.remove(data.id)
@@ -158,9 +158,10 @@ export default {
       })
       return row
     },
-    showAddModal(parentId) {
+    showAddModal(parentId, parentName) {
       let addEditModal = this.$refs.addEditModal
       addEditModal.form.parentId = parentId
+      addEditModal.form.parentName = parentName
       addEditModal.modal.add = true
     },
     add() {

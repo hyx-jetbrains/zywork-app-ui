@@ -81,7 +81,59 @@ renderHeader: (h, params) => {
                   })
                 ])
               ])
-            }
+            },
+            render: (h, params) => {
+						  return h(
+						    'Dropdown',
+						    {
+						      on: {
+						        'on-click': itemName => {
+						          this.userOpt(itemName, params.row)
+						        }
+						      },
+						      props: {
+						        transfer: true
+						      }
+						    },
+						    [
+						      h('span', [
+						        params.row.parentId,
+						        h('Icon', {
+						          props: {
+						            type: 'ios-list',
+						            size: '25'
+						          }
+						        })
+						      ]),
+						      h(
+						        'DropdownMenu',
+						        {
+						          slot: 'list'
+						        },
+						        [
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'moduleDetail'
+						              }
+						            },
+						            '详情'
+						          ),
+						          h(
+						            'DropdownItem',
+						            {
+						              props: {
+						                name: 'showSearch'
+						              }
+						            },
+						            '搜索'
+						          )
+						        ]
+						      )
+						    ]
+						  )
+						}
 },
 {
 title: '组织名称',
@@ -344,6 +396,12 @@ renderHeader: (h, params) => {
                     this.$emit('showDetailModal', row)
                 } else if (itemName === "remove") {
                     utils.remove(this, row);
+                } else if (itemName === 'moduleDetail') {
+                  // 显示详情的弹窗
+                  this.$emit('showParentDetailModal', row.parentId)
+                } else if (itemName === 'showSearch') {
+                  // 显示搜索的弹窗
+                  this.$emit('showSearchTableModal')
                 }
             },
             active(row) {
