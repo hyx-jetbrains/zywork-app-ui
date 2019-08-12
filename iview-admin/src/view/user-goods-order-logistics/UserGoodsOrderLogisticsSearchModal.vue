@@ -283,48 +283,37 @@
 	<Input v-model="searchForm.goodsOrderRemark" placeholder="请输入订单备注"/>
 </FormItem>
 </i-col><i-col span="12">
-	<FormItem label="订单编号"><Row>
-	<i-col span="11">
-	<FormItem prop="goodsOrderLogisticsIdMin">
-	<InputNumber v-model="searchForm.goodsOrderLogisticsIdMin" placeholder="请输入开始订单编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-	<i-col span="2" style="text-align: center">-</i-col>
-	<i-col span="11">
-	<FormItem prop="goodsOrderLogisticsIdMax">
-	<InputNumber v-model="searchForm.goodsOrderLogisticsIdMax" placeholder="请输入结束订单编号" style="width: 100%;"/>
-</FormItem>
-</i-col>
-</Row>
-</FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
 	<FormItem label="收货人" prop="goodsOrderLogisticsRealName">
 	<Input v-model="searchForm.goodsOrderLogisticsRealName" placeholder="请输入收货人"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="手机号" prop="goodsOrderLogisticsPhone">
 	<Input v-model="searchForm.goodsOrderLogisticsPhone" placeholder="请输入手机号"/>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="省" prop="goodsOrderLogisticsProvince">
 	<Input v-model="searchForm.goodsOrderLogisticsProvince" placeholder="请输入省"/>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="市" prop="goodsOrderLogisticsCity">
 	<Input v-model="searchForm.goodsOrderLogisticsCity" placeholder="请输入市"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="区/县" prop="goodsOrderLogisticsDistrict">
+	<Input v-model="searchForm.goodsOrderLogisticsDistrict" placeholder="请输入区/县"/>
 </FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
-	<FormItem label="区/县" prop="goodsOrderLogisticsDistrict">
-	<Input v-model="searchForm.goodsOrderLogisticsDistrict" placeholder="请输入区/县"/>
+	<FormItem label="地址别名" prop="goodsOrderLogisticsAddressAlias">
+	<Input v-model="searchForm.goodsOrderLogisticsAddressAlias" placeholder="请输入地址别名"/>
 </FormItem>
 </i-col><i-col span="12">
 	<FormItem label="详细地址" prop="goodsOrderLogisticsAddress">
@@ -334,6 +323,10 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="门牌号" prop="goodsOrderLogisticsArea">
+	<Input v-model="searchForm.goodsOrderLogisticsArea" placeholder="请输入门牌号"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="是否已发货"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderLogisticsIsDeliverMin">
@@ -348,25 +341,25 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="物流公司名称" prop="goodsOrderLogisticsLogisticsCompany">
 	<Input v-model="searchForm.goodsOrderLogisticsLogisticsCompany" placeholder="请输入物流公司名称"/>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="物流公司编码" prop="goodsOrderLogisticsLogisticsCode">
 	<Input v-model="searchForm.goodsOrderLogisticsLogisticsCode" placeholder="请输入物流公司编码"/>
 </FormItem>
-</i-col><i-col span="12">
-	<FormItem label="物流单号" prop="goodsOrderLogisticsLogisticsNo">
-	<Input v-model="searchForm.goodsOrderLogisticsLogisticsNo" placeholder="请输入物流单号"/>
-</FormItem>
 </i-col>
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="物流单号" prop="goodsOrderLogisticsLogisticsNo">
+	<Input v-model="searchForm.goodsOrderLogisticsLogisticsNo" placeholder="请输入物流单号"/>
+</FormItem>
+</i-col><i-col span="12">
 	<FormItem label="版本号"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderLogisticsVersionMin">
@@ -381,7 +374,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="创建时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderLogisticsCreateTimeMin">
@@ -396,10 +392,7 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col>
-</Row>
-<Row>
-	<i-col span="12">
+</i-col><i-col span="12">
 	<FormItem label="更新时间"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderLogisticsUpdateTimeMin">
@@ -414,7 +407,10 @@
 </i-col>
 </Row>
 </FormItem>
-</i-col><i-col span="12">
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="是否激活"><Row>
 	<i-col span="11">
 	<FormItem prop="goodsOrderLogisticsIsActiveMin">
@@ -512,15 +508,14 @@ goodsOrderDealTime: null,
 goodsOrderDealTimeMin: null, 
 goodsOrderDealTimeMax: null, 
 goodsOrderRemark: null,
-goodsOrderLogisticsId: null,
-goodsOrderLogisticsIdMin: null, 
-goodsOrderLogisticsIdMax: null, 
 goodsOrderLogisticsRealName: null,
 goodsOrderLogisticsPhone: null,
 goodsOrderLogisticsProvince: null,
 goodsOrderLogisticsCity: null,
 goodsOrderLogisticsDistrict: null,
+goodsOrderLogisticsAddressAlias: null,
 goodsOrderLogisticsAddress: null,
+goodsOrderLogisticsArea: null,
 goodsOrderLogisticsIsDeliver: null,
 goodsOrderLogisticsIsDeliverMin: null, 
 goodsOrderLogisticsIsDeliverMax: null, 

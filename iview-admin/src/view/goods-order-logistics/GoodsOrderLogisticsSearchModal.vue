@@ -63,8 +63,19 @@
 	<Input v-model="searchForm.district" placeholder="请输入区/县"/>
 </FormItem>
 </i-col><i-col span="12">
+	<FormItem label="地址别名" prop="addressAlias">
+	<Input v-model="searchForm.addressAlias" placeholder="请输入地址别名"/>
+</FormItem>
+</i-col>
+</Row>
+<Row>
+	<i-col span="12">
 	<FormItem label="详细地址" prop="address">
 	<Input v-model="searchForm.address" placeholder="请输入详细地址"/>
+</FormItem>
+</i-col><i-col span="12">
+	<FormItem label="门牌号" prop="area">
+	<Input v-model="searchForm.area" placeholder="请输入门牌号"/>
 </FormItem>
 </i-col>
 </Row>
@@ -208,7 +219,9 @@ phone: null,
 province: null,
 city: null,
 district: null,
+addressAlias: null,
 address: null,
+area: null,
 isDeliver: null,
 isDeliverMin: null, 
 isDeliverMax: null, 

@@ -19,7 +19,12 @@
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">区/县：</span><span v-text="form.district"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">详细地址：</span><span v-text="form.address"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">地址别名：</span><span v-text="form.addressAlias"></span></i-col>
+
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">详细地址：</span><span v-text="form.address"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">门牌号：</span><span v-text="form.area"></span></i-col>
 
 </Row>
 <Row>
@@ -64,7 +69,9 @@ phone: null,
 province: null,
 city: null,
 district: null,
+addressAlias: null,
 address: null,
+area: null,
 isDeliver: null,
 logisticsCompany: null,
 logisticsCode: null,

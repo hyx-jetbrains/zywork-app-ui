@@ -59,43 +59,47 @@
 </Row>
 <Row>
 	<i-col span="11"><span class="detail-title">订单备注：</span><span v-text="form.goodsOrderRemark"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">订单编号：</span><span v-text="form.goodsOrderLogisticsId"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">收货人：</span><span v-text="form.goodsOrderLogisticsRealName"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">收货人：</span><span v-text="form.goodsOrderLogisticsRealName"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">手机号：</span><span v-text="form.goodsOrderLogisticsPhone"></span></i-col>
+	<i-col span="11"><span class="detail-title">手机号：</span><span v-text="form.goodsOrderLogisticsPhone"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">省：</span><span v-text="form.goodsOrderLogisticsProvince"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">省：</span><span v-text="form.goodsOrderLogisticsProvince"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">市：</span><span v-text="form.goodsOrderLogisticsCity"></span></i-col>
+	<i-col span="11"><span class="detail-title">市：</span><span v-text="form.goodsOrderLogisticsCity"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">区/县：</span><span v-text="form.goodsOrderLogisticsDistrict"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">区/县：</span><span v-text="form.goodsOrderLogisticsDistrict"></span></i-col>
+	<i-col span="11"><span class="detail-title">地址别名：</span><span v-text="form.goodsOrderLogisticsAddressAlias"></span></i-col>
 <i-col span="2"></i-col><i-col span="11"><span class="detail-title">详细地址：</span><span v-text="form.goodsOrderLogisticsAddress"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">是否已发货：</span><span v-text="form.goodsOrderLogisticsIsDeliver"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">物流公司名称：</span><span v-text="form.goodsOrderLogisticsLogisticsCompany"></span></i-col>
+	<i-col span="11"><span class="detail-title">门牌号：</span><span v-text="form.goodsOrderLogisticsArea"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否已发货：</span><span v-text="form.goodsOrderLogisticsIsDeliver"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">物流公司编码：</span><span v-text="form.goodsOrderLogisticsLogisticsCode"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">物流单号：</span><span v-text="form.goodsOrderLogisticsLogisticsNo"></span></i-col>
+	<i-col span="11"><span class="detail-title">物流公司名称：</span><span v-text="form.goodsOrderLogisticsLogisticsCompany"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">物流公司编码：</span><span v-text="form.goodsOrderLogisticsLogisticsCode"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.goodsOrderLogisticsVersion"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsOrderLogisticsCreateTime"></span></i-col>
+	<i-col span="11"><span class="detail-title">物流单号：</span><span v-text="form.goodsOrderLogisticsLogisticsNo"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">版本号：</span><span v-text="form.goodsOrderLogisticsVersion"></span></i-col>
 
 </Row>
 <Row>
-	<i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.goodsOrderLogisticsUpdateTime"></span></i-col>
-<i-col span="2"></i-col><i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.goodsOrderLogisticsIsActive"></span></i-col>
+	<i-col span="11"><span class="detail-title">创建时间：</span><span v-text="form.goodsOrderLogisticsCreateTime"></span></i-col>
+<i-col span="2"></i-col><i-col span="11"><span class="detail-title">更新时间：</span><span v-text="form.goodsOrderLogisticsUpdateTime"></span></i-col>
 
+</Row>
+<Row>
+	<i-col span="11"><span class="detail-title">是否激活：</span><span v-text="form.goodsOrderLogisticsIsActive"></span></i-col>
+<i-col span="2"></i-col>
 </Row>
 
             </div>
@@ -135,13 +139,14 @@ goodsOrderPaySuccess: null,
 goodsOrderDeliverTime: null,
 goodsOrderDealTime: null,
 goodsOrderRemark: null,
-goodsOrderLogisticsId: null,
 goodsOrderLogisticsRealName: null,
 goodsOrderLogisticsPhone: null,
 goodsOrderLogisticsProvince: null,
 goodsOrderLogisticsCity: null,
 goodsOrderLogisticsDistrict: null,
+goodsOrderLogisticsAddressAlias: null,
 goodsOrderLogisticsAddress: null,
+goodsOrderLogisticsArea: null,
 goodsOrderLogisticsIsDeliver: null,
 goodsOrderLogisticsLogisticsCompany: null,
 goodsOrderLogisticsLogisticsCode: null,

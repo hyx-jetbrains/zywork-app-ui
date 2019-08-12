@@ -37,8 +37,19 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="地址别名" prop="addressAlias">
+	<Input v-model="form.addressAlias" placeholder="请输入地址别名"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="详细地址" prop="address">
 	<Input v-model="form.address" placeholder="请输入详细地址"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="门牌号" prop="area">
+	<Input v-model="form.area" placeholder="请输入门牌号"/>
 </FormItem>
 	</i-col><i-col span="12">
 	<FormItem label="是否已发货" prop="isDeliver">
@@ -122,8 +133,19 @@
 </Row>
 <Row>
 	<i-col span="12">
+	<FormItem label="地址别名" prop="addressAlias">
+	<Input v-model="form.addressAlias" placeholder="请输入地址别名"/>
+</FormItem>
+	</i-col><i-col span="12">
 	<FormItem label="详细地址" prop="address">
 	<Input v-model="form.address" placeholder="请输入详细地址"/>
+</FormItem>
+	</i-col>
+</Row>
+<Row>
+	<i-col span="12">
+	<FormItem label="门牌号" prop="area">
+	<Input v-model="form.area" placeholder="请输入门牌号"/>
 </FormItem>
 	</i-col><i-col span="12">
 	<FormItem label="是否已发货" prop="isDeliver">
@@ -240,7 +262,9 @@ phone: null,
 province: null,
 city: null,
 district: null,
+addressAlias: null,
 address: null,
+area: null,
 isDeliver: null,
 logisticsCompany: null,
 logisticsCode: null,
@@ -260,20 +284,22 @@ phone: [
 {type: 'string', min: 1, max: 11, message: '必须1-11个字符', trigger: 'blur'}
 ],
 province: [
-{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
 {type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
 ],
 city: [
-{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
 {type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
 ],
 district: [
-{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
 {type: 'string', min: 1, max: 20, message: '必须1-20个字符', trigger: 'blur'}
 ],
+addressAlias: [
+{type: 'string', min: 1, max: 50, message: '必须1-50个字符', trigger: 'blur'}
+],
 address: [
-{type: 'string', required: true, message: '此项为必须项', trigger: 'blur'},
 {type: 'string', min: 1, max: 255, message: '必须1-255个字符', trigger: 'blur'}
+],
+area: [
+{type: 'string', min: 1, max: 50, message: '必须1-50个字符', trigger: 'blur'}
 ],
 logisticsCompany: [
 {type: 'string', min: 1, max: 255, message: '必须1-255个字符', trigger: 'blur'}
